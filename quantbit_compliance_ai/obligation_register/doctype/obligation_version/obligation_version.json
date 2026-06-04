@@ -1,0 +1,133 @@
+{
+    "doctype": "DocType",
+    "name": "Obligation Version",
+    "module": "Obligation Register",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "OBLV-.######",
+    "fields": [
+        {
+            "fieldname": "obligation",
+            "label": "Obligation",
+            "fieldtype": "Link",
+            "options": "Compliance Obligation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "version_number",
+            "label": "Version Number",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "effective_from",
+            "label": "Effective From",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "effective_until",
+            "label": "Effective Until",
+            "fieldtype": "Date",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "snapshot_json",
+            "label": "Full Snapshot (JSON)",
+            "fieldtype": "Code",
+            "options": "JSON",
+            "reqd": 1,
+            "description": "Frozen copy of all fields at version time"
+        },
+        {
+            "fieldname": "snapshot_hash",
+            "label": "Snapshot Hash (SHA-256)",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "description": "For tamper-evidence"
+        },
+        {
+            "fieldname": "sec_change",
+            "label": "Change Summary",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "change_reason",
+            "label": "Reason",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "change_summary",
+            "label": "What Changed",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "changed_fields",
+            "label": "Changed Fields",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated field names"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "created_by",
+            "label": "Created By",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "fieldname": "created_on",
+            "label": "Created On",
+            "fieldtype": "Datetime",
+            "read_only": 1,
+            "default": "now"
+        },
+        {
+            "fieldname": "validated_by",
+            "label": "Validated By",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "fieldname": "validator_bar_number",
+            "label": "Validator Bar Number",
+            "fieldtype": "Data",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "create": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "create": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

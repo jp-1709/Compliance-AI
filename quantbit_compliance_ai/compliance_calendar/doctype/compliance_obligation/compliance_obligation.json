@@ -1,0 +1,345 @@
+{
+    "doctype": "DocType",
+    "name": "Compliance Obligation",
+    "module": "Compliance Calendar",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "OBL-.######",
+    "track_changes": 1,
+    "search_fields": "obligation_title,obligation_code,regulation",
+    "title_field": "obligation_title",
+    "description": "Reusable definition of a statutory compliance requirement. Shared across all tenants — customer-specific behaviour lives in Compliance Calendar Task.",
+    "fields": [
+        {
+            "fieldname": "tab_main",
+            "label": "Obligation Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "obligation_title",
+            "label": "Obligation Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1,
+            "description": "Action-oriented, max 80 chars. E.g. 'File GSTR-3B Monthly Return'",
+            "length": 80
+        },
+        {
+            "fieldname": "obligation_code",
+            "label": "Obligation Code",
+            "fieldtype": "Data",
+            "unique": 1,
+            "in_list_view": 1,
+            "bold": 1,
+            "description": "Short immutable code used in integrations, e.g. GSTR-3B-MONTHLY"
+        },
+        {
+            "fieldname": "regulation",
+            "label": "Source Regulation",
+            "fieldtype": "Link",
+            "options": "Regulation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "section_reference",
+            "label": "Section / Rule Reference",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "E.g. Section 39, Rule 61, Form 5A"
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "category",
+            "label": "Category",
+            "fieldtype": "Select",
+            "options": "\nLabour\nTax & GST\nSecretarial / MCA\nEnvironment\nFire & Safety\nIndustry-Specific\nData Privacy\nESG\nFinance / RBI\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "frequency",
+            "label": "Frequency",
+            "fieldtype": "Select",
+            "options": "\nDaily\nWeekly\nFortnightly\nMonthly\nBi-Monthly\nQuarterly\nHalf-Yearly\nAnnual\nBi-Annual\nOn-Event\nContinuous\nOne-Time",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "due_timing_rule",
+            "label": "Due Timing Rule",
+            "fieldtype": "Small Text",
+            "reqd": 1,
+            "description": "Plain-English rule for computing due date. E.g. '20th of the following month', 'Within 30 days of FY end'. Parsed by the Applicability Engine."
+        },
+        {
+            "fieldname": "tab_applicability",
+            "label": "Applicability",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_applicability",
+            "label": "Applicability Rules",
+            "fieldtype": "Section Break",
+            "description": "Rules evaluated by the Applicability Engine to decide if this obligation applies to a Business Entity."
+        },
+        {
+            "fieldname": "applicability_rules",
+            "label": "Applicability Rules",
+            "fieldtype": "Table",
+            "options": "Applicability Rule",
+            "description": "AND/OR chain of rules. All must pass (net result) for the obligation to apply."
+        },
+        {
+            "fieldname": "sec_thresholds",
+            "label": "Thresholds & Filters",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "min_employees",
+            "label": "Min. Employees Threshold",
+            "fieldtype": "Int",
+            "description": "Obligation applies only if entity has >= this many employees. 0 = no minimum."
+        },
+        {
+            "fieldname": "max_employees",
+            "label": "Max. Employees Threshold",
+            "fieldtype": "Int",
+            "description": "Obligation applies only if entity has <= this many employees. 0 = no maximum."
+        },
+        {
+            "fieldname": "applicable_states",
+            "label": "Applicable States",
+            "fieldtype": "Table MultiSelect",
+            "options": "Obligation State",
+            "description": "Leave blank = all states. Populate to restrict to specific states."
+        },
+        {
+            "fieldname": "applicable_industries",
+            "label": "Applicable Industries",
+            "fieldtype": "Table MultiSelect",
+            "options": "Obligation Industry",
+            "description": "Leave blank = all industries."
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "applies_to_listed_only",
+            "label": "Listed Companies Only",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "applies_to_hazardous_only",
+            "label": "Hazardous Operations Only",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "applies_to_msme",
+            "label": "MSME Applicable",
+            "fieldtype": "Check",
+            "default": 1,
+            "description": "Checked = this obligation applies to MSMEs too (most do). Uncheck for large-entity-only obligations."
+        },
+        {
+            "fieldname": "tab_consequences",
+            "label": "Consequences & Risk",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_consequences",
+            "label": "Consequences of Non-Compliance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "penalty_inr",
+            "label": "Max Penalty (₹)",
+            "fieldtype": "Currency",
+            "precision": 0,
+            "description": "Maximum statutory penalty in Indian Rupees. Used in Penalty Exposure Report."
+        },
+        {
+            "fieldname": "penalty_description",
+            "label": "Penalty Description",
+            "fieldtype": "Text Editor",
+            "description": "Human-readable summary of penalty structure."
+        },
+        {
+            "fieldname": "complexity",
+            "label": "Compliance Complexity",
+            "fieldtype": "Select",
+            "options": "\nLow\nMedium\nHigh",
+            "default": "Medium",
+            "description": "Effort required to complete — used for workload planning."
+        },
+        {
+            "fieldname": "risk_level",
+            "label": "Default Risk Level",
+            "fieldtype": "Select",
+            "options": "\nCritical\nHigh\nMedium\nLow",
+            "reqd": 1,
+            "default": "Medium",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "imprisonment_risk",
+            "label": "Imprisonment Risk",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "If checked, personal liability attaches. Task escalated to Director by default."
+        },
+        {
+            "fieldname": "blocks_business",
+            "label": "Non-Compliance Can Block Business",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "E.g. licence cancellation, factory closure order."
+        },
+        {
+            "fieldname": "tab_evidence",
+            "label": "Evidence & Filing",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Required Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "evidence_required",
+            "label": "Required Evidence Types",
+            "fieldtype": "Table",
+            "options": "Obligation Evidence Requirement",
+            "description": "Defines what evidence must be uploaded before a task can be marked Complete."
+        },
+        {
+            "fieldname": "form_name",
+            "label": "Form / Filing Name",
+            "fieldtype": "Data",
+            "description": "E.g. Form 5A, GSTR-3B, DIR-3 KYC"
+        },
+        {
+            "fieldname": "submission_portal",
+            "label": "Submission Portal URL",
+            "fieldtype": "Data",
+            "options": "URL",
+            "description": "Deep link to the government portal for filing."
+        },
+        {
+            "fieldname": "tab_metadata",
+            "label": "Metadata & Quality",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_meta",
+            "label": "Search & Guidance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "keywords",
+            "label": "Keywords",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated terms for full-text search. E.g. 'gst, return, monthly, 3b'"
+        },
+        {
+            "fieldname": "guidance_notes",
+            "label": "Implementation Guidance",
+            "fieldtype": "Text Editor",
+            "description": "Step-by-step notes for the Compliance Officer. Shown in Task Detail view."
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "sec_quality",
+            "label": "Content Quality",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "extraction_source",
+            "label": "Extraction Source",
+            "fieldtype": "Select",
+            "options": "\nAI-Extracted\nManual\nPartner Content\nLegacy Migration",
+            "default": "AI-Extracted"
+        },
+        {
+            "fieldname": "validated_by_lawyer",
+            "label": "Validated by Lawyer",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "Legal Counsel user who reviewed and approved the obligation content."
+        },
+        {
+            "fieldname": "validated_on",
+            "label": "Validated On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "is_published",
+            "label": "Published",
+            "fieldtype": "Check",
+            "default": 0,
+            "bold": 1,
+            "description": "Only PUBLISHED obligations are picked up by the Applicability Engine to generate tasks."
+        },
+        {
+            "fieldname": "supersedes",
+            "label": "Supersedes",
+            "fieldtype": "Link",
+            "options": "Compliance Obligation",
+            "description": "When an obligation replaces an older one, link the superseded obligation here."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "QMS Administrator",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

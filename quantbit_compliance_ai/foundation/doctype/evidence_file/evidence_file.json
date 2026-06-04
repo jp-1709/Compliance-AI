@@ -1,0 +1,239 @@
+{
+    "doctype": "DocType",
+    "name": "Evidence File",
+    "module": "Foundation",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "EV-.YYYY.-.######",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "description": "Content-addressable file storage. Universal proof attachment across all modules. Deduplication via SHA-256.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "evidence_title",
+            "label": "Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "evidence_type",
+            "label": "Type",
+            "fieldtype": "Select",
+            "options": "Certificate\nLicence\nReturn/Filing\nReport\nPolicy/Procedure\nMeeting Minutes\nPhotograph\nLab Result\nInvoice/Bill\nLegal Document\nTraining Record\nAudit Report\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "issued_by",
+            "label": "Issued By",
+            "fieldtype": "Data",
+            "description": "Authority or issuer name"
+        },
+        {
+            "fieldname": "issue_date",
+            "label": "Issue Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "expiry_date",
+            "label": "Expiry Date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "description": "Triggers 30/14/7-day reminders via scheduled job"
+        },
+        {
+            "fieldname": "is_expired",
+            "label": "Expired",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "Auto-set by daily scheduled job"
+        },
+        {
+            "fieldname": "sec_file",
+            "label": "File",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "file",
+            "label": "File",
+            "fieldtype": "Attach",
+            "reqd": 1,
+            "description": "Allowed: PDF, JPEG, PNG, DOCX, XLSX, ZIP. Max 25 MB."
+        },
+        {
+            "fieldname": "file_size_bytes",
+            "label": "Size (bytes)",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "description": "Auto-computed on upload"
+        },
+        {
+            "fieldname": "mime_type",
+            "label": "MIME Type",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "description": "Auto-detected from file"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "sha256_hash",
+            "label": "SHA-256 Hash",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "unique": 0,
+            "description": "Content hash for deduplication (per-Organisation) and integrity verification"
+        },
+        {
+            "fieldname": "page_count",
+            "label": "Page Count",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "description": "Auto-extracted for PDFs"
+        },
+        {
+            "fieldname": "ocr_extracted_text",
+            "label": "OCR Text",
+            "fieldtype": "Long Text",
+            "read_only": 1,
+            "hidden": 1,
+            "description": "Extracted for full-text search; not shown in UI"
+        },
+        {
+            "fieldname": "sec_metadata",
+            "label": "Metadata",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "tags",
+            "label": "Tags",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated tags for filtering"
+        },
+        {
+            "fieldname": "retention_period_years",
+            "label": "Retention Period (Years)",
+            "fieldtype": "Int",
+            "default": 7,
+            "description": "Legal retention; default 7y per Companies Act 2013"
+        },
+        {
+            "fieldname": "destroy_after",
+            "label": "Destroy After",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Auto-computed: issue_date + retention_period_years"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_confidential",
+            "label": "Confidential",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "sensitivity_level",
+            "label": "Sensitivity",
+            "fieldtype": "Select",
+            "options": "Public\nInternal\nConfidential\nRestricted",
+            "default": "Internal"
+        },
+        {
+            "fieldname": "uploaded_by",
+            "label": "Uploaded By",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1,
+            "description": "Auto-set to session user on creation"
+        },
+        {
+            "fieldname": "sec_links",
+            "label": "Linked To",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_records",
+            "label": "Linked Records",
+            "fieldtype": "Table",
+            "options": "Evidence Link",
+            "description": "Polymorphic links to any business DocType"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "QMS Administrator",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

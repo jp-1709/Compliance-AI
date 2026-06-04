@@ -1,0 +1,504 @@
+{
+    "doctype": "DocType",
+    "name": "Compliance Calendar Task",
+    "module": "Compliance Calendar",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "TASK-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "track_seen": 1,
+    "title_field": "task_title",
+    "search_fields": "task_title,obligation,business_entity,category",
+    "description": "Instance of a Compliance Obligation for a specific Business Entity and period. The most-touched DocType in the system. Submission = completion confirmation (record locked).",
+    "fields": [
+        {
+            "fieldname": "tab_main",
+            "label": "Task Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Task Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "obligation",
+            "label": "Obligation",
+            "fieldtype": "Link",
+            "options": "Compliance Obligation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "task_title",
+            "label": "Task Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "category",
+            "label": "Category",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only": 1,
+            "fetch_from": "obligation.category"
+        },
+        {
+            "fieldname": "regulation",
+            "label": "Regulation",
+            "fieldtype": "Link",
+            "options": "Regulation",
+            "read_only": 1,
+            "fetch_from": "obligation.regulation"
+        },
+        {
+            "fieldname": "section_reference",
+            "label": "Section Ref",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "fetch_from": "obligation.section_reference"
+        },
+        {
+            "fieldname": "sec_period",
+            "label": "Period & Due Date",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "period_start",
+            "label": "Period Start",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "description": "Start of the compliance period this task covers (e.g. 1 Sep 2025)"
+        },
+        {
+            "fieldname": "period_end",
+            "label": "Period End",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "description": "End of the compliance period (e.g. 30 Sep 2025)"
+        },
+        {
+            "fieldname": "due_date",
+            "label": "Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "bold": 1,
+            "description": "Statutory deadline — the date by which the filing/action must be completed"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "frequency",
+            "label": "Frequency",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "fetch_from": "obligation.frequency"
+        },
+        {
+            "fieldname": "extension_count",
+            "label": "Extensions Granted",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1,
+            "description": "Number of due-date extensions granted. After 3, CXO sign-off is required."
+        },
+        {
+            "fieldname": "original_due_date",
+            "label": "Original Due Date",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Set once on insert; never modified, even after extensions."
+        },
+        {
+            "fieldname": "tab_assignment",
+            "label": "Assignment",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_assignment",
+            "label": "Assignment",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "assigned_to",
+            "label": "Assigned To",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "assigned_on",
+            "label": "Assigned On",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "reviewer",
+            "label": "Reviewer (Maker-Checker)",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "Required for Critical and High risk tasks. Must be different from Assigned To."
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "department",
+            "label": "Department",
+            "fieldtype": "Link",
+            "options": "Department",
+            "description": "Department responsible for this task."
+        },
+        {
+            "fieldname": "external_consultant",
+            "label": "External Consultant",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "If outsourced to a CA or lawyer — they will have read access to this task."
+        },
+        {
+            "fieldname": "tab_status",
+            "label": "Status & Risk",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_status",
+            "label": "Status & Risk",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Open\nIn Progress\nUnder Review\nCompleted\nNot Applicable\nDeferred\nOverdue",
+            "default": "Open",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "completion_pct",
+            "label": "Completion %",
+            "fieldtype": "Percent",
+            "default": 0,
+            "description": "Self-reported by assignee. 0–100."
+        },
+        {
+            "fieldname": "risk_level",
+            "label": "Risk Level",
+            "fieldtype": "Select",
+            "options": "\nCritical\nHigh\nMedium\nLow",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "fetch_from": "obligation.risk_level",
+            "description": "Fetched from obligation but can be overridden per-task."
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "ai_risk_score",
+            "label": "AI Risk Score",
+            "fieldtype": "Float",
+            "precision": 2,
+            "read_only": 1,
+            "description": "ML-predicted likelihood (0–1) that this task will be missed. Updated nightly."
+        },
+        {
+            "fieldname": "is_overdue",
+            "label": "Overdue",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "days_overdue",
+            "label": "Days Overdue",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "tab_completion",
+            "label": "Completion",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_completion",
+            "label": "Completion Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "completed_on",
+            "label": "Completed On",
+            "fieldtype": "Date",
+            "description": "Date on which the compliance action was actually completed."
+        },
+        {
+            "fieldname": "submission_reference",
+            "label": "Submission Reference / ARN",
+            "fieldtype": "Data",
+            "description": "Filing acknowledgement number, ARN, Challan number, or any government-issued reference."
+        },
+        {
+            "fieldname": "amount_paid",
+            "label": "Amount Paid (₹)",
+            "fieldtype": "Currency",
+            "precision": 2,
+            "description": "Tax, fee, or levy paid. Does not substitute for reconciliation — flag variance separately."
+        },
+        {
+            "fieldname": "cb_5",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "completion_remarks",
+            "label": "Completion Remarks",
+            "fieldtype": "Text Editor",
+            "description": "Notes on how the filing was completed; exceptions; issues faced."
+        },
+        {
+            "fieldname": "na_reason",
+            "label": "Reason for Not Applicable",
+            "fieldtype": "Small Text",
+            "depends_on": "eval:doc.status=='Not Applicable'",
+            "mandatory_depends_on": "eval:doc.status=='Not Applicable'",
+            "description": "Legal protection — this reason + approver + timestamp are stored as an immutable activity log entry."
+        },
+        {
+            "fieldname": "na_approved_by",
+            "label": "NA Approved By",
+            "fieldtype": "Link",
+            "options": "User",
+            "depends_on": "eval:doc.status=='Not Applicable'",
+            "description": "Must be a Compliance Officer or above. Their sign-off is the indemnity record."
+        },
+        {
+            "fieldname": "tab_evidence",
+            "label": "Evidence",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence Files",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "evidence_files",
+            "label": "Evidence Files",
+            "fieldtype": "Table",
+            "options": "Task Evidence Link",
+            "description": "All evidence uploaded for this task. SHA-256 hash verified on upload."
+        },
+        {
+            "fieldname": "evidence_completeness",
+            "label": "Evidence Completeness",
+            "fieldtype": "Select",
+            "options": "Not Started\nPartial\nComplete\nVerified",
+            "default": "Not Started",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Computed from required evidence types vs uploaded. Task cannot be submitted unless Complete."
+        },
+        {
+            "fieldname": "tab_communication",
+            "label": "Communication",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_communication",
+            "label": "Reminder & Escalation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "reminders_sent",
+            "label": "Reminders Sent",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_reminder_at",
+            "label": "Last Reminder Sent At",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_6",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "escalation_level",
+            "label": "Escalation Level",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1,
+            "description": "0 = normal | 1 = escalated to Department Manager | 2 = escalated to CXO | 3 = board-level"
+        },
+        {
+            "fieldname": "escalated_to",
+            "label": "Escalated To",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1,
+            "description": "User to whom this task has been escalated."
+        },
+        {
+            "fieldname": "tab_crosslinks",
+            "label": "Cross-Module Links",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_links",
+            "label": "Cross-Module Links",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_qms_event",
+            "label": "Linked QMS Quality Event",
+            "fieldtype": "Link",
+            "options": "QMS Quality Event",
+            "description": "If non-compliance triggered a non-conformance, link the QMS Quality Event here."
+        },
+        {
+            "fieldname": "linked_risk_item",
+            "label": "Linked Risk Register Item",
+            "fieldtype": "Link",
+            "options": "Risk Register Item",
+            "description": "Link to the Risk Register entry that tracks ongoing risk from this obligation."
+        },
+        {
+            "fieldname": "amended_from",
+            "label": "Amended From",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "no_copy": 1,
+            "print_hide": 1,
+            "read_only": 1,
+            "description": "Set automatically when this task is created via amendment of a locked task."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "write": 1,
+            "submit": 1,
+            "report": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "submit": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "due_date"
+            ]
+        },
+        {
+            "fields": [
+                "organisation",
+                "assigned_to",
+                "status"
+            ]
+        },
+        {
+            "fields": [
+                "organisation",
+                "is_overdue",
+                "risk_level"
+            ]
+        },
+        {
+            "fields": [
+                "organisation",
+                "obligation",
+                "period_start"
+            ],
+            "unique": 1,
+            "comment": "Enforces: one task per obligation per period per entity. Guards against race conditions in recurring task creation."
+        }
+    ]
+}

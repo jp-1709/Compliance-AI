@@ -1,0 +1,679 @@
+{
+    "doctype": "DocType",
+    "name": "Compliance Obligation Register",
+    "module": "Obligation Register",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "OBL-.######",
+    "track_changes": 1,
+    "track_seen": 1,
+    "is_submittable": 0,
+    "fields": [
+        {
+            "fieldname": "obligation_title",
+            "label": "Obligation Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1,
+            "length": 200,
+            "description": "Action-oriented, max 200 chars. e.g. 'File GSTR-3B return for the preceding tax period'"
+        },
+        {
+            "fieldname": "obligation_code",
+            "label": "Obligation Code",
+            "fieldtype": "Data",
+            "unique": 1,
+            "in_list_view": 1,
+            "length": 60,
+            "description": "Stable short code, e.g. GSTR-3B-MONTHLY, FACT-ANNUAL-RETURN"
+        },
+        {
+            "fieldname": "obligation_type",
+            "label": "Type",
+            "fieldtype": "Select",
+            "options": "Filing/Return\nPayment\nRegistration/Licence\nDisplay/Notice\nRecord-Keeping\nMeeting/Resolution\nTraining/Awareness\nAssessment/Audit\nDeclaration/Disclosure\nNotification to Authority\nCertification\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "regulation",
+            "label": "Source Regulation",
+            "fieldtype": "Link",
+            "options": "Regulation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "section_reference",
+            "label": "Section / Rule Reference",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "e.g. 'Section 39, CGST Act' or 'Rule 5(2), Maternity Benefit Rules'"
+        },
+        {
+            "fieldname": "cb_classification",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "category",
+            "label": "Category",
+            "fieldtype": "Select",
+            "options": "Labour & Employment\nTax & GST\nSecretarial / MCA\nRBI / FEMA\nEnvironment\nFire & Safety / Industrial Safety\nIndustry-Specific\nData Privacy / IT\nESG / BRSR\nCompetition / Anti-Trust\nIP / Trademark\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "sub_category",
+            "label": "Sub-Category",
+            "fieldtype": "Data",
+            "description": "e.g. 'EPF', 'GST Returns', 'Annual ROC'"
+        },
+        {
+            "fieldname": "regulator",
+            "label": "Regulator",
+            "fieldtype": "Link",
+            "options": "Regulator",
+            "in_list_view": 1,
+            "fetch_from": "regulation.regulator"
+        },
+        {
+            "fieldname": "tags",
+            "label": "Tags",
+            "fieldtype": "Table MultiSelect",
+            "options": "Obligation Tag Link"
+        },
+        {
+            "fieldname": "sec_frequency",
+            "label": "Frequency & Timing",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "frequency",
+            "label": "Frequency",
+            "fieldtype": "Select",
+            "options": "Daily\nWeekly\nFortnightly\nMonthly\nBi-Monthly\nQuarterly\nHalf-Yearly\nAnnual\nBi-Annual\nOn-Event\nContinuous\nOne-Time\nAd-Hoc",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "due_timing_rule",
+            "label": "Due Timing Rule (Human)",
+            "fieldtype": "Small Text",
+            "reqd": 1,
+            "description": "Plain English. e.g. '20th of next month' or 'Within 30 days of FY end' or 'Within 7 days of incident'"
+        },
+        {
+            "fieldname": "due_timing_machine",
+            "label": "Due Timing Rule (Machine)",
+            "fieldtype": "Code",
+            "options": "JSON",
+            "reqd": 1,
+            "description": "Machine-readable JSON timing rule."
+        },
+        {
+            "fieldname": "cb_freq",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "fiscal_year_anchor",
+            "label": "FY Anchor",
+            "fieldtype": "Select",
+            "options": "April-March (default)\nCalendar Year\nCustom",
+            "default": "April-March (default)"
+        },
+        {
+            "fieldname": "trigger_event",
+            "label": "Trigger Event (for On-Event)",
+            "fieldtype": "Data",
+            "depends_on": "eval:doc.frequency=='On-Event'",
+            "description": "e.g. 'Hire of contract worker', 'Hazardous chemical receipt'"
+        },
+        {
+            "fieldname": "instances_per_period",
+            "label": "Instances Per Period",
+            "fieldtype": "Int",
+            "default": 1,
+            "description": "Most are 1. Advance tax = 4 per FY → use separate obligations."
+        },
+        {
+            "fieldname": "sec_applicability",
+            "label": "Applicability",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "applicability_summary",
+            "label": "Applicability Summary",
+            "fieldtype": "Text Editor",
+            "description": "Plain English: who must comply?"
+        },
+        {
+            "fieldname": "applicability_rules",
+            "label": "Applicability Rules",
+            "fieldtype": "Table",
+            "options": "Applicability Rule"
+        },
+        {
+            "fieldname": "applicability_logic",
+            "label": "Logic Combiner",
+            "fieldtype": "Select",
+            "options": "ALL (AND)\nANY (OR)\nCustom Expression",
+            "default": "ALL (AND)",
+            "description": "How rules in the table combine. Custom uses 'expression' field."
+        },
+        {
+            "fieldname": "applicability_expression",
+            "label": "Custom Expression",
+            "fieldtype": "Code",
+            "options": "Python",
+            "depends_on": "eval:doc.applicability_logic=='Custom Expression'",
+            "description": "Pure Python expression. Vars: rules[0..n] (booleans), entity (Business Entity object)"
+        },
+        {
+            "fieldname": "cb_app_thresholds",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "min_employees",
+            "label": "Min. Employees",
+            "fieldtype": "Int"
+        },
+        {
+            "fieldname": "max_employees",
+            "label": "Max. Employees",
+            "fieldtype": "Int"
+        },
+        {
+            "fieldname": "min_turnover_inr_cr",
+            "label": "Min. Turnover (₹ Cr)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "max_turnover_inr_cr",
+            "label": "Max. Turnover (₹ Cr)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "applies_to_listed_only",
+            "label": "Listed Companies Only",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "applies_to_hazardous_only",
+            "label": "Hazardous Operations Only",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "applies_to_msme_only",
+            "label": "MSMEs Only",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "exempt_for_msme",
+            "label": "MSMEs Exempt",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "applicable_states",
+            "label": "Applicable States",
+            "fieldtype": "Table MultiSelect",
+            "options": "Obligation State"
+        },
+        {
+            "fieldname": "applicable_industries",
+            "label": "Applicable Industries (NIC)",
+            "fieldtype": "Table MultiSelect",
+            "options": "Obligation Industry"
+        },
+        {
+            "fieldname": "applicable_business_types",
+            "label": "Applicable Business Types",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated: Private Limited, Public Limited, LLP, etc. Empty = all."
+        },
+        {
+            "fieldname": "applicable_entity_types",
+            "label": "Applicable Entity Types",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated: Factory/Plant, Branch, etc. Empty = all."
+        },
+        {
+            "fieldname": "sec_consequences",
+            "label": "Consequences of Non-Compliance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "penalty_inr_min",
+            "label": "Min. Penalty (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "penalty_inr_max",
+            "label": "Max. Penalty (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "penalty_per_day_inr",
+            "label": "Penalty per Day (₹)",
+            "fieldtype": "Currency",
+            "description": "If continuing default attracts daily penalty"
+        },
+        {
+            "fieldname": "interest_rate_pa",
+            "label": "Interest Rate p.a. (%)",
+            "fieldtype": "Percent",
+            "description": "If late payment attracts interest"
+        },
+        {
+            "fieldname": "cb_consequences",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "imprisonment_risk",
+            "label": "Imprisonment Risk",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Triggers Director-level escalation"
+        },
+        {
+            "fieldname": "imprisonment_term",
+            "label": "Imprisonment Term",
+            "fieldtype": "Data",
+            "depends_on": "imprisonment_risk",
+            "description": "e.g. 'Up to 2 years'"
+        },
+        {
+            "fieldname": "blocks_business",
+            "label": "Can Block Business Operations",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Licence cancellation, factory closure, etc."
+        },
+        {
+            "fieldname": "reputation_risk",
+            "label": "Reputation Risk",
+            "fieldtype": "Select",
+            "options": "Low\nMedium\nHigh",
+            "default": "Medium"
+        },
+        {
+            "fieldname": "default_risk_level",
+            "label": "Default Risk Level",
+            "fieldtype": "Select",
+            "options": "Critical\nHigh\nMedium\nLow",
+            "reqd": 1,
+            "default": "Medium",
+            "description": "Used when generating tasks; overridable per-org"
+        },
+        {
+            "fieldname": "complexity",
+            "label": "Complexity to Comply",
+            "fieldtype": "Select",
+            "options": "Low\nMedium\nHigh",
+            "default": "Medium"
+        },
+        {
+            "fieldname": "estimated_effort_hours",
+            "label": "Estimated Effort (Hours)",
+            "fieldtype": "Float",
+            "description": "Person-hours typically needed to comply"
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence Requirements",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "evidence_required",
+            "label": "Required Evidence",
+            "fieldtype": "Table",
+            "options": "Obligation Evidence Requirement"
+        },
+        {
+            "fieldname": "form_name",
+            "label": "Form / Filing Name",
+            "fieldtype": "Data",
+            "description": "e.g. Form 5A, GSTR-3B, AOC-4"
+        },
+        {
+            "fieldname": "form_url",
+            "label": "Form Template URL",
+            "fieldtype": "Data",
+            "options": "URL"
+        },
+        {
+            "fieldname": "submission_portal",
+            "label": "Submission Portal URL",
+            "fieldtype": "Data",
+            "options": "URL"
+        },
+        {
+            "fieldname": "submission_mode",
+            "label": "Submission Mode",
+            "fieldtype": "Select",
+            "options": "Online Portal\nEmail\nPhysical\nDigital + Physical\nIn-Person\nNotice/Display",
+            "default": "Online Portal"
+        },
+        {
+            "fieldname": "cb_evidence",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "fee_applicable",
+            "label": "Fee/Payment Applicable",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "fee_amount",
+            "label": "Fee Amount (₹)",
+            "fieldtype": "Currency",
+            "depends_on": "fee_applicable"
+        },
+        {
+            "fieldname": "fee_calculation_basis",
+            "label": "Fee Calculation Basis",
+            "fieldtype": "Small Text",
+            "depends_on": "fee_applicable",
+            "description": "e.g. '0.1% of authorised capital subject to min ₹400'"
+        },
+        {
+            "fieldname": "retention_period_years",
+            "label": "Record Retention (Years)",
+            "fieldtype": "Int",
+            "default": 8
+        },
+        {
+            "fieldname": "sec_meta",
+            "label": "Knowledge & Guidance",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "purpose_text",
+            "label": "Purpose / Intent",
+            "fieldtype": "Text Editor",
+            "description": "Why this regulation exists. For Copilot context."
+        },
+        {
+            "fieldname": "compliance_steps",
+            "label": "Step-by-Step Compliance Procedure",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "common_pitfalls",
+            "label": "Common Pitfalls",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "guidance_notes",
+            "label": "Implementation Guidance",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "cb_meta",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "keywords",
+            "label": "Search Keywords",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated. Powers full-text search."
+        },
+        {
+            "fieldname": "iso_clauses_supporting",
+            "label": "ISO Clauses This Supports",
+            "fieldtype": "Table",
+            "options": "Obligation ISO Link",
+            "description": "Cross-link to QMS — compliance often demonstrates ISO clauses"
+        },
+        {
+            "fieldname": "embedding_vector",
+            "label": "Embedding Vector ID",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "hidden": 1,
+            "description": "Reference to pgvector record for RAG retrieval"
+        },
+        {
+            "fieldname": "sec_versioning",
+            "label": "Versioning",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "version_number",
+            "label": "Version",
+            "fieldtype": "Int",
+            "default": 1,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "is_current_version",
+            "label": "Is Current Version",
+            "fieldtype": "Check",
+            "default": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "supersedes",
+            "label": "Supersedes",
+            "fieldtype": "Link",
+            "options": "Compliance Obligation",
+            "read_only_on_submit": 1
+        },
+        {
+            "fieldname": "superseded_by",
+            "label": "Superseded By",
+            "fieldtype": "Link",
+            "options": "Compliance Obligation",
+            "read_only_on_submit": 1
+        },
+        {
+            "fieldname": "effective_from",
+            "label": "Effective From",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "effective_until",
+            "label": "Effective Until",
+            "fieldtype": "Date",
+            "description": "Empty = open-ended"
+        },
+        {
+            "fieldname": "cb_version",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "version_change_reason",
+            "label": "Version Change Reason",
+            "fieldtype": "Small Text",
+            "description": "Why this version differs from previous"
+        },
+        {
+            "fieldname": "version_change_log",
+            "label": "What Changed",
+            "fieldtype": "Text Editor",
+            "description": "Field-level changes for audit"
+        },
+        {
+            "fieldname": "sec_curation",
+            "label": "Curation Status",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "extraction_source",
+            "label": "Extraction Source",
+            "fieldtype": "Select",
+            "options": "AI-Extracted (Claude)\nAI-Extracted (Other)\nManual Entry\nPartner Content (e.g., Bare Acts)\nLegacy Migration\nGazette Notification",
+            "default": "AI-Extracted (Claude)",
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "extraction_confidence",
+            "label": "Extraction Confidence",
+            "fieldtype": "Percent",
+            "description": "AI's self-reported confidence; for prioritising lawyer review"
+        },
+        {
+            "fieldname": "extracted_by_run",
+            "label": "Extraction Run ID",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "description": "Reference to extraction batch"
+        },
+        {
+            "fieldname": "extracted_on",
+            "label": "Extracted On",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_curation",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "curation_status",
+            "label": "Curation Status",
+            "fieldtype": "Select",
+            "options": "Draft\nAI Extracted\nUnder Legal Review\nNeeds Revision\nApproved (Pending Publish)\nPublished\nDeprecated\nRetracted",
+            "default": "Draft",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "needs_review_reason",
+            "label": "Needs Review Reason",
+            "fieldtype": "Small Text",
+            "description": "Why this requires re-validation"
+        },
+        {
+            "fieldname": "validated_by_lawyer",
+            "label": "Validated By (Lawyer)",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "Frappe User with role 'Legal Counsel'"
+        },
+        {
+            "fieldname": "validator_bar_number",
+            "label": "Validator Bar Council Number",
+            "fieldtype": "Data",
+            "description": "BCI/State Bar Council enrolment number — captured for legal indemnity"
+        },
+        {
+            "fieldname": "validated_on",
+            "label": "Validated On",
+            "fieldtype": "Datetime"
+        },
+        {
+            "fieldname": "validation_notes",
+            "label": "Validator Notes",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "is_published",
+            "label": "Is Published",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Only published obligations generate tasks"
+        },
+        {
+            "fieldname": "published_on",
+            "label": "Published On",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "published_by",
+            "label": "Published By",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1,
+            "import": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "QMS Administrator",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "regulation",
+                "section_reference"
+            ]
+        },
+        {
+            "fields": [
+                "category",
+                "sub_category"
+            ]
+        },
+        {
+            "fields": [
+                "is_published",
+                "is_current_version"
+            ]
+        },
+        {
+            "fields": [
+                "curation_status",
+                "extraction_source"
+            ]
+        },
+        {
+            "fields": [
+                "effective_from",
+                "effective_until"
+            ]
+        }
+    ]
+}

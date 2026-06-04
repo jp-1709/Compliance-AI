@@ -1,0 +1,134 @@
+{
+    "doctype": "DocType",
+    "name": "Task Activity",
+    "module": "Compliance Calendar",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "ACT-.######",
+    "track_changes": 0,
+    "title_field": "activity_type",
+    "search_fields": "task,activity_type,actor",
+    "description": "Immutable audit timeline for a Compliance Calendar Task. Append-only — no user has write permission. Every significant action on a task must produce an entry here.",
+    "fields": [
+        {
+            "fieldname": "sec_event",
+            "label": "Activity Event",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "task",
+            "label": "Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "activity_type",
+            "label": "Activity Type",
+            "fieldtype": "Select",
+            "options": "\nCreated\nAssigned\nReassigned\nStatus Changed\nDue Date Extended\nReminder Sent\nEvidence Uploaded\nEvidence Removed\nComment Added\nEscalated\nCompleted\nReopened\nMarked NA\nAmended\nLinked to QMS Event",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "actor",
+            "label": "Actor",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "User who performed the action. Set by the system; never user-editable."
+        },
+        {
+            "fieldname": "actor_role",
+            "label": "Actor Role",
+            "fieldtype": "Data",
+            "description": "Primary role of the actor at time of action."
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "occurred_at",
+            "label": "Occurred At",
+            "fieldtype": "Datetime",
+            "reqd": 1,
+            "default": "now",
+            "description": "UTC timestamp of the event. Converted to IST for display."
+        },
+        {
+            "fieldname": "from_value",
+            "label": "From",
+            "fieldtype": "Data",
+            "description": "Previous value — for status changes, due date extensions, reassignments."
+        },
+        {
+            "fieldname": "to_value",
+            "label": "To",
+            "fieldtype": "Data",
+            "description": "New value after the change."
+        },
+        {
+            "fieldname": "sec_detail",
+            "label": "Detail",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Small Text",
+            "description": "Free-text reason or comment. Required for rejections and NA markings."
+        },
+        {
+            "fieldname": "ip_address",
+            "label": "IP Address",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "description": "Client IP at time of action. Stored for legal audit purposes."
+        },
+        {
+            "fieldname": "user_agent",
+            "label": "User Agent",
+            "fieldtype": "Small Text",
+            "read_only": 1,
+            "hidden": 1,
+            "description": "Browser/device signature. Hidden from UI but stored for forensic use."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "create": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "create": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

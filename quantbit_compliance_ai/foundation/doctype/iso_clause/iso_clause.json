@@ -1,0 +1,171 @@
+{
+    "doctype": "DocType",
+    "name": "ISO Clause",
+    "module": "Foundation",
+    "naming_rule": "By field: clause_full_id",
+    "autoname": "field:clause_full_id",
+    "track_changes": 1,
+    "description": "Library of clauses across the 7 ISO standards. Seeded as fixtures — global/shared (no organisation field).",
+    "fields": [
+        {
+            "fieldname": "clause_full_id",
+            "label": "Clause ID",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "bold": 1,
+            "description": "Format: ISO9001-7.5.3 (standard prefix + clause number)"
+        },
+        {
+            "fieldname": "iso_standard",
+            "label": "ISO Standard",
+            "fieldtype": "Select",
+            "options": "ISO 9001:2015\nISO 14001:2015\nISO 45001:2018\nISO 22000:2018\nISO 22301:2019\nISO 27001:2022\nISO 13485:2016",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "clause_number",
+            "label": "Clause Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "e.g. 7.5.3 — depth determines level automatically"
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "clause_title",
+            "label": "Clause Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "parent_clause",
+            "label": "Parent Clause",
+            "fieldtype": "Link",
+            "options": "ISO Clause",
+            "description": "Must belong to the same ISO standard"
+        },
+        {
+            "fieldname": "level",
+            "label": "Level",
+            "fieldtype": "Int",
+            "description": "1 = section, 2 = clause, 3 = sub-clause. Auto-derived from clause_number depth."
+        },
+        {
+            "fieldname": "sec_text",
+            "label": "Clause Text",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "clause_text",
+            "label": "Full Clause Text",
+            "fieldtype": "Text Editor",
+            "description": "Verbatim or summarised clause content. Must be lawyer-reviewed before publishing."
+        },
+        {
+            "fieldname": "interpretation_notes",
+            "label": "Interpretation / Implementation Guidance",
+            "fieldtype": "Text Editor",
+            "description": "Plain-English guidance for compliance practitioners"
+        },
+        {
+            "fieldname": "sec_meta",
+            "label": "Metadata",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "is_required",
+            "label": "Mandatory",
+            "fieldtype": "Check",
+            "default": 1,
+            "description": "Unchecked for advisory/optional clauses (e.g. Annex A controls in ISO 27001 unless selected)"
+        },
+        {
+            "fieldname": "evidence_examples",
+            "label": "Typical Evidence Examples",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated examples of evidence that typically satisfies this clause"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Active",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "version_year",
+            "label": "Standard Version Year",
+            "fieldtype": "Int",
+            "description": "e.g. 2015, 2022. Must match the year in iso_standard."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "QMS Administrator",
+            "read": 1,
+            "write": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "_seed_expectations": {
+        "ISO 9001:2015": "~80 clauses",
+        "ISO 14001:2015": "~70 clauses",
+        "ISO 45001:2018": "~75 clauses",
+        "ISO 22000:2018": "~85 clauses",
+        "ISO 22301:2019": "~60 clauses",
+        "ISO 27001:2022": "~115 clauses (27 mandatory + 93 Annex A controls)",
+        "ISO 13485:2016": "~95 clauses",
+        "total": "~580 clauses"
+    }
+}

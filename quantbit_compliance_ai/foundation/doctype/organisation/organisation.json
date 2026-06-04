@@ -1,0 +1,259 @@
+{
+    "doctype": "DocType",
+    "name": "Organisation",
+    "module": "Foundation",
+    "naming_rule": "By field: organisation_code",
+    "autoname": "field:organisation_code",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "track_seen": 1,
+    "description": "Top-level SaaS tenant. One Organisation = one customer subscription.",
+    "fields": [
+        {
+            "fieldname": "organisation_code",
+            "label": "Organisation Code",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "bold": 1,
+            "description": "Short unique code, e.g. ACME, TATA. Used as document name."
+        },
+        {
+            "fieldname": "organisation_name",
+            "label": "Organisation Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "legal_name",
+            "label": "Legal Name (as per CIN/PAN)",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "industry_sector",
+            "label": "Industry Sector",
+            "fieldtype": "Link",
+            "options": "Industry Sector",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "business_type",
+            "label": "Business Type",
+            "fieldtype": "Select",
+            "options": "Private Limited\nPublic Limited\nLLP\nPartnership\nProprietorship\nGovernment\nNon-Profit\nOther",
+            "reqd": 1
+        },
+        {
+            "fieldname": "is_listed",
+            "label": "Listed Entity",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "If listed, SEBI LODR obligations apply"
+        },
+        {
+            "fieldname": "sec_identifiers",
+            "label": "Identifiers",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "cin",
+            "label": "CIN",
+            "fieldtype": "Data",
+            "description": "Corporate Identification Number (MCA). Format: L12345AB2020ABC123456"
+        },
+        {
+            "fieldname": "pan",
+            "label": "PAN",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "Permanent Account Number. Format: AAAAA9999A"
+        },
+        {
+            "fieldname": "tan",
+            "label": "TAN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "gstin_primary",
+            "label": "Primary GSTIN",
+            "fieldtype": "Data",
+            "description": "Format: 22AAAAA0000A1Z5"
+        },
+        {
+            "fieldname": "lei",
+            "label": "LEI",
+            "fieldtype": "Data",
+            "description": "Legal Entity Identifier (20-char alphanumeric)"
+        },
+        {
+            "fieldname": "incorporation_date",
+            "label": "Incorporation Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "sec_address",
+            "label": "Registered Address",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "address_line_1",
+            "label": "Address Line 1",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "address_line_2",
+            "label": "Address Line 2",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "city",
+            "label": "City",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "state",
+            "label": "State",
+            "fieldtype": "Link",
+            "options": "State",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "pincode",
+            "label": "PIN Code",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "6-digit Indian PIN code"
+        },
+        {
+            "fieldname": "country",
+            "label": "Country",
+            "fieldtype": "Link",
+            "options": "Country",
+            "default": "India",
+            "reqd": 1
+        },
+        {
+            "fieldname": "phone",
+            "label": "Phone",
+            "fieldtype": "Data",
+            "description": "Format: +91XXXXXXXXXX"
+        },
+        {
+            "fieldname": "email",
+            "label": "Email",
+            "fieldtype": "Data",
+            "options": "Email"
+        },
+        {
+            "fieldname": "website",
+            "label": "Website",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "sec_subscription",
+            "label": "Subscription",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "subscription_plan",
+            "label": "Plan",
+            "fieldtype": "Select",
+            "options": "Trial\nStarter\nBusiness\nEnterprise",
+            "default": "Trial"
+        },
+        {
+            "fieldname": "subscription_start",
+            "label": "Subscription Start",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "subscription_end",
+            "label": "Subscription End",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "max_users",
+            "label": "Max Users",
+            "fieldtype": "Int",
+            "default": 5
+        },
+        {
+            "fieldname": "max_entities",
+            "label": "Max Entities",
+            "fieldtype": "Int",
+            "default": 1
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Active",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "primary_contact",
+            "label": "Primary Contact",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "logo",
+            "label": "Logo",
+            "fieldtype": "Attach Image"
+        },
+        {
+            "fieldname": "sec_modules",
+            "label": "Module Access",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "modules_enabled",
+            "label": "Enabled Modules",
+            "fieldtype": "Table MultiSelect",
+            "options": "Organisation Module Access",
+            "description": "Which modules are enabled for this org based on their plan"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 0,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "write": 1,
+            "report": 1,
+            "export": 1,
+            "if_owner": 0
+        }
+    ]
+}

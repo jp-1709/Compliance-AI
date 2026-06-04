@@ -1,0 +1,162 @@
+{
+    "doctype": "DocType",
+    "name": "Task Reminder Schedule",
+    "module": "Compliance Calendar",
+    "naming_rule": "By field: organisation",
+    "autoname": "field:organisation",
+    "track_changes": 1,
+    "title_field": "organisation",
+    "description": "Per-organisation override of the default reminder and escalation cadence. One record per organisation. Leave defaults for standard behaviour.",
+    "fields": [
+        {
+            "fieldname": "tab_reminders",
+            "label": "Reminder Configuration",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_org",
+            "label": "Organisation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "sec_reminder_cadence",
+            "label": "Reminder Cadence (days before due date)",
+            "fieldtype": "Section Break",
+            "description": "Enter comma-separated integers. E.g. '14,7,3,1,0' means remind 14 days before, 7 days before, 3 days before, 1 day before, and on the due date itself (T-0)."
+        },
+        {
+            "fieldname": "reminder_critical",
+            "label": "Critical Risk Reminders",
+            "fieldtype": "Data",
+            "default": "30,14,7,3,1,0",
+            "description": "Comma-separated days before due date. Default: 30,14,7,3,1,0"
+        },
+        {
+            "fieldname": "reminder_high",
+            "label": "High Risk Reminders",
+            "fieldtype": "Data",
+            "default": "14,7,3,1,0",
+            "description": "Comma-separated days before due date. Default: 14,7,3,1,0"
+        },
+        {
+            "fieldname": "reminder_medium",
+            "label": "Medium Risk Reminders",
+            "fieldtype": "Data",
+            "default": "7,3,0",
+            "description": "Comma-separated days before due date. Default: 7,3,0"
+        },
+        {
+            "fieldname": "reminder_low",
+            "label": "Low Risk Reminders",
+            "fieldtype": "Data",
+            "default": "3,0",
+            "description": "Comma-separated days before due date. Default: 3,0"
+        },
+        {
+            "fieldname": "tab_escalation",
+            "label": "Escalation Rules",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_escalation",
+            "label": "Auto-Escalation Thresholds",
+            "fieldtype": "Section Break",
+            "description": "Overdue tasks are automatically escalated based on these thresholds."
+        },
+        {
+            "fieldname": "escalate_after_days_overdue",
+            "label": "Escalate to Department Manager after (days overdue)",
+            "fieldtype": "Int",
+            "default": 1,
+            "description": "After this many days overdue, the task is escalated to the Department Manager (escalation_level = 1)."
+        },
+        {
+            "fieldname": "escalate_to_cxo_after_days",
+            "label": "Escalate to CXO after (days overdue)",
+            "fieldtype": "Int",
+            "default": 7,
+            "description": "After this many days overdue, the task is escalated to the Group CXO (escalation_level = 2)."
+        },
+        {
+            "fieldname": "tab_channels",
+            "label": "Notification Channels",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_channels",
+            "label": "Notification Channels",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "send_email",
+            "label": "Send Email Reminders",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "send_whatsapp",
+            "label": "Send WhatsApp Reminders",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "send_in_app",
+            "label": "Send In-App Notifications",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "sec_quiet_hours",
+            "label": "Quiet Hours (WhatsApp only)",
+            "fieldtype": "Section Break",
+            "description": "WhatsApp messages will not be sent during quiet hours. Email is always sent immediately (sits in inbox). Times are in IST."
+        },
+        {
+            "fieldname": "quiet_hours_start",
+            "label": "Quiet Hours Start (IST)",
+            "fieldtype": "Time",
+            "default": "21:00:00",
+            "description": "E.g. 21:00 — no WhatsApp after 9 PM"
+        },
+        {
+            "fieldname": "quiet_hours_end",
+            "label": "Quiet Hours End (IST)",
+            "fieldtype": "Time",
+            "default": "08:00:00",
+            "description": "E.g. 08:00 — WhatsApp resumes at 8 AM"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "doctype": "DocType",
+    "name": "Task Evidence Link",
+    "module": "Compliance Calendar",
+    "istable": 1,
+    "track_changes": 0,
+    "description": "Child table row linking an Evidence File to a Compliance Calendar Task. One row per evidence file. Primary evidence is flagged. Use the 'Move Evidence' admin action to reassign evidence to a different task (retains audit trail).",
+    "fields": [
+        {
+            "fieldname": "evidence_file",
+            "label": "Evidence File",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1,
+            "in_list_view": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "evidence_type",
+            "label": "Type",
+            "fieldtype": "Data",
+            "fetch_from": "evidence_file.evidence_type",
+            "in_list_view": 1,
+            "read_only": 1,
+            "description": "Fetched from the Evidence File record. E.g. Filing Acknowledgement, Challan, Screenshot."
+        },
+        {
+            "fieldname": "is_primary",
+            "label": "Primary Evidence",
+            "fieldtype": "Check",
+            "default": 0,
+            "in_list_view": 1,
+            "description": "Mark the most important evidence as primary. Shown prominently in the task detail view and Audit Pack."
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Small Text",
+            "description": "Notes on this specific evidence item — e.g. which filing period it covers, why it is relevant."
+        }
+    ]
+}

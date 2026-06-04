@@ -1,0 +1,143 @@
+{
+    "doctype": "DocType",
+    "name": "User Profile",
+    "module": "Foundation",
+    "naming_rule": "By field: user",
+    "autoname": "field:user",
+    "track_changes": 1,
+    "description": "Extension of Frappe User. Carries persona, entity scope, and notification preferences. Do NOT modify Frappe's core User DocType.",
+    "fields": [
+        {
+            "fieldname": "user",
+            "label": "Frappe User",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "primary_persona",
+            "label": "Primary Persona",
+            "fieldtype": "Select",
+            "options": "Group CXO\nCompliance Officer\nQMS Administrator\nInternal Auditor\nDepartment Manager\nLegal Counsel\nRead Only",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Maps directly to a Frappe Role that is auto-assigned"
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "designation",
+            "label": "Designation",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "department",
+            "label": "Department",
+            "fieldtype": "Link",
+            "options": "Department"
+        },
+        {
+            "fieldname": "reports_to",
+            "label": "Reports To",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "Cannot be the same as the user themselves"
+        },
+        {
+            "fieldname": "sec_access",
+            "label": "Entity Access",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "all_entities_access",
+            "label": "Access All Entities of Org",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "If checked, entity_access table is ignored — user sees all active entities in their org"
+        },
+        {
+            "fieldname": "entity_access",
+            "label": "Specific Entity Access",
+            "fieldtype": "Table",
+            "options": "User Entity Access",
+            "depends_on": "eval:!doc.all_entities_access",
+            "description": "Explicit list of entities this user may access"
+        },
+        {
+            "fieldname": "sec_contact",
+            "label": "Contact",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "phone",
+            "label": "Phone",
+            "fieldtype": "Data",
+            "description": "Format: +91XXXXXXXXXX"
+        },
+        {
+            "fieldname": "whatsapp_number",
+            "label": "WhatsApp Number",
+            "fieldtype": "Data",
+            "description": "Format: +91XXXXXXXXXX — used for deadline reminders via WhatsApp Business"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "notification_pref_email",
+            "label": "Email Notifications",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "notification_pref_whatsapp",
+            "label": "WhatsApp Notifications",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "notification_pref_inapp",
+            "label": "In-app Notifications",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        }
+    ]
+}

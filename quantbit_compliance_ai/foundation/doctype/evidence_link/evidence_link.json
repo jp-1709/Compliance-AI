@@ -1,0 +1,32 @@
+{
+    "doctype": "DocType",
+    "name": "Evidence Link",
+    "module": "Foundation",
+    "istable": 1,
+    "description": "Polymorphic link from Evidence File to any business DocType record",
+    "fields": [
+        {
+            "fieldname": "linked_doctype",
+            "label": "DocType",
+            "fieldtype": "Link",
+            "options": "DocType",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "linked_name",
+            "label": "Record",
+            "fieldtype": "Dynamic Link",
+            "options": "linked_doctype",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "link_purpose",
+            "label": "Purpose",
+            "fieldtype": "Select",
+            "options": "Primary Evidence\nSupporting\nReference\nLegacy",
+            "default": "Primary Evidence"
+        }
+    ]
+}

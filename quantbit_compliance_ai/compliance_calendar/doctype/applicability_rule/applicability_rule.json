@@ -1,0 +1,44 @@
+{
+    "doctype": "DocType",
+    "name": "Applicability Rule",
+    "module": "Compliance Calendar",
+    "istable": 1,
+    "track_changes": 0,
+    "description": "Child table row defining one rule in an obligation's applicability chain. Rows are evaluated in order; the `logical_operator` column defines how each row combines with the next (AND/OR). The Applicability Engine evaluates the full chain to decide if the obligation applies to a Business Entity.",
+    "fields": [
+        {
+            "fieldname": "rule_type",
+            "label": "Rule Type",
+            "fieldtype": "Select",
+            "options": "\nState Match\nIndustry Match\nEmployee Threshold\nTurnover Threshold\nListed Status\nHazardous Status\nMSME Status\nEntity Type\nCustom Expression",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "What attribute of the Business Entity this rule checks."
+        },
+        {
+            "fieldname": "operator",
+            "label": "Operator",
+            "fieldtype": "Select",
+            "options": "\nequals\nnot_equals\ngreater_than\nless_than\ngreater_equal\nless_equal\nin\nnot_in\nbetween",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Comparison operator applied between the entity attribute and the value."
+        },
+        {
+            "fieldname": "value_text",
+            "label": "Value",
+            "fieldtype": "Small Text",
+            "in_list_view": 1,
+            "description": "JSON-encoded value. Scalar: \"Maharashtra\". List: [\"Maharashtra\",\"Goa\"]. Range: {\"min\": 10, \"max\": 499}. Expression: \"entity.employee_count * 1.1 > 100\"."
+        },
+        {
+            "fieldname": "logical_operator",
+            "label": "Logical Op",
+            "fieldtype": "Select",
+            "options": "AND\nOR",
+            "default": "AND",
+            "in_list_view": 1,
+            "description": "How this rule's result combines with the NEXT row. The last row's logical_operator is ignored."
+        }
+    ]
+}

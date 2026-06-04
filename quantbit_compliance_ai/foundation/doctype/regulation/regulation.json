@@ -1,0 +1,277 @@
+{
+    "doctype": "DocType",
+    "name": "Regulation",
+    "module": "Foundation",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "REG-.######",
+    "track_changes": 1,
+    "description": "Library of Indian statutes — Acts, Rules, Notifications, Circulars. Global/shared (no organisation field). Workflow: Not Started → AI Extracted → Under Legal Review → Published.",
+    "fields": [
+        {
+            "fieldname": "regulation_title",
+            "label": "Regulation Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "short_title",
+            "label": "Short Title",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "e.g. 'Factories Act'. Used in obligation references."
+        },
+        {
+            "fieldname": "regulation_type",
+            "label": "Type",
+            "fieldtype": "Select",
+            "options": "Act\nRule\nRegulation\nNotification\nCircular\nGuideline\nStandard",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "regulator",
+            "label": "Regulator/Authority",
+            "fieldtype": "Link",
+            "options": "Regulator",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "jurisdiction",
+            "label": "Jurisdiction",
+            "fieldtype": "Select",
+            "options": "Central\nState\nLocal/Municipal",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "applicable_states",
+            "label": "Applicable States",
+            "fieldtype": "Table MultiSelect",
+            "options": "Regulation State",
+            "description": "Leave empty for Central regulations (applies to all states)"
+        },
+        {
+            "fieldname": "sec_dates",
+            "label": "Dates",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "enacted_date",
+            "label": "Enacted On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "effective_date",
+            "label": "Effective From",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "description": "Must be on or after Enacted date"
+        },
+        {
+            "fieldname": "last_amended",
+            "label": "Last Amended",
+            "fieldtype": "Date",
+            "description": "Must be on or after Effective date"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "supersedes",
+            "label": "Supersedes",
+            "fieldtype": "Link",
+            "options": "Regulation",
+            "description": "When this regulation is Published, the superseded one is auto-marked inactive"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Active",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "sec_content",
+            "label": "Content",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "summary",
+            "label": "Summary",
+            "fieldtype": "Text Editor",
+            "description": "High-level summary of the regulation"
+        },
+        {
+            "fieldname": "applicability_summary",
+            "label": "Applicability Summary",
+            "fieldtype": "Text Editor",
+            "description": "Plain English: who does this apply to, which industries, which states"
+        },
+        {
+            "fieldname": "industries_applicable",
+            "label": "Industries Applicable",
+            "fieldtype": "Table MultiSelect",
+            "options": "Regulation Industry"
+        },
+        {
+            "fieldname": "sec_source",
+            "label": "Source",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "source_url",
+            "label": "Official Source URL",
+            "fieldtype": "Data",
+            "options": "URL"
+        },
+        {
+            "fieldname": "gazette_reference",
+            "label": "Gazette Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "official_pdf",
+            "label": "Official PDF",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "extraction_status",
+            "label": "Obligation Extraction Status",
+            "fieldtype": "Select",
+            "options": "Not Started\nAI Extracted\nUnder Legal Review\nPublished",
+            "default": "Not Started",
+            "description": "Workflow: Not Started → AI Extracted → Under Legal Review → Published. Cannot skip steps."
+        },
+        {
+            "fieldname": "validated_by",
+            "label": "Validated By (Lawyer)",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "Required before Publishing"
+        },
+        {
+            "fieldname": "validated_on",
+            "label": "Validated On",
+            "fieldtype": "Date",
+            "description": "Required before Publishing"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "QMS Administrator",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "_workflow": {
+        "name": "Regulation Lifecycle",
+        "states": [
+            {
+                "state": "Not Started",
+                "who_can_edit": [
+                    "System Manager"
+                ],
+                "visible_to": [
+                    "System Manager"
+                ]
+            },
+            {
+                "state": "AI Extracted",
+                "who_can_edit": [
+                    "System Manager"
+                ],
+                "visible_to": [
+                    "System Manager",
+                    "Legal Counsel"
+                ]
+            },
+            {
+                "state": "Under Legal Review",
+                "who_can_edit": [
+                    "Legal Counsel"
+                ],
+                "visible_to": [
+                    "Legal Counsel",
+                    "System Manager"
+                ]
+            },
+            {
+                "state": "Published",
+                "who_can_edit": [],
+                "visible_to": "All users (read-only)"
+            },
+            {
+                "state": "Superseded",
+                "who_can_edit": [],
+                "visible_to": "All users (read-only, with superseded banner)"
+            }
+        ],
+        "valid_transitions": {
+            "Not Started": [
+                "AI Extracted"
+            ],
+            "AI Extracted": [
+                "Under Legal Review"
+            ],
+            "Under Legal Review": [
+                "Published"
+            ],
+            "Published": [],
+            "Superseded": []
+        }
+    }
+}

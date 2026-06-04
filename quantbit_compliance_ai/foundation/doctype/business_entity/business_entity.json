@@ -1,0 +1,304 @@
+{
+    "doctype": "DocType",
+    "name": "Business Entity",
+    "module": "Foundation",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "BE-.YYYY.-.#####",
+    "track_changes": 1,
+    "description": "A legal entity, branch, plant, or location under an Organisation. Compliance records are scoped here.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "entity_name",
+            "label": "Entity Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "entity_type",
+            "label": "Entity Type",
+            "fieldtype": "Select",
+            "options": "Head Office\nFactory/Plant\nBranch\nWarehouse\nR&D Centre\nSales Office\nSubsidiary\nOther",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_principal_entity",
+            "label": "Principal Entity",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Only one Principal Entity allowed per Organisation"
+        },
+        {
+            "fieldname": "parent_entity",
+            "label": "Parent Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "description": "Must belong to the same Organisation"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Active",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "sec_location",
+            "label": "Location",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "address_line_1",
+            "label": "Address Line 1",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "address_line_2",
+            "label": "Address Line 2",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "city",
+            "label": "City",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "state",
+            "label": "State",
+            "fieldtype": "Link",
+            "options": "State",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "description": "Drives state-specific compliance obligations"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "pincode",
+            "label": "PIN Code",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "6-digit Indian PIN code"
+        },
+        {
+            "fieldname": "country",
+            "label": "Country",
+            "fieldtype": "Link",
+            "options": "Country",
+            "default": "India"
+        },
+        {
+            "fieldname": "geo_lat",
+            "label": "Latitude",
+            "fieldtype": "Float",
+            "precision": 6
+        },
+        {
+            "fieldname": "geo_lng",
+            "label": "Longitude",
+            "fieldtype": "Float",
+            "precision": 6
+        },
+        {
+            "fieldname": "sec_classification",
+            "label": "Classification",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "industry_code",
+            "label": "Industry Code (NIC 2008)",
+            "fieldtype": "Link",
+            "options": "Industry Code"
+        },
+        {
+            "fieldname": "primary_activity",
+            "label": "Primary Activity",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "factory_license_no",
+            "label": "Factory Licence No.",
+            "fieldtype": "Data",
+            "depends_on": "eval:doc.entity_type=='Factory/Plant'"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_hazardous",
+            "label": "Handles Hazardous Substances",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Triggers MSIHC, PESO, PCB obligations"
+        },
+        {
+            "fieldname": "is_msme",
+            "label": "MSME Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "msme_number",
+            "label": "Udyam Number",
+            "fieldtype": "Data",
+            "depends_on": "eval:doc.is_msme",
+            "description": "Format: UDYAM-XX-00-0000000"
+        },
+        {
+            "fieldname": "sec_workforce",
+            "label": "Workforce Profile",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "employee_count",
+            "label": "Total Employees",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "Direct + on-roll employees"
+        },
+        {
+            "fieldname": "contract_worker_count",
+            "label": "Contract Workers",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "women_employee_count",
+            "label": "Women Employees",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "differently_abled_count",
+            "label": "Differently-abled",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "shifts_count",
+            "label": "No. of Shifts",
+            "fieldtype": "Int",
+            "default": 1
+        },
+        {
+            "fieldname": "operates_24x7",
+            "label": "Operates 24x7",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "has_canteen",
+            "label": "Has Canteen",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_registrations",
+            "label": "Statutory Registrations",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "gstin",
+            "label": "GSTIN",
+            "fieldtype": "Data",
+            "description": "Format: 22AAAAA0000A1Z5"
+        },
+        {
+            "fieldname": "epfo_code",
+            "label": "EPFO Code",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "esic_code",
+            "label": "ESIC Code",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_5",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "professional_tax_no",
+            "label": "Professional Tax No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "shops_estab_no",
+            "label": "Shops & Estab. No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "iec_code",
+            "label": "IEC Code",
+            "fieldtype": "Data"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "QMS Administrator",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}
