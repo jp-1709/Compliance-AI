@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/applicability_engine.py
+quantbit_compliance_ai/compliance_calendar/applicability_engine.py
 
 Applicability Engine — decides which Compliance Obligations apply to a Business Entity.
 

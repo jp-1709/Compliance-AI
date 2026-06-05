@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/api.py
+quantbit_compliance_ai/compliance_calendar/api.py
 
 Whitelisted API methods for the Compliance Calendar module.
 
@@ -17,13 +17,13 @@ from frappe.utils import today, getdate, date_diff, now
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 
-from complyai.compliance.compliance_calendar.utils import (
+from quantbit_compliance_ai.compliance_calendar.utils import (
     compute_next_period,
     log_task_activity,
     compute_health_score,
     compute_reminder_dates,
 )
-from complyai.compliance.compliance_calendar.applicability_engine import (
+from quantbit_compliance_ai.compliance_calendar.applicability_engine import (
     ApplicabilityEngine,
 )
 
@@ -112,7 +112,7 @@ def generate_calendar_for_entity(business_entity: str, year: int = None) -> dict
 
 def _generate_tasks_for_obligation(obligation, entity, fy_start: date, fy_end: date) -> dict:
     """Generate all task instances for one obligation within the FY."""
-    from complyai.compliance.compliance_calendar.utils import parse_due_timing_rule
+    from quantbit_compliance_ai.compliance_calendar.utils import parse_due_timing_rule
 
     frequency = obligation.frequency
     if frequency in ("One-Time", "On-Event", "Continuous"):

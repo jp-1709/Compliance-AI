@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/utils.py
+quantbit_compliance_ai/compliance_calendar/utils.py
 
 Shared helpers for the Compliance Calendar module.
 
@@ -198,7 +198,7 @@ def compute_reminder_dates(task_doc, holiday_list: list = None) -> list:
 
     Returns: List of datetime.date objects in ascending order.
     """
-    from complyai.compliance.compliance_calendar.doctype.task_reminder_schedule.task_reminder_schedule import (
+    from quantbit_compliance_ai.compliance_calendar.doctype.task_reminder_schedule.task_reminder_schedule import (
         TaskReminderSchedule,
     )
 

@@ -1,6 +1,6 @@
 """
 iso_clause.py — Frappe DocType controller for ISO Clause (F5)
-ComplyAI · Foundation Module
+Quantbit Compliance AI · Foundation Module
 
 Validations & Business Logic:
   - clause_full_id must be globally unique (used as document name)

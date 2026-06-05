@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/doctype/compliance_calendar_task/compliance_calendar_task.py
+quantbit_compliance_ai/compliance_calendar/doctype/compliance_calendar_task/compliance_calendar_task.py
 
 Controller for Compliance Calendar Task — the most-touched DocType in the system.
 
@@ -15,7 +15,7 @@ Design principles
 import frappe
 from frappe.model.document import Document
 from frappe.utils import today, now, date_diff, getdate, get_datetime
-from complyai.compliance.compliance_calendar.utils import (
+from quantbit_compliance_ai.compliance_calendar.utils import (
     compute_next_period,
     get_actor_role,
     log_task_activity,

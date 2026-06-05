@@ -1,6 +1,6 @@
 """
 evidence_file.py — Frappe DocType controller for Evidence File (F4)
-ComplyAI · Foundation Module
+Quantbit Compliance AI · Foundation Module
 
 Validations & Business Logic:
   - On upload: compute SHA-256 hash, file size, MIME type, page count (PDF)

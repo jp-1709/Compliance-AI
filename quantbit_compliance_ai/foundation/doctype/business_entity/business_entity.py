@@ -1,6 +1,6 @@
 """
 business_entity.py — Frappe DocType controller for Business Entity (F2)
-ComplyAI · Foundation Module
+Quantbit Compliance AI · Foundation Module
 
 Validations:
   - Only one is_principal_entity per Organisation

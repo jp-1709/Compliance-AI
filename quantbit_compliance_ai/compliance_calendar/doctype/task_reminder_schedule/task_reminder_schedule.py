@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/doctype/task_reminder_schedule/task_reminder_schedule.py
+quantbit_compliance_ai/compliance_calendar/doctype/task_reminder_schedule/task_reminder_schedule.py
 
 Controller for Task Reminder Schedule — per-organisation reminder and escalation configuration.
 

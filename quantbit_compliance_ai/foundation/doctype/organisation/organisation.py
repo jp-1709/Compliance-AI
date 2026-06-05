@@ -1,6 +1,6 @@
 """
 organisation.py — Frappe DocType controller for Organisation (F1)
-ComplyAI · Foundation Module
+Quantbit Compliance AI · Foundation Module
 
 Validations:
   - PAN format: ^[A-Z]{5}[0-9]{4}[A-Z]$

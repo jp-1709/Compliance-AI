@@ -1,6 +1,6 @@
 """
 user_profile.py — Frappe DocType controller for User Profile (F3)
-ComplyAI · Foundation Module
+Quantbit Compliance AI · Foundation Module
 
 Validations:
   - primary_persona is mandatory

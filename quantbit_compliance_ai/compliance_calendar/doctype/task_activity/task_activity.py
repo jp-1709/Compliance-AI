@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/doctype/task_activity/task_activity.py
+quantbit_compliance_ai/compliance_calendar/doctype/task_activity/task_activity.py
 
 Controller for Task Activity — the immutable audit log for compliance tasks.
 

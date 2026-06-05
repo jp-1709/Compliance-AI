@@ -1,5 +1,5 @@
 """
-complyai/compliance/compliance_calendar/doctype/compliance_obligation/compliance_obligation.py
+quantbit_compliance_ai/compliance_calendar/doctype/compliance_obligation/compliance_obligation.py
 
 Controller for Compliance Obligation — the global library of statutory requirements.
 
