@@ -1,0 +1,287 @@
+{
+    "doctype": "DocType",
+    "name": "OHS Plan",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "OHS-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "On-site emergency plan, off-site emergency plan, OHS policy. Mandatory for hazardous factories under MSIHC Rules.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "plan_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nUnder Review\nApproved\nActive\nUnder Revision\nSuperseded\nWithdrawn",
+            "default": "Draft",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "plan_type",
+            "label": "Plan Type",
+            "fieldtype": "Select",
+            "options": "On-Site Emergency Plan\nOff-Site Emergency Plan\nDisaster Management Plan\nOccupational Health Policy\nSafety Policy\nMSIHC Safety Report\nProcess Safety Document (PSM)\nLayer of Protection Analysis (LOPA)\nHIRA Document\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "plan_title",
+            "label": "Plan Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "version",
+            "label": "Version",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "default": "1.0",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "tab_validity",
+            "label": "Validity & Approval",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_validity",
+            "label": "Approval Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "approved_on",
+            "label": "Approved On",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "effective_from",
+            "label": "Effective From",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "next_review_due",
+            "label": "Next Review Due",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Annual review is mandatory under MSIHC Rules"
+        },
+        {
+            "fieldname": "approved_by",
+            "label": "Approved By",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "ehs_manager",
+            "label": "EHS Manager",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "occupier",
+            "label": "Occupier (Director)",
+            "fieldtype": "Link",
+            "options": "Director Profile",
+            "description": "Personally liable for compliance under Factories Act"
+        },
+        {
+            "fieldname": "submitted_to_factory_inspector",
+            "label": "Submitted to Factory Inspector",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Mandatory for MSIHC hazardous factories under Factories Act §41B"
+        },
+        {
+            "fieldname": "submission_evidence",
+            "label": "Submission Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_scope",
+            "label": "Scope & Hazards",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_scope",
+            "label": "Hazard Scope",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "covered_hazards",
+            "label": "Covered Hazards",
+            "fieldtype": "Small Text",
+            "description": "e.g. Fire, Chemical Spill, Toxic Release, Earthquake, Cyclone"
+        },
+        {
+            "fieldname": "max_credible_accident_scenario",
+            "label": "Max Credible Accident Scenario (MCAS)",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "vulnerable_population_within_2km",
+            "label": "Vulnerable Population Within 2km",
+            "fieldtype": "Int",
+            "description": "Residential, school, hospital population — for off-site emergency planning"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "mutual_aid_partners",
+            "label": "Mutual Aid Partners",
+            "fieldtype": "Small Text",
+            "description": "Neighbouring industries with mutual aid agreement for emergency response"
+        },
+        {
+            "fieldname": "designated_assembly_points_count",
+            "label": "Designated Assembly Points",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "tab_documents",
+            "label": "Documents",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_documents",
+            "label": "Plan Documents",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "plan_document",
+            "label": "Plan Document",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1
+        },
+        {
+            "fieldname": "site_plan",
+            "label": "Site Plan / Layout",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "evacuation_map",
+            "label": "Evacuation Map",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "previous_version",
+            "label": "Previous Version",
+            "fieldtype": "Link",
+            "options": "OHS Plan"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "submit": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "sort_field": "next_review_due",
+    "sort_order": "ASC",
+    "search_fields": "plan_title,plan_type,business_entity",
+    "title_field": "plan_title"
+}

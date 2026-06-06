@@ -1,33 +1,53 @@
 {
- "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
- "creation": "2026-06-04 17:26:05.107662",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "section_break_lsta"
- ],
- "fields": [
-  {
-   "fieldname": "section_break_lsta",
-   "fieldtype": "Section Break"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "istable": 1,
- "links": [],
- "modified": "2026-06-04 17:26:05.107662",
- "modified_by": "Administrator",
- "module": "Obligation Register",
- "name": "Applicability Rules",
- "owner": "Administrator",
- "permissions": [],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
- "states": []
+    "doctype": "DocType",
+    "name": "Applicability Rules",
+    "module": "Obligation Register",
+    "istable": 1,
+    "fields": [
+        {
+            "fieldname": "rule_index",
+            "label": "Rule #",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "description": "Reference number for use in custom expression"
+        },
+        {
+            "fieldname": "rule_type",
+            "label": "Rule Type",
+            "fieldtype": "Select",
+            "options": "State Match\nIndustry Match (NIC)\nEmployee Threshold\nContract Worker Threshold\nWomen Employee Threshold\nTurnover Threshold\nListed Status\nHazardous Status\nMSME Status\nEntity Type\nBusiness Type\nIs Principal Entity\n24x7 Operations\nHas Canteen\nShifts Count\nGSTIN Present\nEPFO Code Present\nESIC Code Present\nFactory Licence Present\nIEC Present\nLEI Present\nCustom Field Match",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "operator",
+            "label": "Operator",
+            "fieldtype": "Select",
+            "options": "equals\nnot_equals\ngreater_than\nless_than\ngreater_or_equal\nless_or_equal\nin\nnot_in\nbetween\nis_set\nis_not_set",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "value_text",
+            "label": "Value",
+            "fieldtype": "Small Text",
+            "in_list_view": 1,
+            "description": "JSON-encoded: scalar / list / {min,max}"
+        },
+        {
+            "fieldname": "custom_field",
+            "label": "Custom Field Name",
+            "fieldtype": "Data",
+            "depends_on": "eval:doc.rule_type=='Custom Field Match'"
+        },
+        {
+            "fieldname": "logical_operator_next",
+            "label": "Combine With Next",
+            "fieldtype": "Select",
+            "options": "AND\nOR",
+            "default": "AND",
+            "in_list_view": 1,
+            "description": "Used only if applicability_logic='ALL'/'ANY'; ignored for Custom Expression"
+        }
+    ]
 }

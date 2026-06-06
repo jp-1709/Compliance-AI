@@ -1,0 +1,38 @@
+{
+    "doctype": "DocType",
+    "name": "Director Attendance",
+    "module": "Secretarial Compliance",
+    "istable": 1,
+    "fields": [
+        {
+            "fieldname": "director",
+            "label": "Director",
+            "fieldtype": "Link",
+            "options": "Director Profile",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "attendance_status",
+            "label": "Attendance",
+            "fieldtype": "Select",
+            "options": "Present\nVC\nLeave of Absence\nAbsent",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "joined_at",
+            "label": "Joined At",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "left_at",
+            "label": "Left At",
+            "fieldtype": "Time"
+        }
+    ]
+}

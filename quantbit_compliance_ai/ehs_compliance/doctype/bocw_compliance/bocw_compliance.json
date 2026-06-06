@@ -1,0 +1,313 @@
+{
+    "doctype": "DocType",
+    "name": "BOCW Compliance",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "BOCW-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "Building & Other Construction Workers' Welfare Cess compliance. 1% cess on construction cost ≥ ₹10 lakh. Worker welfare obligations.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "project_status",
+            "label": "Project Status",
+            "fieldtype": "Select",
+            "options": "Planned\nApproved\nIn Progress\nCompleted\nClosed",
+            "default": "Planned",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "project_name",
+            "label": "Project Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "project_type",
+            "label": "Project Type",
+            "fieldtype": "Select",
+            "options": "New Construction\nExtension / Addition\nRenovation\nDemolition\nMaintenance (>₹10L)\nInfrastructure\nOther",
+            "reqd": 1
+        },
+        {
+            "fieldname": "project_description",
+            "label": "Description",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "tab_dates",
+            "label": "Dates & Duration",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_dates",
+            "label": "Project Timeline",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "project_start_date",
+            "label": "Start Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project_estimated_end_date",
+            "label": "Estimated End Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "project_actual_end_date",
+            "label": "Actual End Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "duration_days",
+            "label": "Duration (Days)",
+            "fieldtype": "Int",
+            "read_only": 1
+        },
+        {
+            "fieldname": "tab_cess",
+            "label": "Cost & Cess",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_cost_cess",
+            "label": "BOCW Cess Computation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "estimated_construction_cost_inr",
+            "label": "Estimated Construction Cost (₹)",
+            "fieldtype": "Currency",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "≥ ₹10 lakh triggers BOCW cess and worker welfare obligations"
+        },
+        {
+            "fieldname": "actual_construction_cost_inr",
+            "label": "Actual Construction Cost (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "cess_rate_pct",
+            "label": "Cess Rate %",
+            "fieldtype": "Percent",
+            "default": 1.0,
+            "description": "Statutory 1% of construction cost; some states have state-specific rates"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "cess_amount_estimated_inr",
+            "label": "Cess Amount Estimated (₹)",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "description": "Auto-computed: estimated_cost × cess_rate"
+        },
+        {
+            "fieldname": "cess_amount_paid_inr",
+            "label": "Cess Amount Paid (₹)",
+            "fieldtype": "Currency",
+            "default": 0
+        },
+        {
+            "fieldname": "cess_paid_evidence",
+            "label": "Cess Payment Receipt",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cess_paid_to",
+            "label": "Paid to (State BOCW Welfare Board)",
+            "fieldtype": "Data",
+            "description": "State Building & Other Construction Workers' Welfare Board"
+        },
+        {
+            "fieldname": "tab_workers",
+            "label": "Workers & Welfare",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_workers",
+            "label": "Construction Workers",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "total_workers_engaged",
+            "label": "Total Workers Engaged",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "workers_registered_with_welfare_board",
+            "label": "Workers Registered with BOCW Board",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "Mandatory registration if 10+ workers on site (not 11 — threshold is 10)"
+        },
+        {
+            "fieldname": "registration_compliance_pct",
+            "label": "Registration Compliance %",
+            "fieldtype": "Percent",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "site_safety_officer_appointed",
+            "label": "Site Safety Officer Appointed",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Mandatory for projects ≥ ₹10 crore"
+        },
+        {
+            "fieldname": "first_aid_facility_provided",
+            "label": "First Aid Facility Provided",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "drinking_water_facility",
+            "label": "Drinking Water Facility",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "creche_for_women_workers",
+            "label": "Crèche Provided (≥50 women workers)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "tab_forms",
+            "label": "Statutory Forms",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_other",
+            "label": "BOCW Statutory Filings",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "labour_dept_intimation_filed",
+            "label": "Form-I — Labour Dept Intimation Filed",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Mandatory before construction work starts"
+        },
+        {
+            "fieldname": "form_i_evidence",
+            "label": "Form-I Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "form_xxv_filed",
+            "label": "Form-XXV — Annual Return Filed",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "submit": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "project_status"
+            ]
+        }
+    ],
+    "sort_field": "project_start_date",
+    "sort_order": "DESC",
+    "search_fields": "project_name,project_type,business_entity",
+    "title_field": "project_name"
+}

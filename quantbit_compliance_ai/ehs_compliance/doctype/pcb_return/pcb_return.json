@@ -1,0 +1,265 @@
+{
+    "doctype": "DocType",
+    "name": "PCB Return",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "PCBR-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "Periodic returns to State PCB / CPCB. Form-V (Annual Environmental Statement — Sep 30), Form-4 (HW Annual Return — Jun 30), water/air cess returns.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "return_type",
+            "label": "Return Type",
+            "fieldtype": "Select",
+            "options": "Form-V (Annual Environmental Statement)\nForm-4 (HW Annual Return)\nForm-2 (HW Manifest)\nForm-3 (HW Records)\nForm-5 (E-Waste Annual Return)\nForm-6 (Plastic Waste)\nWater Cess Return\nAir Cess Return\nOCEMS Quarterly Calibration\nGreen Belt Status\nFugitive Emissions Survey\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nFiled\nFiled with Late Fee\nLapsed\nNil Filed",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "period_fy",
+            "label": "Financial Year",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "description": "e.g. 2024-25"
+        },
+        {
+            "fieldname": "period_quarter",
+            "label": "Quarter",
+            "fieldtype": "Select",
+            "options": "\nQ1\nQ2\nQ3\nQ4",
+            "in_standard_filter": 1,
+            "description": "For quarterly filings only"
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Form-V: 30-Sep; Form-4: 30-Jun (auto-computed)"
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "submitted_to",
+            "label": "Submitted To",
+            "fieldtype": "Link",
+            "options": "Regulator"
+        },
+        {
+            "fieldname": "tab_data",
+            "label": "Return Data",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_data",
+            "label": "Environmental Data",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "production_data_payload",
+            "label": "Production Data (JSON)",
+            "fieldtype": "Code",
+            "options": "JSON",
+            "description": "Auto-populated from ERP manufacturing data"
+        },
+        {
+            "fieldname": "raw_material_data_payload",
+            "label": "Raw Material Consumption (JSON)",
+            "fieldtype": "Code",
+            "options": "JSON"
+        },
+        {
+            "fieldname": "water_consumption_kl",
+            "label": "Total Water Consumption (KL)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "effluent_generated_kl",
+            "label": "Effluent Generated (KL)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "energy_consumption_payload",
+            "label": "Energy Data (JSON)",
+            "fieldtype": "Code",
+            "options": "JSON"
+        },
+        {
+            "fieldname": "hw_generated_kg",
+            "label": "Hazardous Waste Generated (kg)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "hw_disposed_kg",
+            "label": "Hazardous Waste Disposed (kg)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "hw_recycled_kg",
+            "label": "Hazardous Waste Recycled (kg)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "tab_evidence",
+            "label": "Filing Evidence",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "filed_return_evidence",
+            "label": "Filed Return Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "acknowledgement_evidence",
+            "label": "Acknowledgement",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "filing_reference",
+            "label": "Filing Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "filed_by_user",
+            "label": "Filed By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "submit": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "return_type",
+                "period_fy"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "filing_due_date",
+    "sort_order": "ASC",
+    "search_fields": "return_type,period_fy,business_entity",
+    "title_field": "return_type"
+}

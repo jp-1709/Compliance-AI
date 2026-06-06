@@ -1,0 +1,59 @@
+{
+    "doctype": "DocType",
+    "name": "Director Entity Mapping",
+    "module": "Secretarial Compliance",
+    "istable": 1,
+    "fields": [
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "director_role",
+            "label": "Role",
+            "fieldtype": "Select",
+            "options": "Managing Director\nWhole-time Director\nExecutive Director\nNon-Executive Director\nIndependent Director\nNominee Director\nAlternate Director\nAdditional Director",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "appointment_date",
+            "label": "Appointment Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "appointment_resolution",
+            "label": "Appointment Resolution",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "cessation_date",
+            "label": "Cessation Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "cessation_reason",
+            "label": "Cessation Reason",
+            "fieldtype": "Select",
+            "options": "Resignation\nRetirement\nRemoval\nDisqualification\nDeath\nTerm Expired\nOther"
+        },
+        {
+            "fieldname": "is_current",
+            "label": "Current",
+            "fieldtype": "Check",
+            "default": 1,
+            "in_list_view": 1
+        }
+    ]
+}

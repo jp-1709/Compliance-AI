@@ -1,0 +1,353 @@
+{
+    "doctype": "DocType",
+    "name": "Hazardous Substance Inventory",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "HAZ-.YYYY.-.######",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "description": "Master register of every hazardous chemical/substance. Drives MSDS compliance, MSIHC obligations, PESO licence detection, and fire/emergency planning.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "substance_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Active\nDiscontinued\nUnder Substitution\nProhibited",
+            "default": "Active",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "substance_name",
+            "label": "Substance Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "cas_number",
+            "label": "CAS Number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "Chemical Abstract Service registry number — used for MSIHC threshold lookup"
+        },
+        {
+            "fieldname": "un_number",
+            "label": "UN Number",
+            "fieldtype": "Data",
+            "description": "For transportation (ADR/IMDG)"
+        },
+        {
+            "fieldname": "trade_name",
+            "label": "Trade Name",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "purpose_of_use",
+            "label": "Purpose of Use",
+            "fieldtype": "Small Text",
+            "reqd": 1
+        },
+        {
+            "fieldname": "tab_classification",
+            "label": "Hazard Classification",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_classification",
+            "label": "GHS & MSIHC Classification",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "ghs_classification",
+            "label": "GHS Classification",
+            "fieldtype": "Small Text",
+            "description": "e.g. Flammable Liquid Cat 2, Acute Tox Cat 3"
+        },
+        {
+            "fieldname": "msihc_schedule",
+            "label": "MSIHC Schedule",
+            "fieldtype": "Select",
+            "options": "Schedule 1 — Hazardous\nSchedule 2 — Toxic Chemicals\nSchedule 3 — Class C (Highest)\nNot Listed",
+            "default": "Not Listed",
+            "in_standard_filter": 1,
+            "description": "Manufacture, Storage and Import of Hazardous Chemicals Rules 1989"
+        },
+        {
+            "fieldname": "is_carcinogen",
+            "label": "Carcinogen",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_mutagen",
+            "label": "Mutagen",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_reproductive_toxin",
+            "label": "Reproductive Toxin (CMR)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_flammable",
+            "label": "Flammable",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_corrosive",
+            "label": "Corrosive",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_explosive",
+            "label": "Explosive",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_oxidiser",
+            "label": "Oxidiser",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_eu_reach_listed",
+            "label": "EU REACH Listed",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_pop",
+            "label": "POP (Persistent Organic Pollutant)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_ods",
+            "label": "Ozone-Depleting Substance",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "tab_inventory",
+            "label": "Inventory & Thresholds",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_inventory",
+            "label": "Inventory & Storage",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "max_storage_quantity_kg",
+            "label": "Max Storage Quantity (kg)",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "description": "Drives threshold calculation for MSIHC, PESO, off-site emergency plan"
+        },
+        {
+            "fieldname": "current_inventory_kg",
+            "label": "Current Inventory (kg)",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "annual_consumption_kg",
+            "label": "Annual Consumption (kg)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "storage_location",
+            "label": "Storage Location",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "exceeds_msihc_threshold",
+            "label": "Exceeds MSIHC Threshold",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Auto-detected. Triggers MSIHC obligations (on-site safety report, DSIR, DISHA)"
+        },
+        {
+            "fieldname": "requires_off_site_plan",
+            "label": "Requires Off-Site Emergency Plan",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "MAH (Major Accident Hazard) installation — District Collector prepares off-site plan"
+        },
+        {
+            "fieldname": "requires_peso_licence",
+            "label": "Requires PESO Licence",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "Petroleum >5KL, LPG >100kg, any explosives → PESO licence mandatory"
+        },
+        {
+            "fieldname": "tab_msds",
+            "label": "MSDS / SDS",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_msds",
+            "label": "Safety Data Sheet",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "msds_evidence",
+            "label": "MSDS / SDS Document",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1
+        },
+        {
+            "fieldname": "msds_date",
+            "label": "MSDS Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "msds_language",
+            "label": "MSDS Language",
+            "fieldtype": "Select",
+            "options": "English\nHindi\nLocal Language\nMulti-Lingual",
+            "default": "English",
+            "description": "Factories Act §41C — local language MSDS required for floor workers"
+        },
+        {
+            "fieldname": "supplier_name",
+            "label": "Supplier Name",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "msds_review_due",
+            "label": "MSDS Review Due",
+            "fieldtype": "Date",
+            "description": "Reviewed every 3 years or on regulatory/composition change"
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "substance_name"
+            ],
+            "unique": 1
+        },
+        {
+            "fields": [
+                "cas_number"
+            ]
+        },
+        {
+            "fields": [
+                "msihc_schedule"
+            ]
+        }
+    ],
+    "sort_field": "substance_name",
+    "sort_order": "ASC",
+    "search_fields": "substance_name,cas_number,trade_name",
+    "title_field": "substance_name"
+}

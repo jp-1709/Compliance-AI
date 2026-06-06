@@ -1,0 +1,280 @@
+{
+    "doctype": "DocType",
+    "name": "MCA E-Form Filing",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "EFRM-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Filing Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "form_code",
+            "label": "Form Code",
+            "fieldtype": "Select",
+            "options": "ADT-1\nADT-2\nADT-3\nADT-4\nAOC-4\nAOC-4 XBRL\nAOC-4 CFS\nMGT-7\nMGT-7A\nMGT-9\nMGT-14\nDIR-3\nDIR-3 KYC\nDIR-3 KYC Web\nDIR-6\nDIR-11\nDIR-12\nINC-20A\nINC-22\nINC-22A (ACTIVE)\nINC-28\nCHG-1\nCHG-4\nCHG-9\nDPT-3\nMSME-1\nBEN-2\nNDH-1\nNDH-2\nNDH-3\nNDH-4\nPAS-3\nPAS-6\nSH-7\nSH-11\nIEPF-1\nIEPF-2\nIEPF-3\nIEPF-4\nIEPF-5\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nReady to File\nFiled\nUnder Process\nApproved\nResubmission Required\nRejected\nLapsed",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "fy",
+            "label": "FY",
+            "fieldtype": "Data",
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_period",
+            "label": "Period",
+            "fieldtype": "Data",
+            "description": "e.g. Q1 2025-26 or AGM FY 2024-25"
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "tab_submission",
+            "label": "Submission",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_filing",
+            "label": "Filing Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "srn",
+            "label": "SRN",
+            "fieldtype": "Data",
+            "description": "Service Request Number issued by MCA"
+        },
+        {
+            "fieldname": "challan_no",
+            "label": "Challan Number",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "fee_paid_inr",
+            "label": "Fee Paid (₹)",
+            "fieldtype": "Currency",
+            "default": 0
+        },
+        {
+            "fieldname": "additional_fee_inr",
+            "label": "Additional Fee (Late) (₹)",
+            "fieldtype": "Currency",
+            "default": 0,
+            "description": "₹100/day from Apr 2018 amendment, uncapped"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "filed_by_user",
+            "label": "Filed By (Internal User)",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "cs_certifier",
+            "label": "CS / CA Certifier",
+            "fieldtype": "Data",
+            "description": "Mem. No. + Name"
+        },
+        {
+            "fieldname": "director_signatories",
+            "label": "Director Signatories (DIN)",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "tab_documents",
+            "label": "Documents",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_supporting",
+            "label": "Supporting Documents",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "form_pdf",
+            "label": "Filed Form PDF",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "challan_evidence",
+            "label": "Challan Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "approval_letter",
+            "label": "Approval Letter (if any)",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "sec_attachments",
+            "label": "Other Attachments",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "supporting_attachments",
+            "label": "Other Attachments",
+            "fieldtype": "Table",
+            "options": "Filing Attachment"
+        },
+        {
+            "fieldname": "tab_links",
+            "label": "Linked Records",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_links",
+            "label": "Linked Records",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_resolution",
+            "label": "Linked Resolution (for MGT-14)",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "linked_meeting",
+            "label": "Linked Meeting (for MGT-7/AOC-4 etc.)",
+            "fieldtype": "Link",
+            "options": "Shareholder Meeting"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        },
+        {
+            "fieldname": "linked_charge",
+            "label": "Linked Charge (for CHG-x)",
+            "fieldtype": "Link",
+            "options": "Charge Filing"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "rejection_reason",
+            "label": "Rejection Reason",
+            "fieldtype": "Text Editor",
+            "depends_on": "eval:doc.filing_status=='Rejected' || doc.filing_status=='Resubmission Required'"
+        },
+        {
+            "fieldname": "resubmission_count",
+            "label": "Resubmission Count",
+            "fieldtype": "Int",
+            "default": 0
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

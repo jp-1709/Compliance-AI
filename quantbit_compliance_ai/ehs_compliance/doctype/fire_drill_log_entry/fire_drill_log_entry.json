@@ -1,0 +1,56 @@
+{
+    "doctype": "DocType",
+    "name": "Fire Drill Log Entry",
+    "module": "EHS Compliance",
+    "istable": 1,
+    "description": "Child table for Fire Safety Compliance — logs each mock drill event.",
+    "fields": [
+        {
+            "fieldname": "drill_date",
+            "label": "Drill Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "drill_type",
+            "label": "Drill Type",
+            "fieldtype": "Select",
+            "options": "Full Evacuation\nPartial Evacuation\nFire Extinguisher Use\nEmergency Response\nCombined",
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "duration_minutes",
+            "label": "Duration (Min)",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "description": "Total evacuation / drill time in minutes",
+            "columns": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "participants_count",
+            "label": "Participants",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "columns": 1
+        },
+        {
+            "fieldname": "observations",
+            "label": "Observations & Improvements",
+            "fieldtype": "Small Text",
+            "columns": 3
+        },
+        {
+            "fieldname": "drill_evidence",
+            "label": "Drill Report / Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        }
+    ]
+}

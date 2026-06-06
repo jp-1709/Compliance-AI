@@ -1,0 +1,224 @@
+{
+    "doctype": "DocType",
+    "name": "Advance Tax Payment",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "ADV-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "4-instalment advance tax cycle \u2014 15 Jun, 15 Sep, 15 Dec, 15 Mar.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "instalment",
+            "label": "Instalment",
+            "fieldtype": "Select",
+            "options": "1 \u2014 15 Jun (15%)\n2 \u2014 15 Sep (45% cum.)\n3 \u2014 15 Dec (75% cum.)\n4 \u2014 15 Mar (100% cum.)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "period_fy",
+            "label": "FY",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "payment_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nPaid\nPartially Paid\nMissed",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "due_date",
+            "label": "Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "paid_on",
+            "label": "Paid On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_amounts",
+            "label": "Amounts",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "estimated_total_tax_inr",
+            "label": "Estimated Annual Tax (\u20b9)",
+            "fieldtype": "Currency",
+            "reqd": 1,
+            "description": "Best estimate at instalment time"
+        },
+        {
+            "fieldname": "cumulative_required_pct",
+            "label": "Cumulative Required %",
+            "fieldtype": "Percent",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cumulative_required_inr",
+            "label": "Cumulative Required (\u20b9)",
+            "fieldtype": "Currency",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "cumulative_paid_till_now_inr",
+            "label": "Cumulative Paid Till Now (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "description": "Including this instalment"
+        },
+        {
+            "fieldname": "this_instalment_inr",
+            "label": "This Instalment (\u20b9)",
+            "fieldtype": "Currency",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "shortfall_inr",
+            "label": "Shortfall (\u20b9)",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "description": "If positive, interest u/s 234C applies"
+        },
+        {
+            "fieldname": "interest_234c_inr",
+            "label": "Interest u/s 234C (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "challan_number",
+            "label": "Challan Number (BSR-Code + Date + Sl No)",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "challan_evidence",
+            "label": "Challan Receipt",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "CFO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "period_fy",
+                "instalment"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "due_date",
+    "sort_order": "ASC"
+}

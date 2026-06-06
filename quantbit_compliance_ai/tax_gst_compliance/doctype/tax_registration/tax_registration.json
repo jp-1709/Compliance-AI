@@ -1,0 +1,278 @@
+{
+    "doctype": "DocType",
+    "name": "Tax Registration",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "TAXREG-.YYYY.-.######",
+    "track_changes": 1,
+    "description": "A tax registration held by a Business Entity. Multiple per BE possible \u2014 GSTIN per state, plus PAN, TAN, IEC, etc.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "registration_type",
+            "label": "Registration Type",
+            "fieldtype": "Select",
+            "options": "GSTIN (Regular)\nGSTIN (Composition)\nGSTIN (Casual)\nGSTIN (NRTP)\nGSTIN (ISD)\nGSTIN (TDS)\nGSTIN (TCS)\nPAN\nTAN\nIEC\nLUT (Letter of Undertaking)\nProvident Fund\nProfessional Tax\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "registration_number",
+            "label": "Registration Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Active",
+            "fieldtype": "Check",
+            "default": "1",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "state",
+            "label": "State",
+            "fieldtype": "Link",
+            "options": "State",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "description": "GST is state-wise; non-GST registrations also tracked by state"
+        },
+        {
+            "fieldname": "issued_on",
+            "label": "Issued On",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "valid_until",
+            "label": "Valid Until",
+            "fieldtype": "Date",
+            "description": "Optional \u2014 most are perpetual; LUT/Casual/IEC have validity"
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "sec_gst_specific",
+            "label": "GST-Specific Details",
+            "fieldtype": "Section Break",
+            "depends_on": "eval:doc.registration_type && doc.registration_type.startsWith('GSTIN')"
+        },
+        {
+            "fieldname": "trade_name",
+            "label": "Trade Name on GSTIN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "legal_name",
+            "label": "Legal Name on GSTIN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "gst_business_type",
+            "label": "GST Business Type",
+            "fieldtype": "Select",
+            "options": "Regular\nComposition\nCasual\nNRTP\nISD\nUIN\nTDS Deductor\nTCS Collector\nGovernment Department",
+            "default": "Regular"
+        },
+        {
+            "fieldname": "filing_frequency",
+            "label": "GSTR-1 Filing Frequency",
+            "fieldtype": "Select",
+            "options": "Monthly\nQuarterly (QRMP)",
+            "default": "Monthly",
+            "description": "QRMP available for turnover \u2264 \u20b95 cr"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "annual_turnover_inr",
+            "label": "Annual Turnover (Last FY) (\u20b9)",
+            "fieldtype": "Currency",
+            "description": "Drives QRMP / e-invoice / GSTR-9C eligibility"
+        },
+        {
+            "fieldname": "is_eligible_qrmp",
+            "label": "Eligible for QRMP",
+            "fieldtype": "Check",
+            "read_only": 1,
+            "description": "Auto-computed based on PY turnover"
+        },
+        {
+            "fieldname": "is_eligible_einvoice",
+            "label": "E-Invoice Mandatory",
+            "fieldtype": "Check",
+            "default": "0",
+            "read_only": 1,
+            "description": "Mandatory if PY turnover \u2265 \u20b95 cr"
+        },
+        {
+            "fieldname": "is_eligible_ewaybill",
+            "label": "E-Way Bill Required",
+            "fieldtype": "Check",
+            "default": "1",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_filing_status",
+            "label": "Last Filing Status",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "last_gstr1_period",
+            "label": "Last GSTR-1 Period",
+            "fieldtype": "Data",
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_gstr1_filed_on",
+            "label": "Last GSTR-1 Filed",
+            "fieldtype": "Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_gstr3b_period",
+            "label": "Last GSTR-3B Period",
+            "fieldtype": "Data",
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_gstr3b_filed_on",
+            "label": "Last GSTR-3B Filed",
+            "fieldtype": "Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "consecutive_non_filings",
+            "label": "Consecutive Non-Filings",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1,
+            "description": "GSTIN suspension after 6 consecutive non-filings"
+        },
+        {
+            "fieldname": "gstin_suspended",
+            "label": "GSTIN Suspended",
+            "fieldtype": "Check",
+            "default": "0",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Auto-flipped after 6 consecutive non-filings"
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "registration_certificate",
+            "label": "Registration Certificate",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "registration_type",
+                "state"
+            ],
+            "unique": 1,
+            "comment": "One GSTIN per state per BE"
+        },
+        {
+            "fields": [
+                "registration_number"
+            ]
+        },
+        {
+            "fields": [
+                "valid_until"
+            ]
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC"
+}

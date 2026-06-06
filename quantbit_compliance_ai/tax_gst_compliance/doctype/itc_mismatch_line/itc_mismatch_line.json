@@ -1,0 +1,73 @@
+{
+    "doctype": "DocType",
+    "name": "ITC Mismatch Line",
+    "module": "Tax GST Compliance",
+    "istable": 1,
+    "description": "Child table for ITC Reconciliation. Stores vendor-wise invoice-level mismatch between books and GSTR-2B.",
+    "fields": [
+        {
+            "fieldname": "invoice_number",
+            "label": "Invoice No.",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "invoice_date",
+            "label": "Invoice Date",
+            "fieldtype": "Date",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "vendor_gstin",
+            "label": "Vendor GSTIN",
+            "fieldtype": "Data",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "vendor_name",
+            "label": "Vendor Name",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "books_itc_inr",
+            "label": "Books ITC (\u20b9)",
+            "fieldtype": "Currency",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "gstr2b_itc_inr",
+            "label": "GSTR-2B ITC (\u20b9)",
+            "fieldtype": "Currency",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "diff_inr",
+            "label": "Difference (\u20b9)",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "mismatch_type",
+            "label": "Mismatch Type",
+            "fieldtype": "Select",
+            "options": "In Books, Not in 2B\nIn 2B, Not in Books\nValue Mismatch\nGSTIN Mismatch\nDate Mismatch",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "action_status",
+            "label": "Action Status",
+            "fieldtype": "Select",
+            "options": "New\nVendor Notified\nVendor Will Amend\nReverse in Books\nClaim As-Is\nResolved",
+            "default": "New",
+            "in_list_view": 1
+        }
+    ],
+    "sort_field": "invoice_date",
+    "sort_order": "ASC"
+}

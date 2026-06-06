@@ -1,0 +1,301 @@
+{
+    "doctype": "DocType",
+    "name": "Related Party Transaction",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "RPT-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Transaction Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "rpt_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Proposed\nUnder AC Review\nAC Approved\nBoard Approved\nShareholder Approved\nExecuted\nReversed\nRejected",
+            "default": "Proposed",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "fy",
+            "label": "FY",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "rpt_period",
+            "label": "Quarter",
+            "fieldtype": "Select",
+            "options": "Q1\nQ2\nQ3\nQ4",
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "rpt_date",
+            "label": "Transaction Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "tab_party",
+            "label": "Related Party",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_party",
+            "label": "Related Party",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "related_party_name",
+            "label": "Related Party Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "related_party_pan",
+            "label": "Related Party PAN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "relationship_type",
+            "label": "Relationship Type",
+            "fieldtype": "Select",
+            "options": "Director\nKMP\nRelative of Director/KMP\nHolding Company\nSubsidiary\nAssociate / JV\nFellow Subsidiary\nKMP-Controlled Entity\nSignificant Influence\nOther per AS-18 / Ind AS-24",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "interested_director",
+            "label": "Interested Director",
+            "fieldtype": "Link",
+            "options": "Director Profile"
+        },
+        {
+            "fieldname": "tab_transaction",
+            "label": "Transaction",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_transaction",
+            "label": "Transaction Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "transaction_type",
+            "label": "Transaction Type",
+            "fieldtype": "Select",
+            "options": "Sale of Goods\nPurchase of Goods\nSale of Services\nPurchase of Services\nSale of Property\nPurchase of Property\nLease\nLoan Given\nLoan Taken\nGuarantee\nSecurity\nAppointment with Remuneration\nAgency Arrangement\nOther",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "transaction_amount_inr",
+            "label": "Transaction Amount (₹)",
+            "fieldtype": "Currency",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "ordinary_course_of_business",
+            "label": "Ordinary Course of Business",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "If yes, only AC approval; if no, board + (sometimes) shareholder"
+        },
+        {
+            "fieldname": "arms_length_basis",
+            "label": "Arm's Length Basis",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Both must be true to skip §188 special approvals"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "transaction_description",
+            "label": "Description",
+            "fieldtype": "Text Editor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "agreement_evidence",
+            "label": "Agreement Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_thresholds",
+            "label": "Thresholds & Approvals",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_thresholds",
+            "label": "Threshold Computation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "exceeds_188_threshold",
+            "label": "Exceeds §188 Threshold",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "Auto-computed based on transaction type and amount"
+        },
+        {
+            "fieldname": "exceeds_lodr_material_threshold",
+            "label": "Exceeds LODR Material Threshold (10% turnover)",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "Triggers shareholder approval for listed entities"
+        },
+        {
+            "fieldname": "ac_approval_date",
+            "label": "Audit Committee Approval",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "ac_approval_resolution",
+            "label": "AC Resolution",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "board_approval_date",
+            "label": "Board Approval",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "board_approval_resolution",
+            "label": "Board Resolution",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "shareholder_approval_date",
+            "label": "Shareholder Approval",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "shareholder_approval_resolution",
+            "label": "Shareholder Resolution",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "tab_disclosures",
+            "label": "Disclosures",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_disclosures",
+            "label": "Disclosures",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "disclosed_in_annual_report",
+            "label": "Disclosed in Annual Report (AOC-2)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "disclosed_to_exchange",
+            "label": "Disclosed to Exchange (LODR Reg 23(9))",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "For listed: half-yearly RPT disclosures within 15 days of submission of financials"
+        },
+        {
+            "fieldname": "linked_disclosure",
+            "label": "Linked LED Disclosure",
+            "fieldtype": "Link",
+            "options": "Listed Entity Disclosure"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

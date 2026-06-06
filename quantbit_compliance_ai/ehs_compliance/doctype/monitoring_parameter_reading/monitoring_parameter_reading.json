@@ -1,0 +1,64 @@
+{
+    "doctype": "DocType",
+    "name": "Monitoring Parameter Reading",
+    "module": "EHS Compliance",
+    "istable": 1,
+    "description": "Child table for Environmental Monitoring Reading — per-parameter measurement vs prescribed norm.",
+    "fields": [
+        {
+            "fieldname": "parameter",
+            "label": "Parameter",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "columns": 2,
+            "description": "e.g. PM10, SO2, NOx, BOD, COD, pH, dB(A), TSS"
+        },
+        {
+            "fieldname": "measured_value",
+            "label": "Measured Value",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "unit",
+            "label": "Unit",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "columns": 1,
+            "description": "e.g. mg/Nm³, mg/L, dB(A), pH"
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "prescribed_norm",
+            "label": "Prescribed Norm (CPCB/PCB)",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "is_within_norm",
+            "label": "Within Norm",
+            "fieldtype": "Check",
+            "read_only": 1,
+            "in_list_view": 1,
+            "columns": 1
+        },
+        {
+            "fieldname": "deviation_pct",
+            "label": "Deviation %",
+            "fieldtype": "Percent",
+            "read_only": 1,
+            "in_list_view": 1,
+            "columns": 2,
+            "description": "Positive = exceeds norm. Formula: ((measured - norm) / norm) * 100"
+        }
+    ]
+}

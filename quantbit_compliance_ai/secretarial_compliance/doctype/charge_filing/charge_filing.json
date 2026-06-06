@@ -1,0 +1,240 @@
+{
+    "doctype": "DocType",
+    "name": "Charge Filing",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "CHG-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_charge",
+            "label": "Charge",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Charge Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "charge_status",
+            "label": "Charge Status",
+            "fieldtype": "Select",
+            "options": "Created\nModified\nSatisfied (Closed)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "charge_id_mca",
+            "label": "Charge ID (MCA)",
+            "fieldtype": "Data",
+            "description": "Issued by RoC after CHG-1 approval"
+        },
+        {
+            "fieldname": "charge_holder",
+            "label": "Charge Holder",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Bank / NBFC / FI name"
+        },
+        {
+            "fieldname": "charge_holder_pan",
+            "label": "Charge Holder PAN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "tab_details",
+            "label": "Charge Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_charge",
+            "label": "Charge Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "charge_amount_inr",
+            "label": "Charge Amount (₹)",
+            "fieldtype": "Currency",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "charge_type",
+            "label": "Charge Type",
+            "fieldtype": "Select",
+            "options": "Mortgage\nHypothecation\nLien\nPledge\nFloating Charge\nFixed Charge\nOther",
+            "reqd": 1
+        },
+        {
+            "fieldname": "charged_assets",
+            "label": "Charged Assets / Description",
+            "fieldtype": "Text Editor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "charge_creation_date",
+            "label": "Charge Creation Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "interest_rate_pct",
+            "label": "Interest Rate (%)",
+            "fieldtype": "Float",
+            "precision": 2
+        },
+        {
+            "fieldname": "loan_agreement_date",
+            "label": "Loan Agreement Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "loan_agreement_evidence",
+            "label": "Loan Agreement",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_filings",
+            "label": "MCA Filings",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_filings",
+            "label": "CHG-1 / CHG-4 Filings",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "chg_1_filing",
+            "label": "CHG-1 Filing (Creation)",
+            "fieldtype": "Link",
+            "options": "MCA E-Form Filing"
+        },
+        {
+            "fieldname": "chg_1_due_date",
+            "label": "CHG-1 Due Date",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "30 days from charge creation; extendable to 300 days with additional fees"
+        },
+        {
+            "fieldname": "chg_1_filed_on",
+            "label": "CHG-1 Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "chg_4_filing",
+            "label": "CHG-4 Filing (Satisfaction)",
+            "fieldtype": "Link",
+            "options": "MCA E-Form Filing",
+            "depends_on": "eval:doc.charge_status=='Satisfied (Closed)'"
+        },
+        {
+            "fieldname": "chg_4_due_date",
+            "label": "CHG-4 Due Date",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "30 days from satisfaction"
+        },
+        {
+            "fieldname": "satisfaction_date",
+            "label": "Satisfaction Date",
+            "fieldtype": "Date",
+            "depends_on": "eval:doc.charge_status=='Satisfied (Closed)'"
+        },
+        {
+            "fieldname": "satisfaction_evidence",
+            "label": "Satisfaction Letter (NOC)",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "depends_on": "eval:doc.charge_status=='Satisfied (Closed)'"
+        },
+        {
+            "fieldname": "tab_register",
+            "label": "Register Link",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_register_link",
+            "label": "Register Link",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "register_of_charges",
+            "label": "Register of Charges",
+            "fieldtype": "Link",
+            "options": "Statutory Register Companies",
+            "description": "Auto-creates entry in CHG-7 register"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

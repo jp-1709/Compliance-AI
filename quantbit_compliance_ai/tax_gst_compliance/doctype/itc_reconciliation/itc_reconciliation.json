@@ -1,0 +1,341 @@
+{
+    "doctype": "DocType",
+    "name": "ITC Reconciliation",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "ITC-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "Reconciles books-of-accounts ITC vs GSTR-2B ITC. One per GSTIN per period. The most critical real-money path.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "tax_registration",
+            "label": "GSTIN",
+            "fieldtype": "Link",
+            "options": "Tax Registration",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "recon_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nIn Progress\nMatched\nMismatch Identified\nVendor Chase\nResolved\nClaim As-Is",
+            "default": "Draft",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "period_month",
+            "label": "Period (Month)",
+            "fieldtype": "Select",
+            "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "period_fy",
+            "label": "Period (FY)",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "recon_date",
+            "label": "Reconciliation Date",
+            "fieldtype": "Date",
+            "default": "Today"
+        },
+        {
+            "fieldname": "sec_books",
+            "label": "Books of Accounts (ITC Claimed by Us)",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "books_total_invoices",
+            "label": "Books \u2014 Total Invoices",
+            "fieldtype": "Int",
+            "default": "0"
+        },
+        {
+            "fieldname": "books_total_taxable_inr",
+            "label": "Books \u2014 Taxable Value (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "books_total_itc_inr",
+            "label": "Books \u2014 Total ITC (\u20b9)",
+            "fieldtype": "Currency",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "books_igst_inr",
+            "label": "Books \u2014 IGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "books_cgst_inr",
+            "label": "Books \u2014 CGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "books_sgst_inr",
+            "label": "Books \u2014 SGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "books_cess_inr",
+            "label": "Books \u2014 Cess (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "sec_2b",
+            "label": "GSTR-2B (ITC Available per GST Portal)",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "gstr2b_total_invoices",
+            "label": "GSTR-2B \u2014 Total Invoices",
+            "fieldtype": "Int",
+            "default": "0"
+        },
+        {
+            "fieldname": "gstr2b_total_taxable_inr",
+            "label": "GSTR-2B \u2014 Taxable Value (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "gstr2b_total_itc_inr",
+            "label": "GSTR-2B \u2014 Total ITC (\u20b9)",
+            "fieldtype": "Currency",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "gstr2b_igst_inr",
+            "label": "GSTR-2B \u2014 IGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "gstr2b_cgst_inr",
+            "label": "GSTR-2B \u2014 CGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "gstr2b_sgst_inr",
+            "label": "GSTR-2B \u2014 SGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "gstr2b_cess_inr",
+            "label": "GSTR-2B \u2014 Cess (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "sec_difference",
+            "label": "Difference (Books \u2212 2B)",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "diff_total_itc_inr",
+            "label": "Difference \u2014 Total ITC (\u20b9)",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Positive = ITC at risk; Negative = additional ITC in 2B"
+        },
+        {
+            "fieldname": "match_percentage",
+            "label": "Match %",
+            "fieldtype": "Percent",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "itc_at_risk_inr",
+            "label": "ITC At Risk (\u20b9)",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "description": "Claimed in books but not in 2B"
+        },
+        {
+            "fieldname": "additional_itc_in_2b_inr",
+            "label": "Additional ITC in 2B (\u20b9)",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "description": "In 2B but not yet claimed"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "decision",
+            "label": "Reconciliation Decision",
+            "fieldtype": "Select",
+            "options": "Claim Books Amount (risk)\nClaim 2B Amount (safe)\nClaim Matched Only + Defer Mismatch\nReverse Mismatched + Pursue Vendor",
+            "description": "Per Rule 36(4) only ITC in 2B is allowable"
+        },
+        {
+            "fieldname": "rule_36_4_compliant",
+            "label": "Rule 36(4) Compliant",
+            "fieldtype": "Check",
+            "default": "0",
+            "read_only": 1,
+            "description": "ITC claimed \u2264 ITC in 2B"
+        },
+        {
+            "fieldname": "sec_lines",
+            "label": "Line-Item Mismatches",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "mismatched_invoices",
+            "label": "Mismatched Invoices",
+            "fieldtype": "Table",
+            "options": "ITC Mismatch Line"
+        },
+        {
+            "fieldname": "vendor_chase_count",
+            "label": "Vendors Chased",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "vendor_chase_pending",
+            "label": "Vendor Chase Pending",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "books_register_evidence",
+            "label": "Books Register (Excel/CSV)",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "gstr2b_evidence",
+            "label": "GSTR-2B Download",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_5",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "linked_gstr3b",
+            "label": "Feeds Into GSTR-3B",
+            "fieldtype": "Link",
+            "options": "GSTR Filing",
+            "description": "The GSTR-3B that uses this reconciliation"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Text Editor"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "CFO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "tax_registration",
+                "period_month",
+                "period_fy"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC"
+}

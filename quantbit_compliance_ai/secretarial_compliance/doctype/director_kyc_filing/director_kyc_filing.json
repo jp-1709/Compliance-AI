@@ -1,0 +1,194 @@
+{
+    "doctype": "DocType",
+    "name": "Director KYC Filing",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "KYC-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_details",
+            "label": "Filing Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_main",
+            "label": "Director & Filing",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "director",
+            "label": "Director",
+            "fieldtype": "Link",
+            "options": "Director Profile",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "din",
+            "label": "DIN",
+            "fieldtype": "Data",
+            "fetch_from": "director.din",
+            "in_list_view": 1,
+            "read_only": 1
+        },
+        {
+            "fieldname": "filing_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nSent for Director Sign-off\nFiled\nApproved\nRejected\nResubmission Required",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "fy_for_kyc",
+            "label": "FY For Which Filed",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "form_type",
+            "label": "Form Type",
+            "fieldtype": "Select",
+            "options": "DIR-3 KYC (full)\nDIR-3 KYC Web",
+            "default": "DIR-3 KYC Web",
+            "reqd": 1
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "description": "Sep 30 of FY-end year"
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Actually Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "tab_submission",
+            "label": "Submission",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_filing",
+            "label": "Filing Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "srn",
+            "label": "SRN",
+            "fieldtype": "Data",
+            "description": "Service Request Number from MCA portal"
+        },
+        {
+            "fieldname": "filed_by_user",
+            "label": "Filed By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "filing_evidence",
+            "label": "Filing Acknowledgement",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "challan_evidence",
+            "label": "Challan / Fee Receipt",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "fee_paid_inr",
+            "label": "Fee Paid (₹)",
+            "fieldtype": "Currency",
+            "default": 0,
+            "description": "₹0 if filed by Sep 30; ₹5,000 if late"
+        },
+        {
+            "fieldname": "is_late_filing",
+            "label": "Filed Late",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "din_was_deactivated",
+            "label": "DIN Was Deactivated Before This Filing",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

@@ -2,3 +2,7 @@ Quantbit Compliance AI
 Foundation
 Compliance Calendar
 Obligation Register
+Tax GST Compliance
+Labour Compliance
+Secretarial Compliance
+EHS Compliance

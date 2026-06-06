@@ -1,0 +1,301 @@
+{
+    "doctype": "DocType",
+    "name": "Fire Safety Compliance",
+    "module": "EHS Compliance",
+    "naming_rule": "By field: business_entity",
+    "autoname": "field:business_entity",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "description": "Fire NOC + quarterly mock drill + extinguisher maintenance + training. One record per Business Entity.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "fetch_from": "business_entity.organisation",
+            "read_only": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "compliance_status",
+            "label": "Compliance Status",
+            "fieldtype": "Select",
+            "options": "Compliant\nPartial\nNon-Compliant",
+            "default": "Compliant",
+            "read_only": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "occupancy_classification",
+            "label": "Building Occupancy (NBC 2016)",
+            "fieldtype": "Select",
+            "options": "\nResidential\nEducational\nInstitutional\nAssembly\nBusiness\nMercantile\nIndustrial — Low Hazard\nIndustrial — Moderate Hazard\nIndustrial — High Hazard\nStorage — Low\nStorage — Moderate\nStorage — High\nHazardous",
+            "in_standard_filter": 1,
+            "description": "National Building Code 2016 occupancy classification"
+        },
+        {
+            "fieldname": "building_height_m",
+            "label": "Building Height (m)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "is_high_rise",
+            "label": "High Rise (≥15m or 4 floors)",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Fire NOC from Fire Department is mandatory for all high-rise buildings"
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "tab_noc",
+            "label": "Fire NOC",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_noc",
+            "label": "Fire NOC Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "fire_noc_required",
+            "label": "Fire NOC Required",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "fire_noc_number",
+            "label": "Fire NOC Number",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "fire_noc_issued_on",
+            "label": "Fire NOC Issued On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "fire_noc_valid_until",
+            "label": "Fire NOC Valid Until",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "description": "Typically 3 years; varies by state Fire Services Act"
+        },
+        {
+            "fieldname": "fire_noc_evidence",
+            "label": "Fire NOC Certificate",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "sec_firefighting",
+            "label": "Firefighting Systems",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "fire_extinguishers_count",
+            "label": "Fire Extinguishers Count",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "hydrants_count",
+            "label": "Fire Hydrants Count",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "sprinklers_installed",
+            "label": "Sprinklers Installed",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "smoke_detectors_count",
+            "label": "Smoke Detectors",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "fire_alarm_panel_installed",
+            "label": "Fire Alarm Panel Installed",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "tab_drills",
+            "label": "Mock Drills",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_drill_metrics",
+            "label": "Drill Metrics (Auto-Computed)",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "last_drill_date",
+            "label": "Last Drill Date",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "drills_this_fy",
+            "label": "Drills This FY",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1,
+            "description": "Should be ≥4 (one per quarter)"
+        },
+        {
+            "fieldname": "next_drill_due",
+            "label": "Next Drill Due",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "last_drill_date + 90 days"
+        },
+        {
+            "fieldname": "sec_drills_log",
+            "label": "Mock Drills Log (Quarterly Mandatory)",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "drills_log",
+            "label": "Mock Drills Log",
+            "fieldtype": "Table",
+            "options": "Fire Drill Log Entry"
+        },
+        {
+            "fieldname": "tab_maintenance",
+            "label": "Maintenance & Training",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_extinguisher_maint",
+            "label": "Extinguisher Maintenance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "last_extinguisher_refill_date",
+            "label": "Last Refill Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "next_extinguisher_refill_due",
+            "label": "Next Refill Due",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Annual mandatory (ABC powder every 3 yrs; CO2 every 5 yrs — track type)"
+        },
+        {
+            "fieldname": "extinguisher_maintenance_evidence",
+            "label": "Maintenance Records",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "sec_training",
+            "label": "Fire Training",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "fire_warden_count",
+            "label": "Fire Wardens Trained",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "first_aiders_count",
+            "label": "First Aiders Trained",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "last_training_date",
+            "label": "Last Fire Training",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "next_training_due",
+            "label": "Next Training Due",
+            "fieldtype": "Date",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "search_fields": "business_entity,fire_noc_number",
+    "title_field": "business_entity"
+}

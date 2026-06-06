@@ -1,0 +1,355 @@
+{
+    "doctype": "DocType",
+    "name": "Director Profile",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "DIR-.######",
+    "track_changes": 1,
+    "is_submittable": 0,
+    "fields": [
+        {
+            "fieldname": "tab_basic",
+            "label": "Basic Info",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Director Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "full_name",
+            "label": "Full Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "din",
+            "label": "DIN",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "description": "Director Identification Number — 8 digits"
+        },
+        {
+            "fieldname": "din_status",
+            "label": "DIN Status",
+            "fieldtype": "Select",
+            "options": "Active\nDeactivated (KYC pending)\nDisqualified\nSurrendered\nDeceased",
+            "default": "Active",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "pan",
+            "label": "PAN",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "date_of_birth",
+            "label": "Date of Birth",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "nationality",
+            "label": "Nationality",
+            "fieldtype": "Link",
+            "options": "Country",
+            "default": "India"
+        },
+        {
+            "fieldname": "is_indian_resident",
+            "label": "Indian Resident",
+            "fieldtype": "Check",
+            "default": 1,
+            "description": "Stayed ≥182 days in previous CY — required for Resident Director (§149(3))"
+        },
+        {
+            "fieldname": "sec_appointment",
+            "label": "Appointment & Directorships",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "directorship_entries",
+            "label": "Directorship in Group Entities",
+            "fieldtype": "Table",
+            "options": "Director Entity Mapping"
+        },
+        {
+            "fieldname": "external_directorships_count",
+            "label": "Total Directorships (incl. external)",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "§165 cap: 20 (max 10 public)"
+        },
+        {
+            "fieldname": "external_directorships_public_count",
+            "label": "External Public Co. Directorships",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "tab_dsc_kyc",
+            "label": "DSC & KYC",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_dsc",
+            "label": "Digital Signature Certificate",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "dsc_provider",
+            "label": "DSC Provider",
+            "fieldtype": "Select",
+            "options": "eMudhra\nNICCA\nCapricorn\nSify\nNSDL\nVSign\nOther"
+        },
+        {
+            "fieldname": "dsc_serial_no",
+            "label": "DSC Serial Number",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "dsc_issued_on",
+            "label": "DSC Issued On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "dsc_expiry_date",
+            "label": "DSC Expiry Date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "description": "Critical for e-form signing"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "dsc_class",
+            "label": "DSC Class",
+            "fieldtype": "Select",
+            "options": "Class 2\nClass 3",
+            "default": "Class 3"
+        },
+        {
+            "fieldname": "sec_kyc",
+            "label": "DIR-3 KYC",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "last_kyc_filing",
+            "label": "Last DIR-3 KYC Filed",
+            "fieldtype": "Date",
+            "description": "Annual; due Sep 30"
+        },
+        {
+            "fieldname": "last_kyc_srn",
+            "label": "Last KYC SRN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "next_kyc_due",
+            "label": "Next KYC Due",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "kyc_form_type",
+            "label": "KYC Form Type",
+            "fieldtype": "Select",
+            "options": "DIR-3 KYC (full)\nDIR-3 KYC Web (no change)",
+            "default": "DIR-3 KYC Web (no change)"
+        },
+        {
+            "fieldname": "tab_disqualifications",
+            "label": "Disqualifications",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_disqualifications",
+            "label": "Disqualification Status",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "is_disqualified",
+            "label": "Currently Disqualified",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "dpt_3_pending_count",
+            "label": "Pending DPT-3 (Loans)",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_disq_table",
+            "label": "Disqualification History",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "disqualifications",
+            "label": "Disqualification History",
+            "fieldtype": "Table",
+            "options": "Director Disqualification"
+        },
+        {
+            "fieldname": "tab_contact",
+            "label": "Contact",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_contact",
+            "label": "Contact Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "permanent_address",
+            "label": "Permanent Address",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "present_address",
+            "label": "Present Address",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "email",
+            "label": "Email",
+            "fieldtype": "Data",
+            "options": "Email",
+            "reqd": 1
+        },
+        {
+            "fieldname": "mobile",
+            "label": "Mobile",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "linked_user",
+            "label": "Linked Frappe User",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "tab_id_details",
+            "label": "Independent Director",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_qualifications",
+            "label": "Independent Director Qualifications",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "is_independent_director",
+            "label": "Independent Director (anywhere in group)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "id_databank_registered",
+            "label": "IICA Independent Director Databank Registered",
+            "fieldtype": "Check",
+            "default": 0,
+            "depends_on": "is_independent_director"
+        },
+        {
+            "fieldname": "id_databank_validity",
+            "label": "IICA Membership Validity",
+            "fieldtype": "Date",
+            "depends_on": "id_databank_registered"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "id_proficiency_test_passed",
+            "label": "ID Proficiency Test Passed",
+            "fieldtype": "Check",
+            "default": 0,
+            "depends_on": "is_independent_director"
+        },
+        {
+            "fieldname": "id_proficiency_test_date",
+            "label": "Test Date",
+            "fieldtype": "Date",
+            "depends_on": "id_proficiency_test_passed"
+        },
+        {
+            "fieldname": "is_woman_director",
+            "label": "Counts as Woman Director",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "For listed/specified-class composition (§149(1) proviso)"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

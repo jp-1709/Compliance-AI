@@ -1,0 +1,42 @@
+{
+    "doctype": "DocType",
+    "name": "Director Disqualification",
+    "module": "Secretarial Compliance",
+    "istable": 1,
+    "fields": [
+        {
+            "fieldname": "ground",
+            "label": "Ground",
+            "fieldtype": "Select",
+            "options": "Section 164(1)(d) - 3 consecutive non-filings\nSection 164(2) - non-payment of deposit etc.\nSection 274 (old)\nIBC default\nFraud\nOther",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "disqualified_from",
+            "label": "Disqualified From",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "disqualified_to",
+            "label": "Disqualified Until",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "description": "Typically 5 years"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Currently Active",
+            "fieldtype": "Check",
+            "default": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

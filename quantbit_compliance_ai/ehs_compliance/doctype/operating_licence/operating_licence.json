@@ -1,0 +1,332 @@
+{
+    "doctype": "DocType",
+    "name": "Operating Licence",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "OL-.YYYY.-.######",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "description": "Master record for every operating licence held by a Business Entity. Drives renewal cycle.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "licence_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Active\nUnder Renewal\nExpired\nSuspended\nRevoked\nSurrendered",
+            "default": "Active",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "licence_type",
+            "label": "Licence Type",
+            "fieldtype": "Select",
+            "options": "Factory Licence\nBoiler Inspection Certificate\nLift Licence\nPetroleum Licence (PESO)\nExplosives Licence\nDG Set NOC\nBuilding Occupancy Certificate\nTrade Licence\nFood Licence (FSSAI)\nDrugs Manufacturing Licence\nPharma Wholesale Licence\nBIS Licence\nWeights & Measures\nNarcotics Licence\nTelecom Licence\nMining Licence\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "licence_number",
+            "label": "Licence Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "issuing_authority",
+            "label": "Issuing Authority",
+            "fieldtype": "Link",
+            "options": "Regulator",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "tab_validity",
+            "label": "Validity & Renewal",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_dates",
+            "label": "Validity Dates",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "issued_on",
+            "label": "Issued On",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "valid_from",
+            "label": "Valid From",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "valid_until",
+            "label": "Valid Until",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "days_to_expiry",
+            "label": "Days to Expiry",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Computed daily via scheduled job"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "renewal_lead_days",
+            "label": "Renewal Lead Time (Days)",
+            "fieldtype": "Int",
+            "default": 180,
+            "description": "Renewal application typically 90–180 days before expiry"
+        },
+        {
+            "fieldname": "next_action_due",
+            "label": "Next Action Due",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "valid_until − renewal_lead_days"
+        },
+        {
+            "fieldname": "renewal_periodicity_years",
+            "label": "Renewal Periodicity (Years)",
+            "fieldtype": "Int",
+            "default": 1
+        },
+        {
+            "fieldname": "sec_renewal",
+            "label": "Renewal Tracking",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "renewal_application_filed_on",
+            "label": "Last Renewal Application Filed",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "renewal_application_reference",
+            "label": "Renewal Application Ref",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "renewal_application_evidence",
+            "label": "Renewal Application Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "renewal_fee_paid_inr",
+            "label": "Renewal Fee Paid (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "renewal_fee_evidence",
+            "label": "Fee Receipt",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "predecessor_licence",
+            "label": "Predecessor Licence",
+            "fieldtype": "Link",
+            "options": "Operating Licence"
+        },
+        {
+            "fieldname": "tab_scope",
+            "label": "Scope",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_scope",
+            "label": "Authorised Scope",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "scope_summary",
+            "label": "Scope Summary",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "max_workers_authorised",
+            "label": "Max Workers Authorised",
+            "fieldtype": "Int",
+            "description": "For Factory Licence — Factories Act"
+        },
+        {
+            "fieldname": "max_horsepower_authorised",
+            "label": "Max HP Authorised",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "products_authorised",
+            "label": "Products Authorised",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "current_workers_actual",
+            "label": "Current Workers (Actual)",
+            "fieldtype": "Int",
+            "fetch_from": "business_entity.employee_count",
+            "read_only": 1
+        },
+        {
+            "fieldname": "current_horsepower_actual",
+            "label": "Current HP (Actual)",
+            "fieldtype": "Float"
+        },
+        {
+            "fieldname": "is_oversubscribed",
+            "label": "Oversubscribed (>Authorised)",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "If actual > authorised, licence amendment required under Factories Act §6"
+        },
+        {
+            "fieldname": "tab_certificate",
+            "label": "Certificate & Documents",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_certificate",
+            "label": "Certificate",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "licence_certificate",
+            "label": "Licence Certificate",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1
+        },
+        {
+            "fieldname": "associated_drawings",
+            "label": "Associated Drawings",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "licence_type"
+            ]
+        },
+        {
+            "fields": [
+                "valid_until"
+            ]
+        },
+        {
+            "fields": [
+                "licence_number"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "valid_until",
+    "sort_order": "ASC",
+    "search_fields": "licence_number,licence_type,business_entity",
+    "title_field": "licence_number"
+}

@@ -1,0 +1,299 @@
+{
+    "doctype": "DocType",
+    "name": "Tax Notice",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "TXNOT-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "Notice received from any tax authority. Tracks end-to-end response and outcome.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "notice_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Received\nUnder Review\nResponse Drafted\nResponse Filed\nHearing Scheduled\nHearing Done\nOrder Received\nFavourable\nDemand Confirmed\nAppeal Filed\nClosed",
+            "default": "Received",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "notice_type",
+            "label": "Notice Type",
+            "fieldtype": "Select",
+            "options": "GST \u2014 ASMT-10 (Scrutiny)\nGST \u2014 DRC-01 (Show Cause)\nGST \u2014 DRC-01A\nGST \u2014 REG-17 (Cancellation)\nGST \u2014 REG-31 (Suspension)\nIT \u2014 142(1) (Inquiry)\nIT \u2014 143(2) (Scrutiny)\nIT \u2014 148 (Reassessment)\nIT \u2014 156 (Demand)\nIT \u2014 245 (Refund Adjusted)\nTDS \u2014 Defaults\nCustoms \u2014 SCN\nPF \u2014 Notice\nESIC \u2014 Notice\nProfessional Tax\nLabour Inspector\nFactory Inspector\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "issuing_authority",
+            "label": "Issuing Authority",
+            "fieldtype": "Link",
+            "options": "Regulator",
+            "reqd": 1
+        },
+        {
+            "fieldname": "notice_number",
+            "label": "Notice Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "notice_date",
+            "label": "Notice Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "received_on",
+            "label": "Received On",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "sec_period",
+            "label": "Period & Subject",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "period_covered",
+            "label": "Period Covered",
+            "fieldtype": "Data",
+            "description": "e.g. FY 2022-23, Q2 2024-25"
+        },
+        {
+            "fieldname": "subject",
+            "label": "Subject",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "notice_summary",
+            "label": "Notice Summary",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "amount_demanded_inr",
+            "label": "Amount Demanded (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "interest_demanded_inr",
+            "label": "Interest (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "penalty_demanded_inr",
+            "label": "Penalty (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "total_demand_inr",
+            "label": "Total Demand (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_response",
+            "label": "Response",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "response_due_date",
+            "label": "Response Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "response_filed_on",
+            "label": "Response Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "response_evidence",
+            "label": "Response / Reply",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "hearing_date",
+            "label": "Hearing Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "represented_by",
+            "label": "Represented By",
+            "fieldtype": "Data",
+            "description": "CA / Lawyer / Internal"
+        },
+        {
+            "fieldname": "hearing_notes_evidence",
+            "label": "Hearing Notes",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "sec_outcome",
+            "label": "Outcome",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "order_received_on",
+            "label": "Order Received On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "order_evidence",
+            "label": "Order Document",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "demand_confirmed_inr",
+            "label": "Demand Confirmed (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "demand_paid_inr",
+            "label": "Demand Paid (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "demand_paid_evidence",
+            "label": "Payment Challan",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "appeal_filed",
+            "label": "Appeal Filed",
+            "fieldtype": "Check",
+            "default": "0"
+        },
+        {
+            "fieldname": "appeal_forum",
+            "label": "Appeal Forum",
+            "fieldtype": "Select",
+            "options": "First Appellate Authority (CIT/Commissioner)\nITAT/CESTAT\nHigh Court\nSupreme Court",
+            "depends_on": "appeal_filed"
+        },
+        {
+            "fieldname": "appeal_reference",
+            "label": "Appeal Reference",
+            "fieldtype": "Data",
+            "depends_on": "appeal_filed"
+        },
+        {
+            "fieldname": "linked_quality_event",
+            "label": "Linked QMS Quality Event",
+            "fieldtype": "Link",
+            "options": "QMS Quality Event",
+            "description": "If notice triggered a CAPA"
+        },
+        {
+            "fieldname": "linked_risk_item",
+            "label": "Linked Risk Register Item",
+            "fieldtype": "Link",
+            "options": "Risk Register Item"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "CFO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ],
+    "sort_field": "response_due_date",
+    "sort_order": "ASC"
+}

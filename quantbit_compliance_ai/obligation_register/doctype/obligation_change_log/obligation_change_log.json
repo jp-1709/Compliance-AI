@@ -1,44 +1,169 @@
 {
- "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
- "creation": "2026-06-04 17:25:07.382118",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "section_break_17i0"
- ],
- "fields": [
-  {
-   "fieldname": "section_break_17i0",
-   "fieldtype": "Section Break"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-06-04 17:25:07.382118",
- "modified_by": "Administrator",
- "module": "Obligation Register",
- "name": "Obligation Change Log",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
- "states": []
+    "doctype": "DocType",
+    "name": "Obligation Change Log",
+    "module": "Obligation Register",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "OCL-.######",
+    "fields": [
+        {
+            "fieldname": "obligation",
+            "label": "Obligation",
+            "fieldtype": "Link",
+            "options": "Compliance Obligation",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "change_type",
+            "label": "Change Type",
+            "fieldtype": "Select",
+            "options": "Amendment\nNotification\nCircular\nClarification\nCourt Ruling\nSupersession\nDeprecation\nRetraction",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "change_date",
+            "label": "Change Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "effective_date",
+            "label": "Effective Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "source_type",
+            "label": "Source",
+            "fieldtype": "Select",
+            "options": "Gazette\nRegulator Circular\nCourt Order\nPress Release\nInternal Update\nPartner Feed"
+        },
+        {
+            "fieldname": "source_url",
+            "label": "Source URL",
+            "fieldtype": "Data",
+            "options": "URL"
+        },
+        {
+            "fieldname": "source_reference",
+            "label": "Source Reference",
+            "fieldtype": "Data",
+            "description": "Notification number, gazette ref, etc."
+        },
+        {
+            "fieldname": "regwatch_alert",
+            "label": "RegWatch Alert",
+            "fieldtype": "Link",
+            "options": "RegWatch Alert"
+        },
+        {
+            "fieldname": "sec_change",
+            "label": "Change Detail",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "change_summary",
+            "label": "Change Summary",
+            "fieldtype": "Text Editor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "fields_changed",
+            "label": "Fields Changed",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "old_values",
+            "label": "Old Values",
+            "fieldtype": "Code",
+            "options": "JSON"
+        },
+        {
+            "fieldname": "new_values",
+            "label": "New Values",
+            "fieldtype": "Code",
+            "options": "JSON"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "impact_assessment",
+            "label": "Impact Assessment",
+            "fieldtype": "Text Editor",
+            "description": "What does this mean for affected entities?"
+        },
+        {
+            "fieldname": "tasks_affected_count",
+            "label": "Open Tasks Affected",
+            "fieldtype": "Int",
+            "read_only": 1
+        },
+        {
+            "fieldname": "version_created",
+            "label": "Version Created",
+            "fieldtype": "Link",
+            "options": "Obligation Version"
+        },
+        {
+            "fieldname": "sec_workflow",
+            "label": "Review",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "review_status",
+            "label": "Review Status",
+            "fieldtype": "Select",
+            "options": "Pending Review\nAcknowledged\nVersioned\nNo Action Needed\nDuplicate",
+            "default": "Pending Review",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "reviewed_by",
+            "label": "Reviewed By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "reviewed_on",
+            "label": "Reviewed On",
+            "fieldtype": "Datetime"
+        },
+        {
+            "fieldname": "review_notes",
+            "label": "Review Notes",
+            "fieldtype": "Text Editor"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
 }

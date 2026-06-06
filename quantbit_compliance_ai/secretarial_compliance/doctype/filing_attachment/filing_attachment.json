@@ -1,0 +1,30 @@
+{
+    "doctype": "DocType",
+    "name": "Filing Attachment",
+    "module": "Secretarial Compliance",
+    "istable": 1,
+    "fields": [
+        {
+            "fieldname": "attachment_name",
+            "label": "Attachment Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "evidence_file",
+            "label": "File",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "is_mandatory",
+            "label": "Mandatory by Form",
+            "fieldtype": "Check",
+            "default": 0,
+            "in_list_view": 1
+        }
+    ]
+}

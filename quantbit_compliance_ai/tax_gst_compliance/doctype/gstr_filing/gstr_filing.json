@@ -1,0 +1,342 @@
+{
+    "doctype": "DocType",
+    "name": "GSTR Filing",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "GSTR-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "Unified tracker for every GST return event \u2014 GSTR-1, GSTR-3B, GSTR-9, GSTR-9C, ITC-04, CMP-08.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "tax_registration",
+            "label": "GSTIN",
+            "fieldtype": "Link",
+            "options": "Tax Registration",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "gstin_number",
+            "label": "GSTIN Number",
+            "fieldtype": "Data",
+            "fetch_from": "tax_registration.registration_number",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "return_type",
+            "label": "Return Type",
+            "fieldtype": "Select",
+            "options": "GSTR-1\nGSTR-1A (Amendment)\nGSTR-3B\nGSTR-4 (Composition)\nGSTR-5 (NRTP)\nGSTR-6 (ISD)\nGSTR-7 (TDS)\nGSTR-8 (TCS)\nGSTR-9 (Annual)\nGSTR-9A (Composition Annual)\nGSTR-9C (Audit/Reconciliation)\nGSTR-10 (Final)\nGSTR-11 (UIN)\nITC-04 (Job Work)\nCMP-08 (Composition Quarterly)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nUnder Review\nReady to File\nFiled\nFiled with Late Fee\nLapsed\nNil Filed",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "period_fy",
+            "label": "Period (FY)",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "description": "e.g. 2025-26"
+        },
+        {
+            "fieldname": "period_month",
+            "label": "Period (Month)",
+            "fieldtype": "Select",
+            "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "period_quarter",
+            "label": "Period (Quarter)",
+            "fieldtype": "Select",
+            "options": "Q1\nQ2\nQ3\nQ4",
+            "in_standard_filter": 1,
+            "description": "For QRMP / quarterly returns"
+        },
+        {
+            "fieldname": "sec_dates",
+            "label": "Dates",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "is_nil_return",
+            "label": "NIL Return",
+            "fieldtype": "Check",
+            "default": "0",
+            "description": "No transactions in period"
+        },
+        {
+            "fieldname": "is_revised",
+            "label": "Revised Return",
+            "fieldtype": "Check",
+            "default": "0"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "arn_number",
+            "label": "ARN Number",
+            "fieldtype": "Data",
+            "description": "Application Reference Number from GST portal"
+        },
+        {
+            "fieldname": "filed_by_user",
+            "label": "Filed By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "sec_summary",
+            "label": "Summary Figures",
+            "fieldtype": "Section Break",
+            "description": "For GSTR-3B and GSTR-1"
+        },
+        {
+            "fieldname": "total_taxable_value_inr",
+            "label": "Total Taxable Value (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_igst_inr",
+            "label": "Total IGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_cgst_inr",
+            "label": "Total CGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_sgst_inr",
+            "label": "Total SGST (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_cess_inr",
+            "label": "Total Cess (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "itc_availed_inr",
+            "label": "ITC Availed (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "tax_paid_cash_inr",
+            "label": "Tax Paid (Cash) (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "tax_paid_credit_inr",
+            "label": "Tax Paid (Credit Ledger) (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "interest_paid_inr",
+            "label": "Interest Paid (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "late_fee_inr",
+            "label": "Late Fee Paid (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "sec_source",
+            "label": "Source",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "source_system",
+            "label": "Source System",
+            "fieldtype": "Select",
+            "options": "Manual\nTally Sync\nERPNext Sync\nSAP Sync\nZoho Books\nClearTax\nGST Suvidha Provider\nOther",
+            "default": "Manual"
+        },
+        {
+            "fieldname": "source_reference",
+            "label": "Source Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "imported_at",
+            "label": "Imported At",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "filed_return_pdf",
+            "label": "Filed Return PDF",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "challan_evidence",
+            "label": "Tax Challan",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        },
+        {
+            "fieldname": "linked_itc_recon",
+            "label": "Linked ITC Reconciliation",
+            "fieldtype": "Link",
+            "options": "ITC Reconciliation"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "CFO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "tax_registration",
+                "return_type",
+                "period_month",
+                "period_fy"
+            ],
+            "unique": 1,
+            "comment": "One return per GSTIN per period"
+        },
+        {
+            "fields": [
+                "filing_due_date"
+            ]
+        },
+        {
+            "fields": [
+                "filing_status"
+            ]
+        }
+    ],
+    "sort_field": "filing_due_date",
+    "sort_order": "ASC"
+}

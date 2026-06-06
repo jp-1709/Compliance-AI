@@ -1,0 +1,262 @@
+{
+    "doctype": "DocType",
+    "name": "Statutory Register",
+    "module": "Labour Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "REG-.YYYY.-.######",
+    "track_changes": 1,
+    "title_field": "register_name",
+    "search_fields": "register_code,register_name,business_entity",
+    "description": "A statutory register required to be maintained under labour law. One record per register per Business Entity. Auto-seeded on Labour Profile completion. Staleness tracked — active registers with no entry > 90 days generate alerts.",
+    "fields": [
+        {
+            "fieldname": "tab_identity",
+            "label": "Register Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Register Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "register_code",
+            "label": "Register Code",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Standardised code from the Register Catalogue. E.g. FORM-A-MW, FORM-12-FA, FORM-XII-CL."
+        },
+        {
+            "fieldname": "register_name",
+            "label": "Register Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "regulation",
+            "label": "Source Regulation",
+            "fieldtype": "Link",
+            "options": "Regulation",
+            "reqd": 1
+        },
+        {
+            "fieldname": "form_reference",
+            "label": "Form / Rule Reference",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "E.g. Form A under Rule 21(4), Form 12 under Rule 103."
+        },
+        {
+            "fieldname": "register_type",
+            "label": "Register Type",
+            "fieldtype": "Select",
+            "options": "\nWages\nMuster Roll\nOvertime\nLeave\nFines & Deductions\nAdvances\nAccident\nInspection\nWorking Hours\nEmployment Card\nDamages/Loss\nBonus\nGratuity\nSettlement\nReturn of Employees\nDisplacement\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "maintenance_format",
+            "label": "Permitted Format",
+            "fieldtype": "Select",
+            "options": "Physical Bound Register\nLoose-leaf\nElectronic (allowed)\nElectronic (with state nod)\nPhysical Only",
+            "default": "Electronic (allowed)"
+        },
+        {
+            "fieldname": "tab_currency",
+            "label": "Currency & Maintenance",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_currency",
+            "label": "Currency",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "is_active_register",
+            "label": "Currently Maintained",
+            "fieldtype": "Check",
+            "default": 1,
+            "in_list_view": 1,
+            "description": "Uncheck only if the underlying obligation is no longer applicable. Never hard-delete — soft-delete only."
+        },
+        {
+            "fieldname": "last_entry_date",
+            "label": "Last Entry Date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "description": "Updated automatically when a Register Entry is added. Staleness alert fires at 90+ days."
+        },
+        {
+            "fieldname": "last_audited_on",
+            "label": "Last Audited",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "last_audited_by",
+            "label": "Last Audited By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "next_audit_due_on",
+            "label": "Next Audit Due",
+            "fieldtype": "Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "retention_years",
+            "label": "Retention Period (Years)",
+            "fieldtype": "Int",
+            "default": 3,
+            "description": "Per source regulation. Most registers require 3 years post-record date. Some (Gratuity) require 5 years."
+        },
+        {
+            "fieldname": "earliest_entry_date",
+            "label": "Earliest Entry Date",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Auto-computed from oldest Register Entry. Used to calculate destroy_after date."
+        },
+        {
+            "fieldname": "destroy_after",
+            "label": "Destroy After",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "earliest_entry_date + retention_years. Legal limit for retention."
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "tab_storage",
+            "label": "Storage & Completeness",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_storage",
+            "label": "Storage",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "physical_location",
+            "label": "Physical Location",
+            "fieldtype": "Small Text",
+            "description": "Where the physical register is kept: e.g. 'HR Cupboard 3, Shelf B, Pune Plant'."
+        },
+        {
+            "fieldname": "digital_storage_path",
+            "label": "Digital Storage Reference",
+            "fieldtype": "Data",
+            "description": "If maintained electronically: file path, SharePoint URL, or Drive folder link."
+        },
+        {
+            "fieldname": "register_file",
+            "label": "Register File",
+            "fieldtype": "Attach",
+            "description": "Latest snapshot, template, or scanned copy of the register."
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "completeness_score",
+            "label": "Completeness %",
+            "fieldtype": "Percent",
+            "read_only": 1,
+            "description": "Computed by the completeness checker against expected entry count for the current period."
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Text Editor"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "is_active_register"
+            ]
+        },
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "register_code"
+            ],
+            "unique": 1,
+            "comment": "One register per code per entity. Prevents duplicate register records."
+        }
+    ]
+}

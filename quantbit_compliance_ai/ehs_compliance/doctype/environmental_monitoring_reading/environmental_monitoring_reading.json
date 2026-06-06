@@ -1,0 +1,267 @@
+{
+    "doctype": "DocType",
+    "name": "Environmental Monitoring Reading",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "ENVR-.YYYY.-.######",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "description": "Daily/monthly readings for stack emissions, ambient air, effluent, groundwater, noise. Per-reading record with auto-violation flagging.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "monitoring_type",
+            "label": "Monitoring Type",
+            "fieldtype": "Select",
+            "options": "Stack Emission\nAmbient Air Quality\nEffluent (ETP Outlet)\nEffluent (STP Outlet)\nGround Water\nSurface Water\nNoise Level\nDrinking Water\nFugitive Emission\nVOC Detection\nIndoor Air Quality",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "reading_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Recorded\nVerified\nViolation Flagged\nReview\nAction Taken\nClosed",
+            "default": "Recorded",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "monitoring_point",
+            "label": "Monitoring Point",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "e.g. 'Stack 1 — Boiler', 'STP Outlet', 'Ambient Air Station A'"
+        },
+        {
+            "fieldname": "reading_date",
+            "label": "Reading Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "reading_time",
+            "label": "Reading Time",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "is_continuous_monitoring",
+            "label": "OCEMS / Continuous Monitoring",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "OCEMS mandatory for Red Category and 17 highly polluting industries"
+        },
+        {
+            "fieldname": "tab_parameters",
+            "label": "Parameters",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_violation_summary",
+            "label": "Violation Summary (Auto-Computed)",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "violation_count",
+            "label": "Parameters in Violation",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "is_violation",
+            "label": "Violation Detected",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "sec_parameters",
+            "label": "Parameter Readings",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "parameters",
+            "label": "Parameter Readings",
+            "fieldtype": "Table",
+            "options": "Monitoring Parameter Reading"
+        },
+        {
+            "fieldname": "tab_lab",
+            "label": "Laboratory & Action",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_lab",
+            "label": "Laboratory & Equipment",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "lab_name",
+            "label": "Testing Lab",
+            "fieldtype": "Data",
+            "description": "NABL / MoEFCC-accredited lab name"
+        },
+        {
+            "fieldname": "lab_nabl_number",
+            "label": "NABL Accreditation No.",
+            "fieldtype": "Data",
+            "description": "PCB does not accept non-NABL lab reports for compliance submissions"
+        },
+        {
+            "fieldname": "test_report_evidence",
+            "label": "Test Report",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "is_third_party",
+            "label": "Third-Party Lab",
+            "fieldtype": "Check",
+            "default": 1,
+            "description": "Internal testing not acceptable for PCB submission — NABL accredited only"
+        },
+        {
+            "fieldname": "sec_action",
+            "label": "Action on Violation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_quality_event",
+            "label": "Linked QMS Quality Event",
+            "fieldtype": "Link",
+            "options": "QMS Quality Event",
+            "description": "Auto-created on violation detection"
+        },
+        {
+            "fieldname": "linked_capa",
+            "label": "Linked CAPA",
+            "fieldtype": "Link",
+            "options": "QMS CAPA"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "reported_to_pcb",
+            "label": "Reported to PCB",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Violations must be reported to State PCB within 48 hours"
+        },
+        {
+            "fieldname": "reported_on",
+            "label": "Reported On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Text Editor"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "reading_date"
+            ]
+        },
+        {
+            "fields": [
+                "monitoring_type",
+                "monitoring_point",
+                "reading_date"
+            ]
+        },
+        {
+            "fields": [
+                "is_violation"
+            ]
+        }
+    ],
+    "sort_field": "reading_date",
+    "sort_order": "DESC",
+    "search_fields": "monitoring_point,monitoring_type,business_entity",
+    "title_field": "monitoring_point"
+}

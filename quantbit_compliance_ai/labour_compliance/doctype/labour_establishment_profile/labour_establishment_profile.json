@@ -1,0 +1,522 @@
+{
+    "doctype": "DocType",
+    "name": "Labour Establishment Profile",
+    "module": "Labour Compliance",
+    "naming_rule": "By field: business_entity",
+    "autoname": "field:business_entity",
+    "track_changes": 1,
+    "title_field": "business_entity",
+    "search_fields": "business_entity,organisation,establishment_type,state",
+    "description": "Detailed labour-law profile of a Business Entity. One-to-one with Business Entity. Drives applicability of ALL labour obligations — threshold crossings (10/30/50/100/250/500/1000) trigger automatic calendar recompute.",
+    "fields": [
+        {
+            "fieldname": "tab_identity",
+            "label": "Entity & Setup",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_entity",
+            "label": "Entity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "fetch_from": "business_entity.organisation",
+            "read_only": 1
+        },
+        {
+            "fieldname": "state",
+            "label": "State",
+            "fieldtype": "Link",
+            "options": "State",
+            "fetch_from": "business_entity.state",
+            "read_only": 1,
+            "in_standard_filter": 1,
+            "description": "Fetched from Business Entity. Determines state-specific PT due dates, minimum wages, S&E rules."
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "establishment_type",
+            "label": "Establishment Type",
+            "fieldtype": "Select",
+            "options": "\nFactory\nShop\nCommercial Establishment\nIT/ITES Office\nWarehouse\nResearch Establishment\nMine\nPort\nPlantation\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "operational_status",
+            "label": "Operational Status",
+            "fieldtype": "Select",
+            "options": "Operational\nUnder Construction\nClosed (Temporary)\nClosed (Permanent)",
+            "default": "Operational",
+            "in_list_view": 1,
+            "description": "Note: Closed entities still require annual returns (Form 6A, etc.) until formally surrendered."
+        },
+        {
+            "fieldname": "operations_start_date",
+            "label": "Operations Start Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "tab_workforce",
+            "label": "Workforce",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_workforce",
+            "label": "Workforce Composition",
+            "fieldtype": "Section Break",
+            "description": "These numbers drive applicability thresholds. Update whenever headcount changes significantly. Thresholds: 10 (POSH), 20 (ISMW), 30 (crèche), 50 (CLRA), 100 (Works Committee), 250 (canteen/safety), 500 (welfare officer), 1000 (safety officer)."
+        },
+        {
+            "fieldname": "total_workers",
+            "label": "Total Workers (incl. contract)",
+            "fieldtype": "Int",
+            "default": 0,
+            "in_list_view": 1,
+            "bold": 1,
+            "description": "Primary threshold field. Must equal direct + contract + apprentices (±5 tolerance). Triggers applicability recompute on threshold crossing."
+        },
+        {
+            "fieldname": "direct_employees",
+            "label": "Direct (On-roll)",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "contract_workers",
+            "label": "Contract Workers",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "apprentices",
+            "label": "Apprentices",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "interns_trainees",
+            "label": "Interns / Trainees",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "Interns/trainees may or may not count toward threshold depending on interpretation. Verify with Legal Counsel."
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "women_workers",
+            "label": "Women Workers",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "Triggers: POSH IC (10+ total), crèche (30+ women), women-after-7pm permission if needed."
+        },
+        {
+            "fieldname": "differently_abled_workers",
+            "label": "Differently-Abled Workers",
+            "fieldtype": "Int",
+            "default": 0
+        },
+        {
+            "fieldname": "interstate_migrant_workers",
+            "label": "Interstate Migrant Workers",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "Triggers ISMW Act at 5+ workers from another state. Often under-reported — verify proactively."
+        },
+        {
+            "fieldname": "minors_or_adolescents",
+            "label": "Adolescents (15–18)",
+            "fieldtype": "Int",
+            "default": 0,
+            "description": "Workers aged 15–18 only. Children below 14 are prohibited. Factories require Form 13 for adolescents."
+        },
+        {
+            "fieldname": "tab_operations",
+            "label": "Operations",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_operations",
+            "label": "Operations Profile",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "shifts_count",
+            "label": "Number of Shifts",
+            "fieldtype": "Int",
+            "default": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "operates_24x7",
+            "label": "Operates 24×7",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Triggers night-shift rules (Factories Act §66), women-after-7pm permissions under state S&E Acts."
+        },
+        {
+            "fieldname": "women_work_after_7pm",
+            "label": "Women Work After 7 PM",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Requires state-specific permission under S&E Act / Factories Act rules."
+        },
+        {
+            "fieldname": "weekly_off_day",
+            "label": "Weekly Off Day",
+            "fieldtype": "Select",
+            "options": "Sunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nRotational",
+            "default": "Sunday"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_seasonal",
+            "label": "Seasonal Operation",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Seasonal factories have different provisions under Factories Act Chapter IV."
+        },
+        {
+            "fieldname": "is_hazardous_process",
+            "label": "Hazardous Process (Schedule I)",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Factories Act Schedule I — additional licensing, medical examination, disclosure. Requires Safety Committee regardless of worker count."
+        },
+        {
+            "fieldname": "uses_power",
+            "label": "Manufacturing With Power",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Triggers Factories Act at 10+ workers. Cannot be true simultaneously with 'Without Power'."
+        },
+        {
+            "fieldname": "without_power_workers_only",
+            "label": "Manufacturing Without Power",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Triggers Factories Act at 20+ workers. Cannot be true simultaneously with 'With Power'."
+        },
+        {
+            "fieldname": "tab_facilities",
+            "label": "Facilities & Committees",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_facilities",
+            "label": "Workplace Facilities",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "has_canteen",
+            "label": "Canteen",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Statutory canteen required at 250+ workers (Factories Act §46). Warning auto-created if threshold met but unchecked."
+        },
+        {
+            "fieldname": "canteen_type",
+            "label": "Canteen Type",
+            "fieldtype": "Select",
+            "options": "Statutory\nVoluntary\nNot Applicable",
+            "default": "Not Applicable",
+            "depends_on": "has_canteen"
+        },
+        {
+            "fieldname": "has_creche",
+            "label": "Crèche",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Required at 30+ women workers (Maternity Benefit (Amendment) Act 2017 §11A). Warning task created if threshold met."
+        },
+        {
+            "fieldname": "has_first_aid",
+            "label": "First Aid Boxes",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "has_ambulance_room",
+            "label": "Ambulance Room",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Required at 500+ workers (Factories Act §45)."
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "has_welfare_officer",
+            "label": "Welfare Officer Appointed",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Required at 500+ workers (Factories Act §49)."
+        },
+        {
+            "fieldname": "has_safety_officer",
+            "label": "Safety Officer Appointed",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Required at 1000+ workers OR hazardous process factories (Factories Act §40B)."
+        },
+        {
+            "fieldname": "has_drinking_water_facility",
+            "label": "Drinking Water Facility",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "has_separate_washrooms",
+            "label": "Separate Washrooms (M/F)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_committees",
+            "label": "Statutory Committees",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "posh_ic_constituted",
+            "label": "POSH Internal Committee",
+            "fieldtype": "Check",
+            "default": 0,
+            "bold": 1,
+            "description": "IMPORTANT: Mandatory at 10+ TOTAL employees — regardless of gender ratio. NOT just '10+ women employees'. Fine: ₹50,000 + reputation damage."
+        },
+        {
+            "fieldname": "posh_committee",
+            "label": "POSH Committee Record",
+            "fieldtype": "Link",
+            "options": "POSH Committee",
+            "description": "Link to the active POSH Committee document for this entity."
+        },
+        {
+            "fieldname": "safety_committee_constituted",
+            "label": "Safety Committee",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Mandatory in hazardous factories (any size) or at 250+ workers."
+        },
+        {
+            "fieldname": "canteen_committee_constituted",
+            "label": "Canteen Managing Committee",
+            "fieldtype": "Check",
+            "default": 0,
+            "depends_on": "has_canteen"
+        },
+        {
+            "fieldname": "cb_6",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "works_committee_constituted",
+            "label": "Works Committee",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Mandatory at 100+ workers (Industrial Disputes Act §3). Joint management-labour forum."
+        },
+        {
+            "fieldname": "grievance_redressal_committee",
+            "label": "Grievance Redressal Committee",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Mandatory at 20+ workers (Industrial Disputes Act §9C)."
+        },
+        {
+            "fieldname": "tab_registrations",
+            "label": "Registrations",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_registrations",
+            "label": "Statutory Registrations",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "epfo_registered",
+            "label": "EPFO Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "epfo_code",
+            "label": "EPFO Code",
+            "fieldtype": "Data",
+            "fetch_from": "business_entity.epfo_code"
+        },
+        {
+            "fieldname": "esic_registered",
+            "label": "ESIC Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "esic_code",
+            "label": "ESIC Code",
+            "fieldtype": "Data",
+            "fetch_from": "business_entity.esic_code"
+        },
+        {
+            "fieldname": "professional_tax_registered",
+            "label": "Professional Tax Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "pt_registration_no",
+            "label": "PT Registration No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_5",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "shops_estab_registered",
+            "label": "S&E Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "shops_estab_no",
+            "label": "S&E Registration No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "factory_licence_active",
+            "label": "Factory Licence Active",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "factory_licence_no",
+            "label": "Factory Licence No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "factory_licence_expiry",
+            "label": "Factory Licence Expiry",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "lwf_registered",
+            "label": "Labour Welfare Fund Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "clra_registered",
+            "label": "Contract Labour (Principal Employer) Registered",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "clra_registration_no",
+            "label": "CLRA Registration No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "tab_meta",
+            "label": "Profile Maintenance",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_meta",
+            "label": "Review & Completeness",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "last_reviewed_on",
+            "label": "Last Reviewed On",
+            "fieldtype": "Date",
+            "description": "Profile should be reviewed at least annually. Task auto-created when overdue."
+        },
+        {
+            "fieldname": "last_reviewed_by",
+            "label": "Last Reviewed By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "review_due_on",
+            "label": "Next Review Due",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Auto-computed as last_reviewed_on + 365 days."
+        },
+        {
+            "fieldname": "profile_completeness",
+            "label": "Profile Completeness %",
+            "fieldtype": "Percent",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "% of key profile fields filled. Auto-computed on save."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

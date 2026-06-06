@@ -1,0 +1,271 @@
+{
+    "doctype": "DocType",
+    "name": "Listed Entity Disclosure",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "LED-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Disclosure Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity (Listed)",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "disclosure_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nDraft Prepared\nApproved by Board\nFiled with Exchange\nPublic\nWithdrawn / Corrected",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "disclosure_type",
+            "label": "Disclosure Type",
+            "fieldtype": "Select",
+            "options": "Reg 13(3) — Investor Grievance\nReg 27(2) — Corporate Governance\nReg 30 — Material Event\nReg 31 — Shareholding Pattern\nReg 32 — Statement of Deviation\nReg 33 — Financial Results\nReg 34 — Annual Report\nReg 40 — Transfer / Transmission\nReg 76 — RTA\nReg 80 — Insider Trading\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "regulation_reference",
+            "label": "LODR Regulation Reference",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "disclosure_period",
+            "label": "Period",
+            "fieldtype": "Data",
+            "in_standard_filter": 1,
+            "description": "e.g. Q1 FY26, FY 2024-25"
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "tab_exchanges",
+            "label": "Exchanges",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_exchanges",
+            "label": "Stock Exchanges",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "filed_with_bse",
+            "label": "Filed with BSE",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "bse_acknowledgement",
+            "label": "BSE Acknowledgement",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "filed_with_nse",
+            "label": "Filed with NSE",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "nse_acknowledgement",
+            "label": "NSE Acknowledgement",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "filed_with_msei",
+            "label": "Filed with MSEI",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "filed_with_other_exchange",
+            "label": "Other Exchange",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "tab_content",
+            "label": "Content",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_content",
+            "label": "Content",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "disclosure_summary",
+            "label": "Disclosure Summary",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "disclosure_full_document",
+            "label": "Full Disclosure Document",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "is_material",
+            "label": "Material Event (Reg 30)",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Triggers within-24-hour filing requirement"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_price_sensitive",
+            "label": "Price Sensitive Information",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "PIT Regulations apply"
+        },
+        {
+            "fieldname": "ucc_ucs_compliant",
+            "label": "UCC/UCS Code Followed (Insider Trading)",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "tab_authorisation",
+            "label": "Authorisation",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_authorisation",
+            "label": "Authorisation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "approved_by_board",
+            "label": "Approved by Board on",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "approving_resolution",
+            "label": "Approving Resolution",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "approved_by_committee",
+            "label": "Approved by Committee on",
+            "fieldtype": "Date",
+            "description": "If Audit Committee / NRC approval required"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "compliance_officer_signature",
+            "label": "CO Sign-off",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

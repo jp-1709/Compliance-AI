@@ -1,44 +1,129 @@
 {
- "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
- "creation": "2026-06-04 17:22:57.910271",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "section_break_pfq4"
- ],
- "fields": [
-  {
-   "fieldname": "section_break_pfq4",
-   "fieldtype": "Section Break"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-06-04 17:22:57.910271",
- "modified_by": "Administrator",
- "module": "Obligation Register",
- "name": "Regulator",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
- "states": []
+    "doctype": "DocType",
+    "name": "Regulator",
+    "module": "Obligation Register",
+    "naming_rule": "By field: regulator_code",
+    "autoname": "field:regulator_code",
+    "fields": [
+        {
+            "fieldname": "regulator_code",
+            "label": "Code",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "regulator_name",
+            "label": "Full Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "regulator_type",
+            "label": "Type",
+            "fieldtype": "Select",
+            "options": "Central Ministry\nCentral Authority\nState Department\nState Authority\nMunicipal\nStatutory Body\nProfessional Body\nIndustry Regulator",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "jurisdiction",
+            "label": "Jurisdiction",
+            "fieldtype": "Select",
+            "options": "India (Central)\nState\nMulti-State\nCity / Local"
+        },
+        {
+            "fieldname": "state",
+            "label": "State",
+            "fieldtype": "Link",
+            "options": "State",
+            "depends_on": "eval:doc.jurisdiction=='State'"
+        },
+        {
+            "fieldname": "parent_regulator",
+            "label": "Parent Regulator",
+            "fieldtype": "Link",
+            "options": "Regulator"
+        },
+        {
+            "fieldname": "sec_contact",
+            "label": "Contact",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "website",
+            "label": "Website",
+            "fieldtype": "Data",
+            "options": "URL"
+        },
+        {
+            "fieldname": "portal_url",
+            "label": "Filing/Submission Portal",
+            "fieldtype": "Data",
+            "options": "URL"
+        },
+        {
+            "fieldname": "helpline",
+            "label": "Helpline",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "email",
+            "label": "Email",
+            "fieldtype": "Data",
+            "options": "Email"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_active",
+            "label": "Active",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "supersedes",
+            "label": "Supersedes",
+            "fieldtype": "Link",
+            "options": "Regulator"
+        },
+        {
+            "fieldname": "description",
+            "label": "Description",
+            "fieldtype": "Text Editor"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
 }

@@ -1,0 +1,180 @@
+{
+    "doctype": "DocType",
+    "name": "Register Entry",
+    "module": "Labour Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "REGE-.YYYY.-.######",
+    "track_changes": 0,
+    "title_field": "subject_employee",
+    "search_fields": "register,subject_employee,entry_date",
+    "description": "Individual row/entry within a Statutory Register. Schema varies by register_type — stored as validated JSON payload. Used for Wage Roll cross-checks, completeness audits, and inspector-time retrieval. Why JSON? Different registers have wildly different fields (Form A = wages, Form 13 = adolescent details) — typed columns would need 100+ fields. JSON payload + per-register schema validation is the right balance.",
+    "fields": [
+        {
+            "fieldname": "sec_register",
+            "label": "Register Reference",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "register",
+            "label": "Register",
+            "fieldtype": "Link",
+            "options": "Statutory Register",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "fetch_from": "register.organisation",
+            "read_only": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "fetch_from": "register.business_entity",
+            "read_only": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "entry_date",
+            "label": "Entry Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "period_month",
+            "label": "Period (Month)",
+            "fieldtype": "Select",
+            "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "period_year",
+            "label": "Period (Year)",
+            "fieldtype": "Int",
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "subject_employee",
+            "label": "Employee / Worker",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "Employee ID or name. Used for completeness checks and per-employee cross-checks."
+        },
+        {
+            "fieldname": "subject_designation",
+            "label": "Designation",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "sec_payload",
+            "label": "Entry Data",
+            "fieldtype": "Section Break",
+            "description": "Per-register schema — validated by the register's schema definition."
+        },
+        {
+            "fieldname": "entry_payload",
+            "label": "Entry Payload (JSON)",
+            "fieldtype": "Code",
+            "options": "JSON",
+            "description": "Form A (wages): {basic, da, hra, gross, deductions, net, skill_category}. Form 13 (adolescent): {dob, school_cert_no, work_start_time, work_end_time}. Must be valid JSON."
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "supporting_evidence",
+            "label": "Supporting Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "description": "Bank statement, wage slip, or other documentary evidence for this entry."
+        },
+        {
+            "fieldname": "is_anomaly",
+            "label": "Anomaly Flag",
+            "fieldtype": "Check",
+            "default": 0,
+            "in_list_view": 1,
+            "description": "Set by the completeness checker when the entry violates register-specific rules (e.g. wages below minimum, missing mandatory fields)."
+        },
+        {
+            "fieldname": "anomaly_reason",
+            "label": "Anomaly Reason",
+            "fieldtype": "Small Text",
+            "depends_on": "is_anomaly",
+            "description": "Auto-populated by the completeness checker. Describes the specific violation."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "register",
+                "entry_date"
+            ]
+        },
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "period_month",
+                "period_year"
+            ]
+        },
+        {
+            "fields": [
+                "subject_employee",
+                "period_month",
+                "period_year"
+            ]
+        }
+    ]
+}

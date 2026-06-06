@@ -1,0 +1,57 @@
+{
+    "doctype": "DocType",
+    "name": "Incident People Affected",
+    "module": "EHS Compliance",
+    "istable": 1,
+    "description": "Child table for EHS Incident — details of each person affected (injury type, lost time).",
+    "fields": [
+        {
+            "fieldname": "person_name",
+            "label": "Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "employment_type",
+            "label": "Employment Type",
+            "fieldtype": "Select",
+            "options": "Direct Employee\nContract Worker\nVisitor\nContractor Staff\nApprentice\nOther",
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "designation",
+            "label": "Designation",
+            "fieldtype": "Data",
+            "columns": 2
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "injury_type",
+            "label": "Injury Type",
+            "fieldtype": "Select",
+            "options": "None\nFirst Aid\nMedical Treatment\nLost Time\nRestricted Duty\nFatality",
+            "default": "None",
+            "in_list_view": 1,
+            "columns": 2
+        },
+        {
+            "fieldname": "body_part_affected",
+            "label": "Body Part Affected",
+            "fieldtype": "Data",
+            "columns": 2
+        },
+        {
+            "fieldname": "lost_time_days",
+            "label": "Lost Time (Days)",
+            "fieldtype": "Int",
+            "default": 0,
+            "columns": 1
+        }
+    ]
+}

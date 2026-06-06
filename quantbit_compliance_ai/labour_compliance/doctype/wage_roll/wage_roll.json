@@ -1,0 +1,338 @@
+{
+    "doctype": "DocType",
+    "name": "Wage Roll",
+    "module": "Labour Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "WR-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "title_field": "business_entity",
+    "search_fields": "business_entity,organisation,wage_period_month,wage_period_year",
+    "description": "Reconciled monthly wages record per Business Entity. Source-of-truth for wage cross-checks — validates minimum wages compliance, payment timing (7th/10th rule), and register-entry completeness. Submission locks the record for the period.",
+    "fields": [
+        {
+            "fieldname": "tab_identity",
+            "label": "Period & Entity",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Period",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "wage_period_month",
+            "label": "Period (Month)",
+            "fieldtype": "Select",
+            "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "wage_period_year",
+            "label": "Period (Year)",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "wage_period_start",
+            "label": "Period Start",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "description": "First day of the wage period (usually 1st of month)."
+        },
+        {
+            "fieldname": "wage_period_end",
+            "label": "Period End",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "description": "Last day of the wage period (usually last day of month)."
+        },
+        {
+            "fieldname": "payment_due_date",
+            "label": "Statutory Payment Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "read_only": 1,
+            "description": "Payment of Wages Act §5: 7th of next month for ≤1000 workers; 10th for >1000 workers. Auto-computed."
+        },
+        {
+            "fieldname": "actually_paid_on",
+            "label": "Actually Paid On",
+            "fieldtype": "Date",
+            "description": "Date wages were actually disbursed. Late payment flags are computed from this."
+        },
+        {
+            "fieldname": "tab_amounts",
+            "label": "Wage Figures",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_aggregates",
+            "label": "Aggregate Figures",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "total_employees_in_period",
+            "label": "Total Employees",
+            "fieldtype": "Int",
+            "reqd": 1
+        },
+        {
+            "fieldname": "total_gross_wages_inr",
+            "label": "Total Gross Wages (₹)",
+            "fieldtype": "Currency",
+            "reqd": 1
+        },
+        {
+            "fieldname": "total_basic_da_inr",
+            "label": "Total Basic + DA (₹)",
+            "fieldtype": "Currency",
+            "description": "Used as base for PF/ESIC compliance verification."
+        },
+        {
+            "fieldname": "total_deductions_inr",
+            "label": "Total Deductions (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_net_payable_inr",
+            "label": "Total Net Payable (₹)",
+            "fieldtype": "Currency",
+            "reqd": 1
+        },
+        {
+            "fieldname": "total_pf_employer_inr",
+            "label": "PF (Employer Contribution) (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_pf_employee_inr",
+            "label": "PF (Employee Contribution) (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_esic_employer_inr",
+            "label": "ESIC (Employer Contribution) (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_esic_employee_inr",
+            "label": "ESIC (Employee Contribution) (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_pt_inr",
+            "label": "Professional Tax (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_lwf_inr",
+            "label": "Labour Welfare Fund (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "tab_compliance",
+            "label": "Compliance Checks",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_compliance_checks",
+            "label": "Compliance Check Results",
+            "fieldtype": "Section Break",
+            "description": "All checks run automatically on save. Green = pass. Fix violations before submitting."
+        },
+        {
+            "fieldname": "minimum_wages_compliant",
+            "label": "Min Wages Compliant",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "All employees' Basic+DA ≥ state-notified minimum for their skill category. Uses rate effective on wage_period_end (NOT today's rate)."
+        },
+        {
+            "fieldname": "min_wage_violations_count",
+            "label": "Min Wage Violations",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "wages_paid_within_due_date",
+            "label": "Paid Within Statutory Due Date",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "displays_match_paid",
+            "label": "Notice-Board Displays Match Paid",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Manually confirm that wage rates displayed on the notice board reconcile with wages actually paid."
+        },
+        {
+            "fieldname": "register_entries_count",
+            "label": "Register Entries (Form A)",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "description": "Form A (Register of Wages) entries created for this period. Should equal total_employees_in_period."
+        },
+        {
+            "fieldname": "compliance_score",
+            "label": "Wage Compliance Score",
+            "fieldtype": "Percent",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "tab_source",
+            "label": "Source & Evidence",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_source",
+            "label": "Data Source",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "source_system",
+            "label": "Source System",
+            "fieldtype": "Select",
+            "options": "Manual Entry\nHRMS Sync\nERPNext\nTally\nKeka\nDarwinbox\nGreytHR\nZoho People\nOther",
+            "default": "Manual Entry"
+        },
+        {
+            "fieldname": "source_reference",
+            "label": "Source Reference",
+            "fieldtype": "Data",
+            "description": "Run/batch ID from the source system for traceability."
+        },
+        {
+            "fieldname": "imported_at",
+            "label": "Imported At",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "imported_by",
+            "label": "Imported By",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "supporting_evidence",
+            "label": "Payment Proof / Bank Statement",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Text Editor"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "wage_period_year",
+                "wage_period_month"
+            ],
+            "unique": 1,
+            "comment": "One Wage Roll per entity per period. Prevents duplicate filings."
+        }
+    ]
+}

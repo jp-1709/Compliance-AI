@@ -1,0 +1,22 @@
+{
+ "app": "quantbit_compliance_ai",
+ "bg_color": "gray",
+ "creation": "2026-06-06 10:52:16.706769",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon_type": "App",
+ "idx": 0,
+ "label": "Compliance",
+ "link_to": "Compliance   AI",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-06-06 10:53:13.159199",
+ "modified_by": "Administrator",
+ "name": "Compliance",
+ "owner": "Administrator",
+ "parent_icon": "Framework",
+ "restrict_removal": 0,
+ "roles": [],
+ "sidebar": "Compliance   AI",
+ "standard": 1
+}

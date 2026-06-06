@@ -1,0 +1,324 @@
+{
+    "doctype": "DocType",
+    "name": "Board Meeting",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "BM-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Meeting Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "meeting_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Planned\nNotice Issued\nHeld\nAdjourned\nCancelled",
+            "default": "Planned",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "meeting_number",
+            "label": "Meeting Sequence Number",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "description": "Sequence within FY"
+        },
+        {
+            "fieldname": "meeting_type",
+            "label": "Meeting Type",
+            "fieldtype": "Select",
+            "options": "Regular Board Meeting\nAudit Committee\nNomination & Remuneration Committee\nCSR Committee\nStakeholder Relationship Committee\nRisk Management Committee\nIT Strategy Committee\nOther Committee",
+            "default": "Regular Board Meeting",
+            "reqd": 1
+        },
+        {
+            "fieldname": "fy",
+            "label": "FY",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "description": "e.g. 2025-26"
+        },
+        {
+            "fieldname": "meeting_date",
+            "label": "Meeting Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "meeting_time",
+            "label": "Meeting Time",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "tab_venue_notice",
+            "label": "Venue & Notice",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_venue",
+            "label": "Venue",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "venue_type",
+            "label": "Mode",
+            "fieldtype": "Select",
+            "options": "Physical\nVideo Conference\nHybrid",
+            "reqd": 1,
+            "default": "Hybrid"
+        },
+        {
+            "fieldname": "venue_address",
+            "label": "Physical Venue",
+            "fieldtype": "Small Text",
+            "depends_on": "eval:doc.venue_type!='Video Conference'"
+        },
+        {
+            "fieldname": "vc_platform",
+            "label": "VC Platform",
+            "fieldtype": "Data",
+            "depends_on": "eval:doc.venue_type!='Physical'"
+        },
+        {
+            "fieldname": "vc_recording_evidence",
+            "label": "VC Recording",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "depends_on": "eval:doc.venue_type!='Physical'"
+        },
+        {
+            "fieldname": "sec_notice",
+            "label": "Notice",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "notice_dispatched_on",
+            "label": "Notice Dispatched On",
+            "fieldtype": "Date",
+            "description": "≥7 days before meeting (§173(3))"
+        },
+        {
+            "fieldname": "notice_evidence",
+            "label": "Notice Document",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "agenda_pre_circulated",
+            "label": "Agenda Pre-Circulated",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "shorter_notice_consent_obtained",
+            "label": "Shorter Notice Consent (if <7 days)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_agenda",
+            "label": "Agenda Items",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "agenda",
+            "label": "Agenda Items",
+            "fieldtype": "Table",
+            "options": "Board Meeting Agenda Item"
+        },
+        {
+            "fieldname": "tab_attendance",
+            "label": "Attendance",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_attendance",
+            "label": "Attendance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "directors_invited_count",
+            "label": "Directors Invited",
+            "fieldtype": "Int",
+            "reqd": 1
+        },
+        {
+            "fieldname": "directors_present_count",
+            "label": "Directors Present",
+            "fieldtype": "Int",
+            "reqd": 1
+        },
+        {
+            "fieldname": "quorum_met",
+            "label": "Quorum Met",
+            "fieldtype": "Check",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "1/3 of total or 2 directors, whichever is higher (§174)"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "company_secretary_present",
+            "label": "CS Present",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "auditor_present",
+            "label": "Auditor Present",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_director_attendance",
+            "label": "Director-wise Attendance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "directors_attendance",
+            "label": "Director Attendance",
+            "fieldtype": "Table",
+            "options": "Director Attendance"
+        },
+        {
+            "fieldname": "tab_minutes",
+            "label": "Minutes & Outcomes",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_minutes",
+            "label": "Minutes",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "minutes_finalised",
+            "label": "Minutes Finalised",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Within 30 days per §118"
+        },
+        {
+            "fieldname": "minutes_finalised_on",
+            "label": "Minutes Finalised On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "minutes_evidence",
+            "label": "Signed Minutes",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "minutes_circulated_on",
+            "label": "Minutes Circulated On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "resolutions_count",
+            "label": "Resolutions Passed",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "next_meeting_due",
+            "label": "Next Meeting Due By",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Meeting date + 120 days max gap"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

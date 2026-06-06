@@ -1,0 +1,40 @@
+{
+    "doctype": "DocType",
+    "name": "Board Meeting Agenda Item",
+    "module": "Secretarial Compliance",
+    "istable": 1,
+    "fields": [
+        {
+            "fieldname": "item_no",
+            "label": "Item No",
+            "fieldtype": "Int",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "agenda_title",
+            "label": "Agenda Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "agenda_category",
+            "label": "Category",
+            "fieldtype": "Select",
+            "options": "Statutory Mandatory\nFinancials Approval\nAppointment / Resignation\nInvestment / Loan\nRelated Party Transaction\nCSR\nResolution Plan\nOther",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "linked_resolution",
+            "label": "Resulting Resolution",
+            "fieldtype": "Link",
+            "options": "Board Resolution"
+        },
+        {
+            "fieldname": "is_mandatory_quarterly",
+            "label": "Mandatory Quarterly Item",
+            "fieldtype": "Check",
+            "default": 0
+        }
+    ]
+}

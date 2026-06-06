@@ -1,44 +1,79 @@
 {
- "actions": [],
- "allow_bulk_edit": 1,
- "allow_rename": 1,
- "creation": "2026-06-04 17:23:38.939133",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "section_break_vg0j"
- ],
- "fields": [
-  {
-   "fieldname": "section_break_vg0j",
-   "fieldtype": "Section Break"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-06-04 17:23:38.939133",
- "modified_by": "Administrator",
- "module": "Obligation Register",
- "name": "Industry Code",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
- "sort_order": "DESC",
- "states": []
+    "doctype": "DocType",
+    "name": "Industry Code",
+    "module": "Obligation Register",
+    "naming_rule": "By field: nic_code",
+    "autoname": "field:nic_code",
+    "fields": [
+        {
+            "fieldname": "nic_code",
+            "label": "NIC 2008 Code",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "description": "5-digit NIC code"
+        },
+        {
+            "fieldname": "nic_description",
+            "label": "Description",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "section",
+            "label": "Section",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "NIC Section letter, A-U"
+        },
+        {
+            "fieldname": "division",
+            "label": "Division",
+            "fieldtype": "Data",
+            "description": "2-digit"
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "is_hazardous_default",
+            "label": "Typically Hazardous",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "is_regulated_industry",
+            "label": "Regulated Industry",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Pharma, Food, Mining, etc."
+        },
+        {
+            "fieldname": "regulated_industry_type",
+            "label": "Regulated Industry Type",
+            "fieldtype": "Select",
+            "options": "\nPharmaceuticals\nMedical Devices\nFood\nMining\nOil & Gas\nPower / Energy\nFinancial Services\nTelecom\nDefence\nNuclear\nChemicals\nOther",
+            "depends_on": "is_regulated_industry"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
 }

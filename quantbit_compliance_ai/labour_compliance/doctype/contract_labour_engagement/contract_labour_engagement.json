@@ -1,0 +1,379 @@
+{
+    "doctype": "DocType",
+    "name": "Contract Labour Engagement",
+    "module": "Labour Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "CL-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "title_field": "contractor_name",
+    "search_fields": "contractor_name,contractor_pan,business_entity",
+    "description": "A contractor engaged at a Business Entity under CLRA Act. Tracks principal-employer obligations: Form V issuance, Form XXIV half-yearly filing, contractor licence validity, PF/ESIC compliance. block_new_pos is set automatically — called by ERP as a webhook before PO creation.",
+    "fields": [
+        {
+            "fieldname": "tab_contractor",
+            "label": "Contractor Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Engagement Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity (Principal Employer)",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "engagement_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Active\nSuspended\nTerminated\nExpired",
+            "default": "Active",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "contractor_name",
+            "label": "Contractor Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "contractor_pan",
+            "label": "Contractor PAN",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "Used for deduplication and for is_contractor_blocked() ERP webhook lookups."
+        },
+        {
+            "fieldname": "contractor_gstin",
+            "label": "Contractor GSTIN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "contractor_address",
+            "label": "Contractor Address",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "contractor_contact_person",
+            "label": "Contact Person",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "contractor_phone",
+            "label": "Phone",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "tab_licence",
+            "label": "Licence",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_licence",
+            "label": "CLRA Licence",
+            "fieldtype": "Section Break",
+            "description": "NOTE: Distinct documents — Form V = PE certificate (you issue to contractor). Form VI = contractor's licence application. Form XXIV = PE's half-yearly return. Do not conflate."
+        },
+        {
+            "fieldname": "contractor_clra_licence_no",
+            "label": "Contractor's CLRA Licence No.",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "Mandatory once contractor has 20+ workers (threshold varies by state). Licence number issued by state Labour Commissioner."
+        },
+        {
+            "fieldname": "licence_issued_on",
+            "label": "Licence Issued On",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "licence_expiry_date",
+            "label": "Licence Expiry Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "bold": 1,
+            "description": "Critical: blocks new POs once expired OR within 30 days of expiry."
+        },
+        {
+            "fieldname": "licence_workers_authorised",
+            "label": "Workers Authorised in Licence",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "description": "Maximum workers contractor is licensed to deploy. current_workers_deployed cannot exceed this."
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "licence_copy",
+            "label": "Licence Copy",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1
+        },
+        {
+            "fieldname": "principal_employer_form_v_filed",
+            "label": "Form V (PE Certificate) Issued",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Principal Employer issues Form V to contractor as a prerequisite for licence application. Must be issued before contractor can apply for licence."
+        },
+        {
+            "fieldname": "form_v_evidence",
+            "label": "Form V Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_engagement",
+            "label": "Engagement Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_engagement",
+            "label": "Nature of Engagement",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "nature_of_work",
+            "label": "Nature of Work",
+            "fieldtype": "Small Text",
+            "reqd": 1,
+            "description": "E.g. Housekeeping, Security, Loading/Unloading, Maintenance. Used for CLRA applicability."
+        },
+        {
+            "fieldname": "is_perennial_work",
+            "label": "Perennial / Core Work",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "WARNING: Cannot use contract labour for perennial/core work post-CLRA amendments (certain states). Alert shown on save — escalate to Legal Counsel."
+        },
+        {
+            "fieldname": "engagement_start",
+            "label": "Engagement Start",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "engagement_end",
+            "label": "Engagement End",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "current_workers_deployed",
+            "label": "Current Workers Deployed",
+            "fieldtype": "Int",
+            "default": 0,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "max_workers_deployed_ever",
+            "label": "Peak Workers Deployed",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "contract_value_inr",
+            "label": "Contract Value (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "billing_frequency",
+            "label": "Billing Frequency",
+            "fieldtype": "Select",
+            "options": "\nMonthly\nFortnightly\nWeekly\nMilestone\nOther"
+        },
+        {
+            "fieldname": "po_number",
+            "label": "PO Number",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "agreement_copy",
+            "label": "Agreement Copy",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_compliance",
+            "label": "Compliance & Block Status",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_compliance",
+            "label": "Contractor Compliance Status",
+            "fieldtype": "Section Break",
+            "description": "Principal Employer is liable if contractor defaults on PF/ESIC. Don't trust self-declaration — require monthly challans as evidence."
+        },
+        {
+            "fieldname": "contractor_pf_compliant",
+            "label": "Contractor PF Compliant",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "contractor_pf_last_verified",
+            "label": "PF Last Verified",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "contractor_esic_compliant",
+            "label": "Contractor ESIC Compliant",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "contractor_esic_last_verified",
+            "label": "ESIC Last Verified",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "contractor_min_wages_paid",
+            "label": "Min Wages Paid (Verified)",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "compliance_score",
+            "label": "Contractor Compliance Score",
+            "fieldtype": "Percent",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Auto-computed from PF/ESIC/min-wages compliance. Below 60% triggers block."
+        },
+        {
+            "fieldname": "block_new_pos",
+            "label": "Block New POs",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1,
+            "bold": 1,
+            "description": "Auto-set when: licence expired, expiry <30 days, score <60%, or workers exceed licence. Called by ERP PO module via is_contractor_blocked() webhook."
+        },
+        {
+            "fieldname": "block_reason",
+            "label": "Block Reason",
+            "fieldtype": "Small Text",
+            "read_only": 1,
+            "description": "Auto-populated with the specific reason for the block."
+        },
+        {
+            "fieldname": "tab_pe_obligations",
+            "label": "PE Obligations",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_pe_obligations",
+            "label": "Principal Employer Obligations",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "form_xxiv_half_yearly_filed",
+            "label": "Form XXIV Last Filed",
+            "fieldtype": "Date",
+            "description": "Principal Employer half-yearly return (CLRA). Due every 6 months. Different from Form V and Form VI."
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "engagement_status"
+            ]
+        },
+        {
+            "fields": [
+                "contractor_pan",
+                "business_entity"
+            ]
+        },
+        {
+            "fields": [
+                "licence_expiry_date"
+            ]
+        }
+    ]
+}

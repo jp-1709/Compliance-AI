@@ -1,0 +1,269 @@
+{
+    "doctype": "DocType",
+    "name": "TDS Return",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "TDS-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "TDS quarterly return \u2014 Form 24Q (salaries), 26Q (non-salary), 27Q (non-resident).",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "tax_registration",
+            "label": "TAN",
+            "fieldtype": "Link",
+            "options": "Tax Registration",
+            "reqd": 1,
+            "description": "Type=TAN"
+        },
+        {
+            "fieldname": "form_type",
+            "label": "Form Type",
+            "fieldtype": "Select",
+            "options": "24Q (Salary)\n26Q (Non-Salary)\n27Q (Non-Resident)\n27EQ (TCS)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nFiled\nFiled with Late Fee\nDefective\nCorrected",
+            "default": "Pending",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "period_quarter",
+            "label": "Quarter",
+            "fieldtype": "Select",
+            "options": "Q1 (Apr-Jun)\nQ2 (Jul-Sep)\nQ3 (Oct-Dec)\nQ4 (Jan-Mar)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "period_fy",
+            "label": "FY",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "31st of next month after quarter; Q4: 31-May"
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_summary",
+            "label": "Summary",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "total_deductees",
+            "label": "Total Deductees",
+            "fieldtype": "Int",
+            "default": "0"
+        },
+        {
+            "fieldname": "total_amount_paid_inr",
+            "label": "Total Amount Paid (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "total_tds_deducted_inr",
+            "label": "Total TDS Deducted (\u20b9)",
+            "fieldtype": "Currency",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "total_tds_deposited_inr",
+            "label": "Total TDS Deposited (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "challan_count",
+            "label": "Challan Count",
+            "fieldtype": "Int",
+            "default": "0"
+        },
+        {
+            "fieldname": "matched_challans_count",
+            "label": "Matched Challans",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "unmatched_challans_count",
+            "label": "Unmatched Challans",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "late_fee_inr",
+            "label": "Late Fee (Sec 234E) (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "read_only": 1,
+            "description": "\u20b9200/day, capped at TDS amount"
+        },
+        {
+            "fieldname": "sec_filing",
+            "label": "Filing",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "rrr_token",
+            "label": "RRR Token / Provisional Receipt",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "regular_or_correction",
+            "label": "Type of Return",
+            "fieldtype": "Select",
+            "options": "Regular\nCorrection",
+            "default": "Regular"
+        },
+        {
+            "fieldname": "correction_token_of",
+            "label": "Correction Of",
+            "fieldtype": "Link",
+            "options": "TDS Return",
+            "depends_on": "eval:doc.regular_or_correction=='Correction'"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "filed_return_evidence",
+            "label": "FVU File / Acknowledgement",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "form_16_issued_count",
+            "label": "Form 16/16A Issued",
+            "fieldtype": "Int",
+            "default": "0",
+            "description": "For Q4 24Q: Form 16 by Jun 15; for 26Q: Form 16A within 15 days of return"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "CFO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "tax_registration",
+                "form_type",
+                "period_quarter",
+                "period_fy"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "filing_due_date",
+    "sort_order": "ASC"
+}

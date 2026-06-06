@@ -1,0 +1,368 @@
+{
+    "doctype": "DocType",
+    "name": "EHS Incident",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "INCD-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "EHS incident — injury, near-miss, environmental release, fire, property damage. Connects to QMS Quality Event. Form 18 for Factory Inspector.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "incident_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Reported\nUnder Investigation\nRoot Cause Identified\nCAPA In Progress\nClosed\nReopened",
+            "default": "Reported",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "incident_type",
+            "label": "Incident Type",
+            "fieldtype": "Select",
+            "options": "Injury — First Aid\nInjury — Medical Treatment\nInjury — Lost Time (LTI)\nFatality\nNear Miss\nProperty Damage\nFire / Explosion\nChemical Spill\nGas Release\nProcess Safety\nEnvironmental Release\nElectric Shock\nFall From Height\nVehicle Accident\nPSI (Process Safety Incident)\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "severity",
+            "label": "Severity",
+            "fieldtype": "Select",
+            "options": "Sev-1 (Catastrophic)\nSev-2 (Major)\nSev-3 (Moderate)\nSev-4 (Minor)\nSev-5 (Negligible)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "is_reportable_to_factory_inspector",
+            "label": "Reportable to Factory Inspector (Form 18)",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Fatalities + 48-hour absence injuries → Form 18 to Factory Inspector within 24 hours (Factories Act §92)"
+        },
+        {
+            "fieldname": "is_reportable_to_pcb",
+            "label": "Reportable to PCB",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "Environmental incidents (spill, gas release, fire) → PCB within 24 hours"
+        },
+        {
+            "fieldname": "tab_incident_details",
+            "label": "Incident Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_when_where",
+            "label": "When & Where",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "incident_date",
+            "label": "Incident Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "incident_time",
+            "label": "Incident Time",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "shift",
+            "label": "Shift",
+            "fieldtype": "Select",
+            "options": "\n1st (Morning)\n2nd (Afternoon)\n3rd (Night)\nGeneral\nNon-Production"
+        },
+        {
+            "fieldname": "location_within_site",
+            "label": "Location Within Site",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "description": "e.g. Plant 2 — Mixing Section, Tank Farm — Bay 3"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "reported_on",
+            "label": "Reported On",
+            "fieldtype": "Datetime",
+            "reqd": 1,
+            "default": "now"
+        },
+        {
+            "fieldname": "reported_by",
+            "label": "Reported By",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "delay_in_reporting_hours",
+            "label": "Delay in Reporting (Hours)",
+            "fieldtype": "Float",
+            "read_only": 1,
+            "description": "From incident_date+time to reported_on. >24h for LTI/Fatality = criminal under §92"
+        },
+        {
+            "fieldname": "sec_what",
+            "label": "What Happened",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "incident_description",
+            "label": "Incident Description",
+            "fieldtype": "Text Editor",
+            "reqd": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "immediate_actions_taken",
+            "label": "Immediate Actions Taken",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "property_damage_inr",
+            "label": "Property Damage Estimate (₹)",
+            "fieldtype": "Currency",
+            "default": 0
+        },
+        {
+            "fieldname": "production_loss_hours",
+            "label": "Production Loss (Hours)",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "environmental_release_quantity_kg",
+            "label": "Environmental Release Quantity (kg)",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_people",
+            "label": "People Affected",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "people_affected",
+            "label": "People Affected",
+            "fieldtype": "Table",
+            "options": "Incident People Affected"
+        },
+        {
+            "fieldname": "tab_investigation",
+            "label": "Investigation & Root Cause",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_investigation",
+            "label": "Investigation Details",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "investigation_team",
+            "label": "Investigation Team",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "investigation_started_on",
+            "label": "Investigation Started On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "investigation_completed_on",
+            "label": "Investigation Completed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "root_cause_method",
+            "label": "Root Cause Method",
+            "fieldtype": "Select",
+            "options": "\n5-Why\nFishbone (Ishikawa)\nFault Tree\nBow-Tie\nTAP-Root\nTRIPOD-Beta\nOther"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "root_cause_summary",
+            "label": "Root Cause Summary",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "investigation_report_evidence",
+            "label": "Investigation Report",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_capa",
+            "label": "CAPA & Closure",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_capa",
+            "label": "CAPA & Regulatory Reporting",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_quality_event",
+            "label": "Linked QMS Quality Event",
+            "fieldtype": "Link",
+            "options": "QMS Quality Event",
+            "description": "Auto-created on submit"
+        },
+        {
+            "fieldname": "linked_capa",
+            "label": "Linked CAPA",
+            "fieldtype": "Link",
+            "options": "QMS CAPA"
+        },
+        {
+            "fieldname": "regulatory_reporting_done",
+            "label": "Regulatory Reporting Done",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "regulatory_reference",
+            "label": "Regulatory Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "cb_5",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "closed_on",
+            "label": "Closed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "closure_remarks",
+            "label": "Closure Remarks",
+            "fieldtype": "Text Editor"
+        },
+        {
+            "fieldname": "lessons_learned",
+            "label": "Lessons Learned (for sharing)",
+            "fieldtype": "Text Editor",
+            "description": "Shared across all entities via Document Control on closure"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "submit": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "incident_date"
+            ]
+        },
+        {
+            "fields": [
+                "incident_type",
+                "severity"
+            ]
+        },
+        {
+            "fields": [
+                "is_reportable_to_factory_inspector"
+            ]
+        }
+    ],
+    "sort_field": "incident_date",
+    "sort_order": "DESC",
+    "search_fields": "incident_type,severity,business_entity",
+    "title_field": "incident_type"
+}

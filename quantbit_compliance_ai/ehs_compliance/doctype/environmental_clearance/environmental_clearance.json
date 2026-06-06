@@ -1,0 +1,331 @@
+{
+    "doctype": "DocType",
+    "name": "Environmental Clearance",
+    "module": "EHS Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "EC-.YYYY.-.######",
+    "is_submittable": 0,
+    "track_changes": 1,
+    "description": "CTE / CTO / EC lifecycle record. Most consequential EHS record — lapsed CTO closes the factory.",
+    "fields": [
+        {
+            "fieldname": "tab_overview",
+            "label": "Overview",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "clearance_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Application Filed\nPublic Hearing Done\nIssued\nIssued (Conditional)\nUnder Renewal\nExpired\nSuspended\nRevoked",
+            "default": "Issued",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "clearance_type",
+            "label": "Clearance Type",
+            "fieldtype": "Select",
+            "options": "Consent to Establish (CTE)\nConsent to Operate (CTO) — Air\nConsent to Operate (CTO) — Water\nConsent to Operate (CTO) — Combined\nEnvironmental Clearance (EC) — Centre\nEnvironmental Clearance (EC) — State (SEIAA)\nForest Clearance\nWildlife Clearance\nHazardous Waste Authorisation\nE-Waste Authorisation\nPlastic Waste Authorisation\nBio-Medical Waste Authorisation\nC&D Waste Authorisation\nMOC (Charge of Hazardous Substance)\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "clearance_number",
+            "label": "Clearance Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "issuing_authority",
+            "label": "Issuing Authority",
+            "fieldtype": "Link",
+            "options": "Regulator",
+            "reqd": 1,
+            "description": "State PCB / CPCB / SEIAA / MoEFCC"
+        },
+        {
+            "fieldname": "responsible_person",
+            "label": "Responsible Person",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "tab_industry",
+            "label": "Industry Category",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_category",
+            "label": "Industry Category",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "industry_category",
+            "label": "Industry Category (PCB)",
+            "fieldtype": "Select",
+            "options": "Red\nOrange\nGreen\nWhite",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "description": "PCB classification — Red is most regulated and monitored"
+        },
+        {
+            "fieldname": "industry_classification",
+            "label": "Industry Classification",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "is_red_critical",
+            "label": "Red Critical (17 Categories)",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "MoEFCC 17 highly polluting categories — tighter EC norms and OCEMS mandatory"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "project_capacity",
+            "label": "Project Capacity / Production",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "investment_inr",
+            "label": "Project Investment (₹)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "tab_validity",
+            "label": "Validity & Renewal",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_validity",
+            "label": "Validity Dates",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "issued_on",
+            "label": "Issued On",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "valid_from",
+            "label": "Valid From",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "valid_until",
+            "label": "Valid Until",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "description": "CTO 5–15 years; EC typically lifetime"
+        },
+        {
+            "fieldname": "days_to_expiry",
+            "label": "Days to Expiry",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "renewal_lead_days",
+            "label": "Renewal Lead Time (Days)",
+            "fieldtype": "Int",
+            "default": 365,
+            "description": "PCB requires application 365 days before expiry for CTO renewal"
+        },
+        {
+            "fieldname": "next_renewal_action_due",
+            "label": "Next Renewal Action Due",
+            "fieldtype": "Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "is_perpetual",
+            "label": "Perpetual / Lifetime",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "tab_conditions",
+            "label": "Compliance Conditions",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_conditions",
+            "label": "Specific Conditions",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "specific_conditions_count",
+            "label": "Total Specific Conditions",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1
+        },
+        {
+            "fieldname": "general_conditions_acknowledged",
+            "label": "General Conditions Acknowledged",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "compliance_score",
+            "label": "Compliance %",
+            "fieldtype": "Percent",
+            "read_only": 1
+        },
+        {
+            "fieldname": "non_compliance_open_count",
+            "label": "Open Non-Compliances",
+            "fieldtype": "Int",
+            "default": 0,
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "sec_conditions_table",
+            "label": "",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "specific_conditions",
+            "label": "Specific Conditions",
+            "fieldtype": "Table",
+            "options": "Clearance Specific Condition"
+        },
+        {
+            "fieldname": "tab_evidence",
+            "label": "Evidence",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "clearance_certificate",
+            "label": "Clearance Certificate",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "reqd": 1
+        },
+        {
+            "fieldname": "consent_letter",
+            "label": "Consent Letter / Conditions",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "EHS Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Plant Head",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "clearance_type"
+            ]
+        },
+        {
+            "fields": [
+                "valid_until"
+            ]
+        },
+        {
+            "fields": [
+                "clearance_number"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "valid_until",
+    "sort_order": "ASC",
+    "search_fields": "clearance_number,clearance_type,business_entity",
+    "title_field": "clearance_number"
+}

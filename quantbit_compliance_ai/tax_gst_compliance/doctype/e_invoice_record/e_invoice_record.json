@@ -1,0 +1,281 @@
+{
+    "doctype": "DocType",
+    "name": "E-Invoice Record",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "EINV-.YYYY.-.######",
+    "track_changes": 1,
+    "description": "Per-invoice IRN/QR record. Mandatory for B2B sales by entities with \u2265 \u20b95 cr turnover.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "tax_registration",
+            "label": "Supplier GSTIN",
+            "fieldtype": "Link",
+            "options": "Tax Registration",
+            "reqd": 1
+        },
+        {
+            "fieldname": "einvoice_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nGenerated\nCancelled\nFailed",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "invoice_number",
+            "label": "Invoice Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "invoice_date",
+            "label": "Invoice Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "invoice_type",
+            "label": "Invoice Type",
+            "fieldtype": "Select",
+            "options": "B2B\nSEZ With Payment\nSEZ Without Payment\nExport With Payment\nExport Without Payment\nDeemed Export\nB2C (large)",
+            "reqd": 1
+        },
+        {
+            "fieldname": "buyer_gstin",
+            "label": "Buyer GSTIN",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "buyer_name",
+            "label": "Buyer Name",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "sec_irn",
+            "label": "IRN & QR",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "irn",
+            "label": "IRN",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "64-character Invoice Reference Number"
+        },
+        {
+            "fieldname": "qr_code",
+            "label": "QR Code (Base64)",
+            "fieldtype": "Long Text",
+            "hidden": 1
+        },
+        {
+            "fieldname": "ack_number",
+            "label": "Acknowledgement Number",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "ack_date",
+            "label": "Acknowledgement Date",
+            "fieldtype": "Datetime"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "irn_generated_within_7days",
+            "label": "IRN Within 7 Days",
+            "fieldtype": "Check",
+            "read_only": 1,
+            "description": "From Apr 2024 \u2014 IRN must be generated within 7 days of invoice date for \u2265 \u20b9100 cr turnover"
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_amounts",
+            "label": "Amounts",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "taxable_value_inr",
+            "label": "Taxable Value (\u20b9)",
+            "fieldtype": "Currency",
+            "reqd": 1
+        },
+        {
+            "fieldname": "igst_inr",
+            "label": "IGST (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "cgst_inr",
+            "label": "CGST (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "sgst_inr",
+            "label": "SGST (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "cess_inr",
+            "label": "Cess (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_invoice_value_inr",
+            "label": "Total Invoice Value (\u20b9)",
+            "fieldtype": "Currency",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "sec_links",
+            "label": "Links",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_eway_bill",
+            "label": "Linked E-Way Bill",
+            "fieldtype": "Link",
+            "options": "E-Way Bill Record"
+        },
+        {
+            "fieldname": "source_system",
+            "label": "Source System",
+            "fieldtype": "Select",
+            "options": "Manual\nTally Sync\nERPNext Sync\nSAP Sync\nGSP\nIRP Direct API",
+            "default": "Manual"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "cancellation_date",
+            "label": "Cancellation Date",
+            "fieldtype": "Datetime",
+            "depends_on": "eval:doc.einvoice_status=='Cancelled'",
+            "description": "Within 24 hours of generation only"
+        },
+        {
+            "fieldname": "cancellation_reason",
+            "label": "Cancellation Reason",
+            "fieldtype": "Select",
+            "options": "1 \u2014 Duplicate\n2 \u2014 Data Entry Error\n3 \u2014 Order Cancelled\n4 \u2014 Other"
+        },
+        {
+            "fieldname": "error_message",
+            "label": "Error Message",
+            "fieldtype": "Text Editor",
+            "depends_on": "eval:doc.einvoice_status=='Failed'"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "irn"
+            ],
+            "unique": 1
+        },
+        {
+            "fields": [
+                "organisation",
+                "tax_registration",
+                "invoice_date"
+            ]
+        },
+        {
+            "fields": [
+                "invoice_number",
+                "tax_registration"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "invoice_date",
+    "sort_order": "DESC"
+}

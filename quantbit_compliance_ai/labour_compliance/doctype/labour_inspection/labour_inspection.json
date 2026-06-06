@@ -1,0 +1,308 @@
+{
+    "doctype": "DocType",
+    "name": "Labour Inspection",
+    "module": "Labour Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "LI-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "title_field": "inspection_type",
+    "search_fields": "inspection_type,business_entity,inspector_name,inspection_date",
+    "description": "A labour inspection event (announced or surprise) by Labour Inspector / Factory Inspector / EPF Enforcement / ESIC Inspector / PT Officer. Tracks observations, responses, penalties, and post-inspection corrective actions. The Inspection Pack Generator queries this DocType to build 3-year packs for inspectors in < 30 sec.",
+    "fields": [
+        {
+            "fieldname": "tab_inspection",
+            "label": "Inspection Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Inspection Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "inspection_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Notified\nIn Progress\nObservations Issued\nResponse Submitted\nClosed - Compliant\nClosed - With Penalty\nUnder Litigation",
+            "default": "Notified",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "inspection_type",
+            "label": "Inspection Type",
+            "fieldtype": "Select",
+            "options": "\nFactory Inspector\nLabour Officer\nEPF Enforcement\nESIC Inspector\nPT Officer\nCLRA Inspector\nPOSH Audit\nMines Inspector\nOther",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "inspection_mode",
+            "label": "Mode",
+            "fieldtype": "Select",
+            "options": "\nAnnounced\nSurprise\nFollow-up\nComplaint-Based",
+            "reqd": 1,
+            "description": "Surprise inspections: use 'Emergency Mode' in Inspection Pack Generator to pull 3-year pack in < 5 min."
+        },
+        {
+            "fieldname": "inspection_date",
+            "label": "Inspection Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "tab_inspector",
+            "label": "Inspector Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_inspector",
+            "label": "Inspecting Authority",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "inspector_name",
+            "label": "Inspector Name",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "inspector_designation",
+            "label": "Inspector Designation",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "inspecting_authority",
+            "label": "Inspecting Authority",
+            "fieldtype": "Link",
+            "options": "Regulator",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "inspector_id_evidence",
+            "label": "Inspector ID / Authorisation Letter",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "description": "Scan of the inspector's ID card or authorisation letter. Always request this."
+        },
+        {
+            "fieldname": "notice_received_on",
+            "label": "Notice Received On",
+            "fieldtype": "Date",
+            "depends_on": "eval:doc.inspection_mode=='Announced'"
+        },
+        {
+            "fieldname": "notice_evidence",
+            "label": "Notice",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "tab_scope",
+            "label": "Scope & Observations",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_scope",
+            "label": "Inspection Scope",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "registers_inspected",
+            "label": "Registers Inspected",
+            "fieldtype": "Table",
+            "options": "Inspection Register Link",
+            "description": "Which statutory registers were reviewed by the inspector."
+        },
+        {
+            "fieldname": "filings_inspected",
+            "label": "Filings / Returns Inspected",
+            "fieldtype": "Small Text",
+            "description": "List of ECR filings, ESIC returns, PT challans, etc. reviewed."
+        },
+        {
+            "fieldname": "scope_summary",
+            "label": "Scope Summary",
+            "fieldtype": "Text Editor",
+            "description": "Free-text summary of what the inspection covered."
+        },
+        {
+            "fieldname": "sec_observations",
+            "label": "Observations",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "observations",
+            "label": "Inspector Observations",
+            "fieldtype": "Table",
+            "options": "Inspection Observation",
+            "description": "Each observation raised by the inspector: clause, severity, finding, and response status."
+        },
+        {
+            "fieldname": "observation_letter_evidence",
+            "label": "Observation Letter",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "description": "Scanned copy of the official observation letter issued by the inspector."
+        },
+        {
+            "fieldname": "tab_response",
+            "label": "Response & Closure",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_response",
+            "label": "Response & Penalty",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "response_due_date",
+            "label": "Response Due Date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "description": "Deadline by which the employer must respond to observations."
+        },
+        {
+            "fieldname": "response_submitted_on",
+            "label": "Response Submitted On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "response_evidence",
+            "label": "Response Letter",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "penalty_imposed_inr",
+            "label": "Penalty Imposed (₹)",
+            "fieldtype": "Currency",
+            "default": 0,
+            "description": "Penalty amount in the order/citation. If > 0 and status is 'Closed - With Penalty', a QMS Quality Event should be created."
+        },
+        {
+            "fieldname": "penalty_paid_on",
+            "label": "Penalty Paid On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "penalty_evidence",
+            "label": "Penalty Receipt",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "closure_letter_evidence",
+            "label": "Closure Letter",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "description": "Official closure letter from the authority confirming compliance."
+        },
+        {
+            "fieldname": "tab_followup",
+            "label": "Post-Inspection Actions",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_lessons",
+            "label": "Corrective Actions & Lessons",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "linked_capa",
+            "label": "Linked CAPA",
+            "fieldtype": "Link",
+            "options": "QMS CAPA",
+            "description": "If a Corrective and Preventive Action was triggered to fix root causes found during inspection."
+        },
+        {
+            "fieldname": "lessons_learned",
+            "label": "Lessons Learned",
+            "fieldtype": "Text Editor",
+            "description": "What process gaps were identified. Used to prevent recurrence at same or other entities."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Department Manager",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Read Only",
+            "read": 1
+        }
+    ]
+}

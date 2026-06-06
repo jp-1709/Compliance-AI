@@ -1,0 +1,71 @@
+{
+    "doctype": "DocType",
+    "name": "POSH Committee Member",
+    "module": "Labour Compliance",
+    "istable": 1,
+    "track_changes": 0,
+    "description": "Child table row for a member of a POSH Internal Committee. Drives all IC compliance checks (gender, external member, presiding officer). External org/NGO required when role is External Member or NGO/Expert.",
+    "fields": [
+        {
+            "fieldname": "member_name",
+            "label": "Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "designation",
+            "label": "Designation",
+            "fieldtype": "Data",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "role_in_ic",
+            "label": "Role in IC",
+            "fieldtype": "Select",
+            "options": "\nPresiding Officer\nInternal Member\nExternal Member\nNGO/Expert",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Presiding Officer: senior woman employee. Internal Member: employee committed to women's issues. External Member/NGO: outsider — mandatory 1 required."
+        },
+        {
+            "fieldname": "gender",
+            "label": "Gender",
+            "fieldtype": "Select",
+            "options": "\nFemale\nMale\nOther",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "user",
+            "label": "Frappe User (if internal)",
+            "fieldtype": "Link",
+            "options": "User",
+            "description": "Link to system user for internal members. Used for in-app notifications (redacted templates only)."
+        },
+        {
+            "fieldname": "email",
+            "label": "Email",
+            "fieldtype": "Data",
+            "options": "Email",
+            "reqd": 1
+        },
+        {
+            "fieldname": "phone",
+            "label": "Phone",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "external_organisation",
+            "label": "External Org / NGO",
+            "fieldtype": "Data",
+            "depends_on": "eval:doc.role_in_ic=='External Member' || doc.role_in_ic=='NGO/Expert'",
+            "description": "Name of the NGO, law firm, or expert body the external member represents."
+        }
+    ]
+}

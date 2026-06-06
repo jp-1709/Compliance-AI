@@ -1,0 +1,262 @@
+{
+    "doctype": "DocType",
+    "name": "Board Resolution",
+    "module": "Secretarial Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "BR-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "fields": [
+        {
+            "fieldname": "tab_resolution",
+            "label": "Resolution",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Resolution Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "resolution_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nProposed\nPassed\nWithdrawn\nLapsed",
+            "default": "Draft",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "resolution_passed_at",
+            "label": "Passed At Meeting",
+            "fieldtype": "Link",
+            "options": "Board Meeting",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "shareholder_meeting",
+            "label": "Passed At Shareholder Meeting",
+            "fieldtype": "Link",
+            "options": "Shareholder Meeting"
+        },
+        {
+            "fieldname": "forum",
+            "label": "Forum",
+            "fieldtype": "Select",
+            "options": "Board Meeting\nCommittee Meeting\nShareholder Meeting (AGM)\nShareholder Meeting (EGM)\nCircular Resolution\nPostal Ballot",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "passed_on",
+            "label": "Passed On",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "tab_content",
+            "label": "Content",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_content",
+            "label": "Resolution Content",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "resolution_title",
+            "label": "Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_global_search": 1
+        },
+        {
+            "fieldname": "resolution_type",
+            "label": "Type",
+            "fieldtype": "Select",
+            "options": "Ordinary Resolution\nSpecial Resolution\nCircular Resolution\nUnanimous Resolution",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "category",
+            "label": "Category",
+            "fieldtype": "Select",
+            "options": "Appointment of KMP\nAppointment of Director\nAppointment of Auditor\nAdoption of Accounts\nDividend Declaration\nLoans / Investments / Guarantees (§186)\nRelated Party Transactions (§188)\nIssuance of Securities\nCharge Creation / Modification / Satisfaction\nAlteration of MOA/AOA\nMerger / Demerger / Restructuring\nVoluntary Liquidation\nApproval of Borrowings (§180)\nCSR Policy / Spend\nRisk Management Policy\nOther",
+            "reqd": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "requires_mgt_14",
+            "label": "Requires MGT-14 Filing",
+            "fieldtype": "Check",
+            "default": 0,
+            "read_only": 1,
+            "description": "Auto-determined by category"
+        },
+        {
+            "fieldname": "mgt_14_due_date",
+            "label": "MGT-14 Due Date",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "description": "Within 30 days of resolution"
+        },
+        {
+            "fieldname": "mgt_14_filing",
+            "label": "MGT-14 Filing",
+            "fieldtype": "Link",
+            "options": "MCA E-Form Filing"
+        },
+        {
+            "fieldname": "sec_text",
+            "label": "Full Text",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "resolution_text",
+            "label": "Full Resolution Text",
+            "fieldtype": "Text Editor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "moved_by",
+            "label": "Moved By (Director)",
+            "fieldtype": "Link",
+            "options": "Director Profile"
+        },
+        {
+            "fieldname": "seconded_by",
+            "label": "Seconded By (Director)",
+            "fieldtype": "Link",
+            "options": "Director Profile"
+        },
+        {
+            "fieldname": "tab_voting",
+            "label": "Voting",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_voting",
+            "label": "Voting",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "votes_for",
+            "label": "Votes For",
+            "fieldtype": "Int"
+        },
+        {
+            "fieldname": "votes_against",
+            "label": "Votes Against",
+            "fieldtype": "Int"
+        },
+        {
+            "fieldname": "votes_abstained",
+            "label": "Abstained",
+            "fieldtype": "Int"
+        },
+        {
+            "fieldname": "passed_unanimously",
+            "label": "Passed Unanimously",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "interested_directors_disclosed",
+            "label": "Interested Directors Disclosed (§184)",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "interested_directors_recused",
+            "label": "Interested Directors Recused",
+            "fieldtype": "Check",
+            "default": 0
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Evidence",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "resolution_evidence",
+            "label": "Signed Resolution",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "cancel": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Legal Counsel",
+            "read": 1,
+            "write": 1,
+            "report": 1
+        },
+        {
+            "role": "Group CXO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ]
+}

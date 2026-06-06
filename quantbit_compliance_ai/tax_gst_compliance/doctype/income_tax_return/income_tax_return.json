@@ -1,0 +1,348 @@
+{
+    "doctype": "DocType",
+    "name": "Income Tax Return",
+    "module": "Tax GST Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "ITR-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "description": "Annual ITR-6 (companies) / ITR-5 (LLP/partnership) / ITR-3 (proprietorship). Tracks filing + Form 3CD audit linkage + CARO.",
+    "fields": [
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "itr_form",
+            "label": "ITR Form",
+            "fieldtype": "Select",
+            "options": "ITR-3 (Proprietorship)\nITR-4 (Presumptive)\nITR-5 (LLP/Partnership)\nITR-6 (Companies)\nITR-7 (Trust/Charity)",
+            "reqd": 1,
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "filing_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Pending\nIn Preparation\nAudit Awaited\nReady to File\nFiled\nFiled Belated\nDefective Notice Received\nProcessed (143(1))\nUnder Scrutiny\nAssessment Complete",
+            "default": "Pending",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "period_fy",
+            "label": "FY",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "ay",
+            "label": "AY",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "in_list_view": 1,
+            "description": "Auto-derived from FY"
+        },
+        {
+            "fieldname": "filing_due_date",
+            "label": "Filing Due Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "31-Oct (audit case) / 31-Jul (non-audit) / 30-Nov (TP case)"
+        },
+        {
+            "fieldname": "filed_on",
+            "label": "Filed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "is_belated",
+            "label": "Belated Filing",
+            "fieldtype": "Check",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "delay_days",
+            "label": "Delay (Days)",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1
+        },
+        {
+            "fieldname": "sec_audit",
+            "label": "Tax Audit",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "tax_audit_required",
+            "label": "Tax Audit Required (Sec 44AB)",
+            "fieldtype": "Check",
+            "default": "0",
+            "description": "Turnover > \u20b91 cr / \u20b910 cr (digital)"
+        },
+        {
+            "fieldname": "form_3cd_filed",
+            "label": "Form 3CD Filed",
+            "fieldtype": "Check",
+            "default": "0",
+            "depends_on": "tax_audit_required"
+        },
+        {
+            "fieldname": "form_3cd_filed_on",
+            "label": "Form 3CD Filed On",
+            "fieldtype": "Date",
+            "depends_on": "form_3cd_filed",
+            "description": "Due 30-Sep (1 month before ITR)"
+        },
+        {
+            "fieldname": "form_3cd_evidence",
+            "label": "Form 3CD Evidence",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "tax_auditor_name",
+            "label": "Tax Auditor (CA)",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "tax_auditor_membership",
+            "label": "Tax Auditor Mem. No.",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "transfer_pricing_required",
+            "label": "TP Audit Required (Sec 92E)",
+            "fieldtype": "Check",
+            "default": "0"
+        },
+        {
+            "fieldname": "form_3ceb_filed",
+            "label": "Form 3CEB Filed",
+            "fieldtype": "Check",
+            "default": "0",
+            "depends_on": "transfer_pricing_required"
+        },
+        {
+            "fieldname": "sec_caro",
+            "label": "CARO 2020",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "caro_applicable",
+            "label": "CARO Applicable",
+            "fieldtype": "Check",
+            "default": "0",
+            "description": "All companies except small/OPC/banking/insurance/charitable"
+        },
+        {
+            "fieldname": "caro_evidence",
+            "label": "CARO Report",
+            "fieldtype": "Link",
+            "options": "Evidence File",
+            "depends_on": "caro_applicable"
+        },
+        {
+            "fieldname": "sec_amounts",
+            "label": "Tax Amounts",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "total_income_inr",
+            "label": "Total Income (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "tax_payable_inr",
+            "label": "Tax Payable (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "advance_tax_paid_inr",
+            "label": "Advance Tax Paid (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "tds_credit_inr",
+            "label": "TDS Credit (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "self_assessment_tax_inr",
+            "label": "Self-Assessment Tax (\u20b9)",
+            "fieldtype": "Currency"
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "refund_due_inr",
+            "label": "Refund Due (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "interest_234a_inr",
+            "label": "Interest u/s 234A (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "description": "For belated filing"
+        },
+        {
+            "fieldname": "interest_234b_inr",
+            "label": "Interest u/s 234B (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "interest_234c_inr",
+            "label": "Interest u/s 234C (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0"
+        },
+        {
+            "fieldname": "late_fee_234f_inr",
+            "label": "Late Fee u/s 234F (\u20b9)",
+            "fieldtype": "Currency",
+            "default": "0",
+            "description": "\u20b95,000 if filed belated; \u20b91,000 if income < \u20b95L"
+        },
+        {
+            "fieldname": "sec_filing",
+            "label": "Filing",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "ack_number",
+            "label": "Acknowledgement Number",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "verification_mode",
+            "label": "Verification Mode",
+            "fieldtype": "Select",
+            "options": "DSC\nEVC (Aadhaar OTP)\nNet Banking\nITR-V Physical"
+        },
+        {
+            "fieldname": "itr_v_sent_to_cpc",
+            "label": "ITR-V Sent to CPC",
+            "fieldtype": "Check",
+            "default": "0",
+            "depends_on": "eval:doc.verification_mode=='ITR-V Physical'"
+        },
+        {
+            "fieldname": "cb_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "filed_itr_evidence",
+            "label": "Filed ITR Acknowledgement",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "intimation_143_1_evidence",
+            "label": "Intimation 143(1)",
+            "fieldtype": "Link",
+            "options": "Evidence File"
+        },
+        {
+            "fieldname": "linked_compliance_task",
+            "label": "Linked Compliance Task",
+            "fieldtype": "Link",
+            "options": "Compliance Calendar Task",
+            "read_only": 1
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Tax Head",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Accounts Manager",
+            "read": 1,
+            "report": 1
+        },
+        {
+            "role": "CFO",
+            "read": 1,
+            "report": 1,
+            "export": 1
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "report": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": [
+                "organisation",
+                "business_entity",
+                "period_fy"
+            ],
+            "unique": 1
+        }
+    ],
+    "sort_field": "filing_due_date",
+    "sort_order": "ASC"
+}

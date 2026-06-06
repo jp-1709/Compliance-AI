@@ -1,0 +1,281 @@
+{
+    "doctype": "DocType",
+    "name": "POSH Complaint",
+    "module": "Labour Compliance",
+    "naming_rule": "By \"Naming Series\"",
+    "autoname": "POSH-C-.YYYY.-.######",
+    "is_submittable": 1,
+    "track_changes": 1,
+    "track_seen": 1,
+    "title_field": "complaint_status",
+    "search_fields": "posh_committee,complaint_status,business_entity",
+    "description": "A formal complaint received by the POSH Internal Committee. HIGHLY CONFIDENTIAL. Uses Frappe permlevel: party identity, action, and evidence fields are permlevel=1 — visible only to POSH IC Members and System Manager. Even Compliance Officers cannot read these. Audit logs must redact permlevel-1 fields. Inquiry must complete within 90 days of receipt.",
+    "fields": [
+        {
+            "fieldname": "tab_complaint",
+            "label": "Complaint Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_identity",
+            "label": "Complaint Identity",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "organisation",
+            "label": "Organisation",
+            "fieldtype": "Link",
+            "options": "Organisation",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "business_entity",
+            "label": "Business Entity",
+            "fieldtype": "Link",
+            "options": "Business Entity",
+            "reqd": 1,
+            "in_standard_filter": 1,
+            "read_only_onsave": 1
+        },
+        {
+            "fieldname": "posh_committee",
+            "label": "Receiving IC",
+            "fieldtype": "Link",
+            "options": "POSH Committee",
+            "reqd": 1,
+            "description": "The Internal Committee receiving and handling this complaint."
+        },
+        {
+            "fieldname": "complaint_status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Received\nUnder Inquiry\nConciliation\nReport Submitted\nDisposed - Substantiated\nDisposed - Not Substantiated\nWithdrawn\nReferred to Police",
+            "default": "Received",
+            "in_list_view": 1,
+            "in_standard_filter": 1
+        },
+        {
+            "fieldname": "cb_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "complaint_received_on",
+            "label": "Received On",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "complaint_mode",
+            "label": "Mode of Complaint",
+            "fieldtype": "Select",
+            "options": "\nWritten\nEmail\nVerbal-Recorded\nThird Party\nSelf-by-IC",
+            "reqd": 1
+        },
+        {
+            "fieldname": "complaint_filed_within_3m",
+            "label": "Filed Within 3 Months",
+            "fieldtype": "Check",
+            "read_only": 1,
+            "description": "Statutory limitation period: 3 months from date of incident. Extendable up to 3 additional months if IC satisfied cause is shown."
+        },
+        {
+            "fieldname": "extension_granted",
+            "label": "Limitation Extension Granted",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "IC may extend up to 3 months beyond the initial 3-month window if cause is shown."
+        },
+        {
+            "fieldname": "sec_parties",
+            "label": "Parties (Confidential)",
+            "fieldtype": "Section Break",
+            "permlevel": 1,
+            "description": "CONFIDENTIAL — permlevel 1. Only POSH IC Members and System Manager can read or write these fields. Compliance Officer, Internal Auditor, and all other roles are EXCLUDED. Audit logs redact these fields."
+        },
+        {
+            "fieldname": "complainant_id",
+            "label": "Complainant ID",
+            "fieldtype": "Data",
+            "permlevel": 1,
+            "description": "Internal anonymised ID only — NEVER use real name in code, logs, or notifications. E.g. ANON-001."
+        },
+        {
+            "fieldname": "complainant_user",
+            "label": "Complainant User",
+            "fieldtype": "Link",
+            "options": "User",
+            "permlevel": 1,
+            "description": "If internal employee. Never displayed in subject lines or shared notifications."
+        },
+        {
+            "fieldname": "complainant_relationship",
+            "label": "Complainant Relationship",
+            "fieldtype": "Select",
+            "options": "\nDirect Employee\nContract Worker\nIntern\nVisitor\nClient/Vendor\nOther",
+            "permlevel": 1
+        },
+        {
+            "fieldname": "cb_2",
+            "fieldtype": "Column Break",
+            "permlevel": 1
+        },
+        {
+            "fieldname": "respondent_id",
+            "label": "Respondent ID",
+            "fieldtype": "Data",
+            "permlevel": 1,
+            "description": "Internal anonymised ID only. Never expose in notifications or shared reports."
+        },
+        {
+            "fieldname": "respondent_user",
+            "label": "Respondent User",
+            "fieldtype": "Link",
+            "options": "User",
+            "permlevel": 1
+        },
+        {
+            "fieldname": "respondent_designation",
+            "label": "Respondent Designation",
+            "fieldtype": "Data",
+            "permlevel": 1
+        },
+        {
+            "fieldname": "is_respondent_senior_to_complainant",
+            "label": "Respondent Senior to Complainant",
+            "fieldtype": "Check",
+            "permlevel": 1,
+            "description": "Power imbalance factor — relevant to interim relief assessment."
+        },
+        {
+            "fieldname": "tab_inquiry",
+            "label": "Inquiry",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "sec_inquiry",
+            "label": "Inquiry Timeline",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "inquiry_started_on",
+            "label": "Inquiry Started",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "inquiry_target_completion",
+            "label": "Inquiry Target Completion",
+            "fieldtype": "Date",
+            "read_only": 1,
+            "bold": 1,
+            "description": "Statutory deadline: inquiry must complete within 90 days of complaint receipt (POSH Act §11). Alert fires at 75 days."
+        },
+        {
+            "fieldname": "inquiry_actually_completed",
+            "label": "Inquiry Completed On",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "report_submitted_on",
+            "label": "Report Submitted On",
+            "fieldtype": "Date",
+            "description": "IC report must be submitted within 10 days of inquiry completion (POSH Act §13)."
+        },
+        {
+            "fieldname": "cb_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "interim_relief_granted",
+            "label": "Interim Relief Granted",
+            "fieldtype": "Check",
+            "default": 0,
+            "description": "E.g. transfer complainant (with consent), grant leave, impose no-contact order (POSH Act §12)."
+        },
+        {
+            "fieldname": "interim_relief_details",
+            "label": "Interim Relief Details",
+            "fieldtype": "Small Text",
+            "depends_on": "interim_relief_granted",
+            "permlevel": 1
+        },
+        {
+            "fieldname": "outcome",
+            "label": "Outcome",
+            "fieldtype": "Select",
+            "options": "\nSubstantiated\nNot Substantiated\nFalse Allegation\nNo Verdict (Withdrawn)\nReferred to Police",
+            "depends_on": "eval:doc.complaint_status && doc.complaint_status.startsWith('Disposed')"
+        },
+        {
+            "fieldname": "action_recommended",
+            "label": "Action Recommended",
+            "fieldtype": "Text Editor",
+            "permlevel": 1,
+            "description": "IC's recommended action to the employer. Confidential — permlevel 1."
+        },
+        {
+            "fieldname": "action_taken_by_employer",
+            "label": "Action Taken by Employer",
+            "fieldtype": "Text Editor",
+            "permlevel": 1,
+            "description": "Employer must act on recommendation within 60 days. Confidential — permlevel 1."
+        },
+        {
+            "fieldname": "tab_evidence",
+            "label": "Evidence",
+            "fieldtype": "Tab Break",
+            "permlevel": 1
+        },
+        {
+            "fieldname": "sec_evidence",
+            "label": "Case File Evidence (Restricted)",
+            "fieldtype": "Section Break",
+            "permlevel": 1,
+            "description": "CONFIDENTIAL — permlevel 1. Case documents, statements, evidence. Accessible only to POSH IC Members."
+        },
+        {
+            "fieldname": "case_file_evidence",
+            "label": "Case File Evidence",
+            "fieldtype": "Table",
+            "options": "POSH Evidence Link",
+            "permlevel": 1,
+            "description": "Each piece of documentary evidence for this case. Never exposed in external reports."
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "permlevel": 0,
+            "description": "System Manager gets permlevel-0 access only by default. permlevel-1 requires explicit role grant."
+        },
+        {
+            "role": "POSH IC Member",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "submit": 1,
+            "permlevel": 0
+        },
+        {
+            "role": "POSH IC Member",
+            "read": 1,
+            "write": 1,
+            "permlevel": 1,
+            "description": "IC Members access confidential fields (parties, evidence, action)."
+        },
+        {
+            "role": "Compliance Officer",
+            "read": 1,
+            "permlevel": 0,
+            "description": "Compliance Officer sees meta (status, dates, IC) but NOT parties, evidence, or action details."
+        },
+        {
+            "role": "Internal Auditor",
+            "read": 1,
+            "permlevel": 0
+        }
+    ]
+}
