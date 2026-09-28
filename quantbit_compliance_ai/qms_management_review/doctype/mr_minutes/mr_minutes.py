@@ -2,6 +2,7 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 
+from quantbit_compliance_ai.qms_management_review.output_hooks import dispatch_outputs_to_owners
 from quantbit_compliance_ai.qms_validation import as_list, row_value
 
 
@@ -25,3 +26,11 @@ class MRMinutes(Document):
 			frappe.throw(_("Chairperson and Secretariat signatures are required."))
 		if not self.generated_pdf or not self.generated_pdf_hash or not self.tamper_evident_block:
 			frappe.throw(_("Generated PDF, PDF Hash, and Tamper Evident Block are required."))
+
+	def on_submit(self):
+		# §4.7 on_submit: signing the minutes is the trigger that advances the
+		# cycle/meeting state machines and releases outputs to their owners.
+		frappe.db.set_value("MR Cycle", self.cycle, "status", "Minutes Signed")
+		frappe.db.set_value("MR Meeting", self.meeting, "status", "Minutes Signed")
+		dispatched = dispatch_outputs_to_owners(self.cycle)
+		self.add_comment("Info", _("Minutes signed; {0} output(s) dispatched to their owners for acceptance.").format(dispatched))

@@ -172,6 +172,7 @@
    "label": "Status",
    "fieldtype": "Select",
    "options": "Draft\nIn Review\nApproved\nSuperseded\nWithdrawn",
+   "default": "Draft",
    "reqd": 1
   }
  ],

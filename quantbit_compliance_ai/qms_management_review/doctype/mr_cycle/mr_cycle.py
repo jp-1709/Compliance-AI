@@ -3,9 +3,30 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_days, getdate, now_datetime
 
+from quantbit_compliance_ai.qms_management_review.coverage_engine import compute_coverage
+from quantbit_compliance_ai.qms_management_review.input_handlers import run_auto_population
+
+# Q5 spec §3.1. The Approved -> Superseded-style "Inputs Locked -> In Meeting"
+# transition is nominally system-driven (fires when the linked MR Meeting
+# starts) but is included here too since it is also a legitimate manual
+# catch-up transition when a meeting was started out of band.
+_ALLOWED_TRANSITIONS = {
+	"Draft": {"Planning", "Skipped"},
+	"Planning": {"Inputs Open", "Skipped"},
+	"Inputs Open": {"Inputs Locked"},
+	"Inputs Locked": {"In Meeting", "Inputs Open"},
+	"In Meeting": {"Minutes Pending"},
+	"Minutes Pending": {"Minutes Signed"},
+	"Minutes Signed": {"Closed"},
+	"Closed": set(),
+	"Skipped": set(),
+}
+
 
 class MRCycle(Document):
 	def validate(self):
+		self._validate_status_transition()
+
 		if self.period_start and self.period_end and getdate(self.period_end) < getdate(self.period_start):
 			frappe.throw(_("Period End cannot be before Period Start."))
 		if self.period_end and self.target_meeting_date:
@@ -32,9 +53,33 @@ class MRCycle(Document):
 			if open_outputs:
 				frappe.throw(_("All Management Review outputs must be accepted or resolved before closing the cycle."))
 
+	def _validate_status_transition(self):
+		if self.is_new():
+			return
+		before = self.get_doc_before_save()
+		if not before or before.status == self.status:
+			return
+		allowed = _ALLOWED_TRANSITIONS.get(before.status, set())
+		if self.status not in allowed:
+			frappe.throw(
+				_("Cannot move MR Cycle from {0} to {1} directly. Allowed next states: {2}.").format(
+					before.status, self.status, ", ".join(sorted(allowed)) or "(terminal)"
+				)
+			)
+
 	def before_save(self):
 		if self.status == "Closed" and not self.closed_on:
 			self.closed_on = now_datetime()
+
+	def on_update(self):
+		# Auto-Population Engine (§5.3): fire once, the moment the cycle opens
+		# for input contribution.
+		if self.has_value_changed("status") and self.status == "Inputs Open":
+			run_auto_population(self.name)
+		# Multi-Standard Coverage Check (§7): keep it fresh while inputs are
+		# being contributed and right before the secretariat locks them.
+		if self.status in ("Inputs Open", "Inputs Locked") and self.applicable_standards:
+			compute_coverage(self.name)
 
 	def before_submit(self):
 		if self.status != "Closed":

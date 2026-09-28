@@ -3,6 +3,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_days, getdate, now_datetime
 
+from quantbit_compliance_ai.qms_risk_register.aggregation_engine import refresh_action_tracker
 from quantbit_compliance_ai.qms_validation import require_user_role
 
 
@@ -33,6 +34,11 @@ class RiskAcceptance(Document):
 		band = frappe.db.get_value("Risk Item", self.risk_item, "residual_band")
 		if band == "Critical" and (not self.countersigned_by or not self.countersignature):
 			frappe.throw(_("Critical residual risks require a countersigner and countersignature."))
+		# "Submittable: submit = acceptance signed and active" (§4.9) — submission
+		# itself is the activation event, unless the acceptance is being
+		# withdrawn as part of the same save.
+		if self.status != "Withdrawn":
+			self.status = "Active"
 
 	def before_save(self):
 		if self.status == "Active" and not self.accepted_on:
@@ -43,3 +49,23 @@ class RiskAcceptance(Document):
 	def on_submit(self):
 		frappe.db.set_value("Risk Acceptance", {"risk_item": self.risk_item, "status": "Active", "name": ["!=", self.name]}, "status", "Superseded")
 		frappe.db.set_value("Risk Item", self.risk_item, {"active_acceptance": self.name, "status": "Accepted"})
+		refresh_action_tracker(self.risk_item)
+
+	@frappe.whitelist()
+	def withdraw(self, reason: str):
+		if self.status != "Active":
+			frappe.throw(_("Only an Active acceptance can be withdrawn."))
+		if not reason:
+			frappe.throw(_("Withdrawal Reason is required."))
+		self.status = "Withdrawn"
+		self.withdrawal_reason = reason
+		self.withdrawn_by = frappe.session.user
+		self.withdrawn_on = now_datetime()
+		self.save()
+		# Re-evaluation: the risk no longer has a signed-off acceptance, so its
+		# acceptance_required posture must be recomputed the next time the
+		# Risk Item is saved (validate() re-derives it from residual vs appetite).
+		if frappe.db.get_value("Risk Item", self.risk_item, "active_acceptance") == self.name:
+			frappe.db.set_value("Risk Item", self.risk_item, "active_acceptance", None)
+			frappe.get_doc("Risk Item", self.risk_item).save(ignore_permissions=True)
+		refresh_action_tracker(self.risk_item)

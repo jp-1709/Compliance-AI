@@ -3,6 +3,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate
 
+from quantbit_compliance_ai.qms_capa.effectiveness_hooks import sync_capa_from_ec
 from quantbit_compliance_ai.qms_validation import text_length
 
 
@@ -24,3 +25,7 @@ class EffectivenessCheck(Document):
 				open_actions = frappe.db.count("CAPA Action", {"parent": self.parent_capa, "status": ["not in", ["Completed", "Cancelled"]]})
 				if open_actions:
 					frappe.throw(_("All CAPA Actions must be Completed or Cancelled before an Effective outcome."))
+
+	def on_update(self):
+		if self.has_value_changed("status") and self.status == "Verified":
+			sync_capa_from_ec(self)

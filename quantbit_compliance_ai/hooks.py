@@ -142,7 +142,21 @@ after_migrate = "quantbit_compliance_ai.setup.ensure_reference_data"
 doc_events = {
 	"*": {
 		"validate": "quantbit_compliance_ai.foundation.link_validation.validate_scoped_links",
-	}
+	},
+	# Q6 Risk Register + Q5 Management Review + Q4 Internal Audit
+	# bidirectional sync: a CAPA auto-created from a Risk Treatment, an MR
+	# Output, or an Audit Finding reports its state back onto whichever
+	# record spawned it (each checks CAPA Case.source and no-ops if it
+	# doesn't match, so all three can safely run on every CAPA update).
+	# Control's own reciprocal sync is called directly from
+	# Control.on_update() since Control lives in the qms_risk_register module.
+	"CAPA Case": {
+		"on_update": [
+			"quantbit_compliance_ai.qms_risk_register.treatment_hooks.sync_from_capa",
+			"quantbit_compliance_ai.qms_management_review.output_hooks.sync_output_from_capa",
+			"quantbit_compliance_ai.qms_internal_audit.findings_engine.sync_audit_finding_from_capa",
+		],
+	},
 }
 
 # Scheduled Tasks

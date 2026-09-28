@@ -1,0 +1,94 @@
+{
+ "doctype": "DocType",
+ "name": "QMS Settings",
+ "module": "QMS Document Control",
+ "issingle": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "description": "Leave blank for the organisation-wide default; a per-entity override is looked up first."
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_review_frequency_months",
+   "label": "Default Review Frequency (months)",
+   "fieldtype": "Int",
+   "default": "12",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sec_ack",
+   "label": "Acknowledgement",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "default_acknowledgement_window_days",
+   "label": "Default Acknowledgement Window (days)",
+   "fieldtype": "Int",
+   "default": "14",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "obsolete_pdf_watermark_text",
+   "label": "Obsolete PDF Watermark Text",
+   "fieldtype": "Data",
+   "default": "OBSOLETE — DO NOT USE"
+  },
+  {
+   "fieldname": "sec_control",
+   "label": "Control rules",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "allow_approver_equal_reviewer",
+   "label": "Allow Approver = Reviewer",
+   "fieldtype": "Check",
+   "default": "0",
+   "description": "Only for the smallest teams. Approver can never equal the preparer regardless of this setting."
+  },
+  {
+   "fieldname": "require_clause_mapping",
+   "label": "Require ISO Clause Mapping",
+   "fieldtype": "Check",
+   "default": "1"
+  },
+  {
+   "fieldname": "cb_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "review_confirm_window_days",
+   "label": "Review Confirm Window (days before due)",
+   "fieldtype": "Int",
+   "default": "60",
+   "reqd": 1
+  },
+  {
+   "fieldname": "review_fanout_horizon_days",
+   "label": "Review Schedule Fan-out Horizon (days)",
+   "fieldtype": "Int",
+   "default": "60",
+   "reqd": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

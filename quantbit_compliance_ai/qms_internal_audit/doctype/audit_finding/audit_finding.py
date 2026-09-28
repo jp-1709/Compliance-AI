@@ -3,9 +3,16 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import now_datetime, today
 
+from quantbit_compliance_ai.qms_internal_audit.state_engine import check_and_close_audit, validate_finding_transition
+
 
 class AuditFinding(Document):
 	def validate(self):
+		if not self.is_new():
+			before = self.get_doc_before_save()
+			if before:
+				validate_finding_transition(before.status, self.status)
+
 		is_nc = self.finding_type == "NC (Non-Conformity)"
 		self.corrective_action_required = 1 if is_nc else 0
 		if is_nc and not self.severity:
@@ -44,3 +51,9 @@ class AuditFinding(Document):
 			self.actual_close_date = today()
 		if self.status == "Closed" and not self.closure_verified_at:
 			self.closure_verified_at = now_datetime()
+
+	def on_update(self):
+		# §3.2 auto-transition: Report Issued -> Closed once every finding is
+		# resolved. check_and_close_audit() writes via db_set only.
+		if self.status in ("Closed", "Withdrawn", "Voided") and self.audit:
+			check_and_close_audit(self.audit)

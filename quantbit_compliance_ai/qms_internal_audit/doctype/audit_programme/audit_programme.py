@@ -3,11 +3,17 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_months, getdate
 
+from quantbit_compliance_ai.qms_internal_audit.state_engine import validate_programme_transition
 from quantbit_compliance_ai.qms_validation import as_list
 
 
 class AuditProgramme(Document):
 	def validate(self):
+		if not self.is_new():
+			before = self.get_doc_before_save()
+			if before:
+				validate_programme_transition(before.programme_status, self.programme_status)
+
 		if self.programme_period_start and self.programme_period_end:
 			start, end = getdate(self.programme_period_start), getdate(self.programme_period_end)
 			if end <= start:

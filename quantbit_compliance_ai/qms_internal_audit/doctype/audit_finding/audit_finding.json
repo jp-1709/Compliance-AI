@@ -331,6 +331,14 @@
    "default": "0"
   },
   {
+   "fieldname": "reopen_count",
+   "label": "Reopen Count",
+   "fieldtype": "Int",
+   "default": "0",
+   "read_only": 1,
+   "description": "Max 1 reopen (§3.4)."
+  },
+  {
    "fieldname": "tab_closure",
    "label": "Closure",
    "fieldtype": "Tab Break"

@@ -56,3 +56,19 @@ def validate_and_score(doc, profile, prefix):
 def _validate_scale(value, maximum, label):
 	if value is not None and (value < 1 or value > maximum):
 		frappe.throw(_("{0} must be between 1 and {1}.").format(label, maximum))
+
+
+def resolve_band(profile_name, rating):
+	"""Look up the Risk Method Band whose [min,max] contains `rating`."""
+	if not profile_name or rating is None:
+		return None
+	bands = frappe.get_all(
+		"Risk Method Band",
+		filters={"parent": profile_name, "parenttype": "Risk Method Profile"},
+		fields=["band_label", "band_min_rating", "band_max_rating"],
+		order_by="band_min_rating asc",
+	)
+	for band in bands:
+		if (band.band_min_rating or 0) <= rating <= (band.band_max_rating or 0):
+			return band.band_label
+	return None

@@ -358,6 +358,12 @@
    "depends_on": "eval:doc.status == \"Cancelled\""
   },
   {
+   "fieldname": "no_findings_attestation_text",
+   "label": "No-Findings Attestation",
+   "fieldtype": "Text Editor",
+   "description": "§4.7: a positive attestation (≥200 chars) explaining why zero findings were raised, required to issue an audit with no findings."
+  },
+  {
    "fieldname": "confidentiality_classification",
    "label": "Confidentiality Classification",
    "fieldtype": "Select",

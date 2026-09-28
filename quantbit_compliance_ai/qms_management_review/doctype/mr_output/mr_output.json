@@ -220,6 +220,13 @@
    "fieldtype": "Long Text"
   },
   {
+   "fieldname": "source_chain",
+   "label": "Source Chain",
+   "fieldtype": "Long Text",
+   "read_only": 1,
+   "description": "JSON list of MR Output names in this downstream-creation lineage; used for loop detection (§8.3)."
+  },
+  {
    "fieldname": "tab_effectiveness___closure",
    "label": "Effectiveness & Closure",
    "fieldtype": "Tab Break"

@@ -3,6 +3,8 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate, now_datetime, today
 
+from quantbit_compliance_ai.qms_management_review.output_hooks import on_mr_output_accepted
+
 
 class MROutput(Document):
 	def validate(self):
@@ -50,3 +52,10 @@ class MROutput(Document):
 			self.owner_acceptance_date = now_datetime()
 		if self.status == "Closed":
 			self.closed_on = self.closed_on or today()
+
+	def on_update(self):
+		# Output Auto-Creation Hooks (§8): fires once, the moment the owner
+		# accepts the assignment. on_mr_output_accepted() writes via
+		# frappe.db.set_value only, so this is safe from on_update recursion.
+		if self.has_value_changed("status") and self.status == "Owner Accepted":
+			on_mr_output_accepted(self)

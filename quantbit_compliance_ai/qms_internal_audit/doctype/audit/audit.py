@@ -3,9 +3,13 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate, now_datetime, today
 
+from quantbit_compliance_ai.qms_internal_audit.state_engine import validate_audit_transition
+
 
 class Audit(Document):
 	def validate(self):
+		self._validate_status_transition()
+
 		if self.planned_start_date and self.planned_end_date and getdate(self.planned_end_date) < getdate(self.planned_start_date):
 			frappe.throw(_("Planned End Date cannot be before Planned Start Date."))
 		if self.actual_start_date and self.actual_end_date and getdate(self.actual_end_date) < getdate(self.actual_start_date):
@@ -50,8 +54,8 @@ class Audit(Document):
 			if scope.process_owner_at_audit in team_users:
 				frappe.throw(_("Audit team members cannot audit a process they own (Scope Item {0}).").format(scope.idx))
 
-		if self.status == "Findings Issued" and not (self.audit_checklists or self.findings):
-			frappe.throw(_("At least one checklist or finding is required before findings can be issued."))
+		if self.status == "Findings Issued" and not (self.audit_checklists or self.findings or self.no_findings_attestation_text):
+			frappe.throw(_("At least one checklist, finding, or a no-findings attestation is required before findings can be issued."))
 		if self.status == "Report Issued" and not self.audit_report:
 			frappe.throw(_("An Audit Report is required before the audit can be marked Report Issued."))
 		if self.status == "Closed" and self.name and not self.is_new():
@@ -61,6 +65,13 @@ class Audit(Document):
 			)
 			if open_findings:
 				frappe.throw(_("All findings must be Closed, Withdrawn, or Voided before closing the audit."))
+
+	def _validate_status_transition(self):
+		if self.is_new():
+			return
+		before = self.get_doc_before_save()
+		if before:
+			validate_audit_transition(before.status, self.status)
 
 	def before_save(self):
 		if self.status == "In Progress":

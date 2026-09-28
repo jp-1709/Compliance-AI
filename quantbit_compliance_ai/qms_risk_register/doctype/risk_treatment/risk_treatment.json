@@ -165,6 +165,13 @@
    "fieldtype": "Section Break"
   },
   {
+   "fieldname": "linked_existing_control",
+   "label": "Linked Existing Control",
+   "fieldtype": "Link",
+   "options": "Control",
+   "description": "Mandatory when Treatment Type is 'Modify Existing Control' — the control this treatment amends."
+  },
+  {
    "fieldname": "downstream_doctype",
    "label": "Downstream Doctype",
    "fieldtype": "Data"

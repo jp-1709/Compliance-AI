@@ -3,6 +3,8 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_days, getdate
 
+from quantbit_compliance_ai.qms_risk_register.treatment_hooks import sync_from_control
+
 
 class Control(Document):
 	def validate(self):
@@ -17,3 +19,7 @@ class Control(Document):
 				frappe.throw(_("Next Test Due Date exceeds the selected Control Frequency."))
 		if self.status == "Tested-Effective" and (self.last_test_result != "Effective" or not self.last_test_evidence):
 			frappe.throw(_("Tested-Effective controls require an Effective result and test evidence."))
+
+	def on_update(self):
+		if self.has_value_changed("status") and self.status in ("Tested-Effective", "Tested-Not Effective"):
+			sync_from_control(self)

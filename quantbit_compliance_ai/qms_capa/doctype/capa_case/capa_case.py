@@ -3,51 +3,73 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate, today
 
+from quantbit_compliance_ai.qms_capa.recurrence_engine import detect_recurring_issue
+from quantbit_compliance_ai.qms_capa.state_engine import check_and_advance, validate_transition
 from quantbit_compliance_ai.qms_validation import text_length
+
+# The statuses actually shipped on CAPA Case.status; several branches below
+# used to reference "Submitted" / "Effectiveness Pending" / "Effectiveness In
+# Progress", none of which exist in the Select options, so those branches
+# were silently unreachable. Fixed to the real enum: Draft, Pending Review,
+# In RCA, Action Planning, Plan Approved, In Progress, Pending Effectiveness,
+# Effectiveness Check, Closed, Reopened, Voided.
+_FROM_IN_RCA_ONWARD = {"In RCA", "Action Planning", "Plan Approved", "In Progress", "Pending Effectiveness", "Effectiveness Check", "Closed"}
+_FROM_ACTION_PLANNING_ONWARD = {"Action Planning", "Plan Approved", "In Progress", "Pending Effectiveness", "Effectiveness Check", "Closed"}
+_FROM_IN_PROGRESS_ONWARD = {"In Progress", "Pending Effectiveness", "Effectiveness Check", "Closed"}
 
 
 class CAPACase(Document):
 	def validate(self):
-		self.priority = {"Critical": "P1", "High": "P2", "Medium": "P3", "Low": "P4"}.get(
-			self.severity, self.priority
-		)
+		self._validate_status_transition()
+
+		self.priority = {"Critical": "P1", "High": "P2", "Medium": "P3", "Low": "P4"}.get(self.severity, self.priority)
 		if self.target_close_date and getdate(self.target_close_date) < getdate(today()) and self.status == "Draft":
 			frappe.throw(_("Target Close Date cannot be in the past."))
 		if self.capa_owner and self.capa_owner == self.qa_approver:
 			frappe.throw(_("CAPA Owner and QA Approver must be different users."))
-		if self.status in {"Submitted", "Pending Review"} and (
-			text_length(self.problem_statement) < 50 or not self.source or not self.severity
-		):
+
+		if self.status == "Pending Review" and (text_length(self.problem_statement) < 50 or not self.source or not self.severity):
 			frappe.throw(_("Pending Review requires Source, Severity, and a Problem Statement of at least 50 characters."))
-		if self.status in {"In RCA", "Action Planning", "Plan Approved", "In Progress", "Effectiveness Pending", "Pending Effectiveness", "Effectiveness In Progress", "Effectiveness Check", "Closed"} and not self.rca_record:
+
+		# Recurring-issue detection (§4.3): runs while the CAPA is still being
+		# drafted/refined, before it locks into the RCA pipeline.
+		if self.status in ("Draft", "Pending Review"):
+			detect_recurring_issue(self)
+
+		if self.status in _FROM_IN_RCA_ONWARD and not self.rca_record:
 			frappe.throw(_("An RCA Record is required from In RCA onward."))
-		if self.status in {"Action Planning", "Plan Approved", "In Progress", "Effectiveness Pending", "Pending Effectiveness", "Effectiveness In Progress", "Effectiveness Check", "Closed"}:
+		if self.status in _FROM_ACTION_PLANNING_ONWARD:
 			if text_length(self.root_cause_summary) < 50:
 				frappe.throw(_("Root Cause Summary must contain at least 50 characters from Action Planning onward."))
 			if self.rca_record and frappe.db.get_value("RCA Record", self.rca_record, "status") != "Reviewed":
 				frappe.throw(_("The RCA Record must be Reviewed before Action Planning."))
-		if self.status in {"In Progress", "Effectiveness Pending", "Effectiveness In Progress", "Closed"} and not self.actions:
+		if self.status in _FROM_IN_PROGRESS_ONWARD and not self.actions:
 			frappe.throw(_("At least one CAPA Action is required from In Progress onward."))
-		if self.status in {"Plan Approved", "In Progress", "Effectiveness Pending", "Pending Effectiveness", "Effectiveness In Progress", "Effectiveness Check", "Closed"} and not [row for row in self.actions or [] if row.status != "Cancelled"]:
+		if self.status in _FROM_ACTION_PLANNING_ONWARD and not [row for row in self.actions or [] if row.status != "Cancelled"]:
 			frappe.throw(_("At least one non-cancelled CAPA Action is required after Action Planning."))
+
 		if self.status == "Closed":
 			if not self.effectiveness_check:
 				frappe.throw(_("An Effectiveness Check is required before closing the CAPA."))
 			if frappe.db.get_value("Effectiveness Check", self.effectiveness_check, "outcome") != "Effective":
 				frappe.throw(_("CAPA can close only after an Effectiveness Check outcome of Effective."))
+
 		if self.is_voided and not self.void_reason:
 			frappe.throw(_("Void Reason is required for a voided CAPA."))
+
 		quality_events = [row.quality_event for row in self.quality_events or [] if row.quality_event]
 		if quality_events:
 			if len(quality_events) != len(set(quality_events)):
 				frappe.throw(_("A Quality Event can be linked only once."))
 			if sum(1 for row in self.quality_events if row.is_primary) != 1:
 				frappe.throw(_("Exactly one linked Quality Event must be marked Primary."))
+
 		verifier = None
 		if self.effectiveness_check:
 			verifier = frappe.db.get_value("Effectiveness Check", self.effectiveness_check, "verifier")
 			if verifier in {self.capa_owner, self.qa_approver}:
 				frappe.throw(_("Effectiveness Verifier must differ from CAPA Owner and QA Approver."))
+
 		for action in self.actions or []:
 			if text_length(action.acceptance_criteria) < 20:
 				frappe.throw(_("CAPA Action {0} acceptance criteria must contain at least 20 characters.").format(action.idx))
@@ -62,6 +84,20 @@ class CAPACase(Document):
 			if action.status == "Blocked" and not action.blocking_reason:
 				frappe.throw(_("Blocking Reason is required for blocked CAPA Action {0}.").format(action.idx))
 
+	def _validate_status_transition(self):
+		if self.is_new():
+			return
+		before = self.get_doc_before_save()
+		if not before:
+			return
+		validate_transition(before.status, self.status)
+
 	def before_save(self):
 		if self.status == "Closed" and not self.actual_close_date:
 			self.actual_close_date = today()
+
+	def on_update(self):
+		# §3.3 auto-transitions. Uses db_set internally so there is no
+		# recursion risk from calling it inside this same hook.
+		if self.status in ("In Progress", "Pending Effectiveness"):
+			check_and_advance(self.name)

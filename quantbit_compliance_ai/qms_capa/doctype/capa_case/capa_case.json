@@ -240,6 +240,14 @@
    "default": "0"
   },
   {
+   "fieldname": "reopen_count",
+   "label": "Reopen Count",
+   "fieldtype": "Int",
+   "default": "0",
+   "read_only": 1,
+   "description": "Max 1 reopen; a second recurrence must be raised as a new CAPA (§5.14)."
+  },
+  {
    "fieldname": "extension_history",
    "label": "Extension History",
    "fieldtype": "Code",
