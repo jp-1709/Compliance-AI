@@ -1,0 +1,263 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Method Profile",
+ "module": "QMS Risk Register",
+ "autoname": "RM-METHOD-.####",
+ "track_changes": 1,
+ "title_field": "profile_name",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Method identity and lifecycle",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "profile_name",
+   "label": "Profile Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "slug",
+   "label": "Slug",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "version",
+   "label": "Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "column_is_seed_data",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_seed_data",
+   "label": "Is Seed Data",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_archived",
+   "label": "Is Archived",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_scales",
+   "label": "Scales",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scales",
+   "label": "Likelihood, impact, and third dimension",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "likelihood_scale_max",
+   "label": "Likelihood Scale Max",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "impact_scale_max",
+   "label": "Impact Scale Max",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "has_third_dimension",
+   "label": "Has Third Dimension",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_third_dimension_name",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "third_dimension_name",
+   "label": "Third Dimension Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "third_dimension_scale_max",
+   "label": "Third Dimension Scale Max",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_anchors",
+   "label": "Anchors",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_anchors",
+   "label": "Scoring guidance and anchors",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "likelihood_anchors",
+   "label": "Likelihood Anchors",
+   "fieldtype": "Table",
+   "options": "Risk Method Anchor"
+  },
+  {
+   "fieldname": "impact_anchors",
+   "label": "Impact Anchors",
+   "fieldtype": "Table",
+   "options": "Risk Method Anchor"
+  },
+  {
+   "fieldname": "third_dimension_anchors",
+   "label": "Third Dimension Anchors",
+   "fieldtype": "Table",
+   "options": "Risk Method Anchor"
+  },
+  {
+   "fieldname": "tab_calculation",
+   "label": "Calculation",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_calculation",
+   "label": "Formula, weights, and InfoSec CIA logic",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "composition_formula",
+   "label": "Composition Formula",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Multiply\nAdd\nWeighted\nMultiply-Divide-Detectability\nCustom"
+  },
+  {
+   "fieldname": "composition_weights",
+   "label": "Composition Weights",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "custom_formula_python",
+   "label": "Custom Formula Python",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "is_infosec_cia",
+   "label": "Is Infosec Cia",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "cia_impact_strategy",
+   "label": "Cia Impact Strategy",
+   "fieldtype": "Select",
+   "options": "Max of CIA\nSum of CIA\nAvg of CIA"
+  },
+  {
+   "fieldname": "tab_bands___thresholds",
+   "label": "Bands & Thresholds",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_bands___thresholds",
+   "label": "Severity bands and action thresholds",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "severity_bands",
+   "label": "Severity Bands",
+   "fieldtype": "Table",
+   "options": "Risk Method Band"
+  },
+  {
+   "fieldname": "treatment_required_default",
+   "label": "Treatment Required Default",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "acceptance_required_default",
+   "label": "Acceptance Required Default",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_heat_map",
+   "label": "Heat Map",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_heat_map",
+   "label": "Axes and colour bands",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "heat_map_x_axis",
+   "label": "Heat Map X Axis",
+   "fieldtype": "Select",
+   "options": "Likelihood\nProbability\nFrequency"
+  },
+  {
+   "fieldname": "heat_map_y_axis",
+   "label": "Heat Map Y Axis",
+   "fieldtype": "Select",
+   "options": "Impact\nSeverity\nConsequence"
+  },
+  {
+   "fieldname": "heat_map_colour_band_a",
+   "label": "Heat Map Colour Band A",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "heat_map_colour_band_b",
+   "label": "Heat Map Colour Band B",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "column_heat_map_colour_band_c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "heat_map_colour_band_c",
+   "label": "Heat Map Colour Band C",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "heat_map_colour_band_d",
+   "label": "Heat Map Colour Band D",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "heat_map_colour_band_e",
+   "label": "Heat Map Colour Band E",
+   "fieldtype": "Data"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "profile_name",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

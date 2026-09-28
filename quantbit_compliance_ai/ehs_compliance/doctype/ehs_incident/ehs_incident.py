@@ -164,7 +164,7 @@ class EHSIncident(Document):
 
     def create_or_link_quality_event(self):
         """
-        Auto-create a QMS Quality Event on incident submission.
+        Auto-create a Quality Event on incident submission.
         Idempotent: skips if already linked.
         """
         if self.linked_quality_event:
@@ -176,7 +176,7 @@ class EHSIncident(Document):
         try:
             qe = frappe.get_doc(
                 {
-                    "doctype": "QMS Quality Event",
+                    "doctype": "Quality Event",
                     "organisation": self.organisation,
                     "business_entity": self.business_entity,
                     "event_type": "Safety Incident",
@@ -199,7 +199,7 @@ class EHSIncident(Document):
         except Exception:
             frappe.log_error(
                 frappe.get_traceback(),
-                "EHS Incident — QMS Quality Event creation failed",
+                "EHS Incident — Quality Event creation failed",
             )
 
     # ──────────────────────────────────────────────

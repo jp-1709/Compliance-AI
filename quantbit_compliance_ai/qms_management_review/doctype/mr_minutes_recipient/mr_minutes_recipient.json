@@ -1,0 +1,48 @@
+{
+ "doctype": "DocType",
+ "name": "MR Minutes Recipient",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "user",
+   "label": "User",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "external_email",
+   "label": "External Email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "distributed_at",
+   "label": "Distributed At",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "read_receipt_at",
+   "label": "Read Receipt At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "distribution_token",
+   "label": "Distribution Token",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "token_expires_at",
+   "label": "Token Expires At",
+   "fieldtype": "Datetime"
+  }
+ ],
+ "permissions": []
+}

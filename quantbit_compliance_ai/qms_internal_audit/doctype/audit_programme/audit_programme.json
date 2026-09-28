@@ -1,0 +1,266 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Programme",
+ "module": "QMS Internal Audit",
+ "autoname": "AP-.YYYY.-.##",
+ "track_changes": 1,
+ "title_field": "programme_name",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Programme identity and period",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "AP-.YYYY.-.##",
+   "default": "AP-.YYYY.-.##"
+  },
+  {
+   "fieldname": "programme_name",
+   "label": "Programme Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_programme_period_start",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "programme_period_start",
+   "label": "Programme Period Start",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "programme_period_end",
+   "label": "Programme Period End",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "programme_owner",
+   "label": "Programme Owner",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "programme_owner_role_snapshot",
+   "label": "Programme Owner Role Snapshot",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_scope___risk_basis",
+   "label": "Scope & Risk Basis",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scope___risk_basis",
+   "label": "Objectives, risk basis, and coverage",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "objectives",
+   "label": "Objectives",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "risk_basis_summary",
+   "label": "Risk Basis Summary",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "standards_in_scope",
+   "label": "Standards In Scope",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "reqd": 1,
+   "description": "JSON array for Standard references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "processes_in_scope",
+   "label": "Processes In Scope",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Process Map Node references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "entities_in_scope",
+   "label": "Entities In Scope",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "reqd": 1,
+   "description": "JSON array for Business Entity references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_performance",
+   "label": "Performance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_performance",
+   "label": "Programme progress and finding metrics",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_planned_audits",
+   "label": "Total Planned Audits",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "total_completed_audits",
+   "label": "Total Completed Audits",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_total_findings_raised",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_findings_raised",
+   "label": "Total Findings Raised",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "total_findings_open",
+   "label": "Total Findings Open",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_approval___status",
+   "label": "Approval & Status",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_approval___status",
+   "label": "Approval and programme state",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "programme_status",
+   "label": "Programme Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Draft\nPending Approval\nApproved\nActive\nCompleted\nCancelled",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "label": "Approved By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_on",
+   "label": "Approved On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "approval_signature_id",
+   "label": "Approval Signature Id",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_governance___ai",
+   "label": "Governance & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_governance___ai",
+   "label": "Voiding and AI history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "is_voided",
+   "label": "Is Voided",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "void_reason",
+   "label": "Void Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_by",
+   "label": "Voided By",
+   "fieldtype": "Link",
+   "options": "User",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_on",
+   "label": "Voided On",
+   "fieldtype": "Datetime",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "_ai_drafted",
+   "label": "Ai Drafted",
+   "fieldtype": "Check",
+   "default": "0"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "programme_name",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

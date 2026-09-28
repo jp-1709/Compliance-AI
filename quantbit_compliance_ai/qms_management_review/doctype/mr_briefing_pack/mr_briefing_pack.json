@@ -1,0 +1,233 @@
+{
+ "doctype": "DocType",
+ "name": "MR Briefing Pack",
+ "module": "QMS Management Review",
+ "autoname": "MRB-.YYYY.-.####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Pack identity and version",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "meeting",
+   "label": "Meeting",
+   "fieldtype": "Link",
+   "options": "MR Meeting",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_entity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "version",
+   "label": "Version",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_pack_content",
+   "label": "Pack Content",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_pack_content",
+   "label": "Inputs, attachments, dashboards, and agenda",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cover_summary",
+   "label": "Cover Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "included_input_records",
+   "label": "Included Input Records",
+   "fieldtype": "Table",
+   "options": "MR Briefing Pack Input"
+  },
+  {
+   "fieldname": "included_attachments",
+   "label": "Included Attachments",
+   "fieldtype": "Table",
+   "options": "MR Briefing Pack Attachment"
+  },
+  {
+   "fieldname": "dashboard_snapshots",
+   "label": "Dashboard Snapshots",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "prior_cycle_followup_section",
+   "label": "Prior Cycle Followup Section",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "agenda_preview",
+   "label": "Agenda Preview",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_generation",
+   "label": "Generation",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_generation",
+   "label": "Generated artifacts and generation status",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "generated_pdf",
+   "label": "Generated Pdf",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "generated_pdf_hash",
+   "label": "Generated Pdf Hash",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "generated_html_url",
+   "label": "Generated Html Url",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "page_count",
+   "label": "Page Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "generation_status",
+   "label": "Generation Status",
+   "fieldtype": "Select",
+   "options": "Draft\nGenerating\nGenerated\nFailed\nReissued",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "generation_log",
+   "label": "Generation Log",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_dispatch___acknowledgement",
+   "label": "Dispatch & Acknowledgement",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_dispatch___acknowledgement",
+   "label": "Recipients, dispatch, and acknowledgement",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "recipients",
+   "label": "Recipients",
+   "fieldtype": "Table",
+   "options": "MR Briefing Pack Recipient"
+  },
+  {
+   "fieldname": "dispatched_on",
+   "label": "Dispatched On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "dispatched_by",
+   "label": "Dispatched By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "dispatch_channel",
+   "label": "Dispatch Channel",
+   "fieldtype": "Select",
+   "options": "Email + Portal\nPortal Only\nEmail + Portal + WhatsApp"
+  },
+  {
+   "fieldname": "all_acknowledged",
+   "label": "All Acknowledged",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "acknowledgement_completion_pct",
+   "label": "Acknowledgement Completion Pct",
+   "fieldtype": "Percent"
+  },
+  {
+   "fieldname": "last_ack_check_on",
+   "label": "Last Ack Check On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_security",
+   "label": "Security",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_security",
+   "label": "Confidentiality and watermarking",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "confidentiality_level",
+   "label": "Confidentiality Level",
+   "fieldtype": "Select",
+   "options": "Internal\nConfidential\nStrictly Confidential"
+  },
+  {
+   "fieldname": "watermark_per_recipient",
+   "label": "Watermark Per Recipient",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "search_fields": "cycle",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

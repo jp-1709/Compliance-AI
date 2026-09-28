@@ -1,0 +1,56 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Method Anchor",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "dimension",
+   "label": "Dimension",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Likelihood\nImpact\nThird Dimension\nC\nI\nA",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "scale_value",
+   "label": "Scale Value",
+   "fieldtype": "Int",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "label",
+   "label": "Label",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "example_threshold_lower",
+   "label": "Example Threshold Lower",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "example_threshold_upper",
+   "label": "Example Threshold Upper",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "example_unit",
+   "label": "Example Unit",
+   "fieldtype": "Data"
+  }
+ ]
+}

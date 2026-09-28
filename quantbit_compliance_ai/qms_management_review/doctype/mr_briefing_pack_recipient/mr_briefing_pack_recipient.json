@@ -1,0 +1,65 @@
+{
+ "doctype": "DocType",
+ "name": "MR Briefing Pack Recipient",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "user",
+   "label": "User",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "role_in_meeting",
+   "label": "Role In Meeting",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "dispatched_at",
+   "label": "Dispatched At",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "opened_at",
+   "label": "Opened At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "acknowledged_at",
+   "label": "Acknowledged At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "acknowledgement_method",
+   "label": "Acknowledgement Method",
+   "fieldtype": "Select",
+   "options": "Click Link\nDigital Signature\nManual Tick"
+  },
+  {
+   "fieldname": "acknowledgement_signature",
+   "label": "Acknowledgement Signature",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "reminder_count",
+   "label": "Reminder Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "last_reminder_at",
+   "label": "Last Reminder At",
+   "fieldtype": "Datetime"
+  }
+ ],
+ "permissions": []
+}

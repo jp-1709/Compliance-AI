@@ -1,0 +1,10 @@
+{
+ "doctype": "DocType",
+ "name": "Regulation State",
+ "module": "Foundation",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {"fieldname": "state", "label": "State / Union Territory", "fieldtype": "Link", "options": "State", "reqd": 1, "in_list_view": 1}
+ ]
+}

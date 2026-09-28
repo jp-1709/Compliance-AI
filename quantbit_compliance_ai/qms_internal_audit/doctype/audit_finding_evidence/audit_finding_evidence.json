@@ -1,0 +1,75 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Finding Evidence",
+ "module": "QMS Internal Audit",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "evidence_no",
+   "label": "Evidence No",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "evidence_file",
+   "label": "Evidence File",
+   "fieldtype": "Link",
+   "options": "Evidence File",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "evidence_type",
+   "label": "Evidence Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Photo\nScreenshot\nDocument Sample\nRecord Sample\nInterview Note\nMeasurement Data\nOther",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Small Text",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "captured_at",
+   "label": "Captured At",
+   "fieldtype": "Datetime",
+   "reqd": 1
+  },
+  {
+   "fieldname": "captured_by",
+   "label": "Captured By",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "device_info",
+   "label": "Device Info",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "location_captured",
+   "label": "Location Captured",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "redaction_applied",
+   "label": "Redaction Applied",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "redaction_notes",
+   "label": "Redaction Notes",
+   "fieldtype": "Small Text"
+  }
+ ]
+}

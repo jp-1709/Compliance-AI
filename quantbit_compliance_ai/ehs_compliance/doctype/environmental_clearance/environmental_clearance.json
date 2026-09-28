@@ -99,7 +99,8 @@
         {
             "fieldname": "industry_classification",
             "label": "Industry Classification",
-            "fieldtype": "Data"
+            "fieldtype": "Link",
+            "options": "Industry Code"
         },
         {
             "fieldname": "is_red_critical",

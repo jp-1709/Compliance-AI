@@ -1,0 +1,286 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Report",
+ "module": "QMS Internal Audit",
+ "autoname": "AR-.YYYY.-.#####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Report identity and version",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "AR-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audit",
+   "label": "Audit",
+   "fieldtype": "Link",
+   "options": "Audit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "report_version",
+   "label": "Report Version",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_is_current_version",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_current_version",
+   "label": "Is Current Version",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "prior_version",
+   "label": "Prior Version",
+   "fieldtype": "Link",
+   "options": "Audit Report"
+  },
+  {
+   "fieldname": "report_date",
+   "label": "Report Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tab_report_content",
+   "label": "Report Content",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_report_content",
+   "label": "Executive summary, scope, method, and findings",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "executive_summary",
+   "label": "Executive Summary",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audit_objectives_met",
+   "label": "Audit Objectives Met",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Fully\nPartially\nNot Met"
+  },
+  {
+   "fieldname": "objectives_met_rationale",
+   "label": "Objectives Met Rationale",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "scope_summary",
+   "label": "Scope Summary",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "methodology_summary",
+   "label": "Methodology Summary",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "findings_summary",
+   "label": "Findings Summary",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "findings_table_html",
+   "label": "Findings Table Html",
+   "fieldtype": "Code"
+  },
+  {
+   "fieldname": "tab_conclusion",
+   "label": "Conclusion",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_conclusion",
+   "label": "Strengths, recommendations, and conclusion",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "strengths_identified",
+   "label": "Strengths Identified",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "recommendations",
+   "label": "Recommendations",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "overall_conclusion",
+   "label": "Overall Conclusion",
+   "fieldtype": "Select",
+   "options": "Satisfactory\nSatisfactory With Concerns\nUnsatisfactory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auditor_certifications_statement",
+   "label": "Auditor Certifications Statement",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "tab_sign_off",
+   "label": "Sign-off",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_sign_off",
+   "label": "Signatures and auditee acknowledgement",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lead_auditor_signature",
+   "label": "Lead Auditor Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "lead_auditor_signed_at",
+   "label": "Lead Auditor Signed At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "audit_manager_signature",
+   "label": "Audit Manager Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "auditee_acknowledgement_signature",
+   "label": "Auditee Acknowledgement Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_distribution",
+   "label": "Distribution",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_distribution",
+   "label": "Issued report, distribution, and status",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "report_pdf",
+   "label": "Report Pdf",
+   "fieldtype": "Attach"
+  },
+  {
+   "fieldname": "report_pdf_hash",
+   "label": "Report Pdf Hash",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "distribution_list",
+   "label": "Distribution List",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "confidentiality_classification",
+   "label": "Confidentiality Classification",
+   "fieldtype": "Select",
+   "options": "Public\nInternal\nConfidential\nRestricted"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Draft\nPending Lead Signoff\nPending Auditee Acknowledgement\nIssued\nRe-Issued\nVoided",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "issued_at",
+   "label": "Issued At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_governance___ai",
+   "label": "Governance & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_governance___ai",
+   "label": "Voiding and AI drafting history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "is_voided",
+   "label": "Is Voided",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "void_reason",
+   "label": "Void Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "_ai_executive_summary_drafted",
+   "label": "Ai Executive Summary Drafted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "_ai_findings_summary_drafted",
+   "label": "Ai Findings Summary Drafted",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "search_fields": "audit",
+ "sort_field": "report_date",
+ "sort_order": "DESC"
+}

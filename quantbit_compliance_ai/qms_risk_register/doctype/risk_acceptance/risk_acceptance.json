@@ -1,0 +1,254 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Acceptance",
+ "module": "QMS Risk Register",
+ "autoname": "RACC-.YYYY.-.#####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Risk and acceptance sequence",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "risk_item",
+   "label": "Risk Item",
+   "fieldtype": "Link",
+   "options": "Risk Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "acceptance_seq",
+   "label": "Acceptance Seq",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_appetite_decision",
+   "label": "Appetite Decision",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_appetite_decision",
+   "label": "Residual exposure and appetite variance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "residual_rating_at_acceptance",
+   "label": "Residual Rating At Acceptance",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicable_appetite_at_acceptance",
+   "label": "Applicable Appetite At Acceptance",
+   "fieldtype": "Link",
+   "options": "Risk Appetite"
+  },
+  {
+   "fieldname": "column_appetite_rating_at_acceptance",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "appetite_rating_at_acceptance",
+   "label": "Appetite Rating At Acceptance",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "delta_above_appetite",
+   "label": "Delta Above Appetite",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_rationale",
+   "label": "Rationale",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_rationale",
+   "label": "Decision rationale and alternatives",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "acceptance_rationale",
+   "label": "Acceptance Rationale",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alternative_treatments_considered",
+   "label": "Alternative Treatments Considered",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "residual_treatment_after_acceptance",
+   "label": "Residual Treatment After Acceptance",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "re_review_trigger_conditions",
+   "label": "Re Review Trigger Conditions",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_validity",
+   "label": "Validity",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_validity",
+   "label": "Effective period and re-review",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effective_from",
+   "label": "Effective From",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "valid_until",
+   "label": "Valid Until",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "re_review_due_date",
+   "label": "Re Review Due Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "tab_approval___signatures",
+   "label": "Approval & Signatures",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_approval___signatures",
+   "label": "Acceptor and countersignature",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "accepted_by",
+   "label": "Accepted By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "acceptance_signature",
+   "label": "Acceptance Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "accepted_on",
+   "label": "Accepted On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "countersigned_by",
+   "label": "Countersigned By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "countersignature",
+   "label": "Countersignature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_status___withdrawal",
+   "label": "Status & Withdrawal",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_status___withdrawal",
+   "label": "Lifecycle, withdrawal, and prior acceptance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nPending Approval\nActive\nExpired\nSuperseded\nWithdrawn",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "withdrawal_reason",
+   "label": "Withdrawal Reason",
+   "fieldtype": "Long Text",
+   "depends_on": "eval:doc.status == \"Withdrawn\" || doc.is_withdrawn == 1"
+  },
+  {
+   "fieldname": "withdrawn_by",
+   "label": "Withdrawn By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "depends_on": "eval:doc.status == \"Withdrawn\" || doc.is_withdrawn == 1"
+  },
+  {
+   "fieldname": "withdrawn_on",
+   "label": "Withdrawn On",
+   "fieldtype": "Datetime",
+   "depends_on": "eval:doc.status == \"Withdrawn\" || doc.is_withdrawn == 1"
+  },
+  {
+   "fieldname": "linked_mr_output",
+   "label": "Linked Mr Output",
+   "fieldtype": "Link",
+   "options": "MR Output"
+  },
+  {
+   "fieldname": "prior_acceptance",
+   "label": "Prior Acceptance",
+   "fieldtype": "Link",
+   "options": "Risk Acceptance"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "effective_from",
+ "sort_order": "DESC"
+}

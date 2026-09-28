@@ -1,0 +1,99 @@
+{
+ "doctype": "DocType",
+ "name": "MR Meeting Attendee",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "user",
+   "label": "User",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "role_in_meeting",
+   "label": "Role In Meeting",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Chairperson\nCo-Chair\nSecretariat\nTop Management Member\nProcess Owner\nInvitee\nObserver\nExternal Advisor",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "is_top_management",
+   "label": "Is Top Management",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "invited",
+   "label": "Invited",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "invitation_sent_on",
+   "label": "Invitation Sent On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "briefing_pack_acknowledged",
+   "label": "Briefing Pack Acknowledged",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "briefing_pack_acknowledged_on",
+   "label": "Briefing Pack Acknowledged On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "attended",
+   "label": "Attended",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "join_time",
+   "label": "Join Time",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "leave_time",
+   "label": "Leave Time",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "attendance_mode",
+   "label": "Attendance Mode",
+   "fieldtype": "Select",
+   "options": "In Person\nVirtual\nPhone"
+  },
+  {
+   "fieldname": "apologies",
+   "label": "Apologies",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "apology_reason",
+   "label": "Apology Reason",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "signed_attendance",
+   "label": "Signed Attendance",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "signature_entry",
+   "label": "Signature Entry",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ]
+}

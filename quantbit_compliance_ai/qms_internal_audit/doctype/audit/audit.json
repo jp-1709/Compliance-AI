@@ -1,0 +1,441 @@
+{
+ "doctype": "DocType",
+ "name": "Audit",
+ "module": "QMS Internal Audit",
+ "autoname": "AUD-.YYYY.-.####",
+ "track_changes": 1,
+ "title_field": "audit_title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Audit identity and classification",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "AUD-.YYYY.-.####",
+   "default": "AUD-.YYYY.-.####"
+  },
+  {
+   "fieldname": "audit_title",
+   "label": "Audit Title",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "audit_programme",
+   "label": "Audit Programme",
+   "fieldtype": "Link",
+   "options": "Audit Programme"
+  },
+  {
+   "fieldname": "audit_type",
+   "label": "Audit Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Internal\nSupplier\nSelf-Assessment\nPre-CB\nPost-CB Follow-up\nFor-Cause",
+   "default": "Internal"
+  },
+  {
+   "fieldname": "audit_classification",
+   "label": "Audit Classification",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "System (full QMS)\nProcess (one process)\nProduct\nCompliance (regulatory-focused)\nLayered\nVertical\nHorizontal",
+   "default": "Process"
+  },
+  {
+   "fieldname": "lead_business_entity",
+   "label": "Lead Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "additional_entities",
+   "label": "Additional Entities",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Business Entity references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "auditee_party",
+   "label": "Auditee Party",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Self (internal)\nSupplier\nSub-Supplier\nOutsourced Process Provider",
+   "default": "Self"
+  },
+  {
+   "fieldname": "auditee_supplier",
+   "label": "Auditee Supplier",
+   "fieldtype": "Data",
+   "description": "External-party identifier; kept app-neutral to avoid an ERPNext dependency.",
+   "depends_on": "eval:doc.auditee_party && doc.auditee_party != \"Self (internal)\""
+  },
+  {
+   "fieldname": "tab_scope___criteria",
+   "label": "Scope & Criteria",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scope___criteria",
+   "label": "Standards, scope, objectives, and criteria",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "standards_in_scope",
+   "label": "Standards In Scope",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "reqd": 1,
+   "description": "JSON array for Standard references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "iso_clauses_in_scope",
+   "label": "Iso Clauses In Scope",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for ISO Clause references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "regulatory_references",
+   "label": "Regulatory References",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Regulation references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "scope_items",
+   "label": "Scope Items",
+   "fieldtype": "Table",
+   "options": "Audit Scope Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "objectives",
+   "label": "Objectives",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "criteria",
+   "label": "Criteria",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_people",
+   "label": "People",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_people",
+   "label": "Audit team and auditee contacts",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "audit_team",
+   "label": "Audit Team",
+   "fieldtype": "Table",
+   "options": "Audit Team Member",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_auditor",
+   "label": "Lead Auditor",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_auditor_role_snapshot",
+   "label": "Lead Auditor Role Snapshot",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "auditees_primary_contact",
+   "label": "Auditees Primary Contact",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auditee_process_owners",
+   "label": "Auditee Process Owners",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for User references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_schedule___meetings",
+   "label": "Schedule & Meetings",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_schedule___meetings",
+   "label": "Planned and actual dates and meeting records",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "planned_start_date",
+   "label": "Planned Start Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "planned_end_date",
+   "label": "Planned End Date",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actual_start_date",
+   "label": "Actual Start Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "actual_end_date",
+   "label": "Actual End Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "audit_duration_planned_hours",
+   "label": "Audit Duration Planned Hours",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "audit_duration_actual_hours",
+   "label": "Audit Duration Actual Hours",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "opening_meeting_date",
+   "label": "Opening Meeting Date",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "closing_meeting_date",
+   "label": "Closing Meeting Date",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "opening_meeting_minutes",
+   "label": "Opening Meeting Minutes",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "closing_meeting_minutes",
+   "label": "Closing Meeting Minutes",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "tab_execution___findings",
+   "label": "Execution & Findings",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_execution___findings",
+   "label": "Checklists, findings, and counts",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "audit_checklists",
+   "label": "Audit Checklists",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Audit Checklist references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "findings",
+   "label": "Findings",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Audit Finding references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "total_findings_count",
+   "label": "Total Findings Count",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "nc_major_count",
+   "label": "Nc Major Count",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "nc_minor_count",
+   "label": "Nc Minor Count",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "ofi_count",
+   "label": "Ofi Count",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "obs_count",
+   "label": "Obs Count",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "tab_conclusion___closure",
+   "label": "Conclusion & Closure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_conclusion___closure",
+   "label": "Report, conclusion, acknowledgement, and status",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "audit_report",
+   "label": "Audit Report",
+   "fieldtype": "Link",
+   "options": "Audit Report"
+  },
+  {
+   "fieldname": "audit_overall_conclusion",
+   "label": "Audit Overall Conclusion",
+   "fieldtype": "Select",
+   "options": "Satisfactory\nSatisfactory With Concerns\nUnsatisfactory"
+  },
+  {
+   "fieldname": "auditee_acknowledgement_user",
+   "label": "Auditee Acknowledgement User",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "auditee_acknowledgement_at",
+   "label": "Auditee Acknowledgement At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "auditee_acknowledgement_signature",
+   "label": "Auditee Acknowledgement Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Planned\nConfirmed\nIn Progress\nFindings Issued\nReport Issued\nClosed\nCancelled",
+   "default": "Planned",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cancellation_reason",
+   "label": "Cancellation Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.status == \"Cancelled\""
+  },
+  {
+   "fieldname": "confidentiality_classification",
+   "label": "Confidentiality Classification",
+   "fieldtype": "Select",
+   "options": "Public\nInternal\nConfidential\nRestricted",
+   "default": "Internal"
+  },
+  {
+   "fieldname": "tab_governance___ai",
+   "label": "Governance & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_governance___ai",
+   "label": "Voiding and AI-assistance history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "is_voided",
+   "label": "Is Voided",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "void_reason",
+   "label": "Void Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_by",
+   "label": "Voided By",
+   "fieldtype": "Link",
+   "options": "User",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_on",
+   "label": "Voided On",
+   "fieldtype": "Datetime",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "_ai_checklist_drafted",
+   "label": "Ai Checklist Drafted",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "_ai_findings_assisted",
+   "label": "Ai Findings Assisted",
+   "fieldtype": "Check",
+   "default": "0"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "planned_start_date",
+ "sort_order": "DESC"
+}

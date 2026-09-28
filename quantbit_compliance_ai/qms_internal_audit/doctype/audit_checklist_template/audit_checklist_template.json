@@ -1,0 +1,206 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Checklist Template",
+ "module": "QMS Internal Audit",
+ "autoname": "ACT-.YYYY.-.####",
+ "track_changes": 1,
+ "title_field": "template_name",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Template identity and version",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "ACT-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "template_name",
+   "label": "Template Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_template_version",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "template_version",
+   "label": "Template Version",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "is_active",
+   "label": "Is Active",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "prior_template",
+   "label": "Prior Template",
+   "fieldtype": "Link",
+   "options": "Audit Checklist Template"
+  },
+  {
+   "fieldname": "tab_applicability",
+   "label": "Applicability",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_applicability",
+   "label": "Standards, clauses, processes, and industries",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "applicable_standards",
+   "label": "Applicable Standards",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "reqd": 1,
+   "description": "JSON array for Standard references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "applicable_clauses",
+   "label": "Applicable Clauses",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for ISO Clause references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "applicable_processes",
+   "label": "Applicable Processes",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Process Map Node references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "industry_codes",
+   "label": "Industry Codes",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Industry Code references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_checklist_design",
+   "label": "Checklist Design",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_checklist_design",
+   "label": "Description and checklist items",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "items",
+   "label": "Items",
+   "fieldtype": "Table",
+   "options": "Audit Checklist Item Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_items",
+   "label": "Total Items",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "estimated_duration_hours",
+   "label": "Estimated Duration Hours",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "tab_usage___ai",
+   "label": "Usage & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_usage___ai",
+   "label": "Ownership, usage, and AI provenance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "created_by_user",
+   "label": "Created By User",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "last_used_at",
+   "label": "Last Used At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "times_used",
+   "label": "Times Used",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "_ai_generated",
+   "label": "Ai Generated",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "_ai_generation_source",
+   "label": "Ai Generation Source",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "template_name",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

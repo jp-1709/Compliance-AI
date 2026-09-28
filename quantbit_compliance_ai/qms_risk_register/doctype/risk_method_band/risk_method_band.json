@@ -1,0 +1,58 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Method Band",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "band_label",
+   "label": "Band Label",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "band_min_rating",
+   "label": "Band Min Rating",
+   "fieldtype": "Int",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "band_max_rating",
+   "label": "Band Max Rating",
+   "fieldtype": "Int",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "band_colour",
+   "label": "Band Colour",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "treatment_implication",
+   "label": "Treatment Implication",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Monitor Only\nTreat When Possible\nTreatment Required\nTreatment Mandatory + Acceptance\nBlock Operations"
+  },
+  {
+   "fieldname": "acceptance_required",
+   "label": "Acceptance Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "acceptance_authority_role",
+   "label": "Acceptance Authority Role",
+   "fieldtype": "Link",
+   "options": "Role"
+  }
+ ]
+}

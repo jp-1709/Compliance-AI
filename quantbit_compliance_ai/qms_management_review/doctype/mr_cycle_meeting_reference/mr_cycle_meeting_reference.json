@@ -1,0 +1,35 @@
+{
+ "doctype": "DocType",
+ "name": "MR Cycle Meeting Reference",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "meeting",
+   "label": "Meeting",
+   "fieldtype": "Link",
+   "options": "MR Meeting",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "meeting_seq",
+   "label": "Meeting Seq",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "role",
+   "label": "Role",
+   "fieldtype": "Select",
+   "options": "Primary\nContinuation\nSpecial",
+   "in_list_view": 1,
+   "columns": 4
+  }
+ ],
+ "permissions": []
+}

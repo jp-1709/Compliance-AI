@@ -1,0 +1,51 @@
+{
+ "doctype": "DocType",
+ "name": "RCA Fishbone Cause",
+ "module": "QMS CAPA",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "category",
+   "label": "Category",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Man\nMachine\nMethod\nMaterial\nMeasurement\nEnvironment (the 6Ms)",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "cause",
+   "label": "Cause",
+   "fieldtype": "Small Text",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "sub_cause",
+   "label": "Sub Cause",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "likelihood",
+   "label": "Likelihood",
+   "fieldtype": "Select",
+   "options": "High\nMedium\nLow",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "is_contributing",
+   "label": "Is Contributing",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_root",
+   "label": "Is Root",
+   "fieldtype": "Check"
+  }
+ ]
+}

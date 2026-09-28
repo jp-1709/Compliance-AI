@@ -1,0 +1,24 @@
+{
+ "doctype": "DocType",
+ "name": "Industry Sector",
+ "module": "Foundation",
+ "autoname": "field:sector_code",
+ "title_field": "sector_name",
+ "search_fields": "sector_name,sector_code",
+ "track_changes": 1,
+ "description": "High-level industry classification for organisations. Detailed applicability remains linked through NIC Industry Code.",
+ "fields": [
+  {"fieldname": "sector_code", "label": "Sector Code", "fieldtype": "Data", "reqd": 1, "unique": 1, "in_list_view": 1},
+  {"fieldname": "sector_name", "label": "Sector Name", "fieldtype": "Data", "reqd": 1, "unique": 1, "in_list_view": 1, "in_global_search": 1},
+  {"fieldname": "parent_sector", "label": "Parent Sector", "fieldtype": "Link", "options": "Industry Sector"},
+  {"fieldname": "column_break_1", "fieldtype": "Column Break"},
+  {"fieldname": "is_regulated", "label": "Regulated Sector", "fieldtype": "Check", "default": 0},
+  {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1, "in_list_view": 1},
+  {"fieldname": "description", "label": "Description", "fieldtype": "Small Text"}
+ ],
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Compliance Officer", "read": 1},
+  {"role": "Read Only", "read": 1}
+ ]
+}

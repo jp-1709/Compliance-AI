@@ -1,0 +1,182 @@
+{
+ "doctype": "DocType",
+ "name": "MR Action Tracker",
+ "module": "QMS Management Review",
+ "autoname": "MRAT-.#####",
+ "track_changes": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Tracked output and responsibility",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "output",
+   "label": "Output",
+   "fieldtype": "Link",
+   "options": "MR Output",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle"
+  },
+  {
+   "fieldname": "meeting",
+   "label": "Meeting",
+   "fieldtype": "Link",
+   "options": "MR Meeting"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_output_type",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "output_type",
+   "label": "Output Type",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "severity",
+   "label": "Severity",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "assigned_to",
+   "label": "Assigned To",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "assignee_name",
+   "label": "Assignee Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "target_date",
+   "label": "Target Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "tab_progress",
+   "label": "Progress",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_progress",
+   "label": "Downstream status and target monitoring",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "downstream_doctype",
+   "label": "Downstream Doctype",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "column_downstream_record",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "downstream_record",
+   "label": "Downstream Record",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "downstream_status",
+   "label": "Downstream Status",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_alerts___sync",
+   "label": "Alerts & Sync",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_alerts___sync",
+   "label": "Due-date health and synchronization",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "days_to_target",
+   "label": "Days To Target",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "is_overdue",
+   "label": "Is Overdue",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_is_breach_max_age",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_breach_max_age",
+   "label": "Is Breach Max Age",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "last_synced_on",
+   "label": "Last Synced On",
+   "fieldtype": "Datetime"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title,cycle",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

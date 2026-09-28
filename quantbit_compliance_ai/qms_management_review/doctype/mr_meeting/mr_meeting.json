@@ -1,0 +1,313 @@
+{
+ "doctype": "DocType",
+ "name": "MR Meeting",
+ "module": "QMS Management Review",
+ "autoname": "MRM-.YYYY.-.#####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "meeting_title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Meeting identity and schedule",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "meeting_seq",
+   "label": "Meeting Seq",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "meeting_title",
+   "label": "Meeting Title",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "planned_date",
+   "label": "Planned Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_planned_start_time",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "planned_start_time",
+   "label": "Planned Start Time",
+   "fieldtype": "Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_end_time",
+   "label": "Planned End Time",
+   "fieldtype": "Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actual_start_datetime",
+   "label": "Actual Start Datetime",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "actual_end_datetime",
+   "label": "Actual End Datetime",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "timezone",
+   "label": "Timezone",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_venue___access",
+   "label": "Venue & Access",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_venue___access",
+   "label": "Mode, venue, and virtual access",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "meeting_mode",
+   "label": "Meeting Mode",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "In Person\nVirtual\nHybrid"
+  },
+  {
+   "fieldname": "venue",
+   "label": "Venue",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "virtual_link",
+   "label": "Virtual Link",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.meeting_mode == \"Virtual\" || doc.meeting_mode == \"Hybrid\""
+  },
+  {
+   "fieldname": "column_virtual_meeting_id",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "virtual_meeting_id",
+   "label": "Virtual Meeting Id",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.meeting_mode == \"Virtual\" || doc.meeting_mode == \"Hybrid\""
+  },
+  {
+   "fieldname": "calendar_event_id",
+   "label": "Calendar Event Id",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_roles___attendance",
+   "label": "Roles & Attendance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_roles___attendance",
+   "label": "Meeting leadership, attendees, and quorum",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "chairperson",
+   "label": "Chairperson",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "secretariat",
+   "label": "Secretariat",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "co_chair",
+   "label": "Co Chair",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "attendees",
+   "label": "Attendees",
+   "fieldtype": "Table",
+   "options": "MR Meeting Attendee"
+  },
+  {
+   "fieldname": "quorum_met",
+   "label": "Quorum Met",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "quorum_check_log",
+   "label": "Quorum Check Log",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_agenda",
+   "label": "Agenda",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_agenda",
+   "label": "Agenda and input review",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "agenda_items",
+   "label": "Agenda Items",
+   "fieldtype": "Table",
+   "options": "MR Agenda Item"
+  },
+  {
+   "fieldname": "agenda_seeded_from_template",
+   "label": "Agenda Seeded From Template",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_status___outcomes",
+   "label": "Status & Outcomes",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_status___outcomes",
+   "label": "Lifecycle, cancellation, and outputs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Scheduled\nBriefing Sent\nBriefing Acknowledged\nPre-Meeting Check\nStarted\nIn Progress\nEnded\nMinutes Drafted\nMinutes Signed\nCancelled",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cancellation_reason",
+   "label": "Cancellation Reason",
+   "fieldtype": "Long Text",
+   "depends_on": "eval:doc.status == \"Cancelled\""
+  },
+  {
+   "fieldname": "cancellation_approved_by",
+   "label": "Cancellation Approved By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "depends_on": "eval:doc.status == \"Cancelled\""
+  },
+  {
+   "fieldname": "outputs_count",
+   "label": "Outputs Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "critical_outputs_count",
+   "label": "Critical Outputs Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "input_records_reviewed",
+   "label": "Input Records Reviewed",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_records",
+   "label": "Records",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_records",
+   "label": "Minutes, briefing pack, recording, and transcript",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "linked_minutes",
+   "label": "Linked Minutes",
+   "fieldtype": "Link",
+   "options": "MR Minutes"
+  },
+  {
+   "fieldname": "linked_briefing_pack",
+   "label": "Linked Briefing Pack",
+   "fieldtype": "Link",
+   "options": "MR Briefing Pack"
+  },
+  {
+   "fieldname": "recording_url",
+   "label": "Recording Url",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "column_recording_consent_obtained",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recording_consent_obtained",
+   "label": "Recording Consent Obtained",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "transcript_uploaded",
+   "label": "Transcript Uploaded",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "meeting_title,cycle",
+ "sort_field": "planned_date",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,231 @@
+{
+ "doctype": "DocType",
+ "name": "CAPA AI Suggestion Log",
+ "module": "QMS CAPA",
+ "autoname": "CAI-.YYYY.-.######",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Suggestion identity and source",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "CAI-.YYYY.-.######",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_parent_doctype",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "parent_doctype",
+   "label": "Parent Doctype",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "CAPA Case\nRCA Record\nEffectiveness Check"
+  },
+  {
+   "fieldname": "parent_name",
+   "label": "Parent Name",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_ai_request",
+   "label": "AI Request",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai_request",
+   "label": "Prompt, model, and input context",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "suggestion_type",
+   "label": "Suggestion Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Root Cause\nCAPA Action\nEffectiveness Criteria\nVerification Questions\nSimilar CAPA Retrieval\nTrend Detection"
+  },
+  {
+   "fieldname": "prompt_template_id",
+   "label": "Prompt Template Id",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "model_used",
+   "label": "Model Used",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "input_context",
+   "label": "Input Context",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "input_context_s3_key",
+   "label": "Input Context S3 Key",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_ai_response",
+   "label": "AI Response",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai_response",
+   "label": "Raw and structured outputs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "raw_output",
+   "label": "Raw Output",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "parsed_output_json",
+   "label": "Parsed Output Json",
+   "fieldtype": "Code"
+  },
+  {
+   "fieldname": "tab_performance",
+   "label": "Performance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_performance",
+   "label": "Token usage and latency",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tokens_input",
+   "label": "Tokens Input",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tokens_output",
+   "label": "Tokens Output",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "latency_ms",
+   "label": "Latency Ms",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_requested_by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "requested_by",
+   "label": "Requested By",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requested_at",
+   "label": "Requested At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_human_review",
+   "label": "Human Review",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_human_review",
+   "label": "Decision, feedback, and final text",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "human_decision",
+   "label": "Human Decision",
+   "fieldtype": "Select",
+   "options": "Accepted As-Is\nAccepted With Edits\nRejected\nPending Review"
+  },
+  {
+   "fieldname": "human_decision_by",
+   "label": "Human Decision By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "human_decision_at",
+   "label": "Human Decision At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "final_text_used",
+   "label": "Final Text Used",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "feedback_thumbs",
+   "label": "Feedback Thumbs",
+   "fieldtype": "Select",
+   "options": "Up\nDown\nnull — for prompt tuning"
+  },
+  {
+   "fieldname": "feedback_notes",
+   "label": "Feedback Notes",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

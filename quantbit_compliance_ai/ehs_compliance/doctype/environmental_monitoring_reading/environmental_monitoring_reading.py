@@ -98,7 +98,7 @@ class EnvironmentalMonitoringReading(Document):
 
     def create_quality_event_for_violation(self):
         """
-        Auto-create a QMS Quality Event for any monitoring violation.
+        Auto-create a Quality Event for any monitoring violation.
         Severity mapped by number of violations:
           1 violation  → Sev-3 (Moderate)
           2 violations → Sev-2 (Major)
@@ -122,7 +122,7 @@ class EnvironmentalMonitoringReading(Document):
         try:
             qe = frappe.get_doc(
                 {
-                    "doctype": "QMS Quality Event",
+                    "doctype": "Quality Event",
                     "organisation": self.organisation,
                     "business_entity": self.business_entity,
                     "event_type": "Environmental Non-Conformance",
@@ -146,7 +146,7 @@ class EnvironmentalMonitoringReading(Document):
 
             frappe.msgprint(
                 _(
-                    "⚠️ Monitoring violation detected — QMS Quality Event {0} auto-created."
+                    "⚠️ Monitoring violation detected — Quality Event {0} auto-created."
                 ).format(qe.name),
                 title=_("Violation Flagged"),
                 indicator="red",
@@ -155,7 +155,7 @@ class EnvironmentalMonitoringReading(Document):
         except Exception:
             frappe.log_error(
                 frappe.get_traceback(),
-                "Environmental Monitoring Reading — QMS Quality Event creation failed",
+                "Environmental Monitoring Reading — Quality Event creation failed",
             )
 
 

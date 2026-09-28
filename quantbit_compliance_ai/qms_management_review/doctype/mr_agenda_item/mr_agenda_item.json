@@ -1,0 +1,75 @@
+{
+ "doctype": "DocType",
+ "name": "MR Agenda Item",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "sl_no",
+   "label": "Sl No",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "clause_reference",
+   "label": "Clause Reference",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "input_category",
+   "label": "Input Category",
+   "fieldtype": "Select",
+   "options": "Status of Prior Actions\nExternal/Internal Issues Changes\nInterested Party Needs\nCustomer Satisfaction & Feedback\nQuality/Environment/OH&S Objectives Status\nProcess Performance & Conformity\nNonconformities & Corrective Actions\nMonitoring & Measurement Results\nAudit Results\nExternal Provider/Supplier Performance\nResource Adequacy\nRisks & Opportunities Effectiveness\nImprovement Opportunities\nCompliance Obligations Status\nCommunications Relevant to MR\nIncidents & OH&S Performance\nRecall/Advisory Notice Activity\nRegulatory Requirements Changes\nPost-Market Surveillance\nInformation Security Incidents\nISMS Metrics\nHazard Control & Food Safety\nDisruption Events & BCM\nService & Complaint Reports\nOther (justify)",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "planned_minutes",
+   "label": "Planned Minutes",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "linked_input_records",
+   "label": "Linked Input Records",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "presenter",
+   "label": "Presenter",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "decision_summary",
+   "label": "Decision Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "related_outputs",
+   "label": "Related Outputs",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "completed",
+   "label": "Completed",
+   "fieldtype": "Check"
+  }
+ ]
+}

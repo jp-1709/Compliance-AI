@@ -1,0 +1,65 @@
+{
+ "doctype": "DocType",
+ "name": "MR Input Metric",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "metric_name",
+   "label": "Metric Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "current_period_value",
+   "label": "Current Period Value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "prior_period_value",
+   "label": "Prior Period Value",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "target_value",
+   "label": "Target Value",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "unit",
+   "label": "Unit",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "direction_of_goodness",
+   "label": "Direction Of Goodness",
+   "fieldtype": "Select",
+   "options": "Higher Better\nLower Better\nOn Target"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Above Target\nOn Target\nBelow Target\nCritical"
+  },
+  {
+   "fieldname": "linked_kpi",
+   "label": "Linked Kpi",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "linked_objective",
+   "label": "Linked Objective",
+   "fieldtype": "Data"
+  }
+ ],
+ "permissions": []
+}

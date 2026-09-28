@@ -1,0 +1,28 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Category Clause",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "standard",
+   "label": "Standard",
+   "fieldtype": "Data",
+   "description": "Management-system standard identifier.",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "clause",
+   "label": "Clause",
+   "fieldtype": "Link",
+   "options": "ISO Clause",
+   "in_list_view": 1,
+   "columns": 4
+  }
+ ],
+ "permissions": []
+}

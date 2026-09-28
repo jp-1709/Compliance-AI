@@ -1,0 +1,210 @@
+{
+ "doctype": "DocType",
+ "name": "Effectiveness Check",
+ "module": "QMS CAPA",
+ "autoname": "EC-.YYYY.-.#####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Verification context and responsibility",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "EC-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_parent_capa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "parent_capa",
+   "label": "Parent Capa",
+   "fieldtype": "Link",
+   "options": "CAPA Case",
+   "reqd": 1
+  },
+  {
+   "fieldname": "verifier",
+   "label": "Verifier",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_verification_plan",
+   "label": "Verification Plan",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_verification_plan",
+   "label": "Method, criteria, and timing",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "verification_method",
+   "label": "Verification Method",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Document Review\nProcess Observation\nData Trend Analysis\nRe-test\nRe-inspection\nCustomer Feedback\nAudit\nCombined"
+  },
+  {
+   "fieldname": "effectiveness_criteria",
+   "label": "Effectiveness Criteria",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "verification_window_days",
+   "label": "Verification Window Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "earliest_check_date",
+   "label": "Earliest Check Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "actual_check_date",
+   "label": "Actual Check Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "tab_results___evidence",
+   "label": "Results & Evidence",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_results___evidence",
+   "label": "Evidence and outcome",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "data_collected",
+   "label": "Data Collected",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Evidence File references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "outcome",
+   "label": "Outcome",
+   "fieldtype": "Select",
+   "options": "Effective\nPartially Effective\nNot Effective"
+  },
+  {
+   "fieldname": "outcome_rationale",
+   "label": "Outcome Rationale",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "tab_follow_up___status",
+   "label": "Follow-up & Status",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_follow_up___status",
+   "label": "Follow-up action and completion",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "recommended_followup",
+   "label": "Recommended Followup",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "followup_capa",
+   "label": "Followup Capa",
+   "fieldtype": "Link",
+   "options": "CAPA Case"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Scheduled\nIn Progress\nVerified\nVoided",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "tab_ai_assistance",
+   "label": "AI Assistance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai_assistance",
+   "label": "AI usage indicators",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "_ai_criteria_drafted",
+   "label": "Ai Criteria Drafted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "_ai_questions_drafted",
+   "label": "Ai Questions Drafted",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "search_fields": "parent_capa",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

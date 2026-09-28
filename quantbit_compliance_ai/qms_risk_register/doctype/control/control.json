@@ -1,0 +1,310 @@
+{
+ "doctype": "DocType",
+ "name": "Control",
+ "module": "QMS Risk Register",
+ "autoname": "CTRL-.YYYY.-.#####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Control identity and classification",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "control_id_external",
+   "label": "Control Id External",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_control_type",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "control_type",
+   "label": "Control Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Preventive\nDetective\nCorrective\nCompensating\nDirective"
+  },
+  {
+   "fieldname": "control_category",
+   "label": "Control Category",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Manual\nAutomated\nHybrid"
+  },
+  {
+   "fieldname": "control_frequency",
+   "label": "Control Frequency",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Continuous\nDaily\nWeekly\nMonthly\nQuarterly\nHalf-Yearly\nAnnual\nOn-Event\nAd Hoc"
+  },
+  {
+   "fieldname": "tab_scope",
+   "label": "Scope",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scope",
+   "label": "Processes, assets, standards, and documents",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "applicable_processes",
+   "label": "Applicable Processes",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "applicable_assets",
+   "label": "Applicable Assets",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "applicable_standards",
+   "label": "Applicable Standards",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "infosec_annex_a_ref",
+   "label": "Infosec Annex A Ref",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_design",
+   "label": "Design",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_design",
+   "label": "Objective and design basis",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "control_objective",
+   "label": "Control Objective",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "control_design_basis",
+   "label": "Control Design Basis",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "linked_documents",
+   "label": "Linked Documents",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_ownership___status",
+   "label": "Ownership & Status",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ownership___status",
+   "label": "Owner, operator, tester, and deployment",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "control_owner",
+   "label": "Control Owner",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "control_operator",
+   "label": "Control Operator",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "effectiveness_tester",
+   "label": "Effectiveness Tester",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "column_status",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Designed\nImplemented\nOperating\nTested-Effective\nTested-Partially Effective\nTested-Not Effective\nUnder Remediation\nSuspended\nRetired",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "implementation_date",
+   "label": "Implementation Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "implementation_evidence",
+   "label": "Implementation Evidence",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "tab_testing",
+   "label": "Testing",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_testing",
+   "label": "Latest result, evidence, and history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "last_test_date",
+   "label": "Last Test Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "last_test_result",
+   "label": "Last Test Result",
+   "fieldtype": "Select",
+   "options": "Effective\nPartially Effective\nNot Effective\nNot Tested"
+  },
+  {
+   "fieldname": "last_test_by",
+   "label": "Last Test By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "last_test_evidence",
+   "label": "Last Test Evidence",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "next_test_due_date",
+   "label": "Next Test Due Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "test_history",
+   "label": "Test History",
+   "fieldtype": "Table",
+   "options": "Control Test History"
+  },
+  {
+   "fieldname": "tab_cost___provenance",
+   "label": "Cost & Provenance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_cost___provenance",
+   "label": "Risk usage, cost, sources, and AI",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "risk_count_credited",
+   "label": "Risk Count Credited",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "last_credit_date",
+   "label": "Last Credit Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "implementation_cost_inr",
+   "label": "Implementation Cost Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "annual_running_cost_inr",
+   "label": "Annual Running Cost Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "source_treatments",
+   "label": "Source Treatments",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "ai_drafted",
+   "label": "Ai Drafted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "ai_suggestion_log_ref",
+   "label": "Ai Suggestion Log Ref",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for AI Suggestion Log references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

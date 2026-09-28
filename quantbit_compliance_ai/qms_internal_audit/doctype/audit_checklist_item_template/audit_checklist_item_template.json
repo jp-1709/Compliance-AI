@@ -1,0 +1,78 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Checklist Item Template",
+ "module": "QMS Internal Audit",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "item_no",
+   "label": "Item No",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "clause_reference",
+   "label": "Clause Reference",
+   "fieldtype": "Link",
+   "options": "ISO Clause",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "regulatory_reference",
+   "label": "Regulatory Reference",
+   "fieldtype": "Link",
+   "options": "Regulation",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "question",
+   "label": "Question",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_evidence",
+   "label": "Expected Evidence",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "evidence_types",
+   "label": "Evidence Types",
+   "fieldtype": "Select",
+   "options": "Document Review\nRecord Review\nProcess Observation\nInterview\nRe-test\nWalkthrough\nData Analysis\nSystem Demo"
+  },
+  {
+   "fieldname": "process_observation_required",
+   "label": "Process Observation Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "risk_weighting",
+   "label": "Risk Weighting",
+   "fieldtype": "Select",
+   "options": "High\nMedium\nLow (drives finding severity if NC)"
+  },
+  {
+   "fieldname": "default_severity_if_nc",
+   "label": "Default Severity If Nc",
+   "fieldtype": "Select",
+   "options": "Major\nMinor\nOFI\nObservation"
+  },
+  {
+   "fieldname": "notes_to_auditor",
+   "label": "Notes To Auditor",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "category",
+   "label": "Category",
+   "fieldtype": "Data"
+  }
+ ]
+}

@@ -1,0 +1,310 @@
+{
+ "doctype": "DocType",
+ "name": "MR Input Record",
+ "module": "QMS Management Review",
+ "autoname": "MRI-.YYYY.-.######",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Cycle, category, and applicability",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "input_category",
+   "label": "Input Category",
+   "fieldtype": "Select",
+   "options": "Status of Prior Actions\nExternal/Internal Issues Changes\nInterested Party Needs\nCustomer Satisfaction & Feedback\nQuality/Environment/OH&S Objectives Status\nProcess Performance & Conformity\nNonconformities & Corrective Actions\nMonitoring & Measurement Results\nAudit Results\nExternal Provider/Supplier Performance\nResource Adequacy\nRisks & Opportunities Effectiveness\nImprovement Opportunities\nCompliance Obligations Status\nCommunications Relevant to MR\nIncidents & OH&S Performance\nRecall/Advisory Notice Activity\nRegulatory Requirements Changes\nPost-Market Surveillance\nInformation Security Incidents\nISMS Metrics\nHazard Control & Food Safety\nDisruption Events & BCM\nService & Complaint Reports\nOther (justify)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicable_standards",
+   "label": "Applicable Standards",
+   "fieldtype": "Table",
+   "options": "MR Input Standard Tag"
+  },
+  {
+   "fieldname": "process_areas",
+   "label": "Process Areas",
+   "fieldtype": "Table",
+   "options": "MR Input Process Area"
+  },
+  {
+   "fieldname": "tab_source",
+   "label": "Source",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_source",
+   "label": "Source system, record, and reporting period",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "source_type",
+   "label": "Source Type",
+   "fieldtype": "Select",
+   "options": "Auto-Pulled\nManual Entry\nContributed by Process Owner\nAI Synthesised\nCarried from Prior Cycle"
+  },
+  {
+   "fieldname": "source_module",
+   "label": "Source Module",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Q1 Quality Event\nQ2 CAPA\nQ3 Document Control\nQ4 Internal Audit\nQ5 Prior Cycle\nQ6 Risk\nQ7 Training\nQ8 Supplier\nC1 Compliance Calendar\nC2 Obligation Register\nExternal\nManual"
+  },
+  {
+   "fieldname": "source_record_doctype",
+   "label": "Source Record Doctype",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "source_record_name",
+   "label": "Source Record Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "column_source_record_url",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_record_url",
+   "label": "Source Record Url",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "source_period_start",
+   "label": "Source Period Start",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_period_end",
+   "label": "Source Period End",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_input_narrative",
+   "label": "Input Narrative",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_input_narrative",
+   "label": "Summary, metrics, trends, and evidence",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "data_summary",
+   "label": "Data Summary",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "key_metrics",
+   "label": "Key Metrics",
+   "fieldtype": "Table",
+   "options": "MR Input Metric"
+  },
+  {
+   "fieldname": "trend_analysis",
+   "label": "Trend Analysis",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "trend_direction",
+   "label": "Trend Direction",
+   "fieldtype": "Select",
+   "options": "Improving\nStable\nWorsening\nMixed\nInsufficient Data"
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Table",
+   "options": "MR Input Evidence"
+  },
+  {
+   "fieldname": "tab_contribution___review",
+   "label": "Contribution & Review",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_contribution___review",
+   "label": "Contributor and secretariat review",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "contributed_by",
+   "label": "Contributed By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contributed_on",
+   "label": "Contributed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "contributor_role",
+   "label": "Contributor Role",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nSubmitted by Contributor\nReviewed by Secretariat\nLocked for Meeting\nReviewed in Meeting\nCarried Forward\nWithdrawn",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "secretariat_review_notes",
+   "label": "Secretariat Review Notes",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "secretariat_reviewed_by",
+   "label": "Secretariat Reviewed By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "secretariat_reviewed_on",
+   "label": "Secretariat Reviewed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_meeting_outcome",
+   "label": "Meeting Outcome",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_meeting_outcome",
+   "label": "Discussion, decisions, and carry-forward",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "reviewed_in_meeting",
+   "label": "Reviewed In Meeting",
+   "fieldtype": "Link",
+   "options": "MR Meeting"
+  },
+  {
+   "fieldname": "meeting_discussion_summary",
+   "label": "Meeting Discussion Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "meeting_decisions_referenced",
+   "label": "Meeting Decisions Referenced",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_ai___acknowledgement",
+   "label": "AI & Acknowledgement",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai___acknowledgement",
+   "label": "AI provenance and chair acknowledgement",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ai_drafted",
+   "label": "Ai Drafted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "ai_suggestion_log_ref",
+   "label": "Ai Suggestion Log Ref",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for AI Suggestion Log references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "ai_quality_score",
+   "label": "Ai Quality Score",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "carried_from",
+   "label": "Carried From",
+   "fieldtype": "Link",
+   "options": "MR Input Record"
+  },
+  {
+   "fieldname": "reason_for_carry",
+   "label": "Reason For Carry",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "chair_acknowledged",
+   "label": "Chair Acknowledged",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "chair_acknowledgement_signature",
+   "label": "Chair Acknowledgement Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title,cycle",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,206 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Snapshot",
+ "module": "QMS Risk Register",
+ "autoname": "RSNAP-.YYYY.-.#####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Snapshot identity and purpose",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "snapshot_date",
+   "label": "Snapshot Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "snapshot_purpose",
+   "label": "Snapshot Purpose",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Q5 MR Pack\nExternal Audit\nBRSR Disclosure\nBoard Briefing\nPeriodic Archival\nAd Hoc"
+  },
+  {
+   "fieldname": "column_linked_mr_cycle",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "linked_mr_cycle",
+   "label": "Linked Mr Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle"
+  },
+  {
+   "fieldname": "linked_audit_engagement",
+   "label": "Linked Audit Engagement",
+   "fieldtype": "Link",
+   "options": "Audit"
+  },
+  {
+   "fieldname": "tab_scope___metrics",
+   "label": "Scope & Metrics",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scope___metrics",
+   "label": "Included risks and aggregate views",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scope_filter",
+   "label": "Scope Filter",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "included_risks_count",
+   "label": "Included Risks Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "included_risks",
+   "label": "Included Risks",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "aggregate_metrics",
+   "label": "Aggregate Metrics",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "top_n_risks",
+   "label": "Top N Risks",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "heat_map_data",
+   "label": "Heat Map Data",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_report",
+   "label": "Report",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_report",
+   "label": "Narrative and generated report",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cycle_summary",
+   "label": "Cycle Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "generated_pdf",
+   "label": "Generated Pdf",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "generated_pdf_hash",
+   "label": "Generated Pdf Hash",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tamper_evident_block",
+   "label": "Tamper Evident Block",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_signatures___distribution",
+   "label": "Signatures & Distribution",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_signatures___distribution",
+   "label": "Sign-off, integrity, and recipients",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "signed_by",
+   "label": "Signed By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "signature",
+   "label": "Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "signed_on",
+   "label": "Signed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "countersigned_by",
+   "label": "Countersigned By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "countersignature",
+   "label": "Countersignature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "distributed_to",
+   "label": "Distributed To",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "snapshot_date",
+ "sort_order": "DESC"
+}

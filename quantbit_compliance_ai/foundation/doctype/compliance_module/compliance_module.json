@@ -1,0 +1,20 @@
+{
+ "doctype": "DocType",
+ "name": "Compliance Module",
+ "module": "Foundation",
+ "autoname": "field:module_key",
+ "title_field": "module_name",
+ "track_changes": 1,
+ "description": "Feature catalog used to enable compliance domains for each organisation.",
+ "fields": [
+  {"fieldname": "module_key", "label": "Module Key", "fieldtype": "Data", "reqd": 1, "unique": 1, "in_list_view": 1},
+  {"fieldname": "module_name", "label": "Module Name", "fieldtype": "Data", "reqd": 1, "unique": 1, "in_list_view": 1, "in_global_search": 1},
+  {"fieldname": "description", "label": "Description", "fieldtype": "Small Text"},
+  {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1, "in_list_view": 1}
+ ],
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Group CXO", "read": 1},
+  {"role": "Compliance Officer", "read": 1}
+ ]
+}

@@ -1,0 +1,215 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Appetite",
+ "module": "QMS Risk Register",
+ "autoname": "RM-APP-.#####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Scope, category, and version",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "scope",
+   "label": "Scope",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Entity-Wide\nCategory-Specific"
+  },
+  {
+   "fieldname": "column_risk_category",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "risk_category",
+   "label": "Risk Category",
+   "fieldtype": "Link",
+   "options": "Risk Category"
+  },
+  {
+   "fieldname": "appetite_version",
+   "label": "Appetite Version",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_thresholds",
+   "label": "Thresholds",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_thresholds",
+   "label": "Validity, method, and tolerable exposure",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effective_from",
+   "label": "Effective From",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "effective_to",
+   "label": "Effective To",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "column_max_tolerable_residual_rating",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "max_tolerable_residual_rating",
+   "label": "Max Tolerable Residual Rating",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "method_profile",
+   "label": "Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_guidance",
+   "label": "Guidance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_guidance",
+   "label": "Appetite statement and examples",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "appetite_statement",
+   "label": "Appetite Statement",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tolerance_examples",
+   "label": "Tolerance Examples",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_financial_exposure",
+   "label": "Financial Exposure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_financial_exposure",
+   "label": "Aggregate and single-event limits",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "max_aggregate_exposure_inr",
+   "label": "Max Aggregate Exposure Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "max_single_event_loss_inr",
+   "label": "Max Single Event Loss Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "tab_approval___review",
+   "label": "Approval & Review",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_approval___review",
+   "label": "Approval, review, and version history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nPending Approval\nApproved\nSuperseded\nWithdrawn",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "label": "Approved By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "approval_signature",
+   "label": "Approval Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "approved_on",
+   "label": "Approved On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "review_due_date",
+   "label": "Review Due Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "last_reviewed_on",
+   "label": "Last Reviewed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "prior_version",
+   "label": "Prior Version",
+   "fieldtype": "Link",
+   "options": "Risk Appetite"
+  },
+  {
+   "fieldname": "linked_mr_output",
+   "label": "Linked Mr Output",
+   "fieldtype": "Link",
+   "options": "MR Output"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "effective_from",
+ "sort_order": "DESC"
+}

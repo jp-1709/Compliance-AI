@@ -1,0 +1,53 @@
+{
+ "doctype": "DocType",
+ "name": "MR Checklist Category",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "input_category",
+   "label": "Input Category",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "clause_subref",
+   "label": "Clause Subref",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "mandatory",
+   "label": "Mandatory",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "default_source_module",
+   "label": "Default Source Module",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "default_source_handler",
+   "label": "Default Source Handler",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "prompt_text",
+   "label": "Prompt Text",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "example_metrics",
+   "label": "Example Metrics",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": []
+}

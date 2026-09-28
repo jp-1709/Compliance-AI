@@ -1,0 +1,601 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Item",
+ "module": "QMS Risk Register",
+ "autoname": "RISK-.YYYY.-.#####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Risk identity, category, and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_risk_id_external",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "risk_id_external",
+   "label": "Risk Id External",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "risk_category",
+   "label": "Risk Category",
+   "fieldtype": "Link",
+   "options": "Risk Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_scope___context",
+   "label": "Scope & Context",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scope___context",
+   "label": "Standards, processes, assets, and locations",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sub_categories",
+   "label": "Sub Categories",
+   "fieldtype": "Table",
+   "options": "Risk Item Sub Category"
+  },
+  {
+   "fieldname": "applicable_standards",
+   "label": "Applicable Standards",
+   "fieldtype": "Table",
+   "options": "Risk Item Standard Tag"
+  },
+  {
+   "fieldname": "process_areas",
+   "label": "Process Areas",
+   "fieldtype": "Table",
+   "options": "Risk Item Process Area"
+  },
+  {
+   "fieldname": "asset_links",
+   "label": "Asset Links",
+   "fieldtype": "Table",
+   "options": "Risk Item Asset Link"
+  },
+  {
+   "fieldname": "departments",
+   "label": "Departments",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "locations",
+   "label": "Locations",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tags",
+   "label": "Tags",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_risk_narrative",
+   "label": "Risk Narrative",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_risk_narrative",
+   "label": "Description, causes, consequences, and source",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "risk_description",
+   "label": "Risk Description",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_event",
+   "label": "Source Event",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "cause_factors",
+   "label": "Cause Factors",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "consequence_description",
+   "label": "Consequence Description",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "identified_by",
+   "label": "Identified By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "identified_on",
+   "label": "Identified On",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "identification_source",
+   "label": "Identification Source",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Risk Workshop\nProcess Owner Submission\nQuality Event (Q1) Trigger\nCAPA (Q2) Trigger\nAudit Finding (Q4) Trigger\nMR Output (Q5) Trigger\nReg Watch (C5) Trigger\nExternal Event\nAI-Suggested\nOther"
+  },
+  {
+   "fieldname": "identification_source_record",
+   "label": "Identification Source Record",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "risk_owner",
+   "label": "Risk Owner",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "owner_acceptance_date",
+   "label": "Owner Acceptance Date",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "owner_role",
+   "label": "Owner Role",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "escalation_owner",
+   "label": "Escalation Owner",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "tab_inherent_assessment",
+   "label": "Inherent Assessment",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_inherent_assessment",
+   "label": "Method and inherent risk scoring",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "method_profile",
+   "label": "Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "inherent_likelihood",
+   "label": "Inherent Likelihood",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "inherent_impact",
+   "label": "Inherent Impact",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "inherent_third_dim",
+   "label": "Inherent Third Dim",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_cia_c",
+   "label": "Inherent Cia C",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_inherent_cia_i",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inherent_cia_i",
+   "label": "Inherent Cia I",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_cia_a",
+   "label": "Inherent Cia A",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_rating",
+   "label": "Inherent Rating",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_band",
+   "label": "Inherent Band",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_residual_assessment",
+   "label": "Residual Assessment",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_residual_assessment",
+   "label": "Residual scoring and target",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "residual_likelihood",
+   "label": "Residual Likelihood",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_impact",
+   "label": "Residual Impact",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_third_dim",
+   "label": "Residual Third Dim",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_cia_c",
+   "label": "Residual Cia C",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_cia_i",
+   "label": "Residual Cia I",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_residual_cia_a",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "residual_cia_a",
+   "label": "Residual Cia A",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_rating",
+   "label": "Residual Rating",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_band",
+   "label": "Residual Band",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "target_residual_rating",
+   "label": "Target Residual Rating",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "target_completion_date",
+   "label": "Target Completion Date",
+   "fieldtype": "Date",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tab_treatment",
+   "label": "Treatment",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_treatment",
+   "label": "Treatment strategy, status, and target date",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "treatment_strategy",
+   "label": "Treatment Strategy",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Avoid\nReduce\nTransfer\nAccept\nPursue (Opportunity)"
+  },
+  {
+   "fieldname": "treatment_strategy_rationale",
+   "label": "Treatment Strategy Rationale",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "treatment_status",
+   "label": "Treatment Status",
+   "fieldtype": "Select",
+   "options": "No Treatment Yet\nPlan Drafting\nPlan Approved\nIn Progress\nCompleted\nVerified Effective\nRe-treatment Required\nClosed",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "tab_appetite___acceptance",
+   "label": "Appetite & Acceptance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_appetite___acceptance",
+   "label": "Appetite evaluation and formal acceptance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "applicable_appetite",
+   "label": "Applicable Appetite",
+   "fieldtype": "Link",
+   "options": "Risk Appetite"
+  },
+  {
+   "fieldname": "within_appetite",
+   "label": "Within Appetite",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_acceptance_required",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "acceptance_required",
+   "label": "Acceptance Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "active_acceptance",
+   "label": "Active Acceptance",
+   "fieldtype": "Link",
+   "options": "Risk Acceptance"
+  },
+  {
+   "fieldname": "tab_related_records",
+   "label": "Related Records",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_related_records",
+   "label": "Events, CAPAs, audits, reviews, and dependencies",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "linked_quality_events",
+   "label": "Linked Quality Events",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_capas",
+   "label": "Linked Capas",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_dcrs",
+   "label": "Linked Dcrs",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_audits",
+   "label": "Linked Audits",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_mr_outputs",
+   "label": "Linked Mr Outputs",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_obligations",
+   "label": "Linked Obligations",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "related_risks",
+   "label": "Related Risks",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_lifecycle___closure",
+   "label": "Lifecycle & Closure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_lifecycle___closure",
+   "label": "Status, closure, and reassessment",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nIdentified\nAssessed\nTreatment Planned\nTreatment In Progress\nTreatment Effective\nAccepted\nClosed\nRe-opened\nArchived\nWithdrawn",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status_reason",
+   "label": "Status Reason",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "opened_on",
+   "label": "Opened On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "closed_on",
+   "label": "Closed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "closed_by",
+   "label": "Closed By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "closure_summary",
+   "label": "Closure Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "withdrawal_reason",
+   "label": "Withdrawal Reason",
+   "fieldtype": "Long Text",
+   "depends_on": "eval:doc.status == \"Withdrawn\" || doc.is_withdrawn == 1"
+  },
+  {
+   "fieldname": "last_assessed_on",
+   "label": "Last Assessed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "next_reassessment_due",
+   "label": "Next Reassessment Due",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "is_reassessment_overdue",
+   "label": "Is Reassessment Overdue",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "reassessment_overdue_days",
+   "label": "Reassessment Overdue Days",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "is_top_n_at_entity",
+   "label": "Is Top N At Entity",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "aggregation_rank",
+   "label": "Aggregation Rank",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_reporting___governance",
+   "label": "Reporting & Governance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_reporting___governance",
+   "label": "Trend, disclosures, AI, and confidentiality",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "trend_direction",
+   "label": "Trend Direction",
+   "fieldtype": "Select",
+   "options": "Improving\nStable\nWorsening\nVolatile\nInsufficient Data"
+  },
+  {
+   "fieldname": "trend_residual_delta_last_3",
+   "label": "Trend Residual Delta Last 3",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "is_principal_risk_for_brsr",
+   "label": "Is Principal Risk For Brsr",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "last_brsr_disclosed_on",
+   "label": "Last Brsr Disclosed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "ai_drafted",
+   "label": "Ai Drafted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "ai_suggestion_log_ref",
+   "label": "Ai Suggestion Log Ref",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for AI Suggestion Log references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "confidentiality",
+   "label": "Confidentiality",
+   "fieldtype": "Select",
+   "options": "Internal\nConfidential\nStrictly Confidential"
+  },
+  {
+   "fieldname": "redact_from_external_auditor",
+   "label": "Redact From External Auditor",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title,risk_id_external",
+ "sort_field": "target_completion_date",
+ "sort_order": "DESC"
+}

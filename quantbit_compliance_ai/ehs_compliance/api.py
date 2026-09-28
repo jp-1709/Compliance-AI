@@ -599,12 +599,23 @@ def submit_incident_investigation(incident: str, investigation_data: dict) -> di
     if not doc.linked_capa:
         try:
             capa = frappe.get_doc({
-                "doctype": "QMS CAPA",
+                "doctype": "CAPA Case",
                 "organisation": doc.organisation,
                 "business_entity": doc.business_entity,
-                "capa_title": f"CAPA for {doc.name}: {doc.incident_type}",
-                "linked_ehs_incident": doc.name,
-                "status": "Open",
+                "title": f"CAPA for {doc.name}: {doc.incident_type}",
+                "capa_type": "Corrective",
+                "severity": "High" if doc.severity in ("Fatality", "Lost Time Injury") else "Medium",
+                "priority": "P2" if doc.severity in ("Fatality", "Lost Time Injury") else "P3",
+                "source": "Quality Event",
+                "source_reference": doc.name,
+                "problem_statement": doc.incident_description or f"Investigation of EHS incident {doc.name}",
+                "root_cause_summary": doc.root_cause_summary or "Pending formal RCA confirmation",
+                "capa_owner": frappe.session.user,
+                "qa_approver": frappe.session.user,
+                "target_close_date": frappe.utils.add_days(frappe.utils.today(), 30),
+                # Keep the automatically-created record in Draft until an
+                # independent QA approver and formal actions are assigned.
+                "status": "Draft",
             }).insert(ignore_permissions=True)
             doc.db_set("linked_capa", capa.name)
             doc.db_set("incident_status", "CAPA In Progress")

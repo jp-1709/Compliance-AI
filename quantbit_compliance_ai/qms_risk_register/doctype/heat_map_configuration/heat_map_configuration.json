@@ -1,0 +1,111 @@
+{
+ "doctype": "DocType",
+ "name": "Heat Map Configuration",
+ "module": "QMS Risk Register",
+ "autoname": "hash",
+ "track_changes": 1,
+ "title_field": "config_name",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Risk monitoring configuration",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "config_name",
+   "label": "Config Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_default",
+   "label": "Is Default",
+   "fieldtype": "Check",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "method_profile",
+   "label": "Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "x_axis_dimension",
+   "label": "X Axis Dimension",
+   "fieldtype": "Select",
+   "options": "Likelihood\nProbability\nFrequency\nDetectability"
+  },
+  {
+   "fieldname": "y_axis_dimension",
+   "label": "Y Axis Dimension",
+   "fieldtype": "Select",
+   "options": "Impact\nSeverity\nConsequence"
+  },
+  {
+   "fieldname": "cell_count_x",
+   "label": "Cell Count X",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "cell_count_y",
+   "label": "Cell Count Y",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "cell_band_mapping",
+   "label": "Cell Band Mapping",
+   "fieldtype": "Code",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "show_inherent",
+   "label": "Show Inherent",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "show_residual",
+   "label": "Show Residual",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "show_target",
+   "label": "Show Target",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "show_movement_arrows",
+   "label": "Show Movement Arrows",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_archived",
+   "label": "Is Archived",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

@@ -1,0 +1,106 @@
+{
+ "doctype": "DocType",
+ "name": "MR Input Checklist Template",
+ "module": "QMS Management Review",
+ "autoname": "MRICT-.####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Standard and template version",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "standard",
+   "label": "Standard",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "reqd": 1,
+   "description": "JSON array for Standard references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "applicable_clause",
+   "label": "Applicable Clause",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "template_version",
+   "label": "Template Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "is_seed_data",
+   "label": "Is Seed Data",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_checklist",
+   "label": "Checklist",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_checklist",
+   "label": "Required management-review inputs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "input_categories",
+   "label": "Input Categories",
+   "fieldtype": "Table",
+   "options": "MR Checklist Category"
+  },
+  {
+   "fieldname": "tab_review",
+   "label": "Review",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_review",
+   "label": "Template review history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "last_reviewed_on",
+   "label": "Last Reviewed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "label": "Reviewed By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

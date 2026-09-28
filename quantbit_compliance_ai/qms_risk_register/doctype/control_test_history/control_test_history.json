@@ -1,0 +1,68 @@
+{
+ "doctype": "DocType",
+ "name": "Control Test History",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "test_date",
+   "label": "Test Date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "tested_by",
+   "label": "Tested By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "test_method",
+   "label": "Test Method",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Inquiry\nObservation\nInspection\nReperformance\nRe-execution\nSampling-Based",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "sample_size",
+   "label": "Sample Size",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "exceptions_count",
+   "label": "Exceptions Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "result",
+   "label": "Result",
+   "fieldtype": "Select",
+   "options": "Effective\nPartially Effective\nNot Effective\nNot Tested"
+  },
+  {
+   "fieldname": "evidence_file",
+   "label": "Evidence File",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "linked_audit_engagement",
+   "label": "Linked Audit Engagement",
+   "fieldtype": "Link",
+   "options": "Audit"
+  }
+ ]
+}

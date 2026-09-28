@@ -1,0 +1,120 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Checklist Item",
+ "module": "QMS Internal Audit",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "item_no",
+   "label": "Item No",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "clause_reference",
+   "label": "Clause Reference",
+   "fieldtype": "Link",
+   "options": "ISO Clause",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "regulatory_reference",
+   "label": "Regulatory Reference",
+   "fieldtype": "Link",
+   "options": "Regulation",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "question",
+   "label": "Question",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_evidence",
+   "label": "Expected Evidence",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "evidence_types",
+   "label": "Evidence Types",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "risk_weighting",
+   "label": "Risk Weighting",
+   "fieldtype": "Select",
+   "options": "High\nMedium\nLow"
+  },
+  {
+   "fieldname": "default_severity_if_nc",
+   "label": "Default Severity If Nc",
+   "fieldtype": "Select",
+   "options": "Major\nMinor\nOFI\nObservation"
+  },
+  {
+   "fieldname": "auditor_response",
+   "label": "Auditor Response",
+   "fieldtype": "Select",
+   "options": "Conformant\nConformant With Comments\nNon-Conformant\nNot Applicable\nSkipped"
+  },
+  {
+   "fieldname": "auditor_notes",
+   "label": "Auditor Notes",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Evidence File references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_documents_reviewed",
+   "label": "Linked Documents Reviewed",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Document Version references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_records_reviewed",
+   "label": "Linked Records Reviewed",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "interviewees",
+   "label": "Interviewees",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for User references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "linked_finding",
+   "label": "Linked Finding",
+   "fieldtype": "Link",
+   "options": "Audit Finding"
+  },
+  {
+   "fieldname": "time_spent_minutes",
+   "label": "Time Spent Minutes",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "completed_at",
+   "label": "Completed At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "flagged_for_lead_review",
+   "label": "Flagged For Lead Review",
+   "fieldtype": "Check"
+  }
+ ]
+}

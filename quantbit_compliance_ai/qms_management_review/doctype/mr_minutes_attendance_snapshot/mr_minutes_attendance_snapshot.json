@@ -1,0 +1,44 @@
+{
+ "doctype": "DocType",
+ "name": "MR Minutes Attendance Snapshot",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "user",
+   "label": "User",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "role_in_meeting",
+   "label": "Role In Meeting",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "attended",
+   "label": "Attended",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "attendance_mode",
+   "label": "Attendance Mode",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "signed_attendance",
+   "label": "Signed Attendance",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": []
+}

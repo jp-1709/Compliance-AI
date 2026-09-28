@@ -1,0 +1,225 @@
+{
+ "doctype": "DocType",
+ "name": "RCA Record",
+ "module": "QMS CAPA",
+ "autoname": "RCA-.YYYY.-.#####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "RCA context and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "RCA-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "parent_capa",
+   "label": "Parent Capa",
+   "fieldtype": "Link",
+   "options": "CAPA Case",
+   "reqd": 1
+  },
+  {
+   "fieldname": "analyst",
+   "label": "Analyst",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "analysis_team",
+   "label": "Analysis Team",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for User references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "methods_used",
+   "label": "Methods Used",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "reqd": 1,
+   "description": "JSON array for RCA Method references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_analysis",
+   "label": "Analysis",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_analysis",
+   "label": "Problem definition and evidence",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "problem_definition",
+   "label": "Problem Definition",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "data_gathered",
+   "label": "Data Gathered",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Evidence File references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_methods___findings",
+   "label": "Methods & Findings",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_methods___findings",
+   "label": "Analysis methods and root causes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "five_whys",
+   "label": "Five Whys",
+   "fieldtype": "Table",
+   "options": "RCA Five Whys"
+  },
+  {
+   "fieldname": "fishbone_causes",
+   "label": "Fishbone Causes",
+   "fieldtype": "Table",
+   "options": "RCA Fishbone Cause"
+  },
+  {
+   "fieldname": "fault_tree_xml",
+   "label": "Fault Tree Xml",
+   "fieldtype": "Code"
+  },
+  {
+   "fieldname": "identified_root_causes",
+   "label": "Identified Root Causes",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contributing_factors",
+   "label": "Contributing Factors",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "tab_review___completion",
+   "label": "Review & Completion",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_review___completion",
+   "label": "Completion and independent review",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "analysis_completed_on",
+   "label": "Analysis Completed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Draft\nIn Analysis\nComplete\nReviewed",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_reviewed_by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "label": "Reviewed By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "reviewed_on",
+   "label": "Reviewed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_ai_assistance",
+   "label": "AI Assistance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai_assistance",
+   "label": "AI usage and traceability",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "_ai_assisted",
+   "label": "Ai Assisted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "_ai_suggestions_log",
+   "label": "Ai Suggestions Log",
+   "fieldtype": "Link",
+   "options": "CAPA AI Suggestion Log"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "search_fields": "parent_capa",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

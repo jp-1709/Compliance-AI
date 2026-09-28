@@ -1,0 +1,19 @@
+{
+ "doctype": "DocType",
+ "name": "Inspection Observation",
+ "module": "Labour Compliance",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {"fieldname": "observation_number", "label": "Observation #", "fieldtype": "Data", "in_list_view": 1},
+  {"fieldname": "regulation", "label": "Regulation", "fieldtype": "Link", "options": "Regulation", "in_list_view": 1},
+  {"fieldname": "section_reference", "label": "Section / Rule", "fieldtype": "Data", "in_list_view": 1},
+  {"fieldname": "severity", "label": "Severity", "fieldtype": "Select", "options": "Critical\nMajor\nMinor\nAdvisory", "default": "Minor", "in_list_view": 1},
+  {"fieldname": "finding", "label": "Finding", "fieldtype": "Small Text", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "response", "label": "Management Response", "fieldtype": "Small Text"},
+  {"fieldname": "responsible_user", "label": "Responsible User", "fieldtype": "Link", "options": "User"},
+  {"fieldname": "target_date", "label": "Target Date", "fieldtype": "Date"},
+  {"fieldname": "observation_status", "label": "Status", "fieldtype": "Select", "options": "Pending\nResponse Submitted\nAccepted\nClosed\nDisputed", "default": "Pending", "in_list_view": 1},
+  {"fieldname": "closure_evidence", "label": "Closure Evidence", "fieldtype": "Link", "options": "Evidence File"}
+ ]
+}

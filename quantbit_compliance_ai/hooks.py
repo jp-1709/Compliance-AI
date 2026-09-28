@@ -26,7 +26,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/quantbit_compliance_ai/css/quantbit_compliance_ai.css"
-# app_include_js = "/assets/quantbit_compliance_ai/js/quantbit_compliance_ai.js"
+app_include_js = "/assets/quantbit_compliance_ai/js/scoped_link_queries.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/quantbit_compliance_ai/css/quantbit_compliance_ai.css"
@@ -86,7 +86,8 @@ app_license = "mit"
 # ------------
 
 # before_install = "quantbit_compliance_ai.install.before_install"
-# after_install = "quantbit_compliance_ai.install.after_install"
+after_install = "quantbit_compliance_ai.setup.ensure_reference_data"
+after_migrate = "quantbit_compliance_ai.setup.ensure_reference_data"
 
 # Uninstallation
 # ------------
@@ -138,13 +139,11 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"*": {
+		"validate": "quantbit_compliance_ai.foundation.link_validation.validate_scoped_links",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -255,4 +254,3 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

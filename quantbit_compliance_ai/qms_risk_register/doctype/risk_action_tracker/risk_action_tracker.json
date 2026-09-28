@@ -1,0 +1,155 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Action Tracker",
+ "module": "QMS Risk Register",
+ "autoname": "hash",
+ "track_changes": 1,
+ "title_field": "risk_item",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Risk monitoring configuration",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "risk_item",
+   "label": "Risk Item",
+   "fieldtype": "Link",
+   "options": "Risk Item",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "risk_category",
+   "label": "Risk Category",
+   "fieldtype": "Link",
+   "options": "Risk Category",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "risk_owner",
+   "label": "Risk Owner",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "inherent_rating",
+   "label": "Inherent Rating",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "residual_rating",
+   "label": "Residual Rating",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "residual_band",
+   "label": "Residual Band",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "within_appetite",
+   "label": "Within Appetite",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "acceptance_required",
+   "label": "Acceptance Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "active_acceptance",
+   "label": "Active Acceptance",
+   "fieldtype": "Link",
+   "options": "Risk Acceptance"
+  },
+  {
+   "fieldname": "acceptance_valid_until",
+   "label": "Acceptance Valid Until",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "treatment_status",
+   "label": "Treatment Status",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "open_treatment_count",
+   "label": "Open Treatment Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "completed_treatment_count",
+   "label": "Completed Treatment Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "last_assessed_on",
+   "label": "Last Assessed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "next_reassessment_due",
+   "label": "Next Reassessment Due",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "is_reassessment_overdue",
+   "label": "Is Reassessment Overdue",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "reassessment_overdue_days",
+   "label": "Reassessment Overdue Days",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "top_n_at_entity",
+   "label": "Top N At Entity",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "aggregation_rank",
+   "label": "Aggregation Rank",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "trend_direction",
+   "label": "Trend Direction",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "last_synced_on",
+   "label": "Last Synced On",
+   "fieldtype": "Datetime"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

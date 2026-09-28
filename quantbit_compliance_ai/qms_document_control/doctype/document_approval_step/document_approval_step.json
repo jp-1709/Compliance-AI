@@ -1,0 +1,47 @@
+{
+ "doctype": "DocType",
+ "name": "Document Approval Step",
+ "module": "QMS Document Control",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "step_role",
+   "label": "Step Role",
+   "fieldtype": "Select",
+   "options": "Drafter\nReviewer\nApprover",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "acted_by",
+   "label": "Acted By",
+   "fieldtype": "Link",
+   "options": "User",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "acted_on",
+   "label": "Acted On",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "outcome",
+   "label": "Outcome",
+   "fieldtype": "Select",
+   "options": "Submitted\nApproved\nReturned\nWithdrawn",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "comments",
+   "label": "Comments",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": []
+}

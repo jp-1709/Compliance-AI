@@ -1,0 +1,312 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Policy",
+ "module": "QMS Risk Register",
+ "autoname": "RM-POL-.#####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Policy identity, approval, and method",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "policy_version",
+   "label": "Policy Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "effective_from",
+   "label": "Effective From",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "label": "Approved By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "label": "Approved On",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_method_profile",
+   "label": "Default Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "method_profile_per_category",
+   "label": "Method Profile Per Category",
+   "fieldtype": "Table",
+   "options": "Risk Policy Category Method"
+  },
+  {
+   "fieldname": "tab_assessment_cadence",
+   "label": "Assessment Cadence",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_assessment_cadence",
+   "label": "Reassessment intervals by risk category",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cadence_strategic_days",
+   "label": "Cadence Strategic Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_operational_days",
+   "label": "Cadence Operational Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_compliance_days",
+   "label": "Cadence Compliance Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_infosec_days",
+   "label": "Cadence Infosec Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_oh_s_days",
+   "label": "Cadence Oh S Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_environmental_days",
+   "label": "Cadence Environmental Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_food_safety_days",
+   "label": "Cadence Food Safety Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_product_safety_days",
+   "label": "Cadence Product Safety Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_business_continuity_days",
+   "label": "Cadence Business Continuity Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_financial_days",
+   "label": "Cadence Financial Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_reputational_days",
+   "label": "Cadence Reputational Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cadence_other_days",
+   "label": "Cadence Other Days",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_treatment___appetite",
+   "label": "Treatment & Appetite",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_treatment___appetite",
+   "label": "Event reassessment, thresholds, and appetite",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "on_event_reassessment_required",
+   "label": "On Event Reassessment Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "treatment_required_threshold",
+   "label": "Treatment Required Threshold",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "acceptance_required_threshold",
+   "label": "Acceptance Required Threshold",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "treatment_completion_target_days",
+   "label": "Treatment Completion Target Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_appetite_set_at",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "appetite_set_at",
+   "label": "Appetite Set At",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Entity Level\nCategory Level\nBoth"
+  },
+  {
+   "fieldname": "appetite_review_frequency_days",
+   "label": "Appetite Review Frequency Days",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "appetite_signing_required",
+   "label": "Appetite Signing Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_independence",
+   "label": "Independence",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_independence",
+   "label": "Ownership and testing separation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "control_owner_must_differ_from_risk_owner",
+   "label": "Control Owner Must Differ From Risk Owner",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "effectiveness_tester_must_differ_from_control_owner",
+   "label": "Effectiveness Tester Must Differ From Control Owner",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_aggregation___disclosure",
+   "label": "Aggregation & Disclosure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_aggregation___disclosure",
+   "label": "Aggregation, InfoSec, and BRSR rules",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "aggregate_method",
+   "label": "Aggregate Method",
+   "fieldtype": "Select",
+   "options": "Sum of Top-N\nWeighted Avg\nMax\nCustom"
+  },
+  {
+   "fieldname": "aggregate_top_n",
+   "label": "Aggregate Top N",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "infosec_soa_required",
+   "label": "Infosec Soa Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_infosec_annex_a_version",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "infosec_annex_a_version",
+   "label": "Infosec Annex A Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "brsr_principal_risks_disclosure",
+   "label": "Brsr Principal Risks Disclosure",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "brsr_export_top_n",
+   "label": "Brsr Export Top N",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_assessment_controls",
+   "label": "Assessment Controls",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_assessment_controls",
+   "label": "Self-assessment and evidence requirements",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "allow_self_assessment",
+   "label": "Allow Self Assessment",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "require_evidence_for_assessment_change",
+   "label": "Require Evidence For Assessment Change",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "effective_from",
+ "sort_order": "DESC"
+}

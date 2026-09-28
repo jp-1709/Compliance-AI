@@ -1,0 +1,189 @@
+{
+ "doctype": "DocType",
+ "name": "Document Version",
+ "module": "QMS Document Control",
+ "autoname": "QDV-.YYYY.-.######",
+ "track_changes": 1,
+ "title_field": "version_number",
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_identity",
+   "label": "Identity and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qms_document",
+   "label": "Qms Document",
+   "fieldtype": "Link",
+   "options": "QMS Document",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "version_number",
+   "label": "Version Number",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_major_revision",
+   "label": "Is Major Revision",
+   "fieldtype": "Check",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tab_control",
+   "label": "Control",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_control",
+   "label": "Lifecycle and controlled information",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "change_summary",
+   "label": "Change Summary",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "prepared_by",
+   "label": "Prepared By",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "prepared_on",
+   "label": "Prepared On",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reviewed_by",
+   "label": "Reviewed By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "reviewed_on",
+   "label": "Reviewed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "review_outcome",
+   "label": "Review Outcome",
+   "fieldtype": "Select",
+   "options": "Approved\nReturned"
+  },
+  {
+   "fieldname": "review_comments",
+   "label": "Review Comments",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "approved_by",
+   "label": "Approved By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_on",
+   "label": "Approved On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "effective_date_override",
+   "label": "Effective Date Override",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "tab_traceability",
+   "label": "Traceability",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_traceability",
+   "label": "References and audit trail",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "file_attachment",
+   "label": "File Attachment",
+   "fieldtype": "Attach",
+   "reqd": 1
+  },
+  {
+   "fieldname": "file_format",
+   "label": "File Format",
+   "fieldtype": "Select",
+   "options": "PDF\nDOCX\nXLSX\nPPTX\nDWG\nOther"
+  },
+  {
+   "fieldname": "file_size_bytes",
+   "label": "File Size Bytes",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "hash_sha256",
+   "label": "Hash Sha256",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "evidence_file",
+   "label": "Evidence File",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "superseded_on",
+   "label": "Superseded On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "superseded_by",
+   "label": "Superseded By",
+   "fieldtype": "Link",
+   "options": "Document Version"
+  },
+  {
+   "fieldname": "approval_steps",
+   "label": "Approval Steps",
+   "fieldtype": "Table",
+   "options": "Document Approval Step"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nIn Review\nApproved\nSuperseded\nWithdrawn",
+   "reqd": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1
+  }
+ ]
+}

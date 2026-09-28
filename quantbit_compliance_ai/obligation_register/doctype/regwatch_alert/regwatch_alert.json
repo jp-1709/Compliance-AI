@@ -1,0 +1,36 @@
+{
+ "doctype": "DocType",
+ "name": "RegWatch Alert",
+ "module": "Obligation Register",
+ "autoname": "RW-.YYYY.-.#####",
+ "title_field": "alert_title",
+ "search_fields": "alert_title,regulation,source_reference",
+ "track_changes": 1,
+ "description": "Regulatory intelligence alert awaiting legal review and obligation-impact assessment.",
+ "fields": [
+  {"fieldname": "alert_title", "label": "Alert Title", "fieldtype": "Data", "reqd": 1, "in_list_view": 1, "in_global_search": 1},
+  {"fieldname": "regulation", "label": "Regulation", "fieldtype": "Link", "options": "Regulation", "in_list_view": 1, "in_standard_filter": 1},
+  {"fieldname": "regulator", "label": "Regulator", "fieldtype": "Link", "options": "Regulator", "in_standard_filter": 1},
+  {"fieldname": "column_break_1", "fieldtype": "Column Break"},
+  {"fieldname": "alert_type", "label": "Alert Type", "fieldtype": "Select", "options": "New Regulation\nAmendment\nNotification\nCircular\nClarification\nCourt Ruling\nDeadline Change\nOther", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "published_on", "label": "Published On", "fieldtype": "Date", "in_list_view": 1},
+  {"fieldname": "effective_from", "label": "Effective From", "fieldtype": "Date"},
+  {"fieldname": "jurisdiction", "label": "Jurisdiction", "fieldtype": "Select", "options": "Central\nState\nLocal/Municipal"},
+  {"fieldname": "state", "label": "State", "fieldtype": "Link", "options": "State", "depends_on": "eval:doc.jurisdiction=='State'"},
+  {"fieldname": "source_url", "label": "Official Source URL", "fieldtype": "Data", "options": "URL"},
+  {"fieldname": "source_reference", "label": "Source Reference", "fieldtype": "Data"},
+  {"fieldname": "source_document", "label": "Source Document", "fieldtype": "Attach"},
+  {"fieldname": "summary", "label": "Summary", "fieldtype": "Text Editor", "reqd": 1},
+  {"fieldname": "impact_summary", "label": "Preliminary Impact", "fieldtype": "Text Editor"},
+  {"fieldname": "review_status", "label": "Review Status", "fieldtype": "Select", "options": "New\nUnder Legal Review\nAction Required\nNo Impact\nChange Log Created\nDismissed", "default": "New", "in_list_view": 1, "in_standard_filter": 1},
+  {"fieldname": "reviewed_by", "label": "Reviewed By", "fieldtype": "Link", "options": "User"},
+  {"fieldname": "reviewed_on", "label": "Reviewed On", "fieldtype": "Datetime"},
+  {"fieldname": "change_log", "label": "Obligation Change Log", "fieldtype": "Link", "options": "Obligation Change Log"}
+ ],
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Legal Counsel", "read": 1, "write": 1, "create": 1, "report": 1, "export": 1},
+  {"role": "Compliance Officer", "read": 1, "write": 1, "create": 1, "report": 1},
+  {"role": "Group CXO", "read": 1, "report": 1}
+ ]
+}

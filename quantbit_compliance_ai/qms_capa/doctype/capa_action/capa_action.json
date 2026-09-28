@@ -1,0 +1,110 @@
+{
+ "doctype": "DocType",
+ "name": "CAPA Action",
+ "module": "QMS CAPA",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "action_no",
+   "label": "Action No",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "action_type",
+   "label": "Action Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Corrective\nPreventive\nContainment\nVerification",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Small Text",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "acceptance_criteria",
+   "label": "Acceptance Criteria",
+   "fieldtype": "Small Text",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "owner",
+   "label": "Owner",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "support_team",
+   "label": "Support Team",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for User references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "target_date",
+   "label": "Target Date",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actual_completion_date",
+   "label": "Actual Completion Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Open\nIn Progress\nBlocked\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "blocking_reason",
+   "label": "Blocking Reason",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Evidence File references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "effort_hours_planned",
+   "label": "Effort Hours Planned",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "effort_hours_actual",
+   "label": "Effort Hours Actual",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "_ai_generated",
+   "label": "Ai Generated",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "_human_reviewed",
+   "label": "Human Reviewed",
+   "fieldtype": "Check"
+  }
+ ]
+}

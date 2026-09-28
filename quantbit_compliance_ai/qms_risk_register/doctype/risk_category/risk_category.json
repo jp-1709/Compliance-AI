@@ -1,0 +1,126 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Category",
+ "module": "QMS Risk Register",
+ "autoname": "field:slug",
+ "track_changes": 1,
+ "title_field": "category_name",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Category identity and hierarchy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "category_name",
+   "label": "Category Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "slug",
+   "label": "Slug",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "parent_category",
+   "label": "Parent Category",
+   "fieldtype": "Link",
+   "options": "Risk Category"
+  },
+  {
+   "fieldname": "tab_defaults",
+   "label": "Defaults",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_defaults",
+   "label": "Method, cadence, owners, and clauses",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "default_method_profile",
+   "label": "Default Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile"
+  },
+  {
+   "fieldname": "default_cadence_field",
+   "label": "Default Cadence Field",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "typical_owners",
+   "label": "Typical Owners",
+   "fieldtype": "Table",
+   "options": "Risk Category Typical Owner"
+  },
+  {
+   "fieldname": "applicable_clauses",
+   "label": "Applicable Clauses",
+   "fieldtype": "Table",
+   "options": "Risk Category Clause"
+  },
+  {
+   "fieldname": "tab_guidance",
+   "label": "Guidance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_guidance",
+   "label": "Category guidance and lifecycle",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "is_seed_data",
+   "label": "Is Seed Data",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_archived",
+   "label": "Is Archived",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "category_name",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

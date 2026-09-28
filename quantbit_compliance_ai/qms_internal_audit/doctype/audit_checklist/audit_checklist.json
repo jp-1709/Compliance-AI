@@ -1,0 +1,208 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Checklist",
+ "module": "QMS Internal Audit",
+ "autoname": "ACL-.YYYY.-.#####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Audit checklist identity",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "options": "ACL-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audit",
+   "label": "Audit",
+   "fieldtype": "Link",
+   "options": "Audit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_template",
+   "label": "Source Template",
+   "fieldtype": "Link",
+   "options": "Audit Checklist Template"
+  },
+  {
+   "fieldname": "column_source_template_version",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_template_version",
+   "label": "Source Template Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "checklist_name",
+   "label": "Checklist Name",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "assigned_auditor",
+   "label": "Assigned Auditor",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_checklist",
+   "label": "Checklist",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_checklist",
+   "label": "Scope and walkthrough items",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scope_items_covered",
+   "label": "Scope Items Covered",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Audit Checklist Scope Items Covered Link references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "items",
+   "label": "Items",
+   "fieldtype": "Table",
+   "options": "Audit Checklist Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_progress",
+   "label": "Progress",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_progress",
+   "label": "Completion and finding metrics",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_items",
+   "label": "Total Items",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "items_completed",
+   "label": "Items Completed",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_items_with_findings",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "items_with_findings",
+   "label": "Items With Findings",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "completion_pct",
+   "label": "Completion Pct",
+   "fieldtype": "Percent"
+  },
+  {
+   "fieldname": "tab_review",
+   "label": "Review",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_review",
+   "label": "Lifecycle and lead review",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Not Started\nIn Progress\nComplete\nReviewed",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "started_at",
+   "label": "Started At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "completed_at",
+   "label": "Completed At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "column_reviewed_by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "label": "Reviewed By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "reviewed_at",
+   "label": "Reviewed At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_ai_assistance",
+   "label": "AI Assistance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai_assistance",
+   "label": "AI usage indicator",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "_ai_assist_used",
+   "label": "Ai Assist Used",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "title_field": "checklist_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "checklist_name,audit",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

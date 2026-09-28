@@ -1,0 +1,103 @@
+{
+ "doctype": "DocType",
+ "name": "Document Acknowledgement",
+ "module": "QMS Document Control",
+ "autoname": "DACK-.YYYY.-.######",
+ "track_changes": 1,
+ "title_field": "qms_document",
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_identity",
+   "label": "Identity and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qms_document",
+   "label": "Qms Document",
+   "fieldtype": "Link",
+   "options": "QMS Document",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "document_version",
+   "label": "Document Version",
+   "fieldtype": "Link",
+   "options": "Document Version",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "label": "Assigned To",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "due_on",
+   "label": "Due On",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tab_control",
+   "label": "Control",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_control",
+   "label": "Lifecycle and controlled information",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Pending\nAcknowledged\nOverdue\nWaived",
+   "reqd": 1
+  },
+  {
+   "fieldname": "acknowledged_on",
+   "label": "Acknowledged On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "waived_by",
+   "label": "Waived By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "waiver_reason",
+   "label": "Waiver Reason",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1
+  }
+ ]
+}

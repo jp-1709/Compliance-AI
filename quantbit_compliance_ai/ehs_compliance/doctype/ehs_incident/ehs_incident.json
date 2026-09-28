@@ -245,16 +245,15 @@
         },
         {
             "fieldname": "linked_quality_event",
-            "label": "Linked QMS Quality Event",
-            "fieldtype": "Link",
-            "options": "QMS Quality Event",
-            "description": "Auto-created on submit"
+            "label": "Linked Quality Event",
+            "fieldtype": "Data",
+            "description": "Identifier of the upstream Quality Event created on submit, when available."
         },
         {
             "fieldname": "linked_capa",
             "label": "Linked CAPA",
             "fieldtype": "Link",
-            "options": "QMS CAPA"
+            "options": "CAPA Case"
         },
         {
             "fieldname": "regulatory_reporting_done",
@@ -265,7 +264,8 @@
         {
             "fieldname": "regulatory_reference",
             "label": "Regulatory Reference",
-            "fieldtype": "Data"
+            "fieldtype": "Link",
+            "options": "Regulation"
         },
         {
             "fieldname": "cb_5",

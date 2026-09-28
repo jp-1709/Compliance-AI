@@ -1,0 +1,377 @@
+{
+ "doctype": "DocType",
+ "name": "MR Output",
+ "module": "QMS Management Review",
+ "autoname": "MRO-.YYYY.-.######",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Output identity and classification",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "meeting",
+   "label": "Meeting",
+   "fieldtype": "Link",
+   "options": "MR Meeting",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "output_type",
+   "label": "Output Type",
+   "fieldtype": "Select",
+   "options": "Open CAPA\nDocument Change\nOpen Audit\nRisk Treatment\nTraining Initiative\nResource Allocation\nPolicy Change\nObjective Revision\nStrategic Direction\nCommunication Action\nStakeholder Engagement\nContinual Improvement Project\nSuspend / Withdraw / Recall Action\nAcknowledgement (no further action)\nCarry Forward to Next Cycle\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "severity_classification",
+   "label": "Severity Classification",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Critical\nHigh\nMedium\nLow"
+  },
+  {
+   "fieldname": "column_is_continual_improvement",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "is_continual_improvement",
+   "label": "Is Continual Improvement",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_strategic_direction_integration",
+   "label": "Is Strategic Direction Integration",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_resource_need",
+   "label": "Is Resource Need",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "is_change_to_qms",
+   "label": "Is Change To Qms",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_decision",
+   "label": "Decision",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_decision",
+   "label": "Decision description, rationale, and source inputs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rationale",
+   "label": "Rationale",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "linked_input_records",
+   "label": "Linked Input Records",
+   "fieldtype": "Table",
+   "options": "MR Output Input Reference"
+  },
+  {
+   "fieldname": "linked_agenda_item",
+   "label": "Linked Agenda Item",
+   "fieldtype": "Link",
+   "options": "MR Agenda Item"
+  },
+  {
+   "fieldname": "applicable_standards",
+   "label": "Applicable Standards",
+   "fieldtype": "Table",
+   "options": "MR Output Standard Tag"
+  },
+  {
+   "fieldname": "addresses_clause",
+   "label": "Addresses Clause",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_ownership___due_date",
+   "label": "Ownership & Due Date",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ownership___due_date",
+   "label": "Owner acceptance and due dates",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "assigned_to",
+   "label": "Assigned To",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assignee_role",
+   "label": "Assignee Role",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "target_completion_date",
+   "label": "Target Completion Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "max_age_breach_date",
+   "label": "Max Age Breach Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "owner_acceptance",
+   "label": "Owner Acceptance",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "owner_acceptance_date",
+   "label": "Owner Acceptance Date",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "owner_decline_reason",
+   "label": "Owner Decline Reason",
+   "fieldtype": "Long Text",
+   "depends_on": "eval:doc.status == \"Owner Declined\""
+  },
+  {
+   "fieldname": "tab_execution",
+   "label": "Execution",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_execution",
+   "label": "Status and downstream record creation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nCaptured in Meeting\nPending Owner Acceptance\nOwner Accepted\nOwner Declined\nDownstream Created\nIn Progress\nCompleted\nVerified Effective\nClosed\nCarried Forward\nCancelled",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "downstream_doctype",
+   "label": "Downstream Doctype",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "downstream_record",
+   "label": "Downstream Record",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "downstream_creation_status",
+   "label": "Downstream Creation Status",
+   "fieldtype": "Select",
+   "options": "Not Required\nPending\nAuto-Created\nManually Created\nFailed"
+  },
+  {
+   "fieldname": "downstream_creation_attempt_log",
+   "label": "Downstream Creation Attempt Log",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_effectiveness___closure",
+   "label": "Effectiveness & Closure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_effectiveness___closure",
+   "label": "Independent verification and closure",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effectiveness_verification_required",
+   "label": "Effectiveness Verification Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "effectiveness_verification_method",
+   "label": "Effectiveness Verification Method",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "effectiveness_verified_by",
+   "label": "Effectiveness Verified By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "effectiveness_verified_on",
+   "label": "Effectiveness Verified On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "effectiveness_evidence",
+   "label": "Effectiveness Evidence",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "closed_on",
+   "label": "Closed On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "closed_by",
+   "label": "Closed By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "closure_summary",
+   "label": "Closure Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "carry_forward_to_cycle",
+   "label": "Carry Forward To Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle"
+  },
+  {
+   "fieldname": "tab_impact___escalation",
+   "label": "Impact & Escalation",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_impact___escalation",
+   "label": "Effort, cost, impact, and board escalation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "estimated_effort_hours",
+   "label": "Estimated Effort Hours",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "estimated_cost_inr",
+   "label": "Estimated Cost Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "actual_cost_inr",
+   "label": "Actual Cost Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "impact_assessment",
+   "label": "Impact Assessment",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "escalated_to_board",
+   "label": "Escalated To Board",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "board_briefing_note_id",
+   "label": "Board Briefing Note Id",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "board_briefing_dispatched_on",
+   "label": "Board Briefing Dispatched On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_ai_assistance",
+   "label": "AI Assistance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ai_assistance",
+   "label": "AI provenance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ai_drafted",
+   "label": "Ai Drafted",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "ai_suggestion_log_ref",
+   "label": "Ai Suggestion Log Ref",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for AI Suggestion Log references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title,cycle",
+ "sort_field": "target_completion_date",
+ "sort_order": "DESC"
+}

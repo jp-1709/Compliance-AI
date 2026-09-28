@@ -1,0 +1,10 @@
+{
+ "doctype": "DocType",
+ "name": "Regulation Industry",
+ "module": "Foundation",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {"fieldname": "industry_code", "label": "Industry Code (NIC 2008)", "fieldtype": "Link", "options": "Industry Code", "reqd": 1, "in_list_view": 1}
+ ]
+}

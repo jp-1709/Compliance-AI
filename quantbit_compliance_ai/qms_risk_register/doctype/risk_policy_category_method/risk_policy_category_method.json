@@ -1,0 +1,34 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Policy Category Method",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "risk_category",
+   "label": "Risk Category",
+   "fieldtype": "Link",
+   "options": "Risk Category",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "method_profile",
+   "label": "Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "rationale",
+   "label": "Rationale",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  }
+ ]
+}

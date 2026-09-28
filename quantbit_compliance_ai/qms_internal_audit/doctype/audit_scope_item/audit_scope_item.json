@@ -1,0 +1,101 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Scope Item",
+ "module": "QMS Internal Audit",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "scope_item_no",
+   "label": "Scope Item No",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "scope_type",
+   "label": "Scope Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Process\nDepartment\nLocation\nSite\nProduct Line\nProject\nDocument\nISO Clause\nRegulatory Section\nRisk Item",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "process_reference",
+   "label": "Process",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Process Map Node references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "location",
+   "label": "Location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "controlled_document",
+   "label": "QMS Document",
+   "fieldtype": "Link",
+   "options": "QMS Document"
+  },
+  {
+   "fieldname": "iso_clause",
+   "label": "Iso Clause",
+   "fieldtype": "Link",
+   "options": "ISO Clause"
+  },
+  {
+   "fieldname": "regulation",
+   "label": "Regulation",
+   "fieldtype": "Link",
+   "options": "Regulation"
+  },
+  {
+   "fieldname": "risk_item",
+   "label": "Risk Item",
+   "fieldtype": "Link",
+   "options": "Risk Item"
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "process_owner_at_audit",
+   "label": "Process Owner At Audit",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "is_high_risk",
+   "label": "Is High Risk",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "time_allocation_hours",
+   "label": "Time Allocation Hours",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "assigned_auditor",
+   "label": "Assigned Auditor",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Small Text"
+  }
+ ]
+}

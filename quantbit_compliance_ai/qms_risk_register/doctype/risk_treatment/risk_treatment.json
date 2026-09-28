@@ -1,0 +1,404 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Treatment",
+ "module": "QMS Risk Register",
+ "autoname": "RT-.YYYY.-.######",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Risk and treatment classification",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "risk_item",
+   "label": "Risk Item",
+   "fieldtype": "Link",
+   "options": "Risk Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "treatment_seq",
+   "label": "Treatment Seq",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_treatment_type",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "treatment_type",
+   "label": "Treatment Type",
+   "fieldtype": "Select",
+   "options": "CAPA\nDocument Change (Procedure / Policy / Work Instruction)\nNew Control\nModify Existing Control\nInsurance Cover\nOutsource / Transfer Contractual\nAvoid (Discontinue Activity)\nAccept (No Treatment Beyond Existing Controls)\nPursue (Opportunity)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "treatment_strategy",
+   "label": "Treatment Strategy",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Avoid\nReduce\nTransfer\nAccept\nPursue"
+  },
+  {
+   "fieldname": "tab_treatment_plan",
+   "label": "Treatment Plan",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_treatment_plan",
+   "label": "Action, rationale, and target risk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rationale",
+   "label": "Rationale",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hierarchy_of_control",
+   "label": "Hierarchy Of Control",
+   "fieldtype": "Select",
+   "options": "Eliminate\nSubstitute\nEngineering Control\nAdministrative Control\nPPE\nNot Applicable"
+  },
+  {
+   "fieldname": "target_residual_likelihood",
+   "label": "Target Residual Likelihood",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "target_residual_impact",
+   "label": "Target Residual Impact",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "expected_reduction_pct",
+   "label": "Expected Reduction Pct",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "tab_ownership__time___cost",
+   "label": "Ownership, Time & Cost",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_ownership__time___cost",
+   "label": "Owner, schedule, cost, and effort",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "assigned_to",
+   "label": "Assigned To",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_completion_date",
+   "label": "Target Completion Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "actual_completion_date",
+   "label": "Actual Completion Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "estimated_cost_inr",
+   "label": "Estimated Cost Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "actual_cost_inr",
+   "label": "Actual Cost Inr",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "estimated_effort_hours",
+   "label": "Estimated Effort Hours",
+   "fieldtype": "Float"
+  },
+  {
+   "fieldname": "cost_benefit_rationale",
+   "label": "Cost Benefit Rationale",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_downstream_record",
+   "label": "Downstream Record",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_downstream_record",
+   "label": "Generated CAPA, change, or control",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "downstream_doctype",
+   "label": "Downstream Doctype",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "downstream_record",
+   "label": "Downstream Record",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "downstream_creation_status",
+   "label": "Downstream Creation Status",
+   "fieldtype": "Select",
+   "options": "Not Required\nPending\nAuto-Created\nManually Created\nFailed"
+  },
+  {
+   "fieldname": "downstream_creation_attempt_log",
+   "label": "Downstream Creation Attempt Log",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_insurance",
+   "label": "Insurance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_insurance",
+   "label": "Insurance transfer details",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "insurance_policy_no",
+   "label": "Insurance Policy No",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "insurance_carrier",
+   "label": "Insurance Carrier",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "insurance_sum_insured_inr",
+   "label": "Insurance Sum Insured Inr",
+   "fieldtype": "Float",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "insurance_premium_inr",
+   "label": "Insurance Premium Inr",
+   "fieldtype": "Float",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "column_insurance_coverage_period_start",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_coverage_period_start",
+   "label": "Insurance Coverage Period Start",
+   "fieldtype": "Date",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "insurance_coverage_period_end",
+   "label": "Insurance Coverage Period End",
+   "fieldtype": "Date",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "insurance_renewal_reminder_days",
+   "label": "Insurance Renewal Reminder Days",
+   "fieldtype": "Int",
+   "depends_on": "eval:doc.treatment_type == \"Insurance Cover\""
+  },
+  {
+   "fieldname": "tab_contractual_transfer",
+   "label": "Contractual Transfer",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_contractual_transfer",
+   "label": "Counterparty and contract evidence",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "transfer_counterparty",
+   "label": "Transfer Counterparty",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.treatment_type == \"Outsource / Transfer Contractual\""
+  },
+  {
+   "fieldname": "transfer_contract_no",
+   "label": "Transfer Contract No",
+   "fieldtype": "Data",
+   "depends_on": "eval:doc.treatment_type == \"Outsource / Transfer Contractual\""
+  },
+  {
+   "fieldname": "transfer_contract_doc",
+   "label": "Transfer Contract Doc",
+   "fieldtype": "Link",
+   "options": "Evidence File",
+   "depends_on": "eval:doc.treatment_type == \"Outsource / Transfer Contractual\""
+  },
+  {
+   "fieldname": "tab_approval___effectiveness",
+   "label": "Approval & Effectiveness",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_approval___effectiveness",
+   "label": "Approval, verification, and outcome",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nPlan Approved\nIn Progress\nCompleted\nVerified Effective\nRe-treatment Required\nCancelled",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "label": "Approved By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "approved_on",
+   "label": "Approved On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "effectiveness_verification_required",
+   "label": "Effectiveness Verification Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "effectiveness_verification_method",
+   "label": "Effectiveness Verification Method",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "effectiveness_verified_by",
+   "label": "Effectiveness Verified By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "effectiveness_verified_on",
+   "label": "Effectiveness Verified On",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "effectiveness_evidence",
+   "label": "Effectiveness Evidence",
+   "fieldtype": "Table",
+   "options": "Risk Treatment Effectiveness Evidence"
+  },
+  {
+   "fieldname": "residual_at_verification_assessment",
+   "label": "Residual At Verification Assessment",
+   "fieldtype": "Link",
+   "options": "Risk Assessment"
+  },
+  {
+   "fieldname": "tab_source___ai",
+   "label": "Source & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_source___ai",
+   "label": "Source records and AI provenance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "source_mr_output",
+   "label": "Source Mr Output",
+   "fieldtype": "Link",
+   "options": "MR Output"
+  },
+  {
+   "fieldname": "source_audit_finding",
+   "label": "Source Audit Finding",
+   "fieldtype": "Link",
+   "options": "Audit Finding"
+  },
+  {
+   "fieldname": "source_capa",
+   "label": "Source Capa",
+   "fieldtype": "Link",
+   "options": "CAPA Case"
+  },
+  {
+   "fieldname": "ai_suggested",
+   "label": "Ai Suggested",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "ai_suggestion_log_ref",
+   "label": "Ai Suggestion Log Ref",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for AI Suggestion Log references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title",
+ "sort_field": "target_completion_date",
+ "sort_order": "DESC"
+}

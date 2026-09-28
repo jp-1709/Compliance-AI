@@ -1,0 +1,13 @@
+{
+ "doctype": "DocType",
+ "name": "Inspection Register Link",
+ "module": "Labour Compliance",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {"fieldname": "statutory_register", "label": "Statutory Register", "fieldtype": "Link", "options": "Statutory Register", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "period_reviewed", "label": "Period Reviewed", "fieldtype": "Data", "in_list_view": 1},
+  {"fieldname": "result", "label": "Result", "fieldtype": "Select", "options": "Compliant\nObservation Raised\nNot Produced\nNot Applicable", "in_list_view": 1},
+  {"fieldname": "remarks", "label": "Remarks", "fieldtype": "Small Text"}
+ ]
+}

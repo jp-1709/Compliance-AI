@@ -1,0 +1,37 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Item Asset Link",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "asset_doctype",
+   "label": "Asset Doctype",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "asset_name",
+   "label": "Asset Name",
+   "fieldtype": "Dynamic Link",
+   "options": "asset_doctype",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "asset_role",
+   "label": "Asset Role",
+   "fieldtype": "Select",
+   "options": "Affected\nSource\nBoth",
+   "in_list_view": 1,
+   "columns": 4
+  }
+ ],
+ "permissions": []
+}

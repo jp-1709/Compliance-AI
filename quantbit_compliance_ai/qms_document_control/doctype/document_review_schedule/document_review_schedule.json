@@ -1,0 +1,96 @@
+{
+ "doctype": "DocType",
+ "name": "Document Review Schedule",
+ "module": "QMS Document Control",
+ "autoname": "DRS-.YYYY.-.######",
+ "track_changes": 1,
+ "title_field": "qms_document",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_identity",
+   "label": "Identity and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "qms_document",
+   "label": "Qms Document",
+   "fieldtype": "Link",
+   "options": "QMS Document",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "due_on",
+   "label": "Due On",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "label": "Assigned To",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Open\nIn Progress\nCompleted\nOverdue",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tab_control",
+   "label": "Control",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_control",
+   "label": "Lifecycle and controlled information",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "outcome",
+   "label": "Outcome",
+   "fieldtype": "Select",
+   "options": "No change\nRevised"
+  },
+  {
+   "fieldname": "completed_on",
+   "label": "Completed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "linked_new_version",
+   "label": "Linked New Version",
+   "fieldtype": "Link",
+   "options": "Document Version"
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0
+  }
+ ]
+}

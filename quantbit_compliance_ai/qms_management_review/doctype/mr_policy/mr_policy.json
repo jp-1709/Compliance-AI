@@ -1,0 +1,266 @@
+{
+ "doctype": "DocType",
+ "name": "MR Policy",
+ "module": "QMS Management Review",
+ "autoname": "MR-POL-.#####",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Policy identity and approval",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "policy_version",
+   "label": "Policy Version",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "effective_from",
+   "label": "Effective From",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_approved_by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "label": "Approved By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "label": "Approved On",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_cycle_rules",
+   "label": "Cycle Rules",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_cycle_rules",
+   "label": "Frequency and calendar settings",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "frequency",
+   "label": "Frequency",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Quarterly\nHalf-yearly\nAnnual"
+  },
+  {
+   "fieldname": "max_gap_days",
+   "label": "Max Gap Days",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_cycle_calendar_anchor",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cycle_calendar_anchor",
+   "label": "Cycle Calendar Anchor",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Calendar Year\nFinancial Year (Apr-Mar)\nFiscal Year (Custom)"
+  },
+  {
+   "fieldname": "cycle_custom_start_month",
+   "label": "Cycle Custom Start Month",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_quorum",
+   "label": "Quorum",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_quorum",
+   "label": "Meeting quorum requirements",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "quorum_top_mgmt_min",
+   "label": "Quorum Top Mgmt Min",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quorum_total_min",
+   "label": "Quorum Total Min",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quorum_chair_required",
+   "label": "Quorum Chair Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_quorum_quality_mgr_required",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quorum_quality_mgr_required",
+   "label": "Quorum Quality Mgr Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "quorum_process_owner_min",
+   "label": "Quorum Process Owner Min",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_standards___briefing",
+   "label": "Standards & Briefing",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_standards___briefing",
+   "label": "Applicable standards and briefing rules",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "applicable_standards",
+   "label": "Applicable Standards",
+   "fieldtype": "Table",
+   "options": "MR Policy Standard"
+  },
+  {
+   "fieldname": "multi_standard_combined",
+   "label": "Multi Standard Combined",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "briefing_pack_lead_days",
+   "label": "Briefing Pack Lead Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "briefing_pack_read_required",
+   "label": "Briefing Pack Read Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "briefing_pack_acknowledgement_lead_days",
+   "label": "Briefing Pack Acknowledgement Lead Days",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_output_governance",
+   "label": "Output Governance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_output_governance",
+   "label": "Output acceptance and escalation rules",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "max_output_age_days",
+   "label": "Max Output Age Days",
+   "fieldtype": "Int",
+   "reqd": 1
+  },
+  {
+   "fieldname": "allow_carry_forward_to_next_cycle",
+   "label": "Allow Carry Forward To Next Cycle",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "require_output_owner_acceptance",
+   "label": "Require Output Owner Acceptance",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_brsr_aligned_mode",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "brsr_aligned_mode",
+   "label": "Brsr Aligned Mode",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "escalate_critical_outputs_to_board",
+   "label": "Escalate Critical Outputs To Board",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "tab_signatures",
+   "label": "Signatures",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_signatures",
+   "label": "Chair, secretariat, and witness controls",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "chairperson_role",
+   "label": "Chairperson Role",
+   "fieldtype": "Link",
+   "options": "Role",
+   "reqd": 1
+  },
+  {
+   "fieldname": "countersign_secretariat",
+   "label": "Countersign Secretariat",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "witness_signing",
+   "label": "Witness Signing",
+   "fieldtype": "Check"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "effective_from",
+ "sort_order": "DESC"
+}

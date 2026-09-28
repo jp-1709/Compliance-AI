@@ -180,9 +180,8 @@
         {
             "fieldname": "department",
             "label": "Department",
-            "fieldtype": "Link",
-            "options": "Department",
-            "description": "Department responsible for this task."
+            "fieldtype": "Data",
+            "description": "Source-system-neutral department name or identifier responsible for this task."
         },
         {
             "fieldname": "external_consultant",
@@ -392,16 +391,15 @@
         },
         {
             "fieldname": "linked_qms_event",
-            "label": "Linked QMS Quality Event",
-            "fieldtype": "Link",
-            "options": "QMS Quality Event",
-            "description": "If non-compliance triggered a non-conformance, link the QMS Quality Event here."
+            "label": "Linked Quality Event",
+            "fieldtype": "Data",
+            "description": "Quality Event identifier from an upstream Q1 implementation, when available."
         },
         {
             "fieldname": "linked_risk_item",
-            "label": "Linked Risk Register Item",
+            "label": "Linked Risk Item",
             "fieldtype": "Link",
-            "options": "Risk Register Item",
+            "options": "Risk Item",
             "description": "Link to the Risk Register entry that tracks ongoing risk from this obligation."
         },
         {

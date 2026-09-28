@@ -1,0 +1,85 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Team Member",
+ "module": "QMS Internal Audit",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "team_role",
+   "label": "Team Role",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Lead Auditor\nAuditor\nTechnical Expert\nObserver\nAuditor in Training\nExternal Auditor",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "user",
+   "label": "User",
+   "fieldtype": "Link",
+   "options": "User",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "external_email",
+   "label": "External Email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "external_name",
+   "label": "External Name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "external_organisation",
+   "label": "External Organisation",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "qualification_summary",
+   "label": "Qualification Summary",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "assigned_scope_items",
+   "label": "Assigned Scope Items",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Audit Team Member Assigned Scope Items Link references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "assigned_clauses",
+   "label": "Assigned Clauses",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for ISO Clause references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "independence_confirmed",
+   "label": "Independence Confirmed",
+   "fieldtype": "Check",
+   "reqd": 1
+  },
+  {
+   "fieldname": "independence_confirmed_at",
+   "label": "Independence Confirmed At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "confidentiality_agreement_signed",
+   "label": "Confidentiality Agreement Signed",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "time_logged_hours",
+   "label": "Time Logged Hours",
+   "fieldtype": "Float"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "doctype": "DocType",
+ "name": "State",
+ "module": "Foundation",
+ "autoname": "field:state_code",
+ "title_field": "state_name",
+ "search_fields": "state_name,state_code,gst_state_code",
+ "track_changes": 1,
+ "description": "Canonical state/union-territory master used for jurisdiction and applicability links.",
+ "fields": [
+  {"fieldname": "state_code", "label": "State Code", "fieldtype": "Data", "reqd": 1, "unique": 1, "in_list_view": 1},
+  {"fieldname": "state_name", "label": "State / Union Territory", "fieldtype": "Data", "reqd": 1, "unique": 1, "in_list_view": 1, "in_global_search": 1},
+  {"fieldname": "country", "label": "Country", "fieldtype": "Link", "options": "Country", "default": "India", "reqd": 1, "in_standard_filter": 1},
+  {"fieldname": "column_break_1", "fieldtype": "Column Break"},
+  {"fieldname": "gst_state_code", "label": "GST State Code", "fieldtype": "Data", "unique": 1, "description": "Two-digit GST jurisdiction code."},
+  {"fieldname": "is_union_territory", "label": "Union Territory", "fieldtype": "Check", "default": 0},
+  {"fieldname": "is_active", "label": "Active", "fieldtype": "Check", "default": 1, "in_list_view": 1}
+ ],
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Compliance Officer", "read": 1},
+  {"role": "Read Only", "read": 1}
+ ]
+}

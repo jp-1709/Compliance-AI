@@ -1,0 +1,236 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Cycle",
+ "module": "QMS Risk Register",
+ "autoname": "RC-.YYYY.-.####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "cycle_label",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Cycle identity, period, and type",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cycle_label",
+   "label": "Cycle Label",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "period_start",
+   "label": "Period Start",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_period_end",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "period_end",
+   "label": "Period End",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cycle_type",
+   "label": "Cycle Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Quarterly Operational\nAnnual Strategic\nOn-Event Cluster\nAd Hoc"
+  },
+  {
+   "fieldname": "tab_scope",
+   "label": "Scope",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_scope",
+   "label": "Included categories, owners, and risks",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "scoped_categories",
+   "label": "Scoped Categories",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "scoped_owners",
+   "label": "Scoped Owners",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "included_risks",
+   "label": "Included Risks",
+   "fieldtype": "Table",
+   "options": "Risk Cycle Risk"
+  },
+  {
+   "fieldname": "excluded_risks_with_reason",
+   "label": "Excluded Risks With Reason",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_progress",
+   "label": "Progress",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_progress",
+   "label": "Assessment counts and completion",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nPlanning\nOpen\nAssessments In Progress\nPending Validation\nClosed",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "target_assessment_count",
+   "label": "Target Assessment Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_completed_assessment_count",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "completed_assessment_count",
+   "label": "Completed Assessment Count",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "completion_pct",
+   "label": "Completion Pct",
+   "fieldtype": "Percent"
+  },
+  {
+   "fieldname": "tab_outcomes",
+   "label": "Outcomes",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_outcomes",
+   "label": "Risk movement and acceptances",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "new_risks_added_during_cycle",
+   "label": "New Risks Added During Cycle",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "risks_reduced_band",
+   "label": "Risks Reduced Band",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "column_risks_increased_band",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "risks_increased_band",
+   "label": "Risks Increased Band",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "new_acceptances_signed",
+   "label": "New Acceptances Signed",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "tab_closure",
+   "label": "Closure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_closure",
+   "label": "Snapshots, summary, and management review linkage",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opening_snapshot",
+   "label": "Opening Snapshot",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "closing_snapshot",
+   "label": "Closing Snapshot",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "cycle_summary",
+   "label": "Cycle Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "closed_by",
+   "label": "Closed By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "closed_on",
+   "label": "Closed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "linked_mr_cycle",
+   "label": "Linked Mr Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "cycle_label",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

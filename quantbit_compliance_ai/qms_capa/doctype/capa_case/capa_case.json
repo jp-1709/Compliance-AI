@@ -1,0 +1,355 @@
+{
+ "doctype": "DocType",
+ "name": "CAPA Case",
+ "module": "QMS CAPA",
+ "autoname": "CAPA-.YYYY.-.#####",
+ "track_changes": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "CAPA identity and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "CAPA-.YYYY.-.#####",
+   "default": "CAPA-.YYYY.-.#####"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_capa_type",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "capa_type",
+   "label": "Capa Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Corrective\nPreventive\nBoth",
+   "default": "Corrective"
+  },
+  {
+   "fieldname": "severity",
+   "label": "Severity",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Critical\nHigh\nMedium\nLow",
+   "default": "Medium"
+  },
+  {
+   "fieldname": "priority",
+   "label": "Priority",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "P1\nP2\nP3\nP4"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Draft\nPending Review\nIn RCA\nAction Planning\nPlan Approved\nIn Progress\nPending Effectiveness\nEffectiveness Check\nClosed\nReopened\nVoided",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "tab_source___context",
+   "label": "Source & Context",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_source___context",
+   "label": "Origin, standards, and issue statement",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "source",
+   "label": "Source",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Quality Event\nInternal Audit\nExternal Audit\nCustomer Complaint\nRegulatory Inspection\nManagement Review\nRisk Assessment\nTrend Analysis\nOther"
+  },
+  {
+   "fieldname": "source_reference",
+   "label": "Source Reference",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "quality_events",
+   "label": "Quality Events",
+   "fieldtype": "Table",
+   "options": "CAPA Quality Event Link"
+  },
+  {
+   "fieldname": "iso_clauses",
+   "label": "Iso Clauses",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for ISO Clause references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "regulatory_references",
+   "label": "Regulatory References",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Regulation references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "problem_statement",
+   "label": "Problem Statement",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_containment___investigation",
+   "label": "Containment & Investigation",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_containment___investigation",
+   "label": "Immediate controls and root-cause analysis",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "immediate_containment",
+   "label": "Immediate Containment",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "containment_completed_on",
+   "label": "Containment Completed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "containment_owner",
+   "label": "Containment Owner",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "rca_record",
+   "label": "Rca Record",
+   "fieldtype": "Link",
+   "options": "RCA Record"
+  },
+  {
+   "fieldname": "root_cause_summary",
+   "label": "Root Cause Summary",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "tab_action_plan",
+   "label": "Action Plan",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_action_plan",
+   "label": "Corrective and preventive actions",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "actions",
+   "label": "Actions",
+   "fieldtype": "Table",
+   "options": "CAPA Action"
+  },
+  {
+   "fieldname": "tab_effectiveness___closure",
+   "label": "Effectiveness & Closure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_effectiveness___closure",
+   "label": "Verification, due dates, and closure",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effectiveness_check",
+   "label": "Effectiveness Check",
+   "fieldtype": "Link",
+   "options": "Effectiveness Check"
+  },
+  {
+   "fieldname": "capa_owner",
+   "label": "Capa Owner",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "capa_owner_role",
+   "label": "Capa Owner Role",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "qa_approver",
+   "label": "Qa Approver",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_close_date",
+   "label": "Target Close Date",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "actual_close_date",
+   "label": "Actual Close Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "due_date_extensions",
+   "label": "Due Date Extensions",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "extension_history",
+   "label": "Extension History",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for DocType references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "cost_of_quality_inr",
+   "label": "Cost Of Quality Inr",
+   "fieldtype": "Currency"
+  },
+  {
+   "fieldname": "is_recurring_issue",
+   "label": "Is Recurring Issue",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "prior_capas",
+   "label": "Prior Capas",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for CAPA Case references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tags",
+   "label": "Tags",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Tag references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_governance___audit_trail",
+   "label": "Governance & Audit Trail",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_governance___audit_trail",
+   "label": "Voiding and AI-assistance history",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "is_voided",
+   "label": "Is Voided",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "void_reason",
+   "label": "Void Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_by",
+   "label": "Voided By",
+   "fieldtype": "Link",
+   "options": "User",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_on",
+   "label": "Voided On",
+   "fieldtype": "Datetime",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "_ai_root_cause_suggested",
+   "label": "Ai Root Cause Suggested",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "_ai_actions_suggested",
+   "label": "Ai Actions Suggested",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "_human_reviewed_at",
+   "label": "Human Reviewed At",
+   "fieldtype": "Datetime"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title,source_reference",
+ "sort_field": "target_close_date",
+ "sort_order": "DESC"
+}

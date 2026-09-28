@@ -1,0 +1,54 @@
+{
+ "doctype": "DocType",
+ "name": "MR Minutes Output Snapshot",
+ "module": "QMS Management Review",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "output_record",
+   "label": "Output Record",
+   "fieldtype": "Link",
+   "options": "MR Output",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "title_at_time",
+   "label": "Title At Time",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "output_type_at_time",
+   "label": "Output Type At Time",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "severity_at_time",
+   "label": "Severity At Time",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "assigned_to_at_time",
+   "label": "Assigned To At Time",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "target_date_at_time",
+   "label": "Target Date At Time",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "rationale_at_time",
+   "label": "Rationale At Time",
+   "fieldtype": "Text Editor"
+  }
+ ],
+ "permissions": []
+}

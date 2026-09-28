@@ -1,0 +1,329 @@
+{
+ "doctype": "DocType",
+ "name": "MR Minutes",
+ "module": "QMS Management Review",
+ "autoname": "MRMIN-.YYYY.-.####",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "title_field": "meeting_title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Minutes identity and meeting details",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "MR Cycle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "meeting",
+   "label": "Meeting",
+   "fieldtype": "Link",
+   "options": "MR Meeting",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "minutes_seq",
+   "label": "Minutes Seq",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "meeting_title",
+   "label": "Meeting Title",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "meeting_date",
+   "label": "Meeting Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "meeting_start_time",
+   "label": "Meeting Start Time",
+   "fieldtype": "Time"
+  },
+  {
+   "fieldname": "meeting_end_time",
+   "label": "Meeting End Time",
+   "fieldtype": "Time"
+  },
+  {
+   "fieldname": "venue",
+   "label": "Venue",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "chairperson_name",
+   "label": "Chairperson Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "secretariat_name",
+   "label": "Secretariat Name",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_proceedings",
+   "label": "Proceedings",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_proceedings",
+   "label": "Statements, input review, and decisions",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opening_statement",
+   "label": "Opening Statement",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "quorum_statement",
+   "label": "Quorum Statement",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "inputs_summary",
+   "label": "Inputs Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "agenda_walkthrough",
+   "label": "Agenda Walkthrough",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "outputs_summary",
+   "label": "Outputs Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "any_other_business",
+   "label": "Any Other Business",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "closing_statement",
+   "label": "Closing Statement",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "next_meeting_planned",
+   "label": "Next Meeting Planned",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "tab_evidence_snapshots",
+   "label": "Evidence Snapshots",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_evidence_snapshots",
+   "label": "Reviewed inputs, outputs, and attendance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "reviewed_inputs",
+   "label": "Reviewed Inputs",
+   "fieldtype": "Table",
+   "options": "MR Minutes Input Snapshot"
+  },
+  {
+   "fieldname": "captured_outputs",
+   "label": "Captured Outputs",
+   "fieldtype": "Table",
+   "options": "MR Minutes Output Snapshot"
+  },
+  {
+   "fieldname": "attendance_record",
+   "label": "Attendance Record",
+   "fieldtype": "Table",
+   "options": "MR Minutes Attendance Snapshot"
+  },
+  {
+   "fieldname": "tab_standards_coverage",
+   "label": "Standards Coverage",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_standards_coverage",
+   "label": "Coverage and gap acknowledgement",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "standards_coverage_summary",
+   "label": "Standards Coverage Summary",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "all_standards_inputs_covered",
+   "label": "All Standards Inputs Covered",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "coverage_gaps_acknowledged",
+   "label": "Coverage Gaps Acknowledged",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_signatures",
+   "label": "Signatures",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_signatures",
+   "label": "Chair, secretariat, and witness signatures",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "chair_signed",
+   "label": "Chair Signed",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "chair_signature",
+   "label": "Chair Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "chair_signed_on",
+   "label": "Chair Signed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "chair_signature_certificate_serial",
+   "label": "Chair Signature Certificate Serial",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "secretariat_signed",
+   "label": "Secretariat Signed",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "secretariat_signature",
+   "label": "Secretariat Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "secretariat_signed_on",
+   "label": "Secretariat Signed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "secretariat_signature_certificate_serial",
+   "label": "Secretariat Signature Certificate Serial",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "witness_signed",
+   "label": "Witness Signed",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "witness_user",
+   "label": "Witness User",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "witness_signature",
+   "label": "Witness Signature",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Digital Signature Entry references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "witness_signed_on",
+   "label": "Witness Signed On",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_distribution___integrity",
+   "label": "Distribution & Integrity",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_distribution___integrity",
+   "label": "Generated minutes, tamper evidence, and distribution",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "generated_pdf",
+   "label": "Generated Pdf",
+   "fieldtype": "Link",
+   "options": "Evidence File"
+  },
+  {
+   "fieldname": "generated_pdf_hash",
+   "label": "Generated Pdf Hash",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tamper_evident_block",
+   "label": "Tamper Evident Block",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "distributed_to",
+   "label": "Distributed To",
+   "fieldtype": "Table",
+   "options": "MR Minutes Recipient"
+  },
+  {
+   "fieldname": "distributed_on",
+   "label": "Distributed On",
+   "fieldtype": "Datetime"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "meeting_title,cycle",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

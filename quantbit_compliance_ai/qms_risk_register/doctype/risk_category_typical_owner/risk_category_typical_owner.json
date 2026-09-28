@@ -1,0 +1,20 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Category Typical Owner",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "role",
+   "label": "Role",
+   "fieldtype": "Link",
+   "options": "Role",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  }
+ ],
+ "permissions": []
+}

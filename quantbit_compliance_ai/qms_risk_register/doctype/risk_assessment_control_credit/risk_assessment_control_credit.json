@@ -1,0 +1,46 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Assessment Control Credit",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "control",
+   "label": "Control",
+   "fieldtype": "Link",
+   "options": "Control",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "credit_factor",
+   "label": "Credit Factor",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "last_test_result",
+   "label": "Last Test Result",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "last_test_date",
+   "label": "Last Test Date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "effectiveness_at_assessment_time",
+   "label": "Effectiveness At Assessment Time",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Effective\nPartially Effective\nNot Effective\nNot Tested"
+  }
+ ]
+}

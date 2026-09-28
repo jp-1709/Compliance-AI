@@ -1,0 +1,451 @@
+{
+ "doctype": "DocType",
+ "name": "Audit Finding",
+ "module": "QMS Internal Audit",
+ "autoname": "FND-.YYYY.-.#####",
+ "track_changes": 1,
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Finding identity and classification",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "label": "Naming Series",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "FND-.YYYY.-.#####",
+   "default": "FND-.YYYY.-.#####"
+  },
+  {
+   "fieldname": "title",
+   "label": "Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "organisation",
+   "label": "Organisation",
+   "fieldtype": "Link",
+   "options": "Organisation",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_audit",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "audit",
+   "label": "Audit",
+   "fieldtype": "Link",
+   "options": "Audit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audit_checklist_item",
+   "label": "Audit Checklist Item",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "finding_type",
+   "label": "Finding Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "NC (Non-Conformity)\nOFI (Opportunity for Improvement)\nObservation\nPositive Finding\nComment",
+   "default": "NC"
+  },
+  {
+   "fieldname": "severity",
+   "label": "Severity",
+   "fieldtype": "Select",
+   "options": "Major\nMinor"
+  },
+  {
+   "fieldname": "tab_finding___evidence",
+   "label": "Finding & Evidence",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_finding___evidence",
+   "label": "Requirement, evidence, and affected scope",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "finding_statement",
+   "label": "Finding Statement",
+   "fieldtype": "Text Editor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requirement_breached",
+   "label": "Requirement Breached",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "objective_evidence",
+   "label": "Objective Evidence",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "iso_clauses_breached",
+   "label": "Iso Clauses Breached",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for ISO Clause references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "regulations_breached",
+   "label": "Regulations Breached",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Regulation references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "documents_breached",
+   "label": "Documents Breached",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Document Version references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Table",
+   "options": "Audit Finding Evidence"
+  },
+  {
+   "fieldname": "affected_processes",
+   "label": "Affected Processes",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Process Map Node references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "affected_locations",
+   "label": "Affected Locations",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Location references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_pattern_analysis",
+   "label": "Pattern Analysis",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_pattern_analysis",
+   "label": "Systemic and repeat finding analysis",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "is_systemic",
+   "label": "Is Systemic",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "is_repeat",
+   "label": "Is Repeat",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "repeat_of_finding",
+   "label": "Repeat Of Finding",
+   "fieldtype": "Link",
+   "options": "Audit Finding"
+  },
+  {
+   "fieldname": "prior_similar_findings",
+   "label": "Prior Similar Findings",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for Audit Finding references. Stored inline because this specification does not define a child DocType for the collection."
+  },
+  {
+   "fieldname": "tab_issue___approval",
+   "label": "Issue & Approval",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_issue___approval",
+   "label": "Auditor issuance and lead approval",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "auditor_raised_by",
+   "label": "Auditor Raised By",
+   "fieldtype": "Link",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auditor_raised_by_role_snapshot",
+   "label": "Auditor Raised By Role Snapshot",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "raised_at",
+   "label": "Raised At",
+   "fieldtype": "Datetime",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_lead_auditor_approved",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead_auditor_approved",
+   "label": "Lead Auditor Approved",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "lead_auditor_approved_at",
+   "label": "Lead Auditor Approved At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "tab_auditee_response",
+   "label": "Auditee Response",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_auditee_response",
+   "label": "Acknowledgement, dispute, and resolution",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "auditee_acknowledged",
+   "label": "Auditee Acknowledged",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "auditee_acknowledged_at",
+   "label": "Auditee Acknowledged At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "auditee_acknowledged_by",
+   "label": "Auditee Acknowledged By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "auditee_response",
+   "label": "Auditee Response",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "auditee_disputes",
+   "label": "Auditee Disputes",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "dispute_resolution",
+   "label": "Dispute Resolution",
+   "fieldtype": "Select",
+   "options": "Sustained\nModified\nWithdrawn (post-dispute outcome)"
+  },
+  {
+   "fieldname": "dispute_resolution_rationale",
+   "label": "Dispute Resolution Rationale",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "tab_corrective_action",
+   "label": "Corrective Action",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_corrective_action",
+   "label": "Correction, CAPA, and target dates",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "proposed_correction",
+   "label": "Proposed Correction",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "proposed_corrective_action",
+   "label": "Proposed Corrective Action",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "corrective_action_required",
+   "label": "Corrective Action Required",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "linked_quality_event",
+   "label": "Linked Quality Event",
+   "fieldtype": "Data",
+   "description": "Quality Event identifier from the upstream Q1 module."
+  },
+  {
+   "fieldname": "linked_capa",
+   "label": "Linked Capa",
+   "fieldtype": "Link",
+   "options": "CAPA Case"
+  },
+  {
+   "fieldname": "target_correction_date",
+   "label": "Target Correction Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "target_capa_close_date",
+   "label": "Target Capa Close Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "actual_close_date",
+   "label": "Actual Close Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "due_date_extensions",
+   "label": "Due Date Extensions",
+   "fieldtype": "Int",
+   "default": "0"
+  },
+  {
+   "fieldname": "tab_closure",
+   "label": "Closure",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_closure",
+   "label": "Status, independent verification, and closure",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Draft\nPending Lead Approval\nIssued\nAcknowledged\nDisputed\nWithdrawn\nAction In Progress\nAction Complete\nClosed\nReopened\nVoided",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "closure_evidence_summary",
+   "label": "Closure Evidence Summary",
+   "fieldtype": "Text Editor"
+  },
+  {
+   "fieldname": "closure_verified_by",
+   "label": "Closure Verified By",
+   "fieldtype": "Link",
+   "options": "User"
+  },
+  {
+   "fieldname": "closure_verified_at",
+   "label": "Closure Verified At",
+   "fieldtype": "Datetime"
+  },
+  {
+   "fieldname": "confidentiality_classification",
+   "label": "Confidentiality Classification",
+   "fieldtype": "Select",
+   "options": "Public\nInternal\nConfidential\nRestricted"
+  },
+  {
+   "fieldname": "tab_governance___ai",
+   "label": "Governance & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_governance___ai",
+   "label": "Voiding and AI assistance",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "is_voided",
+   "label": "Is Voided",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "void_reason",
+   "label": "Void Reason",
+   "fieldtype": "Small Text",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_by",
+   "label": "Voided By",
+   "fieldtype": "Link",
+   "options": "User",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "voided_on",
+   "label": "Voided On",
+   "fieldtype": "Datetime",
+   "depends_on": "eval:doc.is_voided == 1"
+  },
+  {
+   "fieldname": "_ai_drafted",
+   "label": "Ai Drafted",
+   "fieldtype": "Check",
+   "default": "0"
+  },
+  {
+   "fieldname": "_ai_clause_suggested",
+   "label": "Ai Clause Suggested",
+   "fieldtype": "Check",
+   "default": "0"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "search_fields": "title,audit",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -213,7 +213,7 @@
             "label": "Penalty Imposed (₹)",
             "fieldtype": "Currency",
             "default": 0,
-            "description": "Penalty amount in the order/citation. If > 0 and status is 'Closed - With Penalty', a QMS Quality Event should be created."
+            "description": "Penalty amount in the order/citation. If > 0 and status is 'Closed - With Penalty', a Quality Event should be created."
         },
         {
             "fieldname": "penalty_paid_on",
@@ -247,7 +247,7 @@
             "fieldname": "linked_capa",
             "label": "Linked CAPA",
             "fieldtype": "Link",
-            "options": "QMS CAPA",
+            "options": "CAPA Case",
             "description": "If a Corrective and Preventive Action was triggered to fix root causes found during inspection."
         },
         {

@@ -1,0 +1,52 @@
+{
+ "doctype": "DocType",
+ "name": "Document Distribution List Member",
+ "module": "QMS Document Control",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "member_kind",
+   "label": "Member Kind",
+   "fieldtype": "Select",
+   "options": "User\nDepartment + Designation Rule\nRole",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "user",
+   "label": "User",
+   "fieldtype": "Link",
+   "options": "User",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "department",
+   "label": "Department",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "designation",
+   "label": "Designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "role",
+   "label": "Role",
+   "fieldtype": "Link",
+   "options": "Role"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Small Text"
+  }
+ ],
+ "permissions": []
+}

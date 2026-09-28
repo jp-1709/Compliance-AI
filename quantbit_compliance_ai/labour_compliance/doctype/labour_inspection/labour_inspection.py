@@ -107,17 +107,17 @@ class LabourInspection(Document):
 
     def create_qms_quality_event(self):
         """
-        When an inspection results in a penalty, create a QMS Quality Event
+        When an inspection results in a penalty, create a Quality Event
         to track the non-conformance and trigger a CAPA.
-        Only creates if QMS Quality Event DocType exists (C6 module).
+        Only creates if the Quality Event DocType exists.
         """
-        if not frappe.db.exists("DocType", "QMS Quality Event"):
+        if not frappe.db.exists("DocType", "Quality Event"):
             return
 
         try:
             event = frappe.get_doc(
                 {
-                    "doctype": "QMS Quality Event",
+                    "doctype": "Quality Event",
                     "title": (
                         f"Labour Inspection Penalty — {self.inspection_type} — "
                         f"{self.inspection_date}"
@@ -132,7 +132,7 @@ class LabourInspection(Document):
                         f"inspection on {self.inspection_date}. "
                         f"Inspection record: {self.name}."
                     ),
-                    "linked_compliance_task": self.name,
+                    "linked_labour_inspection": self.name,
                 }
             )
             event.insert(ignore_permissions=True)
@@ -142,13 +142,13 @@ class LabourInspection(Document):
                 self.db_set("linked_capa", None)  # Placeholder; real CAPA created from event
 
             frappe.msgprint(
-                f"QMS Quality Event {event.name} created for inspection penalty. "
+                f"Quality Event {event.name} created for inspection penalty. "
                 "Assign a CAPA to track corrective action.",
                 alert=True,
             )
         except Exception as e:
             frappe.log_error(
-                f"QMS Quality Event creation failed for inspection {self.name}: {e}",
+                f"Quality Event creation failed for inspection {self.name}: {e}",
                 "LabourInspection",
             )
 

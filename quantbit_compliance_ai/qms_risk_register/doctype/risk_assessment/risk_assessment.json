@@ -1,0 +1,337 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Assessment",
+ "module": "QMS Risk Register",
+ "autoname": "RA-.YYYY.-.######",
+ "track_changes": 1,
+ "is_submittable": 1,
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_overview",
+   "label": "Risk, cycle, method, and trigger",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "risk_item",
+   "label": "Risk Item",
+   "fieldtype": "Link",
+   "options": "Risk Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity",
+   "label": "Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "assessment_seq",
+   "label": "Assessment Seq",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "cycle",
+   "label": "Cycle",
+   "fieldtype": "Link",
+   "options": "Risk Cycle"
+  },
+  {
+   "fieldname": "column_method_profile",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "method_profile",
+   "label": "Method Profile",
+   "fieldtype": "Link",
+   "options": "Risk Method Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "trigger_type",
+   "label": "Trigger Type",
+   "fieldtype": "Select",
+   "reqd": 1,
+   "options": "Initial Identification\nScheduled Cadence\nEvent-Driven\nTreatment Completion\nAudit Finding\nMR Decision\nExternal Reg Change\nOwner Reassessment\nRe-opening"
+  },
+  {
+   "fieldname": "trigger_event_record",
+   "label": "Trigger Event Record",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "tab_assessment_governance",
+   "label": "Assessment Governance",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_assessment_governance",
+   "label": "Assessor and independent validation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "assessed_by",
+   "label": "Assessed By",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assessor_role",
+   "label": "Assessor Role",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "is_self_assessment",
+   "label": "Is Self Assessment",
+   "fieldtype": "Check"
+  },
+  {
+   "fieldname": "column_validated_by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "validated_by",
+   "label": "Validated By",
+   "fieldtype": "Link",
+   "options": "User Profile"
+  },
+  {
+   "fieldname": "validation_date",
+   "label": "Validation Date",
+   "fieldtype": "Date"
+  },
+  {
+   "fieldname": "tab_inherent_risk",
+   "label": "Inherent Risk",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_inherent_risk",
+   "label": "Inherent scores and rationale",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "inherent_likelihood",
+   "label": "Inherent Likelihood",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_impact",
+   "label": "Inherent Impact",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_third_dim",
+   "label": "Inherent Third Dim",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_cia_c",
+   "label": "Inherent Cia C",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_cia_i",
+   "label": "Inherent Cia I",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_cia_a",
+   "label": "Inherent Cia A",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_rating",
+   "label": "Inherent Rating",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "inherent_band",
+   "label": "Inherent Band",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "inherent_rationale",
+   "label": "Inherent Rationale",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_residual_risk",
+   "label": "Residual Risk",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_residual_risk",
+   "label": "Residual scores and rationale",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "residual_likelihood",
+   "label": "Residual Likelihood",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_impact",
+   "label": "Residual Impact",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_third_dim",
+   "label": "Residual Third Dim",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_cia_c",
+   "label": "Residual Cia C",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_cia_i",
+   "label": "Residual Cia I",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_cia_a",
+   "label": "Residual Cia A",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_rating",
+   "label": "Residual Rating",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_band",
+   "label": "Residual Band",
+   "fieldtype": "Data"
+  },
+  {
+   "fieldname": "residual_rationale",
+   "label": "Residual Rationale",
+   "fieldtype": "Long Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tab_evidence___controls",
+   "label": "Evidence & Controls",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_evidence___controls",
+   "label": "Evidence and credited controls",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "evidence_files",
+   "label": "Evidence Files",
+   "fieldtype": "Table",
+   "options": "Risk Assessment Evidence"
+  },
+  {
+   "fieldname": "controls_credited",
+   "label": "Controls Credited",
+   "fieldtype": "Table",
+   "options": "Risk Assessment Control Credit"
+  },
+  {
+   "fieldname": "tab_change_analysis",
+   "label": "Change Analysis",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_change_analysis",
+   "label": "Prior assessment, deltas, and explanation",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "prior_assessment",
+   "label": "Prior Assessment",
+   "fieldtype": "Link",
+   "options": "Risk Assessment"
+  },
+  {
+   "fieldname": "inherent_delta",
+   "label": "Inherent Delta",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "residual_delta",
+   "label": "Residual Delta",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "delta_explanation",
+   "label": "Delta Explanation",
+   "fieldtype": "Long Text"
+  },
+  {
+   "fieldname": "tab_status___ai",
+   "label": "Status & AI",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_status___ai",
+   "label": "Submission status and AI suggestions",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Draft\nPending Validation\nSubmitted",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "ai_suggested_likelihood",
+   "label": "Ai Suggested Likelihood",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "ai_suggested_impact",
+   "label": "Ai Suggested Impact",
+   "fieldtype": "Int"
+  },
+  {
+   "fieldname": "ai_suggestion_log_ref",
+   "label": "Ai Suggestion Log Ref",
+   "fieldtype": "Code",
+   "options": "JSON",
+   "description": "JSON array for AI Suggestion Log references. Stored inline because this specification does not define a child DocType for the collection."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "QMS Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Internal Auditor",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "search_fields": "cycle",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

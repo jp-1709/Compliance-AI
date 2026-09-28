@@ -6,3 +6,8 @@ Tax GST Compliance
 Labour Compliance
 Secretarial Compliance
 EHS Compliance
+QMS CAPA
+QMS Document Control
+QMS Internal Audit
+QMS Management Review
+QMS Risk Register

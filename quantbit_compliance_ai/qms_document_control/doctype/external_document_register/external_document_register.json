@@ -1,0 +1,103 @@
+{
+ "doctype": "DocType",
+ "name": "External Document Register",
+ "module": "QMS Document Control",
+ "autoname": "EXTDOC-.YYYY.-.####",
+ "track_changes": 1,
+ "title_field": "external_title",
+ "fields": [
+  {
+   "fieldname": "tab_overview",
+   "label": "Overview",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_identity",
+   "label": "Identity and ownership",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "external_doc_code",
+   "label": "External Doc Code",
+   "fieldtype": "Data",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "external_title",
+   "label": "External Title",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "issuing_authority",
+   "label": "Issuing Authority",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "original_reference",
+   "label": "Original Reference",
+   "fieldtype": "Data",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tab_control",
+   "label": "Control",
+   "fieldtype": "Tab Break"
+  },
+  {
+   "fieldname": "section_control",
+   "label": "Lifecycle and controlled information",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effective_date",
+   "label": "Effective Date",
+   "fieldtype": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "version_or_edition",
+   "label": "Version Or Edition",
+   "fieldtype": "Data",
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicable_clauses",
+   "label": "Applicable Clauses",
+   "fieldtype": "Code",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "business_entity",
+   "label": "Business Entity",
+   "fieldtype": "Link",
+   "options": "Business Entity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "file_attachment",
+   "label": "File Attachment",
+   "fieldtype": "Attach"
+  },
+  {
+   "fieldname": "notes",
+   "label": "Notes",
+   "fieldtype": "Text Editor"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0
+  }
+ ]
+}

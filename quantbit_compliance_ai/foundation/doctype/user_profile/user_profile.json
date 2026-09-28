@@ -47,8 +47,8 @@
         {
             "fieldname": "department",
             "label": "Department",
-            "fieldtype": "Link",
-            "options": "Department"
+            "fieldtype": "Data",
+            "description": "Source-system-neutral department name or identifier."
         },
         {
             "fieldname": "reports_to",

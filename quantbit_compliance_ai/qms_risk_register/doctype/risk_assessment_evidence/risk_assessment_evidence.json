@@ -1,0 +1,35 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Assessment Evidence",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "evidence_file",
+   "label": "Evidence File",
+   "fieldtype": "Link",
+   "options": "Evidence File",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "description",
+   "label": "Description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "columns": 4
+  },
+  {
+   "fieldname": "relevance",
+   "label": "Relevance",
+   "fieldtype": "Select",
+   "options": "Inherent Justification\nResidual Justification\nBoth",
+   "in_list_view": 1,
+   "columns": 4
+  }
+ ],
+ "permissions": []
+}

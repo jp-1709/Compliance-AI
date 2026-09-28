@@ -1,0 +1,52 @@
+{
+ "doctype": "DocType",
+ "name": "Risk Cycle Risk",
+ "module": "QMS Risk Register",
+ "istable": 1,
+ "editable_grid": 1,
+ "fields": [
+  {
+   "fieldname": "risk_item",
+   "label": "Risk Item",
+   "fieldtype": "Link",
+   "options": "Risk Item",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "assigned_assessor",
+   "label": "Assigned Assessor",
+   "fieldtype": "Link",
+   "options": "User Profile",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "assessment_due_date",
+   "label": "Assessment Due Date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "assessment_completed",
+   "label": "Assessment Completed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "linked_assessment",
+   "label": "Linked Assessment",
+   "fieldtype": "Link",
+   "options": "Risk Assessment"
+  },
+  {
+   "fieldname": "status",
+   "label": "Status",
+   "fieldtype": "Select",
+   "options": "Pending\nIn Progress\nSubmitted\nValidated\nSkipped"
+  }
+ ]
+}
