@@ -19,9 +19,76 @@ The final result is the accumulated boolean.
 Idempotency: calling this function multiple times for the same entity returns the same list.
 """
 
+import ast
 import json
 import frappe
 from frappe.utils import cint, flt
+
+# Fields on Business Entity a Custom Expression rule is allowed to read.
+# Keeping this an explicit allowlist (rather than "any attribute") is what
+# makes the safe-eval below actually safe — see _safe_eval_custom_expression.
+_ALLOWED_ENTITY_ATTRS = {
+	"state", "industry_code", "entity_type", "employee_count", "contract_worker_count",
+	"women_employee_count", "differently_abled_count", "shifts_count", "operates_24x7",
+	"has_canteen", "is_listed", "is_hazardous", "is_msme", "is_principal_entity",
+}
+
+# Only these AST node types may appear in a Custom Expression. Notably absent:
+# ast.Call (no function calls), ast.Subscript, ast.Lambda, ast.Import, etc. —
+# there is no way to reach __class__/__subclasses__-style sandbox escapes
+# without at least one Attribute-on-arbitrary-object or Call node, and every
+# Attribute node is additionally checked against _ALLOWED_ENTITY_ATTRS below.
+_ALLOWED_EXPR_NODES = (
+	ast.Expression, ast.BoolOp, ast.And, ast.Or, ast.UnaryOp, ast.Not,
+	ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE,
+	ast.In, ast.NotIn, ast.Name, ast.Load, ast.Attribute, ast.Constant,
+	ast.List, ast.Tuple,
+)
+
+
+class _EntityAttrProxy:
+	"""Read-only view over a Business Entity doc exposing only the allowlisted
+	attributes to a Custom Expression — a second layer of defence alongside
+	the AST allowlist below."""
+
+	def __init__(self, entity):
+		self._entity = entity
+
+	def __getattr__(self, item):
+		if item not in _ALLOWED_ENTITY_ATTRS:
+			raise AttributeError(item)
+		return getattr(self._entity, item, None)
+
+
+def _safe_eval_custom_expression(expr: str, entity) -> bool:
+	"""Evaluate a Custom Expression rule without ever calling Python's eval()
+	on unvetted code. Parses to an AST, rejects anything outside a small
+	allowlist of node types and entity attributes, then evaluates the
+	pre-vetted tree. Any rejection or error fails closed (returns False —
+	an obligation that can't be safely evaluated is never applied)."""
+	try:
+		tree = ast.parse(expr, mode="eval")
+	except SyntaxError:
+		frappe.log_error(f"Custom Expression syntax error: {expr!r}", "ApplicabilityEngine")
+		return False
+
+	for node in ast.walk(tree):
+		if not isinstance(node, _ALLOWED_EXPR_NODES):
+			frappe.log_error(f"Custom Expression rejected (disallowed syntax {type(node).__name__}): {expr!r}", "ApplicabilityEngine")
+			return False
+		if isinstance(node, ast.Name) and node.id != "entity":
+			frappe.log_error(f"Custom Expression rejected (disallowed name {node.id!r}): {expr!r}", "ApplicabilityEngine")
+			return False
+		if isinstance(node, ast.Attribute) and node.attr not in _ALLOWED_ENTITY_ATTRS:
+			frappe.log_error(f"Custom Expression rejected (disallowed attribute {node.attr!r}): {expr!r}", "ApplicabilityEngine")
+			return False
+
+	try:
+		code = compile(tree, "<custom_expression>", "eval")
+		return bool(eval(code, {"__builtins__": {}}, {"entity": _EntityAttrProxy(entity)}))  # noqa: S307 — pre-vetted AST only
+	except Exception as e:
+		frappe.log_error(f"Custom Expression evaluation error ({e}): {expr!r}", "ApplicabilityEngine")
+		return False
 
 
 class ApplicabilityEngine:
@@ -79,10 +146,11 @@ class ApplicabilityEngine:
             if allowed_states and getattr(self.entity, "state", None) not in allowed_states:
                 return False
 
-        # Industry filter
+        # Industry filter (Obligation Industry rows and Business Entity both use
+        # `industry_code` — there is no plain `industry` field on either).
         if obligation.applicable_industries:
-            allowed_industries = [r.industry for r in obligation.applicable_industries]
-            if allowed_industries and getattr(self.entity, "industry", None) not in allowed_industries:
+            allowed_industries = [r.industry_code for r in obligation.applicable_industries]
+            if allowed_industries and getattr(self.entity, "industry_code", None) not in allowed_industries:
                 return False
 
         # Listed companies only
@@ -147,9 +215,9 @@ class ApplicabilityEngine:
         # Map rule_type to entity attribute
         attr_map = {
             "State Match":          "state",
-            "Industry Match":       "industry",
+            "Industry Match":       "industry_code",
             "Employee Threshold":   "employee_count",
-            "Turnover Threshold":   "annual_turnover",
+            "Turnover Threshold":   "annual_turnover",  # not a Business Entity field yet — see docstring
             "Listed Status":        "is_listed",
             "Hazardous Status":     "is_hazardous",
             "MSME Status":          "is_msme",
@@ -157,20 +225,22 @@ class ApplicabilityEngine:
         }
 
         if rule_type == "Custom Expression":
-            # Custom expressions are evaluated in a sandboxed context.
-            # Only system-managed obligations should use this.
-            try:
-                return bool(eval(  # noqa: S307
-                    str(value),
-                    {"__builtins__": {}},
-                    {"entity": entity},
-                ))
-            except Exception:
-                return False
+            return _safe_eval_custom_expression(str(value), entity)
 
         attr = attr_map.get(rule_type)
         if not attr:
             return True  # Unknown rule type — pass through
+        if not hasattr(entity, attr):
+            # Fail closed rather than silently matching on a None vs None
+            # comparison — a rule referencing a field the entity doesn't
+            # carry (e.g. Turnover Threshold, until Business Entity grows an
+            # annual_turnover field) should never be treated as satisfied.
+            frappe.log_error(
+                f"Applicability rule '{rule_type}' references entity attribute '{attr}', "
+                f"which Business Entity does not have. Rule treated as not satisfied.",
+                "ApplicabilityEngine",
+            )
+            return False
 
         entity_value = getattr(entity, attr, None)
 

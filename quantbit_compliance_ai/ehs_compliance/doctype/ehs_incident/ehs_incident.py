@@ -170,6 +170,12 @@ class EHSIncident(Document):
         if self.linked_quality_event:
             return  # already linked
 
+        if not frappe.db.exists("DocType", "Quality Event"):
+            # Quality Event is not installed in this app build; skip silently
+            # rather than logging an error on every submit (same guard
+            # pattern used in labour_compliance/doctype/labour_inspection).
+            return
+
         severity = SEVERITY_TO_QMS_MAP.get(self.severity, "Sev-3 (Moderate)")
         title = (self.incident_description or "")[:100] if self.incident_description else self.name
 
@@ -337,7 +343,7 @@ def get_incident_trends(organisation: str = None, fy: str = None) -> dict:
     if fy:
         # Parse FY to date range
         try:
-            from complyai.compliance.ehs_compliance.controllers.pcb_return import _parse_fy_end_year
+            from quantbit_compliance_ai.ehs_compliance.doctype.pcb_return.pcb_return import _parse_fy_end_year
             end_year = _parse_fy_end_year(fy)
             filters["incident_date"] = [
                 "between",

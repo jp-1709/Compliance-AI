@@ -14,6 +14,8 @@ from frappe import _
 from frappe.model.document import Document
 from datetime import date, timedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 class EnvironmentalClearance(Document):
 
@@ -158,7 +160,7 @@ class EnvironmentalClearance(Document):
                 "business_entity": self.business_entity,
                 "task_title": ["like", f"%CTO {self.clearance_number}%"],
                 "status": ["in", ["Open", "In Progress"]],
-                "priority": "Urgent",
+                "risk_level": "Critical",
             },
         )
         if existing:
@@ -191,21 +193,26 @@ def _create_cto_critical_task(clearance: "EnvironmentalClearance") -> None:
                 "task_title": (
                     f"🚨 CTO {clearance.clearance_number} expires in "
                     f"{clearance.days_to_expiry} days — START RENEWAL NOW"
-                ),
-                "task_type": "CTO Renewal",
+                )[:140],
+                "category": "CTO Renewal",
+                # next_renewal_action_due can already be in the past by the time
+                # this fires (days_to_expiry < 365 includes already-overdue
+                # renewals) — bracket both dates rather than assume today is earlier.
+                "period_start": min(date.today(), frappe.utils.getdate(clearance.next_renewal_action_due)),
+                "period_end": max(date.today(), frappe.utils.getdate(clearance.next_renewal_action_due)),
                 "due_date": clearance.next_renewal_action_due,
                 "status": "Open",
-                "priority": "Urgent",
+                "risk_level": "Critical",
                 "assigned_to": clearance.responsible_person,
-                "reference_doctype": "Environmental Clearance",
-                "reference_name": clearance.name,
-                "description": (
+                "reviewer": pick_task_reviewer(clearance.responsible_person),
+                "section_reference": (
+                    f"Environmental Clearance: {clearance.name}. "
                     f"CRITICAL: Consent to Operate {clearance.clearance_number} "
                     f"({clearance.clearance_type}) expires on {clearance.valid_until} "
                     f"({clearance.days_to_expiry} days remaining). "
                     "A lapsed CTO = factory closure. Start renewal application immediately. "
                     "PCB requires 365-day lead time."
-                ),
+                )[:140],
             }
         )
         task.insert(ignore_permissions=True)

@@ -10,6 +10,8 @@ import frappe
 from frappe import _
 from datetime import date, timedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 # ══════════════════════════════════════════════════════
 # ─── Operating Licences ───────────────────────────────
@@ -126,7 +128,7 @@ def update_clearance_condition_status(
     evidence: str = None,
 ) -> dict:
     """Update a specific condition's compliance status and recompute score."""
-    from complyai.compliance.ehs_compliance.controllers.environmental_clearance import (
+    from quantbit_compliance_ai.ehs_compliance.doctype.environmental_clearance.environmental_clearance import (
         update_clearance_condition_status as _update,
     )
     return _update(clearance, condition_no, new_status, evidence)
@@ -219,7 +221,7 @@ def auto_populate_form_v(pcb_return: str) -> dict:
         frappe.throw(_("auto_populate_form_v is only applicable for Form-V returns."))
 
     # Derive the 12-month window
-    from complyai.compliance.ehs_compliance.controllers.pcb_return import _parse_fy_end_year
+    from quantbit_compliance_ai.ehs_compliance.doctype.pcb_return.pcb_return import _parse_fy_end_year
     fy_end = _parse_fy_end_year(doc.period_fy)
     from datetime import date
     period_from = date(fy_end - 1, 4, 1)
@@ -356,7 +358,7 @@ def get_or_create_fire_safety_record(business_entity: str) -> dict:
 @frappe.whitelist()
 def log_fire_drill(business_entity: str, drill_data: dict) -> dict:
     """Add drill log entry and recompute drill metrics."""
-    from complyai.compliance.ehs_compliance.controllers.fire_safety_compliance import (
+    from quantbit_compliance_ai.ehs_compliance.doctype.fire_safety_compliance.fire_safety_compliance import (
         log_fire_drill as _log,
     )
     return _log(business_entity, drill_data)
@@ -539,17 +541,24 @@ def create_construction_project(business_entity: str, project_data: dict) -> dic
             "doctype": "Compliance Calendar Task",
             "organisation": entity.organisation,
             "business_entity": business_entity,
-            "task_title": f"File Form-I (Labour Dept Intimation) — {doc.project_name}",
-            "task_type": "BOCW Obligation",
+            "task_title": (
+                f"File Form-I (Labour Dept Intimation) — {doc.project_name}"
+            )[:140],
+            "category": "BOCW Obligation",
             "status": "Open",
-            "priority": "High",
+            "risk_level": "High",
+            # project_start_date may already be in the past for an
+            # already-under-way project; bracket both dates.
+            "period_start": min(date.today(), frappe.utils.getdate(doc.project_start_date)),
+            "period_end": max(date.today(), frappe.utils.getdate(doc.project_start_date)),
             "due_date": doc.project_start_date,
-            "description": (
+            "assigned_to": frappe.session.user,
+            "reviewer": pick_task_reviewer(frappe.session.user),
+            "section_reference": (
+                f"BOCW Compliance: {doc.name}. "
                 "File Form-I with the Labour Department before construction commences. "
                 f"Project: {doc.project_name}. Cost: ₹{doc.estimated_construction_cost_inr:,.0f}"
-            ),
-            "reference_doctype": "BOCW Compliance",
-            "reference_name": doc.name,
+            )[:140],
         }).insert(ignore_permissions=True)
     except Exception:
         frappe.log_error(frappe.get_traceback(), "BOCW Form-I task creation failed")
@@ -564,7 +573,7 @@ def create_construction_project(business_entity: str, project_data: dict) -> dic
 @frappe.whitelist()
 def record_cess_payment(project: str, amount_inr: float, payment_evidence: str) -> dict:
     """Log cess payment; updates remaining cess obligation."""
-    from complyai.compliance.ehs_compliance.controllers.bocw_compliance import (
+    from quantbit_compliance_ai.ehs_compliance.doctype.bocw_compliance.bocw_compliance import (
         record_cess_payment as _pay,
     )
     return _pay(project, amount_inr, payment_evidence)
@@ -577,7 +586,7 @@ def record_cess_payment(project: str, amount_inr: float, payment_evidence: str) 
 @frappe.whitelist()
 def log_incident(business_entity: str, incident_data: dict) -> dict:
     """Log incident; auto-assesses regulatory reportability."""
-    from complyai.compliance.ehs_compliance.controllers.ehs_incident import (
+    from quantbit_compliance_ai.ehs_compliance.doctype.ehs_incident.ehs_incident import (
         log_incident as _log,
     )
     return _log(business_entity, incident_data)
@@ -604,8 +613,8 @@ def submit_incident_investigation(incident: str, investigation_data: dict) -> di
                 "business_entity": doc.business_entity,
                 "title": f"CAPA for {doc.name}: {doc.incident_type}",
                 "capa_type": "Corrective",
-                "severity": "High" if doc.severity in ("Fatality", "Lost Time Injury") else "Medium",
-                "priority": "P2" if doc.severity in ("Fatality", "Lost Time Injury") else "P3",
+                "severity": "High" if doc.incident_type in ("Fatality", "Injury — Lost Time (LTI)") else "Medium",
+                "priority": "P2" if doc.incident_type in ("Fatality", "Injury — Lost Time (LTI)") else "P3",
                 "source": "Quality Event",
                 "source_reference": doc.name,
                 "problem_statement": doc.incident_description or f"Investigation of EHS incident {doc.name}",
@@ -632,7 +641,7 @@ def submit_incident_investigation(incident: str, investigation_data: dict) -> di
 @frappe.whitelist()
 def get_incident_trends(organisation: str = None, fy: str = None) -> dict:
     """LTIFR, severity rate, by-type breakdown."""
-    from complyai.compliance.ehs_compliance.controllers.ehs_incident import (
+    from quantbit_compliance_ai.ehs_compliance.doctype.ehs_incident.ehs_incident import (
         get_incident_trends as _trends,
     )
     return _trends(organisation, fy)

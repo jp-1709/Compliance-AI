@@ -17,7 +17,7 @@ from frappe import _
 from frappe.utils import today, getdate, now
 from datetime import date, timedelta
 
-from complyai.compliance.labour_compliance.doctype.contract_labour_engagement.contract_labour_engagement import (
+from quantbit_compliance_ai.labour_compliance.doctype.contract_labour_engagement.contract_labour_engagement import (
     ContractLabourEngagement,
 )
 

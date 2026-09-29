@@ -15,6 +15,8 @@ from frappe.model.document import Document
 from datetime import date
 from dateutil.relativedelta import relativedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 # ──────────────────────────────────────────────────────
 # MSIHC Schedule 3 thresholds (kg) — CAS → threshold
@@ -229,17 +231,20 @@ class HazardousSubstanceInventory(Document):
                         "organisation": self.organisation,
                         "business_entity": self.business_entity,
                         "task_title": "Prepare MSIHC Safety Report (On-Site Emergency Plan)",
-                        "task_type": "MSIHC Obligation",
+                        "category": "MSIHC Obligation",
                         "status": "Open",
-                        "priority": "High",
+                        "risk_level": "High",
+                        "period_start": frappe.utils.today(),
+                        "period_end": frappe.utils.today(),
+                        "due_date": frappe.utils.today(),
                         "assigned_to": self.responsible_person,
-                        "reference_doctype": "Hazardous Substance Inventory",
-                        "reference_name": self.name,
-                        "description": (
+                        "reviewer": pick_task_reviewer(self.responsible_person),
+                        "section_reference": (
+                            f"Hazardous Substance Inventory: {self.name}. "
                             f"Substance '{self.substance_name}' (CAS: {self.cas_number}) "
                             f"exceeds MSIHC Schedule 3 threshold. "
                             "Required: On-Site Emergency Plan, MSIHC Safety Report, DSIR notification."
-                        ),
+                        )[:140],
                     }
                 ).insert(ignore_permissions=True)
         except Exception:

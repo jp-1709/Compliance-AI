@@ -41,11 +41,11 @@ class ApplicabilityTestCase(Document):
         Execute this test case inline and return result dict.
         Also persists last_run_* fields.
         """
-        from complyai.compliance.obligation_register.controllers.applicability_engine import (
+        from quantbit_compliance_ai.obligation_register.applicability_engine import (
             is_obligation_applicable,
         )
 
-        ob = frappe.get_doc("Compliance Obligation", self.obligation).as_dict()
+        ob = frappe.get_doc("Compliance Obligation Register", self.obligation).as_dict()
         entity = {
             "state": self.state,
             "industry_code": self.industry_code,

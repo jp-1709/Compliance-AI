@@ -46,9 +46,9 @@
             "label": "Obligation",
             "fieldtype": "Link",
             "options": "Compliance Obligation",
-            "reqd": 1,
             "in_list_view": 1,
-            "read_only_onsave": 1
+            "read_only_onsave": 1,
+            "description": "Left blank for system-generated ad-hoc tasks (threshold warnings, notice-response deadlines, inspection follow-ups, etc.) that don't trace back to a catalogued regulatory obligation. Set for tasks the Applicability Engine generates from a real Compliance Obligation."
         },
         {
             "fieldname": "task_title",

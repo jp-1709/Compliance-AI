@@ -234,6 +234,14 @@
             "fieldtype": "Table MultiSelect",
             "options": "Organisation Module Access",
             "description": "Which modules are enabled for this org based on their plan"
+        },
+        {
+            "fieldname": "_entity_count",
+            "label": "Active Entity Count (cached)",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "hidden": 1,
+            "description": "Cached count of active Business Entities; refreshed on every save by sync_entity_count()."
         }
     ],
     "permissions": [

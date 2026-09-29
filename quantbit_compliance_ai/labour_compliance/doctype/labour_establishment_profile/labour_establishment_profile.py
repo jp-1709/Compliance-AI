@@ -14,6 +14,8 @@ from frappe.model.document import Document
 from frappe.utils import today, add_days, getdate
 from dateutil.relativedelta import relativedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 WORKER_THRESHOLDS = [10, 20, 30, 50, 100, 250, 500, 1000]
 
 # Key fields for completeness calculation
@@ -121,7 +123,7 @@ class LabourEstablishmentProfile(Document):
         ]
         if crossed:
             frappe.enqueue(
-                "complyai.compliance.compliance_calendar.api.generate_calendar_for_entity",
+                "quantbit_compliance_ai.compliance_calendar.api.generate_calendar_for_entity",
                 queue="long",
                 job_name=f"recompute_obligations_{self.business_entity}",
                 business_entity=self.business_entity,
@@ -201,6 +203,7 @@ def _create_warning_task(business_entity: str, message: str) -> None:
                 "period_end": today(),
                 "due_date": today(),
                 "assigned_to": frappe.session.user,
+                "reviewer": pick_task_reviewer(frappe.session.user),
                 "status": "Open",
                 "risk_level": "High",
                 "category": "Labour",

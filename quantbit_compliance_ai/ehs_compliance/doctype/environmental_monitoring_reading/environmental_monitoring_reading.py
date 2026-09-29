@@ -104,6 +104,12 @@ class EnvironmentalMonitoringReading(Document):
           2 violations → Sev-2 (Major)
           3+ violations→ Sev-1 (Catastrophic)
         """
+        if not frappe.db.exists("DocType", "Quality Event"):
+            # Quality Event is not installed in this app build; skip silently
+            # rather than logging an error on every violation (same guard
+            # pattern used in labour_compliance/doctype/labour_inspection).
+            return
+
         severity = _map_violation_count_to_severity(self.violation_count)
 
         # Build a readable title

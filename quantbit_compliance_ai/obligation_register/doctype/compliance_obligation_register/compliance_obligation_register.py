@@ -282,7 +282,7 @@ class ComplianceObligationRegister(Document):
         """Queue background job to compute/update pgvector embedding."""
         try:
             frappe.enqueue(
-                "complyai.compliance.obligation_register.tasks.compute_embedding",
+                "quantbit_compliance_ai.obligation_register.tasks.compute_embedding",
                 obligation=self.name,
                 queue="long",
                 timeout=300,
@@ -303,7 +303,7 @@ class ComplianceObligationRegister(Document):
         """Notify open compliance tasks that their source obligation changed."""
         try:
             frappe.enqueue(
-                "complyai.compliance.obligation_register.tasks.flag_tasks_for_obligation_change",
+                "quantbit_compliance_ai.obligation_register.tasks.flag_tasks_for_obligation_change",
                 obligation=self.name,
                 queue="default",
                 now=frappe.flags.in_test,

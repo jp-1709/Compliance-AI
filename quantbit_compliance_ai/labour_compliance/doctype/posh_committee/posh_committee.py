@@ -19,6 +19,8 @@ from frappe.utils import getdate, today
 from dateutil.relativedelta import relativedelta
 from datetime import date, timedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 class POSHCommittee(Document):
 
@@ -187,6 +189,7 @@ class POSHCommittee(Document):
                     "period_end": str(tenure_end_date),
                     "due_date": str(task_due),
                     "assigned_to": frappe.session.user,
+                    "reviewer": pick_task_reviewer(frappe.session.user),
                     "status": "Open",
                     "risk_level": "High",
                     "category": "Labour",

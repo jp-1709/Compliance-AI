@@ -14,6 +14,8 @@ from frappe.model.document import Document
 from frappe.utils import getdate, today
 from datetime import date, timedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 class LabourInspection(Document):
 
@@ -89,6 +91,7 @@ class LabourInspection(Document):
                     "period_end": str(due),
                     "due_date": str(due),
                     "assigned_to": frappe.session.user,
+                    "reviewer": pick_task_reviewer(frappe.session.user),
                     "status": "Open",
                     "risk_level": "High",
                     "category": "Labour",

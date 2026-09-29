@@ -32,6 +32,8 @@ import frappe
 from frappe.utils import today, getdate, now
 from datetime import date, timedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # DAILY JOBS
@@ -122,7 +124,7 @@ def _send_licence_expiry_alert(engagement: dict, days_remaining: int):
     if days_remaining <= 7:
         channels.append("whatsapp")
 
-    from complyai.compliance.compliance_calendar.utils import notify_user
+    from quantbit_compliance_ai.compliance_calendar.utils import notify_user
     notify_user(
         user=engagement.responsible_person or "Administrator",
         template="contractor_licence_expiry",
@@ -202,7 +204,7 @@ def _send_posh_sla_alert(complaint: dict, days_elapsed: int):
     if not po_email:
         return
 
-    from complyai.compliance.compliance_calendar.utils import notify_user
+    from quantbit_compliance_ai.compliance_calendar.utils import notify_user
     notify_user(
         user=po_email,
         template="posh_inquiry_sla",
@@ -338,6 +340,7 @@ def posh_annual_report_kickoff():
                 "period_end": f"{cal_year+1}-01-31",
                 "due_date": f"{cal_year+1}-01-31",
                 "assigned_to": "Administrator",
+                "reviewer": pick_task_reviewer("Administrator"),
                 "status": "Open",
                 "risk_level": "High",
                 "category": "Labour",
@@ -378,18 +381,24 @@ def _create_tenure_renewal_task(committee: dict):
         },
     ):
         return
+
+    due = getdate(committee.tenure_end) - timedelta(days=30)
+    # tenure_end (and therefore due, 30 days before it) may already be in the
+    # past for an already-expired IC, not just one expiring soon — bracket
+    # all three candidate dates rather than assume today is the earliest.
+    candidates = [date.today(), getdate(committee.tenure_end), due]
+
     frappe.get_doc(
         {
             "doctype": "Compliance Calendar Task",
             "organisation": committee.organisation,
             "business_entity": committee.business_entity,
             "task_title": task_title,
-            "period_start": str(date.today()),
-            "period_end": str(committee.tenure_end),
-            "due_date": str(date(getdate(committee.tenure_end).year,
-                                  getdate(committee.tenure_end).month,
-                                  max(1, getdate(committee.tenure_end).day - 30))),
+            "period_start": str(min(candidates)),
+            "period_end": str(max(candidates)),
+            "due_date": str(due),
             "assigned_to": "Administrator",
+            "reviewer": pick_task_reviewer("Administrator"),
             "status": "Open",
             "risk_level": "High",
             "category": "Labour",

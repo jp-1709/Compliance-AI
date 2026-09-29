@@ -1,0 +1,107 @@
+{
+ "doctype": "DocType",
+ "name": "Minimum Wage Rate",
+ "module": "Labour Compliance",
+ "naming_rule": "By \"Naming Series\"",
+ "autoname": "MWR-.YYYY.-.######",
+ "track_changes": 1,
+ "title_field": "state",
+ "search_fields": "state,skill_category",
+ "description": "State-notified minimum wage rate for a skill category, effective for a date range. Reference/master data consumed by Wage Roll's minimum-wages compliance check. Most states re-notify rates twice yearly (1-Apr and 1-Oct).",
+ "fields": [
+  {
+   "fieldname": "state",
+   "label": "State",
+   "fieldtype": "Link",
+   "options": "State",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "skill_category",
+   "label": "Skill Category",
+   "fieldtype": "Select",
+   "options": "Unskilled\nSemi-Skilled\nSkilled\nHighly Skilled",
+   "default": "Unskilled",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "monthly_rate_inr",
+   "label": "Monthly Rate (₹)",
+   "fieldtype": "Currency",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sec_validity",
+   "label": "Validity",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effective_from",
+   "label": "Effective From",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "effective_to",
+   "label": "Effective To",
+   "fieldtype": "Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "Last date this rate applies. Set to a far-future date if the notification has no known expiry."
+  },
+  {
+   "fieldname": "sec_source",
+   "label": "Source",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "source_notification",
+   "label": "Source Notification Reference",
+   "fieldtype": "Data",
+   "description": "Gazette/notification number from the state Labour Commissioner"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Compliance Officer",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Read Only",
+   "read": 1
+  }
+ ],
+ "indexes": [
+  {
+   "fields": ["state", "skill_category", "effective_from"]
+  }
+ ]
+}

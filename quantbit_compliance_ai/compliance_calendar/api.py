@@ -529,18 +529,29 @@ def upload_evidence_to_task(
     task_name: str,
     file_url: str,
     evidence_type: str,
+    title: str = None,
     is_primary: int = 0,
     remarks: str = None,
 ) -> dict:
-    """Upload evidence and link to task in one call."""
+    """Upload evidence and link to task in one call.
+
+    Evidence File (Foundation F4) requires organisation, business_entity,
+    evidence_title, evidence_type, and file — all of which must come from the
+    task, not be left unset. evidence_type here should match one of Evidence
+    File's own Select options (Certificate/Licence/Report/... — see F4);
+    the compliance-calendar-side Task Evidence Link field is free text, but
+    the underlying Evidence File record will reject anything else.
+    """
     task = _assert_task_access(task_name)
 
-    # Create Evidence File record (simplified — production creates with SHA-256 hash)
     evidence_file = frappe.get_doc(
         {
             "doctype": "Evidence File",
-            "file_url": file_url,
+            "organisation": task.organisation,
+            "business_entity": task.business_entity,
+            "evidence_title": title or f"{task.task_title} — {evidence_type}",
             "evidence_type": evidence_type,
+            "file": file_url,
         }
     )
     evidence_file.insert(ignore_permissions=True)

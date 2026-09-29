@@ -195,19 +195,27 @@ def _parse_fy_end_year(period_fy: str) -> int:
 
 
 def _compute_quarterly_due(fy_end_year: int, quarter: str) -> date:
-    """Return the quarterly filing due date (15th of month after quarter end)."""
-    quarter_end_months = {
-        "Q1": (6, 30),  # Q1 Apr–Jun → due 15-Jul
-        "Q2": (9, 30),  # Q2 Jul–Sep → due 15-Oct
-        "Q3": (12, 31), # Q3 Oct–Dec → due 15-Jan
-        "Q4": (3, 31),  # Q4 Jan–Mar → due 15-Apr
+    """
+    Return the quarterly filing due date (15th of month after quarter end).
+
+    FY 'end year' convention (matches _parse_fy_end_year): FY 2024-25 → fy_end_year=2025.
+    Q1 (Apr–Jun), Q2 (Jul–Sep) and Q3 (Oct–Dec) all fall in the calendar year
+    fy_end_year - 1; only Q4 (Jan–Mar) falls in fy_end_year itself.
+    """
+    quarter_end = {
+        "Q1": (fy_end_year - 1, 6, 30),   # Apr–Jun → due 15-Jul
+        "Q2": (fy_end_year - 1, 9, 30),   # Jul–Sep → due 15-Oct
+        "Q3": (fy_end_year - 1, 12, 31),  # Oct–Dec → due 15-Jan
+        "Q4": (fy_end_year, 3, 31),       # Jan–Mar → due 15-Apr
     }
-    if not quarter or quarter not in quarter_end_months:
+    if not quarter or quarter not in quarter_end:
         return date(fy_end_year, 6, 30)  # default
 
-    end_month, _ = quarter_end_months[quarter]
-    due_month = end_month + 1 if end_month < 12 else 1
-    due_year = fy_end_year if end_month < 12 else fy_end_year + 1
+    end_year, end_month, _ = quarter_end[quarter]
+    if end_month == 12:
+        due_year, due_month = end_year + 1, 1
+    else:
+        due_year, due_month = end_year, end_month + 1
     return date(due_year, due_month, 15)
 
 

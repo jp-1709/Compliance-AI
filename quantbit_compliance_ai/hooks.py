@@ -127,13 +127,21 @@ after_migrate = "quantbit_compliance_ai.setup.ensure_reference_data"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+# Foundation spec §5: row-level tenancy isolation. permission_query_conditions
+# scopes list views/reports; has_permission scopes a direct single-document
+# load. Both are thin closures from foundation/permissions.py's factory — add
+# a DocType here the same way as each module's own tenancy scoping is
+# finalised (see that module's docstring for why only Business Entity and
+# Evidence File are wired at this pass).
+permission_query_conditions = {
+	"Business Entity": "quantbit_compliance_ai.foundation.permissions.get_business_entity_query_conditions",
+	"Evidence File": "quantbit_compliance_ai.foundation.permissions.get_evidence_file_query_conditions",
+}
+
+has_permission = {
+	"Business Entity": "quantbit_compliance_ai.foundation.permissions.has_business_entity_permission",
+	"Evidence File": "quantbit_compliance_ai.foundation.permissions.has_evidence_file_permission",
+}
 
 # Document Events
 # ---------------

@@ -13,7 +13,7 @@ import frappe
 from frappe import _
 from frappe.utils import now, now_datetime, getdate
 
-from complyai.compliance.obligation_register.controllers.applicability_engine import (
+from quantbit_compliance_ai.obligation_register.applicability_engine import (
     get_applicable_obligations as _engine_get_applicable,
     is_obligation_applicable,
 )
@@ -36,7 +36,7 @@ def _require_role(*roles):
 
 
 def _get_obligation_or_throw(name: str):
-    doc = frappe.get_doc("Compliance Obligation", name)
+    doc = frappe.get_doc("Compliance Obligation Register", name)
     return doc
 
 
@@ -66,8 +66,8 @@ def explain_applicability(obligation: str, business_entity: str) -> dict:
     """
     Return full rule trace for why an obligation does (or doesn't) apply.
     """
-    ob = frappe.get_doc("Compliance Obligation", obligation).as_dict()
-    from complyai.compliance.obligation_register.controllers.applicability_engine import (
+    ob = frappe.get_doc("Compliance Obligation Register", obligation).as_dict()
+    from quantbit_compliance_ai.obligation_register.applicability_engine import (
         _load_entity_profile,
     )
     entity = _load_entity_profile(business_entity)
@@ -114,7 +114,7 @@ def search_obligations(
             or_filters.append([field, "like", f"%{query}%"])
 
     results = frappe.get_all(
-        "Compliance Obligation",
+        "Compliance Obligation Register",
         filters=filters,
         or_filters=or_filters if or_filters else None,
         fields=[
@@ -160,7 +160,7 @@ def search_obligations(
 @frappe.whitelist()
 def get_obligation_with_history(obligation: str) -> dict:
     """Return obligation + all versions + change log entries."""
-    doc = frappe.get_doc("Compliance Obligation", obligation).as_dict()
+    doc = frappe.get_doc("Compliance Obligation Register", obligation).as_dict()
     versions = frappe.get_all(
         "Obligation Version",
         filters={"obligation": obligation},
@@ -271,20 +271,29 @@ def bulk_publish(obligation_names: list, validator_bar_number: str) -> dict:
     if not obligation_names:
         frappe.throw(_("No obligations provided for bulk publish"), frappe.ValidationError)
 
+    # Pre-validate every obligation before mutating any of them — this is
+    # what actually makes the batch atomic. A single frappe.db.rollback()
+    # after a partial loop only undoes DB writes, not the .save() calls'
+    # already-returned side effects, and calling it once per already-failed
+    # item (the old code) was both redundant and misleading. Frappe runs one
+    # transaction per request, so failing fast before any write is the
+    # correct atomicity guarantee here.
+    docs = [_get_obligation_or_throw(name) for name in obligation_names]
+    for doc in docs:
+        if doc.curation_status != "Approved (Pending Publish)":
+            frappe.throw(
+                _("Obligation {0} is not in 'Approved (Pending Publish)' status (found: {1}). No obligations in this batch were published.").format(
+                    doc.name, doc.curation_status
+                ),
+                frappe.ValidationError,
+            )
+
     published = []
     try:
         for name in obligation_names:
-            result = publish_obligation(name, validator_bar_number)
-            published.append(result)
+            published.append(publish_obligation(name, validator_bar_number))
     except Exception:
-        # Rollback already-published ones (best-effort)
-        for p in published:
-            try:
-                doc = frappe.get_doc("Compliance Obligation", p["obligation"])
-                # Force-revert (only in case of partial publish in same transaction)
-                frappe.db.rollback()
-            except Exception:
-                pass
+        frappe.db.rollback()
         raise
 
     return {
@@ -335,7 +344,7 @@ def amend_obligation(obligation: str, changes: dict, change_reason: str) -> dict
 
     # Mark old as superseded
     frappe.db.set_value(
-        "Compliance Obligation",
+        "Compliance Obligation Register",
         old_doc.name,
         {
             "superseded_by": new_doc.name,
@@ -383,7 +392,7 @@ def retract_obligation(obligation: str, reason: str) -> dict:
         change_summary=reason,
     )
     frappe.enqueue(
-        "complyai.compliance.obligation_register.tasks.flag_tasks_for_retraction",
+        "quantbit_compliance_ai.obligation_register.tasks.flag_tasks_for_retraction",
         obligation=obligation,
         reason=reason,
         queue="default",
@@ -447,7 +456,7 @@ def run_applicability_test(test_case: str = None, run_all: bool = False) -> dict
     results = []
 
     for case in cases:
-        ob = frappe.get_doc("Compliance Obligation", case["obligation"]).as_dict()
+        ob = frappe.get_doc("Compliance Obligation Register", case["obligation"]).as_dict()
         entity = {
             "state": case.get("state"),
             "industry_code": case.get("industry_code"),
@@ -543,7 +552,7 @@ def import_extracted_batch(extraction_run_id: str, payload: list) -> dict:
 
     for item in payload:
         try:
-            doc = frappe.new_doc("Compliance Obligation")
+            doc = frappe.new_doc("Compliance Obligation Register")
             doc.update(item)
             doc.curation_status = "AI Extracted"
             doc.extraction_source = item.get("extraction_source", "AI-Extracted (Claude)")
@@ -584,14 +593,15 @@ def get_curation_pipeline_status() -> dict:
     by_status = {}
     for status in statuses:
         by_status[status] = frappe.db.count(
-            "Compliance Obligation", {"curation_status": status}
+            "Compliance Obligation Register", {"curation_status": status}
         )
 
-    by_regulator = frappe.db.get_all(
-        "Compliance Obligation",
-        fields=["regulator", "curation_status", "count(*) as count"],
+    # This Frappe version rejects raw SQL function strings in `fields`
+    # ("count(*) as count") — it requires the dict aggregate syntax.
+    by_regulator = frappe.get_all(
+        "Compliance Obligation Register",
+        fields=["regulator", "curation_status", {"COUNT": "*", "as": "count"}],
         group_by="regulator, curation_status",
-        as_list=False,
     )
 
     return {

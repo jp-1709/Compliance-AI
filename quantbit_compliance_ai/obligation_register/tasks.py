@@ -30,7 +30,7 @@ def regenerate_pending_embeddings():
     Enqueues compute_embedding() for each pending obligation.
     """
     pending = frappe.get_all(
-        "Compliance Obligation",
+        "Compliance Obligation Register",
         filters={
             "is_published": 1,
             "embedding_vector": ("is", "not set"),
@@ -40,7 +40,7 @@ def regenerate_pending_embeddings():
     )
     for ob in pending:
         frappe.enqueue(
-            "complyai.compliance.obligation_register.tasks.compute_embedding",
+            "quantbit_compliance_ai.obligation_register.tasks.compute_embedding",
             obligation=ob["name"],
             queue="long",
             timeout=300,
@@ -57,7 +57,7 @@ def compute_embedding(obligation: str):
     """
     try:
         # Compose text corpus for embedding
-        doc = frappe.get_doc("Compliance Obligation", obligation)
+        doc = frappe.get_doc("Compliance Obligation Register", obligation)
         corpus_parts = [
             doc.obligation_title or "",
             doc.section_reference or "",
@@ -71,10 +71,10 @@ def compute_embedding(obligation: str):
         # Delegate to AI Copilot module (import lazily to avoid circular deps)
         try:
             from complyai.ai_copilot.vector_store import upsert_embedding
-            vector_id = upsert_embedding(doctype="Compliance Obligation",
+            vector_id = upsert_embedding(doctype="Compliance Obligation Register",
                                          docname=obligation,
                                          text=corpus)
-            frappe.db.set_value("Compliance Obligation", obligation,
+            frappe.db.set_value("Compliance Obligation Register", obligation,
                                 "embedding_vector", vector_id)
         except ImportError:
             # AI Copilot not installed yet; log and continue
@@ -98,7 +98,7 @@ def run_applicability_regression_tests():
     Run all active Applicability Test Cases.
     Alert engineering via notification if any fail.
     """
-    from complyai.compliance.obligation_register.api.api import run_applicability_test
+    from quantbit_compliance_ai.obligation_register.api import run_applicability_test
 
     result = run_applicability_test(run_all=True)
     if result["failed"] > 0:
@@ -190,7 +190,7 @@ def detect_stale_obligations():
     """
     cutoff = add_months(today(), -12)
     stale = frappe.get_all(
-        "Compliance Obligation",
+        "Compliance Obligation Register",
         filters={
             "curation_status": "Published",
             "is_published": 1,
@@ -202,7 +202,7 @@ def detect_stale_obligations():
 
     for ob in stale:
         frappe.db.set_value(
-            "Compliance Obligation",
+            "Compliance Obligation Register",
             ob["name"],
             "needs_review_reason",
             f"Not validated since {ob.get('validated_on') or 'unknown'}. Auto-flagged for revalidation.",
@@ -239,7 +239,7 @@ def curation_pipeline_report():
     """
     Email internal staff a summary of extraction → validation → publication metrics.
     """
-    from complyai.compliance.obligation_register.api.api import get_curation_pipeline_status
+    from quantbit_compliance_ai.obligation_register.api import get_curation_pipeline_status
 
     pipeline = get_curation_pipeline_status()
     lines = [f"  {status}: {count}" for status, count in pipeline["by_status"].items()]
@@ -262,22 +262,37 @@ def curation_pipeline_report():
 
 def flag_tasks_for_obligation_change(obligation: str):
     """
-    Mark open Compliance Tasks that reference this obligation so
+    Mark open Compliance Calendar Tasks that reference this obligation so
     Compliance Officers know the underlying obligation has been updated.
+
+    KNOWN ARCHITECTURAL GAP: this module's obligations live in "Compliance
+    Obligation Register" (94-field authoritative schema, this module), but
+    `Compliance Calendar Task.obligation` links to a *different*,
+    independently-schemad "Compliance Obligation" DocType that lives in the
+    compliance_calendar module. The two were meant to be one DocType per the
+    original spec ("the authoritative full schema lives here... anywhere
+    they differ, this spec wins") but were built as two disconnected
+    records. Until that's reconciled (either merge the DocTypes, or add a
+    field on Compliance Calendar Task linking back to Compliance Obligation
+    Register), this filter will correctly find zero tasks — it's wired
+    against the right DocType and the real Task Activity logging mechanism,
+    it just has nothing to match yet.
     """
     try:
+        from quantbit_compliance_ai.compliance_calendar.utils import log_task_activity
+
         tasks = frappe.get_all(
-            "Compliance Task",
-            filters={"obligation": obligation, "status": ["not in", ["Completed", "Cancelled"]]},
+            "Compliance Calendar Task",
+            filters={"obligation": obligation, "status": ["not in", ["Completed", "Not Applicable"]]},
             fields=["name"],
             limit_page_length=0,
         )
         for task in tasks:
-            frappe.db.set_value(
-                "Compliance Task",
-                task["name"],
-                "obligation_changed_flag",
-                1,
+            log_task_activity(
+                task=task["name"],
+                activity_type="Amended",
+                remarks=f"Source obligation {obligation} was updated. Review required.",
+                actor="Administrator",
             )
         frappe.logger().info(
             f"[ObligationRegister] Flagged {len(tasks)} task(s) for obligation change: {obligation}"
@@ -288,24 +303,30 @@ def flag_tasks_for_obligation_change(obligation: str):
 
 def flag_tasks_for_retraction(obligation: str, reason: str):
     """
-    Freeze all open tasks referencing a retracted obligation.
+    Notify open tasks referencing a retracted obligation. See the
+    architectural-gap note on flag_tasks_for_obligation_change — the same
+    Compliance-Obligation-vs-Compliance-Obligation-Register disconnect
+    applies here.
     """
     try:
+        from quantbit_compliance_ai.compliance_calendar.utils import log_task_activity
+
         tasks = frappe.get_all(
-            "Compliance Task",
-            filters={"obligation": obligation, "status": ["not in", ["Completed", "Cancelled"]]},
+            "Compliance Calendar Task",
+            filters={"obligation": obligation, "status": ["not in", ["Completed", "Not Applicable"]]},
             fields=["name"],
             limit_page_length=0,
         )
         for task in tasks:
-            frappe.db.set_value(
-                "Compliance Task",
-                task["name"],
-                {
-                    "obligation_retracted": 1,
-                    "retraction_reason": reason,
-                },
+            log_task_activity(
+                task=task["name"],
+                activity_type="Status Changed",
+                remarks=f"Source obligation {obligation} was retracted: {reason}",
+                actor="Administrator",
             )
+        frappe.logger().info(
+            f"[ObligationRegister] Flagged {len(tasks)} task(s) for obligation retraction: {obligation}"
+        )
     except Exception as exc:
         frappe.log_error(str(exc), "flag_tasks_for_retraction")
 

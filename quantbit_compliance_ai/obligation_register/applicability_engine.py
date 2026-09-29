@@ -10,6 +10,7 @@ evaluate_custom_expression(expr, rules, entity) → bool
 get_applicable_obligations(entity_name, as_of_date, include_trace) → list
 """
 
+import ast
 import json
 from typing import Optional
 
@@ -270,51 +271,71 @@ def evaluate_single_rule(rule: dict, entity: dict) -> bool:
 # Custom expression evaluator (sandboxed)
 # ─────────────────────────────────────────────────────────────────────────────
 
+
+# Only these AST node types may appear in a Custom Expression. There is no
+# ast.Call, ast.Subscript, or ast.Attribute-on-arbitrary-object in this list,
+# so the classic sandbox-escape idiom `().__class__.__bases__[0].__subclasses__()`
+# is rejected at parse time — it needs Call and Attribute nodes that simply
+# aren't allowed to exist in the tree, regardless of what names/builtins are
+# reachable at eval time. This replaces a substring blocklist (easily
+# defeated — e.g. string concatenation or attribute-chain escapes that never
+# contain a forbidden literal token) with a positive allowlist.
+_ALLOWED_EXPR_NODES = (
+    ast.Expression, ast.BoolOp, ast.And, ast.Or, ast.UnaryOp, ast.Not,
+    ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE,
+    ast.In, ast.NotIn, ast.Name, ast.Load, ast.Subscript, ast.Index,
+    ast.Constant, ast.List, ast.Tuple,
+)
+_ALLOWED_EXPR_NAMES = {"rules", "entity", "True", "False", "None"}
+
+
 def evaluate_custom_expression(expression: str, rule_results: list, entity: dict) -> bool:
     """
     Evaluate a custom Python expression in a restricted sandbox.
 
     Available variables:
-        rules  — list of booleans (one per rule row, in order)
-        entity — dict of entity profile fields
+        rules  — list of booleans (one per rule row, in order); indexable
+                 via rules[0], rules[1], ... (ast.Subscript is allowed)
+        entity — dict of entity profile fields; NOT attribute-accessible
+                 (ast.Attribute is deliberately not in the allowlist — use
+                 dict membership/comparison on known keys instead)
 
-    SECURITY: __import__, open, exec, and all builtins not in _SAFE_BUILTINS
-    are blocked. Never call with untrusted expressions outside Legal Counsel
-    / System Manager authorship context.
+    Parses to an AST and rejects anything outside a small node/name
+    allowlist before ever compiling or executing. Fails closed: any
+    rejection or runtime error returns False, never raises past this
+    function (a bad expression must never crash task generation).
     """
     expression = (expression or "").strip()
     if not expression:
         return False
 
-    safe_globals = {
-        **_SAFE_BUILTINS,
-        "rules": rule_results,
-        "entity": entity,
-    }
-
-    # Extra guard: reject obvious injection patterns
-    _assert_no_dangerous_tokens(expression)
-
     try:
-        compiled = compile(expression, "<applicability>", "eval")
-        return bool(eval(compiled, safe_globals, {}))  # nosec B307
-    except Exception as exc:
-        frappe.log_error(
-            message=f"Applicability expression error: {exc}\n{expression}",
-            title="Applicability Engine",
-        )
+        tree = ast.parse(expression, mode="eval")
+    except SyntaxError as exc:
+        frappe.log_error(message=f"Custom expression syntax error: {exc}\n{expression}", title="Applicability Engine")
         return False
 
-
-def _assert_no_dangerous_tokens(expr: str):
-    """Raise if obviously dangerous tokens appear in the expression."""
-    forbidden = ["__import__", "__builtins__", "open(", "exec(", "eval(", "os.", "sys."]
-    for token in forbidden:
-        if token in expr:
-            frappe.throw(
-                f"Expression contains forbidden token: '{token}'",
-                frappe.PermissionError,
+    for node in ast.walk(tree):
+        if not isinstance(node, _ALLOWED_EXPR_NODES):
+            frappe.log_error(
+                message=f"Custom expression rejected (disallowed syntax {type(node).__name__}): {expression}",
+                title="Applicability Engine",
             )
+            return False
+        if isinstance(node, ast.Name) and node.id not in _ALLOWED_EXPR_NAMES:
+            frappe.log_error(
+                message=f"Custom expression rejected (disallowed name {node.id!r}): {expression}",
+                title="Applicability Engine",
+            )
+            return False
+
+    safe_globals = {**_SAFE_BUILTINS, "rules": rule_results, "entity": entity}
+    try:
+        compiled = compile(tree, "<applicability>", "eval")
+        return bool(eval(compiled, safe_globals, {}))  # noqa: S307 — pre-vetted AST only
+    except Exception as exc:
+        frappe.log_error(message=f"Applicability expression error: {exc}\n{expression}", title="Applicability Engine")
+        return False
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -343,7 +364,7 @@ def get_applicable_obligations(
 
     # ── Load published obligations (lean fetch) ───────────────────────────
     obligations = frappe.get_all(
-        "Compliance Obligation",
+        "Compliance Obligation Register",
         filters={
             "is_published": 1,
             "is_current_version": 1,

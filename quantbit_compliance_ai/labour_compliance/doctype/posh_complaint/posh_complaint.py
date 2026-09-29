@@ -11,8 +11,17 @@ Key behaviour:
 - validate()                        : compute inquiry target (90 days); check filing window.
 - on_update()                       : roll up complaint counters to parent POSH Committee.
 - check_ic_permission()             : hard-block if caller is not POSH IC Member.
-- Audit logs auto-redact permlevel-1 fields (enforced in hooks.py doc_events).
+- on_change()                       : redact permlevel-1 field values from the Version
+                                       (audit trail) record Frappe just wrote for this save.
+
+Frappe's `track_changes` / Version log does NOT respect `permlevel` — it snapshots
+full before/after field values regardless, so without this the audit trail itself
+would leak complainant/respondent identity. `on_change()` runs after Frappe's own
+`save_version()` call (see frappe/model/document.py: on_update -> save_version ->
+on_change), so the Version record already exists by the time we scrub it.
 """
+
+import json
 
 import frappe
 from frappe.model.document import Document
@@ -22,6 +31,16 @@ from datetime import date, timedelta
 
 # Roles that may access permlevel-1 (confidential) fields
 _CONFIDENTIAL_ROLES = frozenset(["POSH IC Member", "System Manager"])
+
+# permlevel-1 fieldnames on POSH Complaint (kept in sync with posh_complaint.json).
+# Table fields (case_file_evidence) are redacted wholesale in added/removed/row_changed.
+_CONFIDENTIAL_FIELDS = frozenset([
+    "complainant_id", "complainant_user", "complainant_relationship",
+    "respondent_id", "respondent_user", "respondent_designation",
+    "is_respondent_senior_to_complainant", "interim_relief_details",
+    "action_recommended", "action_taken_by_employer",
+])
+_CONFIDENTIAL_TABLE_FIELDS = frozenset(["case_file_evidence"])
 
 
 class POSHComplaint(Document):
@@ -37,6 +56,9 @@ class POSHComplaint(Document):
 
     def on_update(self):
         self.update_committee_complaint_counters()
+
+    def on_change(self):
+        self._redact_confidential_version_diff()
 
     def before_insert(self):
         """Reject complaint creation by non-IC roles."""
@@ -132,6 +154,62 @@ class POSHComplaint(Document):
             },
             update_modified=False,
         )
+
+    # ──────────────────────────────────────────────────────────────────
+    # AUDIT TRAIL REDACTION
+    # ──────────────────────────────────────────────────────────────────
+
+    def _redact_confidential_version_diff(self):
+        """
+        Scrub permlevel-1 field values out of the Version record Frappe just
+        created for this save. Frappe's diff (frappe.core.doctype.version)
+        stores field-level before/after values keyed by fieldname under
+        'changed', and whole child-row dicts under 'added'/'removed'/
+        'row_changed' for table fields — none of it is permlevel-aware.
+        """
+        version_name = frappe.db.get_value(
+            "Version",
+            {"ref_doctype": "POSH Complaint", "docname": self.name},
+            "name",
+            order_by="creation desc",
+        )
+        if not version_name:
+            return
+
+        try:
+            version = frappe.get_doc("Version", version_name)
+            data = json.loads(version.data or "{}")
+            redacted = False
+
+            changed = data.get("changed") or []
+            for row in changed:
+                if row and row[0] in _CONFIDENTIAL_FIELDS:
+                    row[1] = "[REDACTED]"
+                    row[2] = "[REDACTED]"
+                    redacted = True
+
+            for key in ("added", "removed"):
+                rows = data.get(key) or []
+                for row in rows:
+                    if row and row[0] in _CONFIDENTIAL_TABLE_FIELDS:
+                        row[1] = {"redacted": True}
+                        redacted = True
+
+            row_changed = data.get("row_changed") or []
+            for row in row_changed:
+                if row and row[0] in _CONFIDENTIAL_TABLE_FIELDS:
+                    row[3] = [["redacted", "[REDACTED]", "[REDACTED]"]]
+                    redacted = True
+
+            if redacted:
+                frappe.db.set_value(
+                    "Version", version_name, "data", json.dumps(data), update_modified=False
+                )
+        except Exception as e:
+            frappe.log_error(
+                f"Failed to redact Version diff for POSH Complaint {self.name}: {e}",
+                "POSHComplaint",
+            )
 
     # ──────────────────────────────────────────────────────────────────
     # PERMISSION GUARD

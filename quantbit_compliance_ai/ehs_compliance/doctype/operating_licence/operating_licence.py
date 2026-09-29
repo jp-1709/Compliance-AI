@@ -14,6 +14,8 @@ from frappe import _
 from frappe.model.document import Document
 from datetime import date, timedelta
 
+from quantbit_compliance_ai.foundation.utils import pick_task_reviewer
+
 
 class OperatingLicence(Document):
 
@@ -186,20 +188,28 @@ def _create_renewal_task(licence: "OperatingLicence") -> None:
                 "doctype": "Compliance Calendar Task",
                 "organisation": licence.organisation,
                 "business_entity": licence.business_entity,
-                "task_title": f"Renew {licence.licence_type} — {licence.licence_number}",
-                "task_type": "Licence Renewal",
+                "task_title": (
+                    f"Renew {licence.licence_type} — {licence.licence_number}"
+                )[:140],
+                "category": "Licence Renewal",
+                # This alert only fires once next_action_due is already <= today
+                # (see maybe_create_renewal_task), so due can be in the past —
+                # period_start/period_end must bracket both dates, not assume
+                # today is the earlier one.
+                "period_start": min(date.today(), frappe.utils.getdate(licence.next_action_due)),
+                "period_end": max(date.today(), frappe.utils.getdate(licence.next_action_due)),
                 "due_date": licence.next_action_due,
                 "status": "Open",
-                "priority": _derive_priority(licence.days_to_expiry),
+                "risk_level": _derive_priority(licence.days_to_expiry),
                 "assigned_to": licence.responsible_person,
-                "reference_doctype": "Operating Licence",
-                "reference_name": licence.name,
-                "description": (
+                "reviewer": pick_task_reviewer(licence.responsible_person),
+                "section_reference": (
+                    f"Operating Licence: {licence.name}. "
                     f"Renewal due for {licence.licence_type} — {licence.licence_number} "
                     f"issued by {licence.issuing_authority}. "
                     f"Valid until: {licence.valid_until}. "
                     f"Days remaining: {licence.days_to_expiry}."
-                ),
+                )[:140],
             }
         )
         task.insert(ignore_permissions=True)
@@ -209,10 +219,11 @@ def _create_renewal_task(licence: "OperatingLicence") -> None:
 
 
 def _derive_priority(days_to_expiry: int) -> str:
+    """Maps to Compliance Calendar Task.risk_level Select options (Critical/High/Medium/Low)."""
     if days_to_expiry is None:
         return "Medium"
     if days_to_expiry <= 30:
-        return "Urgent"
+        return "Critical"
     if days_to_expiry <= 90:
         return "High"
     return "Medium"
